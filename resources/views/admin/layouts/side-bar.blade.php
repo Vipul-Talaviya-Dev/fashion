@@ -30,7 +30,7 @@
                             <li><a href="{{ route('admin.categories') }}"><i class="icon-price-tags"></i> Category</a></li>
                             <li><a href="javascript:void(0);"><i class="icon-price-tags"></i> Attribute</a></li>
                             <li><a href="javascript:void(0);"><i class="icon-price-tags"></i>Attribute Value</a></li>
-                            <li><a href="javascript:void(0);"><i class="icon-basket"></i> Product</a></li>
+                            <li><a href="{{ route('admin.products') }}"><i class="icon-basket"></i> Product</a></li>
                         </ul>
                     </li>
                         <li><a href="{{ route('admin.offers') }}"><i class="icon-gift"></i> <span>Offers</span></a></li>

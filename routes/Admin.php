@@ -53,5 +53,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
         Route::get('color/{id}/edit', 'ColorController@edit')->name('color.edit');
         Route::post('color/{id}/update', 'ColorController@update')->name('color.update');
         Route::get('color/{id}/delete', 'ColorController@delete')->name('color.delete');
+
+        // Product Controller
+        Route::get('products', 'ProductController@index')->name('products');
+        Route::get('product/add', 'ProductController@add')->name('product.add');
+        Route::post('product/create', 'ProductController@create')->name('product.create');
+        Route::post('product/insert', 'ProductController@insert')->name('product.insert');
+        Route::get('product/{id}/edit', 'ProductController@edit')->name('product.edit');
+        Route::post('product/{id}/update', 'ProductController@update')->name('product.update');
     });
 });
