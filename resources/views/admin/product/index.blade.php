@@ -1,6 +1,5 @@
 @extends('admin.layouts.main')
 @section('title', 'Prodcuts')
-
 @section('page-header')
     <div class="page-header page-header-default">
         <div class="breadcrumb-line">
@@ -40,7 +39,7 @@
                                         <label>Category</label>
                                         <select id="category" class="form-control select-results-color" name="category"
                                                 data-placeholder="Select Category">
-                                            <option></option>
+                                            <option value="">-- Select Category --</option>
                                             @if(isset($categories))
                                                 @foreach($categories as $category)
                                                     <option value="{{ $category->id }}" {{ request('category') && request('category') == $category->id ? 'selected' : '' }}>
@@ -61,21 +60,18 @@
                                                style="background: #25A296; color: white" placeholder="Search Text">
                                     </div>
                                     <div class="col-md-2">
-                                        <a href="{{ route('admin.product.index') }}" class="btn btn-danger form-control" style="margin-top: 27px;">
+                                        <a href="{{ route('admin.products') }}" class="btn btn-danger form-control" style="margin-top: 27px;">
                                             Reset
                                         </a>
                                     </div>
                                     <div class="pull-right col-md-2">
-                                        <input type="submit"
-                                               {{ request('store') && request('category') && request('subCategory') ? '' : 'disabled' }} id="search"
-                                               class="btn btn-info form-control" style="margin-top: 27px;">
+                                        <input type="submit" {{ request('store') && request('category') && request('subCategory') ? '' : 'disabled' }} id="search" class="btn btn-info form-control" style="margin-top: 27px;">
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="content">
-                            <a href="{{ route('admin.product.add') }}" class="btn btn-info pull-right"
-                               style="margin-right: 20px; margin-top: 20px;">
+                            <a href="{{ route('admin.product.add') }}" class="btn btn-info pull-right" style="margin-right: 20px; margin-top: 20px;">
                                 ADD NEW
                             </a>
 
@@ -86,15 +82,13 @@
                                 {{--value="{{ request()->get('search') }}" placeholder="Search">--}}
                                 {{--</div>--}}
                                 {{--<div class="col-md-1">--}}
-                                {{--<a href="{{ route('admin.product.index') }}"--}}
+                                {{--<a href="{{ route('admin.products') }}"--}}
                                 {{--class="btn btn-flat btn-rounded btn-xs btn-icon" style="margin-top: 20px;"><i--}}
                                 {{--class="icon-reset">Refresh</i></a>--}}
                                 {{--</div>--}}
                                 {{--</form>--}}
 
-                                <div id="table">
-
-                                </div>
+                                <div id="table"></div>
                                 <table class="table">
                                     <thead>
                                     <tr>
@@ -142,24 +136,20 @@
                     </div>
                 </div>
             </div>
-            {{--vfsdf--}}
         </div>
     </div>
-    <!-- /traffic sources -->
 @endsection
 
 @section('js')
     <script type="text/javascript" src="/assets/js/core/app.js"></script>
     <script type="text/javascript" src="/assets/js/pages/form_select2.js"></script>
     <script type="text/javascript" src="/assets/js/plugins/forms/selects/select2.min.js"></script>
-
     <script>
         $('body').on('change', '#category', function () {
             var type = $('#category').val();
             if ('category') {
                 $.ajax({
                     type: 'POST',
-                    // url: '{{ route('api.category.change') }}',
                     data: {'type': type, '_token': "{{ csrf_token() }}"},
                     success: function (data) {
                         $('#subCategory').empty();

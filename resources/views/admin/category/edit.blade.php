@@ -4,8 +4,8 @@
     <div class="page-header page-header-default">
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li><a href="index.html"><i class="icon-home2 position-left"></i> Home</a></li>
-                <li class="active">Dashboard</li>
+                <li><a href="{{ 'admin.dashboard' }}"><i class="icon-home2 position-left"></i> Home</a></li>
+                <li class="active">Category Update</li>
             </ul>
         </div>
     </div>
@@ -15,10 +15,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-flat">
-                    <div class="panel-heading">
-                        <h1 class="panel-title">Category Update</h1>
-                    </div>
-                    <hr/>
+                    <div class="panel-heading"><h1 class="panel-title">Category Update</h1></div><hr/>
                     <div class="container-fluid">
                         <div class="row">
                             <table class="panel-body">
@@ -27,13 +24,12 @@
                                           action="{{ route('admin.category.update', $category->id) }}"
                                           method="post" enctype="multipart/form-data">
                                         {{ csrf_field() }}
-
                                         <fieldset class="content-group">
-                                            @if($category->parent_id)
-                                            <div class="form-group col-xs-4 col-sm-4 col-md-4 pull-left {{ $errors->has('parentId') ? 'has-error' : ''  }}">
+                                            @if($category->parent)
+                                            <div class="form-group col-xs-4 col-sm-4 col-md-4 {{ $errors->has('parentId') ? 'has-error' : ''  }}" style="display: none;">
                                                 <label for=""><span style="color: red;">*</span> Main Category:</label>
                                                 <select name="parentId" class="form-control input-sm">
-                                                    <option value="">-- -Select Main Category-</option>
+                                                    <option value="">-- Select Main Category --</option>
                                                     @foreach($mainCategories as $mainCategory)
                                                     <option value="{{ $mainCategory->id }}" {{ $mainCategory->id == $category->parent_id ? 'selected' : '' }}>{{ $mainCategory->name }}</option>
                                                     @endforeach

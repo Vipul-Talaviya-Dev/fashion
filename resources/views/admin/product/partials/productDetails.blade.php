@@ -80,7 +80,7 @@
                         <label>Color: <span class="text-danger">*</span></label>
                         <select name="color[]" class="form-control color" required>
                             <option value="">Choose a Color...</option>
-                            @foreach($color as $color)
+                            @foreach($colors as $color)
                                 <option value="{{ $color->id }}"
                                         style="background-color: {{ $color->code }}">{{ $color->name }}</option>
                             @endforeach
@@ -93,7 +93,7 @@
                         <label>Size: <span class="text-danger">*</span></label>
                         <select name="size[]" class="form-control">
                             <option value="">Choose a Size...</option>
-                            @foreach($size as $size)
+                            @foreach($sizes as $size)
                                 <option value="{{ $size->id }}">{{ $size->name }}</option>
                             @endforeach
                         </select>

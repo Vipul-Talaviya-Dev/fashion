@@ -44,6 +44,6 @@ class Category extends Model
 
 	public static function parents()
 	{
-		return self::where('parent_id', null);
+		return self::where('parent_id', NULL);
 	}
 }

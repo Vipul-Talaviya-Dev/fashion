@@ -63,3 +63,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
         Route::post('product/{id}/update', 'ProductController@update')->name('product.update');
     });
 });
+
+Route::group(['namespace' => 'Admin', 'as' => 'api.'], function () {
+    Route::post('subCategory', 'ProductController@subCategory')->name('subCategory');
+});

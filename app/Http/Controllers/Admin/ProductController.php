@@ -247,4 +247,12 @@ class ProductController extends Controller
             return redirect('/product')->with('success', 'Product has been updated successfully.');
         }
     }
+
+    public function subCategory(Request $request)
+    {
+        return response()->json([
+            'status' => true,
+            'categories' => Category::active()->where('parent_id', $request->get('id'))->get(['id', 'name'])
+        ]);
+    }
 }

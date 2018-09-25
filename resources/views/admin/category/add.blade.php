@@ -15,10 +15,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-flat">
-                <div class="panel-heading">
-                    <h1 class="panel-title">Category</h1>
-                </div>
-                <hr/>
+                <div class="panel-heading"><h1 class="panel-title">Category</h1></div><hr/>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="panel-body">
@@ -31,7 +28,7 @@
                                         </div>
                                         <div class="col-lg-9">
                                             <select data-placeholder="Select a type..."
-                                            class="select-results-color form-control" name="parent_id">
+                                            class="select-results-color form-control category" name="parent_id">
                                             <option value="">-- Select Main Category --</option>
                                             @foreach($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -39,10 +36,19 @@
                                         </select>
                                     </div>
                                 </div>
-
+                                <div class="form-group" id="subCategoryDiv" style="display: none;">
+                                        <div class="col-lg-3">
+                                            <label class="control-label">Sub Category</label>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <select data-placeholder="Select a Sub Category..."
+                                            class="select-results-color form-control" id="subCategory" name="parent_id">
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <div class="col-lg-3">
-                                        <label class="control-label">Category <span
+                                        <label class="control-label">Category Name<span
                                             class="text-danger">*</span></label>
                                         </div>
                                         <div class="col-lg-9">
@@ -102,3 +108,33 @@
                     </div>
                 </div>
                 @endsection
+                
+    @section('js')
+    <script type="text/javascript">
+        $('body').on('change', '.category', function () {
+            var id = $(this).val();
+            if (id) {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('api.subCategory') }}',
+                    data: {'id': id, '_token': "{{ csrf_token() }}"},
+                    success: function (data) {
+                        $('#subCategory').empty();
+                        if (data.status) {
+                            $("#subCategoryDiv").show();
+                            $("#subCategory").empty();
+                            $("#subCategory").append('<option value="">Select A SubCategory</option>');
+                            $.each(data.categories, function (key, value) {
+                                $("#subCategory").append('<option value="' + value['id'] + '">' + value['name'] + '</option>');
+                            });
+                        } else {
+                            $("#subCategory").empty();
+                            $("#subCategoryDiv").hide();
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+    @endsection
+

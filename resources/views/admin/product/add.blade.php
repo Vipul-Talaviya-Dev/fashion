@@ -1,15 +1,12 @@
 @extends('admin.layouts.main')
-
-@section('title')
-    Product Create panel
-@endsection
+@section('title', 'Product Create')
 
 @section('page-header')
     <div class="page-header page-header-default">
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
-                <li><a href="javascript:void(0)"><i class="icon-home2 position-left"></i> Home</a></li>
-                <li class="active">Dashboard</li>
+                <li><a href="{{ 'admin.dashboard' }}"><i class="icon-home2 position-left"></i> Dashboard</a></li>
+                <li class="active">Product Create</li>
             </ul>
         </div>
     </div>
@@ -18,14 +15,13 @@
 @section('content')
     <div class="panel panel-white">
         <div class="panel-heading">
-            <h6 class="panel-title">Product</h6>
+            <h6 class="panel-title">Product Create</h6>
         </div>
         @if(!Session::get('product'))
             <form class="stepy-validation" action="{{ route('admin.product.create') }}" method="post"
                   enctype="multipart/form-data">
                 {{ csrf_field()  }}
                 @include('admin.product.partials.product')
-
                 @include('admin.product.partials.productDetails')
                 <button type="submit" class="btn btn-primary stepy-finish">
                     Submit <i class="icon-check position-right"></i>
@@ -68,17 +64,14 @@
 @section('js')
 
     <script type="text/javascript" src="/assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
-    {{--<script type="text/javascript" src="/assets/js/core/libraries/jquery_ui/interactions.min.js"></script>--}}
-    {{--<script type="text/javascript" src="/assets/js/pages/form_select2.js"></script>--}}
     <script type="text/javascript" src="/assets/js/plugins/forms/wizards/stepy.min.js"></script>
     <script type="text/javascript" src="/assets/js/plugins/forms/selects/select2.min.js"></script>
     <script type="text/javascript" src="/assets/js/plugins/forms/styling/uniform.min.js"></script>
-    {{--<script type="text/javascript" src="/assets/js/core/libraries/jasny_bootstrap.min.js"></script>--}}
     <script type="text/javascript" src="/assets/js/plugins/forms/validation/validate.min.js"></script>
     <script type="text/javascript" src="/assets/js/core/app.js"></script>
     <script type="text/javascript" src="/assets/js/pages/wizard_stepy.js"></script>
     <script type="text/javascript" src="/assets/js/cloudinary_widget.js"></script>
-    <script>
+    <script type="text/javascript">
 
         $('#form').submit(function () {
             $(this).find(':button[type=submit]').prop('disabled', true);
@@ -125,96 +118,33 @@
                 $('#cloudinaryInput' + color.id).val(color.images.join(','));
             });
         });
-        $('body').on('change', '#type', function () {
-            var type = $('#type').val();
-            if ('#type') {
+        $('body').on('change', '.category', function () {
+            var id = $(this).val();
+            if (id) {
                 $.ajax({
                     type: 'POST',
-                    url: '{{ route('api.category.change') }}',
-                    data: {'type': type, '_token': "{{ csrf_token() }}"},
+                    url: '{{ route('api.subCategory') }}',
+                    data: {'id': id, '_token': "{{ csrf_token() }}"},
                     success: function (data) {
-                        $('#category').empty();
-                        if (data) {
-                            $("#category").empty();
-                            $("#category").append('<option>Select a category...</option>');
-                            $.each(data, function (key, value) {
-                                $("#category").append('<option value="' + value['id'] + '">' + value['name'] + '</option>');
-                            });
-
+                        $("#subCategory").empty();
+                        if (data.status) {
+                            if(data.categories.length > 0) {
+                                $("#subCategoryDiv").show();
+                                var categories = '<option value="">-- Select SubCategory --</option>';
+                                $.each(data.categories, function (key, value) {
+                                    categories +='<option value="' + value['id'] + '">' + value['name'] + '</option>';
+                                });
+                                $("#subCategoryDiv").html('<div class="col-md-6"><div class="form-group"><label>Sub Category: <span class="text-danger">*</span></label><select name="category"  data-placeholder="Select Type First" class="form-control required category subCategory">'+categories+'</select></div>');   
+                            }
                         } else {
-                            $("#category").empty();
+                            $(".subCategory").empty();
+                            $("#subCategoryDiv").hide();
                         }
                     }
                 });
             }
         });
-        $('body').on('change', '#category', function () {
-            var html = '';
-            var category = $('#category').val();
-            if ('category') {
-                $.ajax({
-                    type: 'POST',
-                    url: '{{ route('api.attribute.list') }}',
-                    data: {'category': category, '_token': "{{ csrf_token() }}"},
-                    success: function (data) {
-                        console.log(data['attributes']);
-                        $('#attributes').empty();
-                        if (data['attributes']) {
-                            $("#attribute").empty();
-
-                            var i = 0;
-                            $.each(data['attributes'], function (key, value) {
-                                html += '<div class="col-md-6">';
-                                html += '    <div class="form-group">';
-                                if (value.require == '1') {
-                                    html += '    <label>' + value.name + ':<span class="text-danger">*</span></label>';
-
-                                    html += '    <select class="select form-control" required name="attributeValues[]">';
-
-                                    html += '<option value="">-- Select attribute --</option>';
-                                    if (value['attribute_value'].length > 0) {
-                                        $.each(value['attribute_value'], function (index, attrvalue) {
-                                            html += '    <option value="' + attrvalue.id + '">' + attrvalue.value + '</option>';
-                                        });
-                                    }
-                                    else {
-                                        html += '<option value="">-- No attributes available --</option>';
-                                    }
-
-                                    html += '    </select>';
-                                } else {
-                                    html += '    <label>' + value.name + ':</label>';
-
-                                    html += '    <select class="select form-control" name="attributeValues[]">';
-
-                                    html += '<option value="">-- Select attribute --</option>';
-                                    if (value['attribute_value'].length > 0) {
-                                        $.each(value['attribute_value'], function (index, attrvalue) {
-                                            html += '    <option value="' + attrvalue.id + '">' + attrvalue.value + '</option>';
-                                        });
-                                    }
-                                    else {
-                                        html += '<option value="">-- No attributes available --</option>';
-                                    }
-
-                                    html += '    </select>';
-                                }
-
-                                html += '    </div>';
-                                html += '    </div>';
-
-                                i++;
-
-                                $(".attr").html(html);
-                            });
-
-                        } else {
-                            $("#attribute").empty();
-                        }
-                    }
-                });
-            }
-        });
+        
         $('#finish').css('display', 'none');
     </script>
 @endsection

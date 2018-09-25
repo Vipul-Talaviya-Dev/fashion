@@ -11,7 +11,6 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        // $categories = Category::search($request->input('search'), ['name'])->paginate(10);
         $categories = new Category;
         if($request->get('id')) {
             $categories = $categories->where('parent_id', $request->get('id'));
@@ -30,7 +29,7 @@ class CategoryController extends Controller
 
     public function add()
     {
-        return view('admin.category.add', ['categories' => Category::where('parent_id', null)->get(['name', 'id'])]);
+        return view('admin.category.add', ['categories' => Category::parents()->get(['name', 'id'])]);
     }
 
     public function create(Request $request)
@@ -57,7 +56,7 @@ class CategoryController extends Controller
 
         return view('admin.category.edit', [
             'category' => $category,
-            'mainCategories' => Category::where('parent_id', NULL)->get(),
+            'mainCategories' => Category::parents()->get(['name', 'id']),
         ]);
     }
 
