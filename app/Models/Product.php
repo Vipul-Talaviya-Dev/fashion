@@ -25,6 +25,7 @@ class Product extends Model
         'thumb_image',
         'smll_images',
         'description',
+        'short_description',
         'status',
     ];
 

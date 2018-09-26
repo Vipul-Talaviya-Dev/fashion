@@ -41,18 +41,22 @@ class ProductController extends Controller
         }
 
         $this->validate($request, [
-            'seller' => 'required|exists:sellers,id',
             'name' => 'required',
-            'brand' => 'required|exists:brands,id',
-            'maxPrice' => 'required|numeric',
-            'price' => 'required|numeric',
-            'type' => 'required|exists:categories,id',
+            'brand' => 'nullable|exists:brands,id',
+            'maxPrice' => 'required|numeric|min:1',
+            'price' => 'required|numeric|min:1',
+            'discount' => 'required|numeric|min:1',
+            'categoryId' => 'required|exists:categories,id',
             'attributeValues' => 'required|array|min:1',
-            'category' => 'required|exists:categories,id',
             'color' => 'required|array|min:1',
             'size' => 'required|array|min:1',
-            'quantity' => 'required|array|min:1',
+            'quantity' => 'required|numeric|array|min:1',
+            'prices' => 'required|numeric|array|min:1',
+            'thumImage' => 'required|image',
+            'smallImages' => 'required|array|min:1',
         ]);
+
+        dd($request->all());
         if (!\Session::put('product', $request->all())) {
             return view('admin.product.add',
                 ['colors' => Color::whereIn('id', Session::get('product')['color'])->get()]);

@@ -150,6 +150,7 @@
             if ('category') {
                 $.ajax({
                     type: 'POST',
+                    // url: '{{ route('api.category.change') }}',
                     data: {'type': type, '_token': "{{ csrf_token() }}"},
                     success: function (data) {
                         $('#subCategory').empty();

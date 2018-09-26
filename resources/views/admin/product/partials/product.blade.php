@@ -17,7 +17,6 @@
                 @endif
             </div>
         </div>
-        <div id="subCategoryDiv"></div>
-        <!-- <div class="col-md-6"><div class="form-group"><label>Sub Category: <span class="text-danger">*</span></label><select name="category"  data-placeholder="Select Type First" class="select required" id="subCategory"></select></div></div> -->
-</div>
+        <div class="subCategoryDiv"></div>
+    </div>
 </fieldset>

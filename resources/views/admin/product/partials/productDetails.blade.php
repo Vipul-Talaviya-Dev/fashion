@@ -19,8 +19,8 @@
             <div class="form-group">
                 <label>Select Brand: <span class="text-danger">*</span></label>
                 <select name="brand" data-placeholder="Select Brand Name"
-                        class="select required">
-                    <option></option>
+                        class="form-control">
+                    <option value=""> -- Select Brand --</option>
                     @foreach($brands as $brand)
                         <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                     @endforeach
@@ -39,9 +39,8 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>Price: <span class="text-danger">*</span></label>
-                <input type="number" name="price" placeholder="Enter Price"
-                       class="form-control required" value="{{ old('price') }}" pattern="[0-9]"
-                       min="0"></div>
+                <input type="number" name="price" placeholder="Enter Price" class="form-control required" value="{{ old('price') }}" pattern="[0-9]" min="0">
+            </div>
             @if($errors->get('price'))
                 @foreach($errors->get('price') as $error)
                     <span style="color: red;">{{$error}}</span>
@@ -52,13 +51,10 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label>MaxPrice: <span class="text-danger">*</span></label>
-                <input type="text" name="maxPrice" placeholder="Enter Max Price"
-                       class="form-control required"></div>
-            @if($errors->get('maxPrice'))
+                <input type="number" name="maxPrice" placeholder="Enter Max Price" class="form-control required" value="{{ old('maxPrice') }}" pattern="[0-9]" min="0">
                 @foreach($errors->get('maxPrice') as $error)
                     <span style="color: red;">{{$error}}</span>
                 @endforeach
-            @endif
         </div>
     </div>
 
@@ -66,8 +62,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label>Description :</label>
-                <textarea name="description" class="form-control"
-                          data-placeholder="Enter Product Details"></textarea>
+                <textarea name="description" class="form-control" data-placeholder="Enter Product Details"></textarea>
             </div>
         </div>
     </div>
@@ -78,7 +73,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Color: <span class="text-danger">*</span></label>
-                        <select name="color[]" class="form-control color" required>
+                        <select name="colors[]" class="form-control color" required>
                             <option value="">Choose a Color...</option>
                             @foreach($colors as $color)
                                 <option value="{{ $color->id }}"
@@ -87,11 +82,10 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Size: <span class="text-danger">*</span></label>
-                        <select name="size[]" class="form-control">
+                        <select name="sizes[]" class="form-control">
                             <option value="">Choose a Size...</option>
                             @foreach($sizes as $size)
                                 <option value="{{ $size->id }}">{{ $size->name }}</option>
@@ -102,8 +96,15 @@
 
                 <div class="col-md-3">
                     <div class="form-group">
+                        <label>Price: <span class="text-danger">*</span></label>
+                        <input type="number" name="prices[]" placeholder="Enter Product Price"
+                               class="form-control" required>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
                         <label>Quantity: <span class="text-danger">*</span></label>
-                        <input type="text" name="quantity[]" placeholder="Enter Quantity"
+                        <input type="number" name="quantities[]" placeholder="Enter Quantity"
                                class="form-control" required>
                     </div>
                 </div>
