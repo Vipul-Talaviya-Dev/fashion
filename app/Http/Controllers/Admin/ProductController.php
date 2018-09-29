@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Session;
+use Cloudder;
 use App\Models\Size;
 use App\Models\Brand;
 use App\Models\Color;
@@ -25,18 +26,18 @@ class ProductController extends Controller
 
     public function add()
     {
-        \Session::forget('product');
+        // \Session::forget('product');
         return view('admin.product.add', [
-            'categories' => Category::where('parent_id', null)->where('status', 1)->active()->get(),
-            'brands' => Brand::where('status', 1)->get(),
-            'colors' => Color::where('status', 1)->get(),
-            'sizes' => Size::where('status', 1)->get(),
+            'categories' => Category::parents()->active()->get(),
+            'brands' => Brand::active()->get(),
+            'colors' => Color::active()->get(),
+            'sizes' => Size::active()->get(),
         ]);
     }
 
     public function create(Request $request)
     {
-        if ($request->maxPrice <= $request->price) {
+        if ($request->get('maxPrice') <= $request->get('price')) {
             return redirect()->back()->with('error', 'Price is not greater than or equal to Max Price.')->withInput();
         }
 
@@ -45,15 +46,42 @@ class ProductController extends Controller
             'brand' => 'nullable|exists:brands,id',
             'maxPrice' => 'required|numeric|min:1',
             'price' => 'required|numeric|min:1',
-            'discount' => 'required|numeric|min:1',
+            'discount' => 'numeric|min:1',
             'categoryId' => 'required|exists:categories,id',
-            'attributeValues' => 'required|array|min:1',
-            'color' => 'required|array|min:1',
-            'size' => 'required|array|min:1',
-            'quantity' => 'required|numeric|array|min:1',
-            'prices' => 'required|numeric|array|min:1',
-            'thumImage' => 'required|image',
+            'colors' => 'required|array|min:1',
+            'sizes' => 'required|array|min:1',
+            'prices' => 'required|array|min:1',
+            'quantities' => 'required|array|min:1',
+            'thumbImage' => 'required|image',
             'smallImages' => 'required|array|min:1',
+        ]);
+
+        $sizes = [];
+        $colors = [];
+        for ($i = 0; $i <count($request->get('colors')) ; $i++) {
+            $sizes[$request->get('sizes')[$i]] = ['price' => $request->get('prices')[$i], 'qty' => $request->get('quantities')[$i]];
+            // echo $request->get('colors')[$i];
+        }
+        dd($sizes);
+        exit;
+
+        $subImages = [];
+        for ($i = 0; $i < count($request->file('smallImages')); $i++) {
+            $subImages[] = Cloudder::upload($request->file('smallImages')[$i], [])->getPublicId();
+        }
+        $discount = (($request->get('maxPrice') - $request->get('price')) / $request->get('maxPrice') * 10);
+        $product = Product::create([
+            'name' => trim($request->get('name')),
+            'slug' => trim(str_slug($request->get('name'))),
+            'price' => $request->get('price'),
+            'max_price' => $request->get('maxPrice'),
+            'category_id' => $request->get('categoryId'),
+            'brand_id' => $request->get('brand'),
+            'thumb_image' => Cloudder::upload($request->file('thumbImage'), [])->getPublicId(),
+            'small_images' => implode(',', $subImages),
+            'description' => $request->get('description'),
+            'short_description' => $request->get('shortDescription'),
+            'discount' => floor($discount)
         ]);
 
         dd($request->all());

@@ -146,12 +146,12 @@
     <script type="text/javascript" src="/assets/js/plugins/forms/selects/select2.min.js"></script>
     <script>
         $('body').on('change', '#category', function () {
-            var type = $('#category').val();
+            var id = $('#category').val();
             if ('category') {
                 $.ajax({
                     type: 'POST',
-                    // url: '{{ route('api.category.change') }}',
-                    data: {'type': type, '_token': "{{ csrf_token() }}"},
+                    url: '{{ route('api.subCategory') }}',
+                    data: {'id': id, '_token': "{{ csrf_token() }}"},
                     success: function (data) {
                         $('#subCategory').empty();
                         if (data) {
