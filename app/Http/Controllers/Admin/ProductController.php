@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Variation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -46,7 +47,7 @@ class ProductController extends Controller
             'brand' => 'nullable|exists:brands,id',
             'maxPrice' => 'required|numeric|min:1',
             'price' => 'required|numeric|min:1',
-            'discount' => 'numeric|min:1',
+            // 'discount' => 'numeric|min:1',
             'categoryId' => 'required|exists:categories,id',
             'colors' => 'required|array|min:1',
             'sizes' => 'required|array|min:1',
@@ -54,22 +55,20 @@ class ProductController extends Controller
             'quantities' => 'required|array|min:1',
             'thumbImage' => 'required|image',
             'smallImages' => 'required|array|min:1',
+            'highlights' => 'required',
+            'shortDescription' => 'required',
+            'description' => 'required',
         ]);
 
-        $sizes = [];
-        $colors = [];
-        for ($i = 0; $i <count($request->get('colors')) ; $i++) {
-            $sizes[$request->get('sizes')[$i]] = ['price' => $request->get('prices')[$i], 'qty' => $request->get('quantities')[$i]];
-            // echo $request->get('colors')[$i];
-        }
-        dd($sizes);
-        exit;
+        // dd($request->all());
 
         $subImages = [];
         for ($i = 0; $i < count($request->file('smallImages')); $i++) {
             $subImages[] = Cloudder::upload($request->file('smallImages')[$i], [])->getPublicId();
         }
-        $discount = (($request->get('maxPrice') - $request->get('price')) / $request->get('maxPrice') * 10);
+
+        $total = $request->get('maxPrice') - $request->get('price');
+        $discount = ($total / $request->get('maxPrice') * 100);
         $product = Product::create([
             'name' => trim($request->get('name')),
             'slug' => trim(str_slug($request->get('name'))),
@@ -78,66 +77,31 @@ class ProductController extends Controller
             'category_id' => $request->get('categoryId'),
             'brand_id' => $request->get('brand'),
             'thumb_image' => Cloudder::upload($request->file('thumbImage'), [])->getPublicId(),
-            'small_images' => implode(',', $subImages),
+            'small_image' => implode(',', $subImages),
             'description' => $request->get('description'),
             'short_description' => $request->get('shortDescription'),
+            'highlights' => $request->get('highlights'),
             'discount' => floor($discount)
         ]);
 
-        dd($request->all());
-        if (!\Session::put('product', $request->all())) {
-            return view('admin.product.add',
-                ['colors' => Color::whereIn('id', Session::get('product')['color'])->get()]);
-        } else {
-            return view('admin.product.add');
-        }
-    }
-
-    public function insert(Request $request)
-    {
-        dd($request->all());exit;
-        $discount = Session::get('product')['maxPrice'] - Session::get('product')['price'];
-        $total = ($discount / Session::get('product')['maxPrice']) * 100;
-        $product = Product::create([
-            'seller_id' => Session::get('product')['seller'],
-            'category_id' => Session::get('product')['category'],
-            'brand_id' => Session::get('product')['brand'],
-            'name' => Session::get('product')['name'],
-            'price' => Session::get('product')['price'],
-            'max_price' => Session::get('product')['maxPrice'],
-            'description' => Session::get('product')['description'],
-            'discount' => floor($total)
-        ]);
-
-        Discount::create([
-            'product_id' => $product->id,
-            'discount' => floor($total)
-        ]);
-
-        $count = count(Session::get('product')['color']);
-        for ($i = 0; $i < $count; $i++) {
+        for ($i = 0; $i < count($request->get('colors')); $i++) {
             Variation::create([
                 'product_id' => $product->id,
-                'color_id' => Session::get('product')['color'][$i],
-                'size_id' => Session::get('product')['size'][$i],
-                'quantity' => Session::get('product')['quantity'][$i],
+                'color_id' => $request->get('colors')[$i],
+                'size_id' => $request->get('sizes')[$i],
+                'price' => $request->get('prices')[$i],
+                'qty' => $request->get('quantities')[$i],
             ]);
+            /*\DB::insert('insert into product_size (product_id, size_id, price, qty) values (?, ?, ?, ?)', [
+                $product->id, $request->get('sizes')[$i], $request->get('prices')[$i], $request->get('quantities')[$i]
+            ]);
+
+            \DB::insert('insert into color_product (product_id, color_id, price, qty) values (?, ?, ?, ?)', [
+                $product->id, $request->get('colors')[$i], $request->get('prices')[$i], $request->get('quantities')[$i]
+            ]);*/
         }
 
-        $product->attributeValues()->sync(array_filter(Session::get('product')['attributeValues']));
-
-        foreach ($request['colorImages'] as $key => $image) {
-            $img = explode(',', $image);
-            foreach ($img as $value) {
-                ProductImage::create([
-                    'product_id' => $product->id,
-                    'color_id' => $key,
-                    'name' => $value,
-                ]);
-            }
-        }
-        \Session::forget('product');
-        return redirect('/product')->with('success', 'Product has been updated successfully.');
+        return redirect(route('admin.products'))->with('success','Product has been inserted successfully.');        
     }
 
     public function edit($id)

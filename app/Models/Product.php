@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    const ACTIVE = 1, INACTIVE = 2;
+    const ACTIVE = 1, INACTIVE = 2, COD = 1, COD = 2;
     use Notifiable;
     use SoftDeletes;
     use Eloquence;
@@ -23,10 +23,14 @@ class Product extends Model
         'discount',
         'weight',
         'thumb_image',
-        'smll_images',
+        'small_image',
         'description',
         'short_description',
+        'highlights',
         'status',
+        'meta_keyword',
+        'meta_description',
+        'cod', // Cash on Delivery
     ];
 
     protected $dates = [

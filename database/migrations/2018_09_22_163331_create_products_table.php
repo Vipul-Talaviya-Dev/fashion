@@ -27,6 +27,10 @@ class CreateProductsTable extends Migration
             $table->longText('small_image');
             $table->longText('description')->nullable();
             $table->text('short_description')->nullable();
+            $table->text('highlights')->nullable();
+            $table->text('meta_keyword')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->tinyInteger('cod')->comment('1: Yes, 2: No')->default(2);
             $table->tinyInteger('status')->comment('1: Active, 2: In-active')->default(1);
             $table->timestamps();
             $table->softDeletes();

@@ -87,13 +87,13 @@
                     <span style="color: red;">{{$error}}</span>
                     @endforeach
                 </div>
-                <div class="form-group col-md-3">
+                <!-- <div class="form-group col-md-3">
                     <label>Discount: <span class="text-danger">*</span></label>
                     <input type="number" name="discount" placeholder="Enter Discount" class="form-control" value="{{ old('discount') }}" pattern="[0-9]" min="0">
                     @foreach($errors->get('discount') as $error)
                     <span style="color: red;">{{$error}}</span>
                     @endforeach
-                </div>
+                </div> -->
             </div>
             <div class="row">
                 <div class="col-md-4">
@@ -156,11 +156,19 @@
             <p><br></p>
             <div class="row">
                 <label>Short Description :</label>
-                <textarea name="shortDescription" rows="4" cols="4" class="form-control required" placeholder="Enter Product Short Details. Example: Fabric: Cotton, Slim Fit Henley T-shirt" required>{{ old('shortDescription') }}</textarea> 
+                <textarea name="shortDescription" rows="4" cols="4" class="form-control required"  required>{{ old('shortDescription') }}</textarea> 
                 @foreach($errors->get('shortDescription') as $error)
                 <span style="color: red;">{{$error}}</span>
                 @endforeach
             </div>  
+            <p><br></p>
+            <div class="row">
+                <label>Highlights :</label>
+                <textarea name="highlights" rows="4" cols="4" class="form-control required" placeholder="Enter Product Short Details. Example: Fabric: Cotton, Slim Fit Henley T-shirt" required>{{ old('highlights') }}</textarea> 
+                @foreach($errors->get('highlights') as $error)
+                <span style="color: red;">{{$error}}</span>
+                @endforeach
+            </div>
             <p><br></p>
             <div class="row pull-right">
                 <button type="submit" class="btn btn-primary stepy-finish">

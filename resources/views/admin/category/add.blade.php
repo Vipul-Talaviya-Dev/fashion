@@ -133,6 +133,8 @@
                         }
                     }
                 });
+            } else {
+                $("#subCategoryDiv").hide();
             }
         });
     </script>
