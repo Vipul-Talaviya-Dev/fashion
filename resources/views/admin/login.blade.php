@@ -131,8 +131,7 @@
                 <!-- /simple login form -->
                 <!-- Footer -->
                 <div class="footer text-muted text-center">
-                    &copy;{{ date('Y') }}. <a href="#">Fashhunt Web App Kit</a> by <a href="javascript:void(0)"
-                                                                                      target="_blank">WolfSoft. </a>
+                    &copy; {{ date('Y') }}. <a href="/">Fashion Web App Kit</a> by <a href="javascript:void(0)" target="_blank">Fashion. </a>
                 </div>
                 <!-- /footer -->
 

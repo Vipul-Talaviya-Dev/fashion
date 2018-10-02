@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    const ACTIVE = 1, INACTIVE = 2, COD = 1, COD = 2;
+    const ACTIVE = 1, INACTIVE = 2;
     use Notifiable;
     use SoftDeletes;
     use Eloquence;

@@ -42,52 +42,40 @@
             </div> 
             <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="index.html" class="act">Home</a></li>   
+                    <li class="active"><a href="{{ route('user.index') }}" class="act">Home</a></li>   
                     <!-- Mega Menu -->
+                    <?php
+                        $categories = \App\Models\Category::parents()->active()->get(['id', 'name', 'parent_id', 'slug']);
+                    ?>
+                    @foreach($categories as $category)
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">{{ $category->name }} <b class="caret"></b></a>
                         <ul class="dropdown-menu multi-column columns-3">
                             <div class="row">
+                            <?php
+                                $subCategories = \App\Models\Category::active()->where('parent_id', $category->id)->get(['id', 'name', 'parent_id', 'slug']);
+                            ?>          
+                                @foreach($subCategories as $subCategory)
                                 <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
-                                        <h6>Clothing</h6>
-                                        <li><a href="dresses.html">Dresses<span>New</span></a></li>
-                                        <li><a href="sweaters.html">Sweaters</a></li>
-                                        <li><a href="skirts.html">Shorts & Skirts</a></li>
-                                        <li><a href="jeans.html">Jeans</a></li>
-                                        <li><a href="shirts.html">Shirts & Tops<span>New</span></a></li>
+                                        <h6><a href="{{ route('user.subCategoryUrl', ['mainCategory' => $category->slug, 'subCategory' => $subCategory->slug])}}">{{ $subCategory->name }}</a></h6>
+                                        <?php
+                                            $thirdCategories = \App\Models\Category::active()->where('parent_id', $subCategory->id)->get(['id', 'name', 'parent_id', 'slug']);
+                                        ?>
+                                        @foreach($thirdCategories as $thirdCategory)
+                                        <li><a href="{{ route('user.thirdCategoryUrl', ['mainCategory' => $category->slug, 'subCategory' => $subCategory->slug, 'thirdCategory' => $thirdCategory->slug])}}">{{ $thirdCategory->name }}</a></li>
+                                        @endforeach
                                     </ul>
                                 </div>
-                                <div class="col-sm-3">
-                                    <ul class="multi-column-dropdown">
-                                        <h6>Ethnic Wear</h6>
-                                        <li><a href="salwars.html">Salwars</a></li>
-                                        <li><a href="sarees.html">Sarees<span>New</span></a></li>
-                                        <li><a href="products.html"><i>Summer Store</i></a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-2">
-                                    <ul class="multi-column-dropdown">
-                                        <h6>Foot Wear</h6>
-                                        <li><a href="sandals.html">Flats</a></li>
-                                        <li><a href="sandals.html">Sandals</a></li>
-                                        <li><a href="sandals.html">Boots</a></li>
-                                        <li><a href="sandals.html">Heels</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="w3ls_products_pos">
-                                        <h4>50%<i>Off/-</i></h4>
-                                        <img src="/front/images/1.jpg" alt=" " class="img-responsive" />
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
+                                @endforeach
+                                <!-- <div class="clearfix"></div> -->
                             </div>
                         </ul>
                     </li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="short-codes.html">Short Codes</a></li>
-                    <li><a href="mail.html">Mail Us</a></li>
+                    @endforeach
+                    <!-- <li><a href="about.html">About Us</a></li> -->
+                    <!-- <li><a href="short-codes.html">Short Codes</a></li> -->
+                    <li><a href="{{ route('user.contact') }}">Contact Us</a></li>
                 </ul>
             </div>
         </nav>

@@ -87,6 +87,13 @@
                     <span style="color: red;">{{$error}}</span>
                     @endforeach
                 </div>
+                <div class="form-group col-md-3">
+                    <label>Meta Keyword: <span class="text-danger">*</span></label>
+                    <input type="text" name="meta_keyword" value="T-shirt, Jens" class="form-control metaKeyword" data-fouc required="">
+                    @foreach($errors->get('meta_keyword') as $error)
+                    <span style="color: red;">{{$error}}</span>
+                    @endforeach
+                </div>
                 <!-- <div class="form-group col-md-3">
                     <label>Discount: <span class="text-danger">*</span></label>
                     <input type="number" name="discount" placeholder="Enter Discount" class="form-control" value="{{ old('discount') }}" pattern="[0-9]" min="0">
@@ -96,6 +103,15 @@
                 </div> -->
             </div>
             <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Meta Description :<span class="text-danger">*</span></label>
+                        <textarea name="meta_description" class="form-control required" required placeholder="Enter Meta Description"></textarea>
+                        @foreach($errors->get('meta_description') as $error)
+                        <span style="color: red;">{{$error}}</span>
+                        @endforeach
+                    </div>
+                </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Thumb Image :<span class="text-danger">*</span></label>
@@ -181,6 +197,8 @@
 @endsection
 
 @section('js')
+<script type="text/javascript" src="/assets/js/plugins/forms/tags/tagsinput.min.js"></script>
+<script type="text/javascript" src="/assets/js/plugins/forms/tags/tokenfield.min.js"></script>
 <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="/ckeditor/samples/js/sample.js"></script>
 <script type="text/javascript">
@@ -192,6 +210,7 @@
     var form_html = '';
     var html_inc = '0';
     $(document).ready(function () {
+        $('.metaKeyword').tokenfield();
         form_html = $('#product0').html();
     });
     $(function () {

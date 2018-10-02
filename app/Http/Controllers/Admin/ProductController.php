@@ -38,6 +38,7 @@ class ProductController extends Controller
 
     public function create(Request $request)
     {
+        // dd($request->all());
         if ($request->get('maxPrice') <= $request->get('price')) {
             return redirect()->back()->with('error', 'Price is not greater than or equal to Max Price.')->withInput();
         }
@@ -58,6 +59,8 @@ class ProductController extends Controller
             'highlights' => 'required',
             'shortDescription' => 'required',
             'description' => 'required',
+            'meta_keyword' => 'required',
+            'meta_description' => 'required',
         ]);
 
         // dd($request->all());
@@ -80,6 +83,8 @@ class ProductController extends Controller
             'small_image' => implode(',', $subImages),
             'description' => $request->get('description'),
             'short_description' => $request->get('shortDescription'),
+            'meta_keyword' => $request->get('meta_keyword'),
+            'meta_description' => $request->get('meta_description'),
             'highlights' => $request->get('highlights'),
             'discount' => floor($discount)
         ]);

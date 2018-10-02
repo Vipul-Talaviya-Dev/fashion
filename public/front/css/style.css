@@ -276,7 +276,7 @@ ul.multi-column-dropdown h6 {
     float: none;
 }
 .navbar-nav > li:nth-child(1) {
-    margin-left: 12em;
+    margin-left: -2em;
 }
 .dropdown-menu {
     left: -130%;

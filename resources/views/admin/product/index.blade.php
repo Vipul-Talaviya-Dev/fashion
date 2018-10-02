@@ -56,8 +56,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label>Search: </label>
-                                        <input type="text" name="search" class="form-control"
-                                               style="background: #25A296; color: white" placeholder="Search Text">
+                                        <input type="text" name="search" class="form-control" style="background: #25A296; color: white" placeholder="Search Text" autocomplete="off">
                                     </div>
                                     <div class="col-md-2">
                                         <a href="{{ route('admin.products') }}" class="btn btn-danger form-control" style="margin-top: 27px;">
@@ -94,7 +93,7 @@
                                     <tr>
                                         <th>Sr No.</th>
                                         <th>Product</th>
-                                        <th>Store</th>
+                                        <th>Price</th>
                                         <th>Image</th>
                                         <th>Status</th>
                                         <th class="text-center">Actions</th>
@@ -106,9 +105,9 @@
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $product->name }}</td>
-                                                <td>{{ $product->name }}</td>
+                                                <td>{{ $product->price }}</td>
                                                 <td>@if(!empty($product->id))
-                                                    <img src="{{ \Cloudder::secureShow($product->name) }}" alt="" style="max-height: 50px; max-width: 100px">@endif
+                                                    <img src="{{ \Cloudder::secureShow($product->thumb_image) }}" alt="" style="max-height: 50px; max-width: 100px">@endif
                                                 </td>
                                                 @if($product->status == 1)
                                                     <td><span class="label label-success">Active</span></td>

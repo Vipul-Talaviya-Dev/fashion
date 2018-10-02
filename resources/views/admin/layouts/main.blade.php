@@ -88,8 +88,8 @@
 {{--<script type="text/javascript" src="/assets/js/core/app.js"></script>--}}
 <script type="text/javascript" src="/js/sweetalert.min.js"></script>
 <script type="text/javascript" src="/assets/js/plugins/datepicker/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.0/vue.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.3.4/vue-resource.js"></script>
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.0/vue.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.3.4/vue-resource.js"></script> -->
 <!-- /core JS files -->
 
 @yield('js')
