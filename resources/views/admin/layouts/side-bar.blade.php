@@ -46,8 +46,8 @@
                             <a href="javascript:void(0);"><i class="icon-tree6"></i> <span>Module</span></a>
                             <ul>
                                 <li><a href="{{ route('admin.banners') }}"><i class="icon-stack3"></i> Banner</a></li>
-                                <li><a href="javascript:void(0);"><i class="icon-stack3"></i> Ad's</a></li>
-                                <li><a href="javascript:void(0);"><i class="icon-stack3"></i> Module</a></li>
+                                <li><a href="{{ route('admin.windowImages') }}"><i class="icon-stack3"></i> Window Images</a></li>
+                                <!-- <li><a href="javascript:void(0);"><i class="icon-stack3"></i> Module</a></li> -->
                             </ul>
                         </li>
                         <li>

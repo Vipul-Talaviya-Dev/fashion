@@ -58,12 +58,12 @@
                                 @foreach($subCategories as $subCategory)
                                 <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
-                                        <h6><a href="{{ route('user.subCategoryUrl', ['mainCategory' => $category->slug, 'subCategory' => $subCategory->slug])}}">{{ $subCategory->name }}</a></h6>
+                                        <h6><a href="{{ route('user.products', ['mainCategory' => $category->slug, 'subCategory' => $subCategory->slug])}}">{{ $subCategory->name }}</a></h6>
                                         <?php
                                             $thirdCategories = \App\Models\Category::active()->where('parent_id', $subCategory->id)->get(['id', 'name', 'parent_id', 'slug']);
                                         ?>
                                         @foreach($thirdCategories as $thirdCategory)
-                                        <li><a href="{{ route('user.thirdCategoryUrl', ['mainCategory' => $category->slug, 'subCategory' => $subCategory->slug, 'thirdCategory' => $thirdCategory->slug])}}">{{ $thirdCategory->name }}</a></li>
+                                        <li><a href="{{ route('user.productDetail', ['mainCategory' => $category->slug, 'subCategory' => $subCategory->slug, 'thirdCategory' => $thirdCategory->slug])}}">{{ $thirdCategory->name }}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>

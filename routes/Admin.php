@@ -46,6 +46,14 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
         Route::post('banner/{id}/update', 'BannerController@update')->name('banner.update');
         Route::get('banner/{id}/delete', 'BannerController@delete')->name('banner.delete');
 
+        // Window Image Controller
+        Route::get('windowImages', 'WindowImageController@index')->name('windowImages');
+        Route::get('windowImage/add', 'WindowImageController@add')->name('windowImage.add');
+        Route::post('windowImage/create', 'WindowImageController@create')->name('windowImage.create');
+        Route::get('windowImage/{id}/edit', 'WindowImageController@edit')->name('windowImage.edit');
+        Route::post('windowImage/{id}/update', 'WindowImageController@update')->name('windowImage.update');
+        Route::get('windowImage/{id}/delete', 'WindowImageController@delete')->name('windowImage.delete');
+
         // Color Controller
         Route::get('colors', 'ColorController@index')->name('colors');
         Route::get('color/add', 'ColorController@add')->name('color.add');
