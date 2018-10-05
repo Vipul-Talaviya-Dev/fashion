@@ -1,7 +1,5 @@
 @extends('admin.layouts.main')
-@section('title')
-    Product update panel
-@endsection
+@section('title', 'Product update panel')
 @section('page-header')
     <div class="page-header page-header-default">
         <div class="breadcrumb-line">
@@ -21,63 +19,12 @@
                 <h6 class="panel-title">Product</h6>
             </div>
             <form class="stepy-validation" id="product"
-                  action="{{ route('admin.product.update', base64_encode($product->id)) }}"
+                  action="{{ route('admin.product.update', $product->id) }}"
                   method="post"
                   enctype="multipart/form-data">
                 {{ csrf_field()  }}
                 <fieldset title="1">
                     <legend class="text-semibold">Seller Info</legend>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Seller Name : <span class="text-danger">*</span></label>
-                                <input type="text" name="seller" placeholder="Enter Seller"
-                                       value="{{ $product->seller->fname }} {{ $product->seller->lname }}"
-                                       class="form-control required">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Type: <span class="text-danger">*</span></label>
-                                <input type="text" name="type" placeholder="Enter Category"
-                                       value="{{ $category->name }}" class="form-control required">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Category: <span class="text-danger">*</span></label>
-                                <input type="text" name="seller" placeholder="Enter Seller"
-                                       value="{{ $product->category->name }}"
-                                       class="form-control required">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        @foreach($attributes as $attribute)
-                            @foreach($values as $val)
-                                @if($attribute['name'] == $val['id'])
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>{{ $attribute['name'] }}</label>
-                                            <select name="attribute[]" data-placeholder="Select Attribute"
-                                                    class="select">
-                                                <option></option>
-                                                @foreach($attribute['values'] as $value)
-                                                    <option value="{{ $value['id'] }}" {{ ($val['subID'] == $value['id']) ? 'selected' : '' }}>{{ $value['value'] }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                @endif
-                            @endforeach
-
-                        @endforeach
-                    </div>
-
                     <div class="row">
                         <label class="col-md-1">Status:</label>
                         <div class="col-md-11">
@@ -161,7 +108,7 @@
 
                     <div class="row">
                         @foreach($product->variations as $variation)
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Color: <span class="text-danger">*</span></label>
                                     <input type="text" name="color[]" value="{{ $variation->color->name }}"
@@ -169,7 +116,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Size: <span class="text-danger">*</span></label>
                                     <input type="text" name="size[]" value="{{ $variation->size->name }}"
@@ -181,26 +128,16 @@
                                 <div class="form-group">
                                     <label>Quantity: <span class="text-danger">*</span></label>
                                     <input type="text" name="quantity[]" placeholder="Enter Quantity"
-                                           class="form-control" value="{{ $variation->quantity }}" required>
-                                    <input type="hidden" name="variationID[]" value="{{ $variation->id }}">
+                                           class="form-control" value="{{ $variation->qty }}" required>
                                 </div>
                             </div>
-                        @endforeach
-                    </div>
-                </fieldset>
-                <fieldset title="3">
-                    <legend class="text-semibold">Personal data</legend>
-                    <div class="row">
 
-                        @foreach($images as $color)
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>{{ $color['colorName'] }} :<span class="text-danger">*</span></label>
-                                    <input type="file" name="colorImages[{{ $color['colorID'] }}][]"
-                                           class="file-styled from-control" multiple>
-                                    @foreach($color['images'] as $image)
-                                        <img src="{{ $image['image'] }}" height="100" width="50">
-                                    @endforeach
+                                    <label>Price: <span class="text-danger">*</span></label>
+                                    <input type="text" name="prices[]" placeholder="Enter price"
+                                           class="form-control" value="{{ $variation->price }}" required>
+                                    <input type="hidden" name="variationID[]" value="{{ $variation->id }}">
                                 </div>
                             </div>
                         @endforeach

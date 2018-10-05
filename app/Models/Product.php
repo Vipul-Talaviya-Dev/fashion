@@ -72,4 +72,9 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class);
     }
+
+    public function variations()
+    {
+        return $this->hasMany(Variation::class);
+    }
 }

@@ -93,6 +93,7 @@
                                     <tr>
                                         <th>Sr No.</th>
                                         <th>Product</th>
+                                        <th>Max Price</th>
                                         <th>Price</th>
                                         <th>Image</th>
                                         <th>Status</th>
@@ -105,6 +106,7 @@
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $product->name }}</td>
+                                                <td>{{ $product->max_price }}</td>
                                                 <td>{{ $product->price }}</td>
                                                 <td>@if(!empty($product->id))
                                                     <img src="{{ \Cloudder::secureShow($product->thumb_image) }}" alt="" style="max-height: 50px; max-width: 100px">@endif

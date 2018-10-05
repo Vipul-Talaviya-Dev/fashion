@@ -111,66 +111,13 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = Product::with([
-            'category',
-            'seller',
-            'category.attribute',
-            'category.attribute.attributeValue',
-            'variations.color',
-            'variations.size',
-            'brand'
-        ])->where('id', base64_decode($id))->first();
+        $product = Product::with(['category', 'variations.color', 'variations.size', 'brand'])->where('id', $id)->first();
         $category = Category::find($product->category->parent_id);
-        $attributes = Attribute::where('category_id', '=', $product->category_id)->get()->map(function (
-            Attribute $attribute
-        ) {
-            return [
-                'id' => $attribute->id,
-                'name' => $attribute->name,
-                'values' => AttributeValue::where('attribute_id', '=', $attribute->id)->get()->map(function (
-                    AttributeValue $value
-                ) {
-                    return [
-                        'id' => $value->id,
-                        'value' => $value->value,
-                    ];
-                }),
-            ];
-        });
-        $values = $product->attributeValues()->get()->map(function (
-            AttributeValue $item
-        ) {
-            $attribute = Attribute::find($item->attribute_id);
-            return [
-                'valueID' => $attribute->id,
-                'id' => $attribute->name,
-                'subID' => $item->id,
-                'name' => $item->value,
-            ];
-        })->toArray();
         $brands = Brand::active()->get();
-        $images = ProductImage::select('color_id')->groupBy('color_id')->where('product_id', '=',
-            $product->id)->get()->map(function (ProductImage $image) use ($product) {
-            $color = Color::find($image->color_id);
-            return [
-                'colorID' => $image->color_id,
-                'colorName' => $color->name,
-                'images' => ProductImage::where('product_id', '=', $product->id)->where('color_id', '=',
-                    $image->color_id)->get()->map(function (ProductImage $img) {
-                    return [
-                        'id' => $img->id,
-                        'image' => \Cloudder::secureShow($img->name, []),
-                    ];
-                }),
-            ];
-        });
         return view('admin.product.update', [
             'product' => $product,
             'category' => $category,
-            'attributes' => $attributes,
-            'values' => $values,
             'brands' => $brands,
-            'images' => $images,
         ]);
 
         return view('admin.product.update');
