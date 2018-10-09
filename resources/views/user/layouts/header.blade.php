@@ -50,7 +50,7 @@
                     @foreach($categories as $category)
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">{{ $category->name }} <b class="caret"></b></a>
-                        <ul class="dropdown-menu multi-column columns-3">
+                        <ul class="dropdown-menu multi-column columns-3" style="margin-left: 130px;">
                             <div class="row">
                             <?php
                                 $subCategories = \App\Models\Category::active()->where('parent_id', $category->id)->get(['id', 'name', 'parent_id', 'slug']);
@@ -58,7 +58,8 @@
                                 @foreach($subCategories as $subCategory)
                                 <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
-                                        <h6><a href="{{ route('user.products', ['mainCategory' => $category->slug, 'subCategory' => $subCategory->slug])}}">{{ $subCategory->name }}</a></h6>
+                                        <!-- <h6><a href="{{ route('user.products', ['mainCategory' => $category->slug, 'subCategory' => $subCategory->slug])}}">{{ $subCategory->name }}</a></h6> -->
+                                        <h6>{{ $subCategory->name }}</h6>
                                         <?php
                                             $thirdCategories = \App\Models\Category::active()->where('parent_id', $subCategory->id)->get(['id', 'name', 'parent_id', 'slug']);
                                         ?>

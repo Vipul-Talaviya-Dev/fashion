@@ -13,7 +13,7 @@
 
 Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 	Route::get('/', 'HomeController@index')->name('index');
-	Route::get('{mainCategory}/{subCategory}', 'ProductController@index')->name('products');
-	Route::get('{mainCategory}/{subCategory}/{thirdCategory}', 'ProductController@productDetail')->name('productDetail');
+	Route::get('{mainCategory}/{subCategory}/{thirdCategory?}', 'ProductController@index')->name('products');
+	Route::get('{mainCategory?}/{subCategory?}/{thirdCategory?}/{productUrl?}', 'ProductController@productDetail')->name('productDetail');
 	Route::get('contact-us', function () { return "Contact"; })->name('contact');
 });

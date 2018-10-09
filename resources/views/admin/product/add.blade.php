@@ -248,7 +248,7 @@
                             $.each(data.categories, function (key, value) {
                                 categories +='<option value="' + value['id'] + '">' + value['name'] + '</option>';
                             });
-                            $(".subCategoryDiv").html('<div class="col-md-3"><div class="form-group"><label>Sub Category: <span class="text-danger">*</span></label><select name="category"  data-placeholder="Select Type First" class="form-control category subCategory">'+categories+'</select></div>'); 
+                            $(".subCategoryDiv").html('<div class="col-md-3"><div class="form-group"><label>Sub Category: <span class="text-danger">*</span></label><select name="categoryId"  data-placeholder="Select Type First" class="form-control category subCategory">'+categories+'</select></div>'); 
                             count++;  
                         }
                     } else {

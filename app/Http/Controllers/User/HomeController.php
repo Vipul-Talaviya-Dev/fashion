@@ -13,9 +13,11 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
+    	// $pro = Product::with(['category.parent.parent'])->find(3);
+    	// dd($pro->category->parent->parent->slug.'/'.$pro->category->parent->slug.'/'.$pro->category->slug);
         return view('user.index', [
         	'brands' => Brand::latest()->get(),
-        	'products' => Product::latest()->limit(4)->get(),
+        	'products' => Product::with(['category.parent.parent'])->latest()->limit(4)->get(),
         	'windowImages' => WindowImage::latest()->limit(2)->get(),
         ]);
     }

@@ -10,6 +10,12 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        return view('user.index');
+        return view('user.product-list');
+    }
+
+    public function productDetail($mainCategory, $subCategory, $thirdCategory, $productUrl, Request $request)
+    {
+    	dd("ffff");
+    	return view('user.product-detail');
     }
 }

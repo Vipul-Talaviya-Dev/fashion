@@ -70,11 +70,12 @@ class ProductController extends Controller
             $subImages[] = Cloudder::upload($request->file('smallImages')[$i], [])->getPublicId();
         }
 
+        $lastId = (Product::latest()->first() ? Product::latest()->first()->id : 1);
         $total = $request->get('maxPrice') - $request->get('price');
         $discount = ($total / $request->get('maxPrice') * 100);
         $product = Product::create([
             'name' => trim($request->get('name')),
-            'slug' => trim(str_slug($request->get('name'))),
+            'slug' => trim(str_slug($request->get('name')).date('Ymd').$lastId),
             'price' => $request->get('price'),
             'max_price' => $request->get('maxPrice'),
             'category_id' => $request->get('categoryId'),
