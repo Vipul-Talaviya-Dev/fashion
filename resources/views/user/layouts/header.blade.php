@@ -59,7 +59,7 @@
                                 <div class="col-sm-3">
                                     <ul class="multi-column-dropdown">
                                         <!-- <h6><a href="{{ route('user.products', ['mainCategory' => $category->slug, 'subCategory' => $subCategory->slug])}}">{{ $subCategory->name }}</a></h6> -->
-                                        <h6>{{ $subCategory->name }}</h6>
+                                        <a href="{{ route('user.products', ['mainCategory' => $category->slug, 'subCategory' => $subCategory->slug, 'thirdCategory' => 'all'])}}"><h6>{{ $subCategory->name }}</h6></a>
                                         <?php
                                             $thirdCategories = \App\Models\Category::active()->where('parent_id', $subCategory->id)->get(['id', 'name', 'parent_id', 'slug']);
                                         ?>

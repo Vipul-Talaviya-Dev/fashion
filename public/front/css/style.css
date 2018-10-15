@@ -195,7 +195,7 @@ a.simpleCart_empty {
 .navbar-collapse {
     padding: 0;
 }
-ul.multi-column-dropdown h6 {
+ul.multi-column-dropdown a h6 {
     font-size: 1.5em;
 /*-- w3layouts --*/
     color:#ff9b05;

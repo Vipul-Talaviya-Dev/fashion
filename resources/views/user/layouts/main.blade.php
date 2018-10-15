@@ -9,7 +9,7 @@
     <link href="/front/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/front/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/front/css/fasthover.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="/front/css/jquery.countdown.css" rel="stylesheet" />
+    <!-- <link href="/front/css/jquery.countdown.css" rel="stylesheet" /> -->
     <link href="/front/css/popuo-box.css" rel="stylesheet" type="text/css" property="" media="all" />
     <link href='https://fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
