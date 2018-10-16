@@ -121,12 +121,14 @@
                     success: function (data) {
                         $('#subCategory').empty();
                         if (data.status) {
-                            $("#subCategoryDiv").show();
-                            $("#subCategory").empty();
-                            $("#subCategory").append('<option value="">Select A SubCategory</option>');
-                            $.each(data.categories, function (key, value) {
-                                $("#subCategory").append('<option value="' + value['id'] + '">' + value['name'] + '</option>');
-                            });
+                            if(data.categories.length > 0) {
+                                $("#subCategoryDiv").show();
+                                $("#subCategory").empty();
+                                $("#subCategory").append('<option value="">Select A SubCategory</option>');
+                                $.each(data.categories, function (key, value) {
+                                    $("#subCategory").append('<option value="' + value['id'] + '">' + value['name'] + '</option>');
+                                });
+                            }
                         } else {
                             $("#subCategory").empty();
                             $("#subCategoryDiv").hide();

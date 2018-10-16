@@ -28,7 +28,7 @@ class ProductController extends Controller
 
     public function productDetail($mainCategory, $subCategory, $thirdCategory, $productUrl, Request $request)
     {
-    	dd("ffff");
+    	// dd("ffff");
     	return view('user.product-detail');
     }
 }

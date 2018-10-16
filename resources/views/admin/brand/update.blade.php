@@ -22,7 +22,9 @@
                 <!-- Traffic sources -->
                 <div class="panel panel-flat">
                     <div class="panel-heading">
-                        <h1 class="panel-title">Brand</h1>
+                        <h1 class="panel-title">Brand
+                            <a href="{{ route('admin.brands') }}" class="btn btn-primary pull-right">Brand List</a>
+                        </h1>
                     </div>
                     <hr/>
                     <!-- Single row selection -->

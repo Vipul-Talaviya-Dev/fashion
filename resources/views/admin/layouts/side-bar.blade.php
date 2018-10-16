@@ -28,8 +28,6 @@
                             <li><a href="{{ route('admin.sizes') }}"><i class="icon-height"></i> Size</a></li>
                             <li><a href="{{ route('admin.brands') }}"><i class="icon-price-tags"></i> Brand</a></li>
                             <li><a href="{{ route('admin.categories') }}"><i class="icon-price-tags"></i> Category</a></li>
-                            <li><a href="javascript:void(0);"><i class="icon-price-tags"></i> Attribute</a></li>
-                            <li><a href="javascript:void(0);"><i class="icon-price-tags"></i>Attribute Value</a></li>
                             <li><a href="{{ route('admin.products') }}"><i class="icon-basket"></i> Product</a></li>
                         </ul>
                     </li>
