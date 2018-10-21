@@ -1,57 +1,62 @@
+function show_loader() {
+    $(".loader").css("display", "block")
+}
 
-$(document).ready(function(){
+function hide_loader(a) {
+    setTimeout(function() {
+        $(".loader").fadeOut("slow")
+    }, a)
+}
 
-
-	/* ---- Countdown timer ---- */
-
-	$('#counter').countdown({
-		timestamp : (new Date()).getTime() + 11*24*60*60*1000
-	});
-
-
-	/* ---- Animations ---- */
-
-	$('#links a').hover(
-		function(){ $(this).animate({ left: 3 }, 'fast'); },
-		function(){ $(this).animate({ left: 0 }, 'fast'); }
-	);
-
-	$('footer a').hover(
-		function(){ $(this).animate({ top: 3 }, 'fast'); },
-		function(){ $(this).animate({ top: 0 }, 'fast'); }
-	);
-
-
-	/* ---- Using Modernizr to check if the "required" and "placeholder" attributes are supported ---- */
-
-	if (!Modernizr.input.placeholder) {
-		$('.email').val('Input your e-mail address here...');
-		$('.email').focus(function() {
-			if($(this).val() == 'Input your e-mail address here...') {
-				$(this).val('');
-			}
+$(document).ready(function() {
+    $("body").on("click", ".item_add", function() {
+        var p = $(".varselected").attr("data-product");
+        var v = $(".varselected").attr("data-variation");
+        // var q = $(".qty").val();
+        if (typeof p === "undefined" || typeof v === "undefined") {
+            toastr.warning("Select Size.");
+            return false
+        }
+        if (!p) {
+            toastr.warning("Select Size");
+            return false
+        } else {
+            show_loader();
+            $.ajaxSetup({
+                cache: false
+            });
+            $.ajax({
+			    type: 'GET',
+			    url: '/product/add/to/cart/item?product_id='+p+'&variation_id='+v,
+			    // data: {'product_id': p, 'variation_id': v },
+			    success: function (data) {
+			        if (data.status) {
+			            $('.backetItem').html(data.totalItem);
+			        } else {
+			        	toastr.warning(data.error);
+			        }
+			        hide_loader();
+			    }
+			});
+        }
+    });
+    // Remove Cart Item
+    $("body").on("click", ".removeItem", function() {
+    	var id = $(this).attr("data-id");
+    	show_loader();
+        $.ajaxSetup({
+            cache: false
+        });
+        $.ajax({
+		    type: 'GET',
+		    url: '/product/add/to/cart/item?removeCartId='+id,
+		    success: function (data) {
+		        if (data.status) {
+		            $('.backetItem').html(data.totalItem);
+		            window.location.reload();
+		        }
+		        hide_loader();
+		    }
 		});
-	}
-
-	// for detecting if the browser is Safari
-	var browser = navigator.userAgent.toLowerCase();
-
-	if(!Modernizr.input.required || (browser.indexOf("safari") != -1 && browser.indexOf("chrome") == -1)) {
-		$('form').submit(function() {
-			$('.popup').remove();
-			if(!$('.email').val() || $('.email').val() == 'Input your e-mail address here...') {
-				$('form').append('<p class="popup">Please fill out this field.</p>');
-				$('.email').focus();
-				return false;
-			}
-		});
-		$('.email').keydown(function() {
-			$('.popup').remove();
-		});
-		$('.email').blur(function() {
-			$('.popup').remove();
-		});
-	}
-
-
+    });
 });

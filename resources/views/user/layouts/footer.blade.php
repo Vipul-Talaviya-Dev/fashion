@@ -53,7 +53,7 @@
 	<div class="footer-copy">
 		<div class="footer-copy1">
 			<div class="footer-copy-pos">
-				<a href="#home1" class="scroll"><img src="/front/images/arrow.png" alt=" " class="img-responsive" /></a>
+				<a href="javascript:void(0);" class="scroll"><img src="/front/images/arrow.png" alt=" " class="img-responsive" /></a>
 			</div>
 		</div>
 		<div class="container">

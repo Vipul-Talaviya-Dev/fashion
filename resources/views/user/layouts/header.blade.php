@@ -4,7 +4,7 @@
             <a href="#" data-toggle="modal" data-target="#myModal88"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
         </div>
         <div class="w3l_logo">
-            <h1><a href="index.html">Women's Fashion<span>For Fashion Lovers</span></a></h1>
+            <h1><a href="{{ route('user.index') }}">Women's Fashion<span>For Fashion Lovers</span></a></h1>
         </div>
         <div class="search">
             <input class="search_box" type="checkbox" id="search_box">
@@ -17,9 +17,9 @@
             </div>
         </div>
         <div class="cart box_1">
-            <a href="checkout.html">
+            <a href="{{ route('user.cart') }}">
                 <div class="total">
-                <span class="simpleCart_total"></span> (<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)</div>
+                <!--<span class="simpleCart_total"></span>--> (<span id="backetItem" class="backetItem">{{ ((\Session::get('cart') =="") ? 0 : count(\Session::get('cart'))) }}</span> items)</div>
                 <img src="/front/images/bag.png" alt="" />
             </a>
             <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
@@ -64,7 +64,7 @@
                                             $thirdCategories = \App\Models\Category::active()->where('parent_id', $subCategory->id)->get(['id', 'name', 'parent_id', 'slug']);
                                         ?>
                                         @foreach($thirdCategories as $thirdCategory)
-                                        <li><a href="{{ route('user.productDetail', ['mainCategory' => $category->slug, 'subCategory' => $subCategory->slug, 'thirdCategory' => $thirdCategory->slug])}}">{{ $thirdCategory->name }}</a></li>
+                                        <li><a href="{{ route('user.products', ['mainCategory' => $category->slug, 'subCategory' => $subCategory->slug, 'thirdCategory' => $thirdCategory->slug])}}">{{ $thirdCategory->name }}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>

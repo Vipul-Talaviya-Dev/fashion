@@ -1,9 +1,16 @@
 @extends('user.layouts.main')
 
-@section('title', 'Fashion')
+@section('title')
+	{{ $product->name }}
+@endsection
 
 @section('css')
 <link rel="stylesheet" href="/front/css/flexslider.css" type="text/css" media="screen" />
+<style type="text/css">
+	.flex-control-thumbs img {
+		height: 135px;
+	}
+</style>
 @endsection
 @section('content')
 <!-- Detail Start -->
@@ -12,86 +19,92 @@
 		<div class="col-md-4 single-left">
 			<div class="flexslider">
 				<ul class="slides">
-					<li data-thumb="/front/images/a.jpg">
-						<div class="thumb-image"> <img src="/front/images/a.jpg" data-imagezoom="true" class="img-responsive"> </div>
+					<li data-thumb="{{ \Cloudder::secureShow($product->thumb_image) }}">
+						<div class="thumb-image">
+							<img src="{{ \Cloudder::secureShow($product->thumb_image) }}" data-imagezoom="true" class="img-responsive" alt="{{ $product->name }}">
+						</div>
 					</li>
-					<li data-thumb="/front/images/b.jpg">
-						<div class="thumb-image"> <img src="/front/images/b.jpg" data-imagezoom="true" class="img-responsive"> </div>
-					</li>
-					<li data-thumb="/front/images/c.jpg">
-						<div class="thumb-image"> <img src="/front/images/c.jpg" data-imagezoom="true" class="img-responsive"> </div>
-					</li> 
+					<?php
+						$images = explode(',', $product->small_image);
+						if(count($images) > 0) {
+							foreach ($images as $img) {
+								echo '<li data-thumb="'.\Cloudder::secureShow($img).'">
+										<div class="thumb-image">
+											<img src="'.\Cloudder::secureShow($img).'" data-imagezoom="true" class="img-responsive" alt="'.$product->name.'">
+										</div>
+									</li>';
+							}
+						}
+					?>
 				</ul>
 			</div>
 		</div>
 		<div class="col-md-8 single-right">
-			<h3>Swan Miami Red Skirt</h3>
-			<div class="rating1">
-				<span class="starRating">
-					<input id="rating5" type="radio" name="rating" value="5">
-					<label for="rating5">5</label>
-					<input id="rating4" type="radio" name="rating" value="4">
-					<label for="rating4">4</label>
-					<input id="rating3" type="radio" name="rating" value="3" checked>
-					<label for="rating3">3</label>
-					<input id="rating2" type="radio" name="rating" value="2">
-					<label for="rating2">2</label>
-					<input id="rating1" type="radio" name="rating" value="1">
-					<label for="rating1">1</label>
-				</span>
-			</div>
+			<h3>{{ $product->name }}</h3>
+			@if(false)
+				<div class="rating1">
+					<span class="starRating">
+						<input id="rating5" type="radio" name="rating" value="5">
+						<label for="rating5">5</label>
+						<input id="rating4" type="radio" name="rating" value="4">
+						<label for="rating4">4</label>
+						<input id="rating3" type="radio" name="rating" value="3" checked>
+						<label for="rating3">3</label>
+						<input id="rating2" type="radio" name="rating" value="2">
+						<label for="rating2">2</label>
+						<input id="rating1" type="radio" name="rating" value="1">
+						<label for="rating1">1</label>
+					</span>
+				</div>
+			@endif
 			<div class="description">
 				<h5><i>Description</i></h5>
-				<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-					eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-					Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut 
-					odit aut fugit, sed quia consequuntur magni dolores eos qui 
-				ratione voluptatem sequi nesciunt.</p>
+				<p>{{ $product->short_description }}</p>
 			</div>
 			<div class="color-quality">
 				<div class="color-quality-left">
 					<h5>Color : </h5>
 					<ul>
-						<li><a href="#"><span></span>Red</a></li>
-						<li><a href="#" class="brown"><span></span>Yellow</a></li>
-						<li><a href="#" class="purple"><span></span>Purple</a></li>
-						<li><a href="#" class="gray"><span></span>Violet</a></li>
+						@if($product->variations)
+							@foreach($product->variations as $variation)
+								<li>
+									<a href="javascript:void(0);" class="btn varbtn colorVariation" data-col="{{ $variation->color_id }}"><span style="background: {{ $variation->color->code  }}"></span> {{ $variation->color->name }}</a>
+								</li>
+							@endforeach
+						@endif
+					</ul>
+					<p><br></p>
+					<h5>Select Size : </h5>
+					<ul>
+						@if($product->variations)
+							@foreach($product->variations as $variation)
+								<li>
+									<a href="javascript:void(0);" class="btn varbtn variation" name="size" id="varbtn-{{ $variation->size_id }}" data-id="{{ $variation->size_id }}" data-variation="{{ $variation->id }}" data-product="{{ $product->id }}" data-col="{{ $variation->color_id }}"> {{ $variation->size->name }}</a><input type="radio" name="variation" class="radio-cust radio-variation" id="{{ $variation->size_id }}" data-col="{{ $variation->color_id }}" style="display:none;" value="{{ $variation->size_id }}">
+								</li>
+							@endforeach
+						@endif
 					</ul>
 				</div>
 				<div class="color-quality-right">
-					<h5>Quality :</h5>
-					<div class="quantity"> 
-						<div class="quantity-select">                           
-							<div class="entry value-minus1">&nbsp;</div>
-							<div class="entry value1"><span>1</span></div>
-							<div class="entry value-plus1 active">&nbsp;</div>
-						</div>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="occasional">
-				<h5>Occasion :</h5>
-				<div class="colr ert">
-					<div class="check">
-						<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>Occasion Wear</label>
-					</div>
-				</div>
-				<div class="colr">
-					<div class="check">
-						<label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>Party Wear</label>
-					</div>
-				</div>
-				<div class="colr">
-					<div class="check">
-						<label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>Formal Wear</label>
-					</div>
+					<strong>Estimated Delivery</strong><br>
+					<?php $date = strtotime("+7 day");
+						echo date('M d', $date);
+						echo "&nbsp&nbsp"."To"."&nbsp&nbsp";
+						$date = strtotime("+10 day");
+						echo date('M d , Y', $date);
+					?>	
 				</div>
 				<div class="clearfix"> </div>
 			</div>
 			<div class="simpleCart_shelfItem">
-				<p><span>$320</span> <i class="item_price">$250</i></p>
-				<p><a class="item_add" href="#">Add to cart</a></p>
+				<p><span>Rs. {{ $product->max_price }}</span> Rs. <i class="item_price">{{ $product->price }}</i></p>
+				<p>
+					@if(array_sum($product->variations()->pluck('qty')->toArray()) > 0)
+						<a class="item_add" href="javascript:void(0);">Add to cart</a>
+					@else
+						<a href="javascript:void(0);">Out Of Stock</a>
+					@endif	
+				</p>
 			</div>
 
 		</div>
@@ -105,21 +118,15 @@
 			<div id="horizontalTab1" style="display: block; width: 100%; margin: 0px;">
 				<ul>
 					<li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Product Information</span></li>
-					<li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Reviews</span></li>
+					@if(false)
+						<li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Reviews</span></li>
+					@endif	
 				</ul>		
 				<div class="tab-1 resp-tab-content additional_info_grid" aria-labelledby="tab_item-0">
-					<h3>Swan Miami Red Skirt</h3>
-					<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore 
-						eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-						Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut 
-						odit aut fugit, sed quia consequuntur magni dolores eos qui 
-						ratione voluptatem sequi nesciunt.Ut enim ad minima veniam, quis nostrum 
-						exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea 
-						commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate 
-						velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat 
-					quo voluptas nulla pariatur.</p>
+					<h3>{{ $product->name }}</h3>
+					<p>{!!  $product->description !!}</p>
 				</div>	
-
+				@if(false)
 				<div class="tab-2 resp-tab-content additional_info_grid" aria-labelledby="tab_item-1">
 					<h4>(2) Reviews</h4>
 					<div class="additional_info_sub_grids">
@@ -204,7 +211,8 @@
 							<input type="submit" value="Submit" >
 						</form>
 					</div>
-				</div> 			        					            	      
+				</div> 	
+				@endif		        					            	      
 			</div>	
 		</div>
 	</div>
@@ -213,113 +221,45 @@
 <div class="w3l_related_products">
 		<div class="container">
 			<h3>Related Products</h3>
-			<ul id="flexiselDemo2">			
-				<li>
-					<div class="w3l_related_products_grid">
-						<div class="agile_ecommerce_tab_left dresses_grid">
-							<div class="hs-wrapper hs-wrapper3">
-								<img src="/front/images/ss1.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss2.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss3.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss4.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss5.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss6.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss7.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss8.jpg" alt=" " class="img-responsive">
-								<div class="w3_hs_bottom">
-									<div class="flex_ecommerce">
-										<a href="#" data-toggle="modal" data-target="#myModal6"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+			<ul id="flexiselDemo2">
+				@foreach($relatedProducts as $relatedProduct)
+					<li>
+						<div class="w3l_related_products_grid">
+							<div class="agile_ecommerce_tab_left dresses_grid">
+								<div class="hs-wrapper hs-wrapper3">
+									<img src="{{ \Cloudder::secureShow($relatedProduct->thumb_image) }}" alt="{{ $relatedProduct->name }}" class="img-responsive" />
+									<?php 
+										$images = explode(',', $relatedProduct->small_image);
+										foreach ($images as $image) {
+											echo '<img src="'.\Cloudder::secureShow($image).'" alt="'.$relatedProduct->name.'" class="img-responsive" />';
+										}
+									?>
+									<div class="w3_hs_bottom">
+										<div class="flex_ecommerce">
+											<a href="javascript:void(0);"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+										</div>
 									</div>
 								</div>
-							</div>
-							<h5><a href="single.html">Pink Flared Skirt</a></h5>
-							<div class="simpleCart_shelfItem">
-								<p class="flexisel_ecommerce_cart"><span>$312</span> <i class="item_price">$212</i></p>
-								<p><a class="item_add" href="#">Add to cart</a></p>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li>
-					<div class="w3l_related_products_grid">
-						<div class="agile_ecommerce_tab_left dresses_grid">
-							<div class="hs-wrapper hs-wrapper3">
-								<img src="/front/images/ss2.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss3.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss4.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss5.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss6.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss9.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss7.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss8.jpg" alt=" " class="img-responsive">
-								<div class="w3_hs_bottom">
-									<div class="flex_ecommerce">
-										<a href="#" data-toggle="modal" data-target="#myModal6"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-									</div>
+								<h5>
+									<?php
+										if($relatedProduct->category && $relatedProduct->category->parent && $relatedProduct->category->parent->parent) {
+											$url = $relatedProduct->category->parent->parent->slug.'/'.$relatedProduct->category->parent->slug.'/'.$relatedProduct->category->slug.'/'.$relatedProduct->slug;
+										} else if($relatedProduct->category && $relatedProduct->category->parent) {
+											$url = $relatedProduct->category->parent->slug.'/'.$relatedProduct->category->slug.'/'.$relatedProduct->slug;
+										} else {
+											$url = $relatedProduct->category->slug.'/'.$relatedProduct->slug;
+										}
+										echo '<a href="/shop/'.$url.'">'.$relatedProduct->name.'</a>';
+									?>
+								</h5>
+								<div class="simpleCart_shelfItem">
+									<p class="flexisel_ecommerce_cart"><span>Rs. {{ $relatedProduct->max_price }}</span> Rs. <i class="item_price">{{ $relatedProduct->price }}</i></p>
 								</div>
 							</div>
-							<h5><a href="single.html">Red Pencil Skirt</a></h5>
-							<div class="simpleCart_shelfItem">
-								<p class="flexisel_ecommerce_cart"><span>$432</span> <i class="item_price">$323</i></p>
-								<p><a class="item_add" href="#">Add to cart</a></p>
-							</div>
 						</div>
-					</div>
-				</li>
-				<li>
-					<div class="w3l_related_products_grid">
-						<div class="agile_ecommerce_tab_left dresses_grid">
-							<div class="hs-wrapper hs-wrapper3">
-								<img src="/front/images/ss3.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss4.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss5.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss6.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss7.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss8.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss9.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss1.jpg" alt=" " class="img-responsive">
-								<div class="w3_hs_bottom">
-									<div class="flex_ecommerce">
-										<a href="#" data-toggle="modal" data-target="#myModal6"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-									</div>
-								</div>
-							</div>
-							<h5><a href="single.html">Yellow Cotton Skirt</a></h5>
-							<div class="simpleCart_shelfItem">
-								<p class="flexisel_ecommerce_cart"><span>$323</span> <i class="item_price">$310</i></p>
-								<p><a class="item_add" href="#">Add to cart</a></p>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li>
-					<div class="w3l_related_products_grid">
-						<div class="agile_ecommerce_tab_left dresses_grid">
-							<div class="hs-wrapper hs-wrapper3">
-								<img src="/front/images/ss4.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss5.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss6.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss7.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss8.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss9.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss1.jpg" alt=" " class="img-responsive">
-								<img src="/front/images/ss2.jpg" alt=" " class="img-responsive">
-								<div class="w3_hs_bottom">
-									<div class="flex_ecommerce">
-										<a href="#" data-toggle="modal" data-target="#myModal6"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-									</div>
-								</div>
-							</div>
-							<h5><a href="single.html">Black Short</a></h5>
-							<div class="simpleCart_shelfItem">
-								<p class="flexisel_ecommerce_cart"><span>$256</span> <i class="item_price">$200</i></p>
-								<p><a class="item_add" href="#">Add to cart</a></p>
-							</div>
-						</div>
-					</div>
-				</li>
+					</li>
+				@endforeach
 			</ul>
-				
 		</div>
 	</div>
 @endsection
@@ -334,7 +274,10 @@
 	$(window).load(function() {
 		$('.flexslider').flexslider({
 			animation: "slide",
-			controlNav: "thumbnails"
+			// controlNav: false,
+			direction: "horizontal",
+			controlNav: "thumbnails",
+
 		});
 		$("#flexiselDemo2").flexisel({
 			visibleItems:4,
@@ -376,6 +319,27 @@
 			if(newVal>=1) divUpd.text(newVal);
 		});
 	});
+
+	$("body").on("click", ".variation", function() { 
+		$(".variation").removeClass("varselected");
+      	var a = $(this).attr("data-id"); // size
+      	var c = $(this).attr("data-col");
+      	$(".variation").removeClass("disabled");
+      	var e = $(this).attr("data-product");
+      	$("#varbtn-"+a).addClass("varselected");
+      	$("#varbtn-"+a).addClass("disabled");
+
+      	$(".colorVariation").each(function(index, data) {
+      		var v = $(this).attr("data-col");
+      		$(this).removeClass("disabled");
+      		$(this).removeClass("colorSelected");
+      		if(parseInt(v) == parseInt(c)) {
+	      		$(this).addClass("colorSelected");
+      		}
+      	});
+	});
 </script>
+
+
 <!--quantity-->
 @endsection

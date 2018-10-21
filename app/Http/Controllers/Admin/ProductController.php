@@ -75,7 +75,7 @@ class ProductController extends Controller
         $discount = ($total / $request->get('maxPrice') * 100);
         $product = Product::create([
             'name' => trim($request->get('name')),
-            'slug' => trim(str_slug($request->get('name')).date('Ymd').$lastId),
+            'slug' => trim(str_slug($request->get('name')).date('YmdHis').$lastId),
             'price' => $request->get('price'),
             'max_price' => $request->get('maxPrice'),
             'category_id' => $request->get('categoryId'),

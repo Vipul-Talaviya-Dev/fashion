@@ -69,12 +69,11 @@
 								} else {
 									$url = $product->category->slug.'/'.$product->slug;
 								}
-								echo '<a href="'.$url.'">'.$product->name.'</a>';
-							
+								echo '<a href="shop/'.$url.'">'.$product->name.'</a>';
 							?>
 						</h5>
 						<div class="simpleCart_shelfItem">
-							<p><span>{{ $product->max_price }}</span> <i class="item_price">{{ $product->price }}</i></p>
+							<p><span>Rs. {{ $product->max_price }}</span> Rs. <i class="item_price">{{ $product->price }}</i></p>
 							<p><a class="item_add" href="javascript:void(0);">Add to cart</a></p>
 						</div>
 					</div>
