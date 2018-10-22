@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('mobile');
             $table->string('password');
-            $table->string('member_ship_code')->nullable();
+            $table->string('member_ship_code')->unique()->nullable();
             $table->string('referral_code')->unique();
             $table->tinyInteger('status')->comment('1: Active, 2: In-active')->default(1);
             $table->rememberToken();

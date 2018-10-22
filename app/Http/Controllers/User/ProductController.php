@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use Session;
+use App\Models\User;
+use App\Models\Address;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -134,10 +136,51 @@ class ProductController extends Controller
 
     public function orderShipping()
     {
+    	// if(Session::get('order') == null) {
+    	// 	return redirect(route('user.index'));
+    	// }
+    	return view('user.order-shipping');
+    }
+
+    public function shippingDetail(Request $request)
+    {
     	if(Session::get('order') == null) {
     		return redirect(route('user.index'));
     	}
-    	dd(Session::get('order'));
-    	return view('user.order-shipping');
+
+    	$this->validate($request, [
+    		'name' => 'required',
+    		'email' => 'required|email|unique:users,email',
+    		'mobile' => 'required|numeric|digits_between:10,12',
+    		'address' => 'required',
+    		'pincode' => 'required|numeric|digits:6',
+    		'city' => 'required|alpha',
+    		'state' => 'required|alpha',
+    		'country' => 'required|alpha',
+    	]);
+
+    	$user = User::create([
+    		'name' => $request->get('name'),
+    		'email' => $request->get('email'),
+    		'mobile' => $request->get('mobile'),
+    		'password' => \Hash::make('123456'),
+    		'referral_code' => User::referralCode(),
+    	]);
+
+    	$address = Address::create([
+    		'user_id' => $user->id,
+    		'name' => $request->get('name'),
+    		'mobile' => $request->get('mobile'),
+    		'address' => $request->get('address'),
+    		'pincode' => $request->get('pincode'),
+    		'city' => $request->get('city'),
+    		'state' => $request->get('state'),
+    		'country' => $request->get('country'),
+    		'default' => 1,
+    	]);
+
+    	Session::put("user", User::find($user->id));
+
+    	return redirect(route('user.payment'));
     }
 }

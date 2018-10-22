@@ -19,5 +19,11 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 	Route::get('/cart', 'ProductController@cart')->name('cart');
 	Route::post('/cart-order-detail', 'ProductController@cartOrderDetail')->name('cartOrderDetail');
 	Route::get('/order-shipping', 'ProductController@orderShipping')->name('orderShipping');
+	Route::post('/order-shipping-detail', 'ProductController@shippingDetail')->name('shippingDetail');
+	
+	Route::group(['middleware' => 'userAuth'], function () {
+		Route::get('/payment', 'ProductController@payment')->name('payment');
+	});
+
 	Route::get('contact-us', function () { return "Contact"; })->name('contact');
 });

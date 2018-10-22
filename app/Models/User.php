@@ -36,6 +36,34 @@ class User extends Authenticatable
         'updated_at',
         'deleted_at'
     ];
+
+    /**
+     * @return string
+     * Referral Function
+     */
+    public static function referralCode()
+    {
+        $random = 'FHN'.str_random(4);
+        if (self::where('referral_code', $random)->first()) {
+            $random = 'FHN'.str_random(4);
+        }
+
+        return $random;
+    }
+    /**
+     * [memberShipCode description]
+     * @return [type] [description]
+     */
+    public static function memberShipCode()
+    {
+        $random = 'FHN'.str_random(5);
+        if (self::where('member_ship_code', $random)->first()) {
+            $random = 'FHN'.str_random(5);
+        }
+
+        return $random;
+    }
+
      /**
      * scope
      */
