@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use Auth;
 use Session;
 use App\Models\User;
 use App\Models\Address;
@@ -138,9 +139,10 @@ class ProductController extends Controller
 
     public function orderShipping()
     {
-    	// if(Session::get('order') == null) {
-    	// 	return redirect(route('user.index'));
-    	// }
+    	if(Session::get('order') == null) {
+    		return redirect(route('user.index'));
+    	}
+
     	return view('user.order-shipping');
     }
 
@@ -158,7 +160,7 @@ class ProductController extends Controller
     		'pincode' => 'required|numeric|digits:6',
     		'city' => 'required|alpha',
     		'state' => 'required|alpha',
-    		'country' => 'required|alpha',
+    		// 'country' => 'required|alpha',
     	]);
 
     	$user = User::create([
@@ -177,13 +179,22 @@ class ProductController extends Controller
     		'pincode' => $request->get('pincode'),
     		'city' => $request->get('city'),
     		'state' => $request->get('state'),
-    		'country' => $request->get('country'),
+    		'country' => $request->get('country') ?: 'India',
     		'default' => 1,
     	]);
 
-    	Session::put("user", User::find($user->id));
+    	Auth::login(User::find($user->id));
 
     	return redirect(route('user.payment'));
+    }
+
+    public function payment()
+    {
+    	if(Session::get('order') == null) {
+    		return redirect(route('user.index'));
+    	}
+
+    	return view('user.payment');
     }
 
     public function orderPlace(Request $request)
@@ -214,4 +225,11 @@ class ProductController extends Controller
         $orderProduct->status = 1;
         // $orderProduct->save();
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect(route('user.index'));
+    }
+
 }

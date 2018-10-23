@@ -15,7 +15,7 @@ class UserAuth
      */
     public function handle($request, Closure $next)
     {
-        if(!\Session::get('user')) {
+        if(!\Auth::check()) {
             return redirect(route('user.index'));
         }
         return $next($request);

@@ -1,6 +1,6 @@
 @extends('user.layouts.main')
 
-@section('title', 'Order Shipping')
+@section('title', 'Payment')
 
 @section('content')
 <hr>

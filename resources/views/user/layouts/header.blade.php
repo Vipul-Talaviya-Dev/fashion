@@ -1,7 +1,11 @@
 <div class="header">
     <div class="container">
         <div class="w3l_login">
-            <a href="#" data-toggle="modal" data-target="#myModal88"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+            @if(!\Auth::check())
+                <a href="javascript:void(0);" data-toggle="modal" data-target="#login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+            @else
+                <a href="{{ route('user.myAccount') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+            @endif
         </div>
         <div class="w3l_logo">
             <h1><a href="{{ route('user.index') }}">Women's Fashion<span>For Fashion Lovers</span></a></h1>

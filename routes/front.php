@@ -22,6 +22,7 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 	Route::post('/order-shipping-detail', 'ProductController@shippingDetail')->name('shippingDetail');
 	
 	Route::group(['middleware' => 'userAuth'], function () {
+		Route::get('/my-account', 'UserController@payment')->name('myAccount');
 		Route::get('/payment', 'ProductController@payment')->name('payment');
 	});
 
