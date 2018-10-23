@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Address;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
@@ -182,5 +184,34 @@ class ProductController extends Controller
     	Session::put("user", User::find($user->id));
 
     	return redirect(route('user.payment'));
+    }
+
+    public function orderPlace(Request $request)
+    {
+        
+        $order = new Order;
+        $order->user_id = $request->get('data');
+        $order->voucher_id = $request->get('data');
+        $order->offer_id = $request->get('data');
+        $order->payment_mode = $request->get('data');
+        $order->payment_status = $request->get('data');
+        $order->payment_reference = $request->get('data');
+        $order->cart_amount = $request->get('data');
+        $order->discount = $request->get('data');
+        $order->extra_discount = $request->get('data');
+        $order->total = $request->get('data');
+        $order->status = 1;
+        // $order->save();
+        
+        $orderProduct = new OrderProduct;
+        $orderProduct->order_id = $request->get('data');
+        $orderProduct->user_id = $request->get('data');
+        $orderProduct->product_id = $request->get('data');
+        $orderProduct->variation_id = $request->get('data');
+        $orderProduct->price = $request->get('data');
+        $orderProduct->max_price = $request->get('data');
+        $orderProduct->qty = $request->get('data');
+        $orderProduct->status = 1;
+        // $orderProduct->save();
     }
 }
