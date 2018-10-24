@@ -90,7 +90,7 @@
 					$product = \App\Models\Product::find($data['product_id']);
 					$variation = $product->variations()->find($data['variation_id']);
 
-					$total += $product->price;
+					$total += ($product->price * $data['qty']);
 					$finalAmount = $total;
 					?>
 					<div class="order-boxos-item">
@@ -103,7 +103,7 @@
 								<span class="cart-variation"><span>Color : {{ $variation->color->name }}</span></span>
 							</h5>
 							<div class="pull-left">Quantity : {{ $data['qty'] }}</div>
-							<div class="pull-right">Rs. {{ $product->price }}</div>
+							<div class="pull-right">Rs. {{ ($product->price * $data['qty']) }}</div>
 						</div>
 					</div>
 					@endforeach
