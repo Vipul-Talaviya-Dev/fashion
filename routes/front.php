@@ -24,6 +24,8 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 	Route::group(['middleware' => 'userAuth'], function () {
 		Route::get('/my-account', 'UserController@payment')->name('myAccount');
 		Route::get('/payment', 'ProductController@payment')->name('payment');
+		Route::post('/order-place', 'ProductController@orderPlace')->name('order-place');
+		Route::get('/thanks', 'ProductController@thanks')->name('thanks');
 	});
 
 	Route::get('contact-us', function () { return "Contact"; })->name('contact');

@@ -30,5 +30,12 @@ class Order extends Model
    *
    * @var array
    */
-  protected $dates = ['deleted_at'];
+	protected $dates = ['deleted_at'];
+
+
+	public function orderProducts()
+	{
+		return $this->hasMany(OrderProduct::class);
+	}
+
 }

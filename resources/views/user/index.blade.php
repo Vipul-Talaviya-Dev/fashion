@@ -1,6 +1,6 @@
 @extends('user.layouts.main')
 
-@section('title', 'Fashion')
+@section('title', 'Online Shopping')
 
 @section('content')
 <!-- banner -->

@@ -22,7 +22,10 @@
 		<header id="header" class="navbar-static-top">
 			<div class="order-header">
 				<div class="container">
-					<div class="col-md-2"><img class="order-logo" src="https://tymkpck001.s3.amazonaws.com/assets/images/logoPCK.png" alt="Purchasekaro.com | India`s Emerging Online Shopping Website"></div>
+					<div class="col-md-2">
+						<h2>Logo</h2>
+						<!-- <img class="order-logo" src="/front/images/4.png" alt="Online Fashion store "> -->
+					</div>
 					<div class="col-md-10">
 						<div class="pull-right">
 							<div class="order-header-menu">
@@ -37,7 +40,7 @@
 				</div>
 			</div>
 		</header>
-		<form action="" method="post">
+		<form action="{{ route('user.order-place') }}" method="post">
 			{{ csrf_field() }}
 			<div data-alerts="alerts"></div>
 			<section id="content" class="gray-area">
@@ -140,9 +143,9 @@
 								<div class="panel-body">
 									<div class="notification-area">
 										<div class="info-box">
-											<p><b>Vipul patel</b><br><br>
-												614, Shree Ram Chambers, Opp: Circuit House, R.C.Dutt Road, Alkapuri, Vadodara (Guj) -390007Opp: Circuit House<br>
-												VADODARA - 390007,Gujarat<br>Phone: 9998363518<br>
+											<p><b>{{ $address->name }}</b><br><br>
+												{{ $address->address }}<br>
+												{{ $address->city }} - {{ $address->pincode }}, {{ $address->state }}<br>Phone: {{ $address->mobile }}<br>
 											</p>
 										</div>
 									</div>	

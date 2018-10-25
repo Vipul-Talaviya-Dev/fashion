@@ -81,6 +81,10 @@ class ProductController extends Controller
     		$new_cart_id = "FHSCART_".$count;
     		foreach(Session::get('cart') as $cartItems) {
 				if($cartItems['cart_product_id'] == $productId && $cartItems['variation_id'] == $variationId) {
+					return response()->json([
+			            'status' => false,
+			            'error' => 'Already Added For This Product..'
+			        ]);
 					exit(); // If Product Id Already Exist then Exit	
 				}	
 			}
@@ -184,6 +188,7 @@ class ProductController extends Controller
     	]);
 
     	Auth::login(User::find($user->id));
+    	// Auth::login(User::find(1));
 
     	return redirect(route('user.payment'));
     }
@@ -193,39 +198,76 @@ class ProductController extends Controller
     	if(Session::get('order') == null) {
     		return redirect(route('user.index'));
     	}
-
-    	return view('user.payment');
+    	$user = Auth::user();
+    	$address = Address::where('user_id', $user->id)->first();
+    	return view('user.payment', [
+    		'user' => $user,
+    		'address' => $address,
+    	]);
     }
 
     public function orderPlace(Request $request)
     {
-        
+    	if(Session::get('order') == null) {
+    		return redirect(route('user.index'));
+    	}
+
+        $user = Auth::user();
+
         $order = new Order;
-        $order->user_id = $request->get('data');
-        $order->voucher_id = $request->get('data');
-        $order->offer_id = $request->get('data');
-        $order->payment_mode = $request->get('data');
-        $order->payment_status = $request->get('data');
-        $order->payment_reference = $request->get('data');
-        $order->cart_amount = $request->get('data');
-        $order->discount = $request->get('data');
-        $order->extra_discount = $request->get('data');
-        $order->total = $request->get('data');
+        $order->user_id = $user->id;
+        if(Session::get('voucher')) {
+        	$order->voucher_id = Session::get('voucher');
+        }
+        if(Session::get('offer')) {
+        	$order->offer_id = Session::get('offer');
+        }
+
+        $order->payment_mode = 1;
+        $order->payment_status = 1;
+        $order->cart_amount = Session::get('order')['total'];
+        $order->discount = Session::get('discount') ?: 0;
+        // $order->extra_discount = $request->get('data');
+        $order->total = Session::get('order')['final_amount'];
         $order->status = 1;
-        // $order->save();
+        $order->save();
         
-        $orderProduct = new OrderProduct;
-        $orderProduct->order_id = $request->get('data');
-        $orderProduct->user_id = $request->get('data');
-        $orderProduct->product_id = $request->get('data');
-        $orderProduct->variation_id = $request->get('data');
-        $orderProduct->price = $request->get('data');
-        $orderProduct->max_price = $request->get('data');
-        $orderProduct->qty = $request->get('data');
-        $orderProduct->status = 1;
-        // $orderProduct->save();
+        $orderId = $order->id;
+        foreach(Session::get('order')['product'] as $key => $data) {
+        	$product = Product::find($data['product_id']);
+			$variation = $product->variations()->find($data['variation_id']);
+
+			$orderProduct = new OrderProduct;
+	        $orderProduct->order_id = $order->id;
+	        $orderProduct->user_id = $user->id;
+	        $orderProduct->product_id = $product->id;
+	        $orderProduct->variation_id = $variation->id;
+	        $orderProduct->price = $product->price;
+	        $orderProduct->max_price = $product->max_price;
+	        $orderProduct->qty = $data['qty'];
+	        $orderProduct->status = 1;
+	        $orderProduct->save();
+        }
+
+    	Session::forget('cart');
+    	Session::forget('order');
+    	Session::forget('voucher');
+    	Session::forget('offer');
+
+    	Session::put('orderId', $orderId);
+        return redirect(route('user.thanks'));
     }
 
+    public function thanks(Request $request)
+    {
+    	if(Session::get('orderId') < 0) {
+    		return redirect(route('user.index'));
+    	}
+
+    	return view('user.thanks', [
+    		'order' => Order::with(['orderProducts.product'])->find(Session::get('orderId'))
+    	]);
+    }
     public function logout()
     {
         Auth::logout();

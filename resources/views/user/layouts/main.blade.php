@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>@yield('title')</title>
+    <title>@yield('title') | Fashion</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     @yield('meta')
     
     <link href="/front/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/front/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/front/css/material.min.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/front/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/front/css/fasthover.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/front/css/toast.css" rel="stylesheet" type="text/css" media="all" />
@@ -26,6 +28,7 @@
 <!-- Core JS files -->
 <script src="/front/js/jquery.min.js" type="text/javascript"></script>
 <script src="/front/js/bootstrap-3.1.1.min.js" type="text/javascript"></script>
+<script src="/front/js/material.min.js" type="text/javascript"></script>
 <!-- <script src="/front/js/simpleCart.min.js" type="text/javascript"></script> -->
 <script src="/front/js/toast.js" type="text/javascript"></script>
 <script src="/front/js/script.js" type="text/javascript"></script>
