@@ -67,20 +67,20 @@
 				<tbody>
 				@foreach($order->orderProducts as $key => $orderProduct)
 				<tr>
-					<td>{{ $key++ }}</td>
+					<td>{{ $key+1 }}</td>
 					<td>
 					<div align="center">
-						<a style="text-decoration:none" width="200px" href="{{ \Cloudder::secureShow($orderProduct->thumb_image) }}" target="_blank">
-						<img border="0" src="{{ {{ \Cloudder::secureShow($orderProduct->thumb_image) }} }}" style="width:80px;min-height:auto" class="CToWUd">
-						</a>
-						{{ $orderProduct->product->name }} <br> (Order Id: {{ $cs_order_id }})
+						<a style="text-decoration:none" width="200px" href="{{ \Cloudder::secureShow($orderProduct->product->thumb_image) }}" target="_blank">
+						<img border="0" src="{{ \Cloudder::secureShow($orderProduct->product->thumb_image) }}" style="width:80px;min-height:auto" class="CToWUd">
+						</a><br>
+						<span>{{ $orderProduct->product->name }} <br> (Order Id: {{ $cs_order_id }})</span>
 					</div>
 					</td>
 					<td style="font-family:Arial,Helvetica,sans-serif;color:#34495e;font-size:13px"><div align="center">Rs. {{ $orderProduct->price }}</div></td>
 					<td style="font-family:Arial,Helvetica,sans-serif;color:#34495e;font-size:13px"><div align="center">{{ $orderProduct->qty }}</div> </td>
 					<td style="font-family:Arial,Helvetica,sans-serif;color:#34495e;font-size:13px"><div align="center">Rs. {{ $orderProduct->price * $orderProduct->qty }}</div> </td>
-				</tr>';
-				}
+				</tr>
+				@endforeach
 			</tbody>
 			</table>
 		</td>
@@ -100,60 +100,22 @@
 	</tr>
 	<tr><td colspan="2" height="10" style="border-bottom:1px solid #eaedef"></td></tr>
 	<tr>
-      <td valign="top" align="left" style="background-color:#ffffff;color:#565656;display:block;font-weight:300;margin:0;padding:0;clear:both" bgcolor="#ffffff">'
+      <td valign="top" align="left" style="background-color:#ffffff;color:#565656;display:block;font-weight:300;margin:0;padding:0;clear:both" bgcolor="#ffffff">
 			<table width="100%" cellspacing="0" cellpadding="0">
-        <tbody>
-					<tr>
-            <td valign="top" align="left">
-              <p style="color:#565656;font-size:15px;font-family:Arial,Helvetica,sans-serif">Shipping Address</p>
-              <p style="padding:0;margin:15px 0 10px 0;font-size:18px;color:#333333;font-family:Arial,Helvetica,sans-serif">{{ $address->name }} &nbsp;&nbsp;&nbsp;&nbsp; {{ $address->mobile }}
-                    </p>
-								<p style="line-height:18px;padding:0;margin:0;color:#565656;font-size:13px;font-family:Arial,Helvetica,sans-serif">{{ $address->address }} <br> {{ $address->city }} - {{ $address->pincode }}<br> {{ $address->state }}
-                </p>
-            </td>
-					</tr>
-        </tbody>
+        		<tbody>
+				<tr>
+	            <td valign="top" align="left">
+	              <p style="color:#565656;font-size:15px;font-family:Arial,Helvetica,sans-serif">Shipping Address</p>
+	              <p style="padding:0;margin:15px 0 10px 0;font-size:18px;color:#333333;font-family:Arial,Helvetica,sans-serif">{{ $address->name }} &nbsp;&nbsp;&nbsp;&nbsp; {{ $address->mobile }}
+	                    </p>
+						<p style="line-height:18px;padding:0;margin:0;color:#565656;font-size:13px;font-family:Arial,Helvetica,sans-serif">{{ $address->address }} <br> {{ $address->city }} - {{ $address->pincode }}<br> {{ $address->state }}
+	                </p>
+	            </td>
+				</tr>
+        		</tbody>
 			</table>            
     </td>
   </tr>
-	<tr><td colspan="2" height="10" style="border-bottom:1px solid #eaedef"></td></tr>
-	<tr><td colspan="2">
-        <center><img src="order-placed.jpg" height="100px" width="500px" class="CToWUd"></center></td>
-	</tr>
-	<tr><td colspan="2" height="10" style="border-bottom:1px solid #eaedef"></td></tr>
-	
-	
-	<tr>
-	<td colspan="2">
-		<table width="100%" style="padding:18px 18px 14px 18px;border:1px solid #eaedef;background-color:#ffffff">
-			<tbody>
-			<tr style="text-align:center;">
-			<td width="80">
-			<a href="http://www.purchasekaro.com/"><img src="http://www.purchasekaro.com/recharge/img/icon/shopping-icon.png" alt="Online Shopping" title="Online Shopping">
-			</a>
-			</td>
-			<td style="text-align:center"><img src="http://s16.postimg.org/3w7nt4x1t/plus.png" alt="Plus" title="Plus"></td>
-			<td width="80">
-			<a href="http://www.purchasekaro.com/recharge/"><img src="http://www.purchasekaro.com/recharge/img/icon/icon-recharge.png" alt="Recharge" title="Recharge">
-			</a>
-			</td>
-			<td style="text-align:center"><img src="http://s16.postimg.org/3w7nt4x1t/plus.png" alt="Plus" title="Plus"></td>
-			<td width="80">
-			<img src="http://www.purchasekaro.com/recharge/img/icon/icon-travel.png" alt="Travel and Tourism" title="Travel and Tourism">
-			</td>
-			</tr>
-			<tr style="text-align:center;font-size:12px;line-height:1.4;font-family:Arial,Helvetica,sans-serif;color:#34495e">
-			<td width="80">Online Shopping</td>
-			<td width="80"></td>
-			<td width="80">Recharge Utility</td>
-			<td width="80"></td>
-			<td width="80">Travel & Hotel</td>
-			</tr>
-		</tbody>
-		</table>
-		</td>
-	</tr>
-	
 	<tr><td colspan="2" style="font-size:11px;text-align:center;font-family:Arial,Helvetica,sans-serif;color:#919bac;padding-top:10px">
         Feedback, suggestions or compliments - do write to <a href="mailto:support@altsolution.in" style="font-size:12px;font-family:Arial,Helvetica,sans-serif;color:#22a7f0;text-decoration:none" target="_blank">Support Mail</a>
 		</td>
@@ -166,7 +128,7 @@
 				<a href="https://www.facebook.com/purchasekaro"><img src=""></a>
 				<a href="https://twitter.com/purchasekaro"><img src=""></a>
 				<a href="https://www.linkedin.com/company/purchasekaro-com"><img src=""></a>
-				<a href="https://plus.google.com/b/108977991095064028173/108977991095064028173"><img src="'.IMAGE.'google-plus.png"></a>
+				<a href="https://plus.google.com/b/108977991095064028173/108977991095064028173"><img src=""></a>
 				<a href="https://www.youtube.com/channel/UCZ61J0rd7wzWrK7SIKas_cg"><img src=""></a>
 			</div>
 		</td>
@@ -176,7 +138,6 @@
 	<tr><td align="center" style="font-weight:bold;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#929292"><div style="padding-bottom:10px">All Rights Reserved. Online Fashion Store</div>
 	<p style="padding:10px 0 0 0;margin:0;border-top:solid 1px #cccccc;font-size:11px;color:#565656">24x7 Customer Support&nbsp; | &nbsp;Policy&nbsp; | &nbsp;Flexible Payment Options&nbsp; | &nbsp;900+ Categories</p>
 	</td>
-	
 	</tr>
 	</tbody>
 </table>

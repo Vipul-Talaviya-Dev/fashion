@@ -5,6 +5,9 @@
 .margin-top-25 {
     margin-top: 25px;
 }
+.black-text {
+    color: #000000 !important;
+}
 #preloader {
     position: fixed;
     top: 0;
@@ -180,3 +183,48 @@
     font-size: 14px;
 }
 .thanks_summary_text.total{text-align:right;color:#b22222;font-size:18px}
+.shopping-order-box {
+    background: #fff;
+    padding: 11px 25px;
+    box-shadow: 0 1px 3px 1px rgba(0,0,0,.2);
+    border-left: 5px solid transparent;
+    margin: 5px 0;
+}
+.usermenu-Container {
+    background: rgba(255,255,255,.98);
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,.2);
+}
+.usermenu-Head {
+    height: 56px;
+    padding: 0px 10px;
+}.usermenu-Panel {
+    padding: 10px;
+}
+.usermenu-Head, .usermenu-Panel {
+    border-bottom: 1px solid rgba(12,12,12,.1);
+}
+.usermenu-PanelTitle {
+    display: inline-block;
+    line-height: 26px;
+    font-size: 16px;
+}
+.usermenu-PanelTitle i {
+    float: left;
+    margin-right: 5px;
+}
+.usermenu-PanelContent {
+    display: table;
+    width: 100%;
+}
+.btn-cart {
+    background: 0;
+    color: #fb8903;
+    padding: 10px;
+}
+.btn-cart, .btn-cart:hover, .btn-purchase:hover {
+    border: 1px solid #fb8903;
+}
+.btn.btn-xs {
+    padding: 4px 15px;
+    font-size: 10px;
+}

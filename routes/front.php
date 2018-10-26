@@ -22,11 +22,12 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 	Route::post('/order-shipping-detail', 'ProductController@shippingDetail')->name('shippingDetail');
 	
 	Route::group(['middleware' => 'userAuth'], function () {
-		Route::get('/my-account', 'UserController@payment')->name('myAccount');
+		Route::get('/my-account', 'UserController@index')->name('myAccount');
 		Route::get('/payment', 'ProductController@payment')->name('payment');
 		Route::post('/order-place', 'ProductController@orderPlace')->name('order-place');
 		Route::get('/thanks', 'ProductController@thanks')->name('thanks');
 	});
 
 	Route::get('contact-us', function () { return "Contact"; })->name('contact');
+	Route::get('logout', 'UserController@logout')->name('logout');
 });

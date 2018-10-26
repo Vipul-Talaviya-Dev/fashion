@@ -168,28 +168,31 @@ class ProductController extends Controller
     		// 'country' => 'required|alpha',
     	]);
 
-    	$user = User::create([
-    		'name' => $request->get('name'),
-    		'email' => $request->get('email'),
-    		'mobile' => $request->get('mobile'),
-    		'password' => \Hash::make('123456'),
-    		'referral_code' => User::referralCode(),
-    	]);
+    	if($user = User::where('email', $reuqest->get('email'))->first()) {
+    		Auth::login($user);
+    	} else {
+	    	$user = User::create([
+	    		'name' => $request->get('name'),
+	    		'email' => $request->get('email'),
+	    		'mobile' => $request->get('mobile'),
+	    		'password' => \Hash::make('123456'),
+	    		'referral_code' => User::referralCode(),
+	    	]);
 
-    	$address = Address::create([
-    		'user_id' => $user->id,
-    		'name' => $request->get('name'),
-    		'mobile' => $request->get('mobile'),
-    		'address' => $request->get('address'),
-    		'pincode' => $request->get('pincode'),
-    		'city' => $request->get('city'),
-    		'state' => $request->get('state'),
-    		'country' => $request->get('country') ?: 'India',
-    		'default' => 1,
-    	]);
+	    	$address = Address::create([
+	    		'user_id' => $user->id,
+	    		'name' => $request->get('name'),
+	    		'mobile' => $request->get('mobile'),
+	    		'address' => $request->get('address'),
+	    		'pincode' => $request->get('pincode'),
+	    		'city' => $request->get('city'),
+	    		'state' => $request->get('state'),
+	    		'country' => $request->get('country') ?: 'India',
+	    		'default' => 1,
+	    	]);
 
-    	Auth::login(User::find($user->id));
-    	// Auth::login(User::find(1));
+	    	Auth::login(User::find($user->id));
+    	}
 
     	return redirect(route('user.payment'));
     }
@@ -261,7 +264,7 @@ class ProductController extends Controller
 
     public function thanks(Request $request)
     {
-    	if(Session::get('orderId') < 0) {
+    	if(Session::get('orderId') == null) {
     		return redirect(route('user.index'));
     	}
         $order = Order::with(['orderProducts.product'])->find(Session::get('orderId'));
@@ -278,14 +281,12 @@ class ProductController extends Controller
                 ->to($user->email, $user->name);
         });
 
+        Session::forget('orderId');
+
     	return view('user.thanks', [
-    		'order' => $order
+    		'order' => $order,
+            'user' => $user,
+            'address' => $address,
     	]);
     }
-    public function logout()
-    {
-        Auth::logout();
-        return redirect(route('user.index'));
-    }
-
 }
