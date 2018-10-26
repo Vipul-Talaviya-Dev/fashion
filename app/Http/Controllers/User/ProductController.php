@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use Mail;
 use Auth;
 use Session;
 use App\Models\User;
@@ -263,9 +264,22 @@ class ProductController extends Controller
     	if(Session::get('orderId') < 0) {
     		return redirect(route('user.index'));
     	}
+        $order = Order::with(['orderProducts.product'])->find(Session::get('orderId'));
+        $user = Auth::user();
+        $address = Address::where('user_id', $user->id)->first();
+
+        Mail::send('user.email.order-place', [
+            'order' => $order,
+            'user' => $user,
+            'address' => $address
+        ], function ($message) use ($user) {
+            $message->from('vipulpatel1152@gmail.com', 'Developer Mail')
+                ->subject('Order Placed')
+                ->to($user->email, $user->name);
+        });
 
     	return view('user.thanks', [
-    		'order' => Order::with(['orderProducts.product'])->find(Session::get('orderId'))
+    		'order' => $order
     	]);
     }
     public function logout()
