@@ -69,6 +69,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
         Route::post('product/insert', 'ProductController@insert')->name('product.insert');
         Route::get('product/{id}/edit', 'ProductController@edit')->name('product.edit');
         Route::post('product/{id}/update', 'ProductController@update')->name('product.update');
+
+        // Order Controller
+        Route::get('orders', 'OrderController@index')->name('orders');
+        Route::get('order/{id}/detail', 'OrderController@orderDetail')->name('orderDetail');
     });
 });
 

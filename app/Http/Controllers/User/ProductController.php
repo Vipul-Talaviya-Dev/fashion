@@ -168,7 +168,7 @@ class ProductController extends Controller
     		// 'country' => 'required|alpha',
     	]);
 
-    	if($user = User::where('email', $reuqest->get('email'))->first()) {
+    	if($user = User::where('email', $request->get('email'))->first()) {
     		Auth::login($user);
     	} else {
 	    	$user = User::create([
