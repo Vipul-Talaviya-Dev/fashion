@@ -125,9 +125,9 @@
 										if($product->category && $product->category->parent && $product->category->parent->parent) {
 											$url = $product->category->parent->parent->slug.'/'.$product->category->parent->slug.'/'.$product->category->slug.'/'.$product->slug;
 										} else if($product->category && $product->category->parent) {
-											$url = $product->category->parent->slug.'/'.$product->category->slug.'/'.$product->slug;
+											$url = 'products/'.$product->category->parent->slug.'/'.$product->category->slug.'/'.$product->slug;
 										} else {
-											$url = $product->category->slug.'/'.$product->slug;
+											$url = 'products/all/'.$product->category->slug.'/'.$product->slug;
 										}
 										echo '<a href="/shop/'.$url.'">'.$product->name.'</a>';
 									?>

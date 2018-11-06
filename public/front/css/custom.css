@@ -228,3 +228,19 @@
     padding: 4px 15px;
     font-size: 10px;
 }
+.login-btn {
+    outline: none;
+    border: none;
+    background: #212121;
+    padding: 10px 0;
+    color: #fff;
+    width: 40%;
+    font-size: 1em;
+    text-transform: uppercase;
+    margin: 2em 0 0;
+}
+.fsn-box {
+    background: #fff;
+    padding: 20px;
+    margin: 30px;
+}

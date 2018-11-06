@@ -2,7 +2,7 @@
     <div class="container">
         <div class="w3l_login">
             @if(!\Auth::check())
-                <a href="javascript:void(0);" data-toggle="modal" data-target="#login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+                <a href="javascript:void(0);" class="loginModel"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
             @else
                 <a href="{{ route('user.myAccount') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
             @endif

@@ -159,7 +159,7 @@ class ProductController extends Controller
 
     	$this->validate($request, [
     		'name' => 'required',
-    		'email' => 'required|email|unique:users,email',
+    		'email' => 'required|email',
     		'mobile' => 'required|numeric|digits_between:10,12',
     		'address' => 'required',
     		'pincode' => 'required|numeric|digits:6',
@@ -169,6 +169,17 @@ class ProductController extends Controller
     	]);
 
     	if($user = User::where('email', $request->get('email'))->first()) {
+            $address = Address::create([
+                'user_id' => $user->id,
+                'name' => $request->get('name'),
+                'mobile' => $request->get('mobile'),
+                'address' => $request->get('address'),
+                'pincode' => $request->get('pincode'),
+                'city' => $request->get('city'),
+                'state' => $request->get('state'),
+                'country' => $request->get('country') ?: 'India',
+                'default' => 1,
+            ]);
     		Auth::login($user);
     	} else {
 	    	$user = User::create([

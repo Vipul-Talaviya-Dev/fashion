@@ -62,7 +62,7 @@
 	</div>
 </div>
 
-<div class="modal fade" id="logind" tabindex="-1" role="dialog" aria-labelledby="login"
+<div class="modal fade" id="logingId" tabindex="-1" role="dialog" aria-labelledby="logingId"
 aria-hidden="true">
 <div class="modal-dialog modal-lg">
 	<div class="modal-content">
@@ -80,17 +80,17 @@ aria-hidden="true">
 							<ul>
 								<li class="resp-tab-item" aria-controls="tab_item-0"><span>Sign in</span></li>
 								<li class="resp-tab-item" aria-controls="tab_item-1"><span>Sign up</span></li>
-							</ul>		
+							</ul>	
+							<div id="message" class="text-center"></div>	
 							<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
 								<div class="facts">
 									<div class="register">
-										<form action="#" method="post">			
-											<input name="Email" placeholder="Email Address" type="text" required="">						
-											<input name="Password" placeholder="Password" type="password" required="">										
-											<div class="sign-up">
-												<input type="submit" value="Sign in"/>
-											</div>
-										</form>
+										<input type="email" name="email" class="keyup-email email" placeholder="Email Address"  required="">
+										<input type="password" class="password" name="password" placeholder="Password" required="">
+										<div class="sign-up">
+											<button type="button" class="login-btn" id="userLogin">Sign in</button>
+											<!-- <input type="submit" value="Sign in"/> -->
+										</div>
 									</div>
 								</div> 
 							</div>	
@@ -98,15 +98,23 @@ aria-hidden="true">
 							<div class="tab-2 resp-tab-content" aria-labelledby="tab_item-1">
 								<div class="facts">
 									<div class="register">
-										<form action="#" method="post">			
-											<input placeholder="Name" name="Name" type="text" required="">
-											<input placeholder="Email Address" name="Email" type="email" required="">	
-											<input placeholder="Password" name="Password" type="password" required="">	
-											<input placeholder="Confirm Password" name="Password" type="password" required="">
+										<div id="registrationCheck">
+											<input placeholder="Name" name="name" type="text" class="signupName" required autocomplete="off">
+											<input placeholder="Mobile" name="mobile" type="text" class="signupMobile" required style="margin: 1em 0 0;" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" autocomplete="off">
+											<input placeholder="Email Address" name="email" class="signupEmail keyup-email" type="email" required autocomplete="off">	
+											<input placeholder="Password" name="password" class="signupPassword" type="password" required autocomplete="off">	
+											<input placeholder="Confirm Password" name="confirmPassword" class="confirmPassword" type="password" required autocomplete="off">
 											<div class="sign-up">
-												<input type="submit" value="Create Account"/>
+												<input type="button" class="login-btn" id="signUp" value="Create Account"/>
 											</div>
-										</form>
+										</div>
+										<div id="otpDiv" style="display: none;">
+											<p>Don't Share OTP. Your Otp is = <span id="otp"></span></p>
+											<input placeholder="Otp" name="otp" type="text" class="otp" required>
+											<div class="sign-up">
+												<input type="button" class="login-btn" id="otpBtn" value="Submit"/>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div> 			        					            	      

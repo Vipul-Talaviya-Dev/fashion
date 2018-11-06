@@ -30,6 +30,13 @@
 		<p><br></p>
 	</div>
 	<div class="col-md-9">
+		@if(count($orders) == 0)
+		<div class="fsn-box pck-box-shadow text-center" >
+			<h3>Hey, There are no any Order history available 
+				<a href="{{ route('user.index') }}"><b class="red">Order Now!</b></a>
+			</h3> 
+		</div>
+		@endif
 		@foreach($orders as $order)
 		<div class="shopping-order-box">
 			<div class="row">
@@ -39,7 +46,7 @@
 				<div class="col-md-3">
 					<!-- <span class="timetitle atimes"><a href="/product/"></a></span><p><br></p> -->
 					<?php
-						$variation = $order->product->variations()->find($order->variation_id);
+					$variation = $order->product->variations()->find($order->variation_id);
 					?>
 					<span class="bus-order-location">Size : {{ $variation->size->name }}</span><p><br></p><a href="javascript:void(0);" target="_blank" class="btn btn-cart btn-xs black-text">GET INVOICE<div class="ripple-wrapper"></div></a>
 				</div>

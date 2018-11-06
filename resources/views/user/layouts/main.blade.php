@@ -35,10 +35,14 @@
 
 @yield('js')
 <script type="text/javascript">
-    $(document).ready(function($) {
+    $(document).ready(function() {
         $("body").on("click", ".scroll", function(event){     
             event.preventDefault();
             $('html,body').animate({scrollTop: "0px"},1000);
+        });
+
+        $("body").on("click", ".loginModel", function() {
+            $('#logingId').modal('show');
         });
     });
 </script>

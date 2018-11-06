@@ -21,6 +21,9 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 	Route::get('/order-shipping', 'ProductController@orderShipping')->name('orderShipping');
 	Route::post('/order-shipping-detail', 'ProductController@shippingDetail')->name('shippingDetail');
 	
+	Route::post('/login', 'LoginController@login')->name('login');
+	Route::post('/signUpCheck', 'LoginController@signUpCheck')->name('signUpCheck');
+	Route::post('/signUp', 'LoginController@signUp')->name('signUp');
 	Route::group(['middleware' => 'userAuth'], function () {
 		Route::get('/my-account', 'UserController@index')->name('myAccount');
 		Route::get('/payment', 'ProductController@payment')->name('payment');
