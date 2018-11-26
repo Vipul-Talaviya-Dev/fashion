@@ -112,7 +112,7 @@
 								</div>
 							</div>
 							<!-- Coupons & Gift Vouchers-->
-							<div class="panel panel-warning">
+							<div class="panel panel-default">
 								<div class="panel-heading"><h4 class="panel-title white-text"><a data-toggle="collapse" data-parent="#accordion" href="#promotional">Apply Your Offer or Gift Voucher</a></h4></div>
 								<div class="panel-collapse collapse in" id="promotional">
 									<div class="panel-body">
@@ -138,8 +138,8 @@
 									</div>
 								</div>
 							</div>
-							<div class="panel panel-info">
-								<div class="panel-heading"><h4 class="panel-title white-text">Shipping Address Details</h4></div>
+							<div class="panel panel-default">
+								<div class="panel-heading"><h4 class="panel-title">Shipping Address Details</h4></div>
 								<div class="panel-body">
 									<div class="notification-area">
 										<div class="info-box">

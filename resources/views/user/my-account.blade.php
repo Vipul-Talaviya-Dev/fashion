@@ -5,22 +5,22 @@
 @section('content')
 <hr>
 <div class="col-md-12 col-sm-12 col-xs-12" style="background-color: #f3f3f3;">
-	<div class="col-md-3">
+	<div class="col-md-3 col-xs-12">
 		<div class="usermenu-Container">
 			<div class="usermenu-Head"><h2>My Account </h2></div>
-			<a href="javascript:void(0);">
+			<a href="javascript:void(0);" class="default-text">
 				<div class="usermenu-Panel">
 					<div class="usermenu-PanelTitle"><i class="mdi-action-account-circle"></i> Profile</div>
 					<div class="usermenu-PanelContent"></div>
 				</div>
 			</a>
-			<a href="{{ route('user.myAccount') }}">
+			<a href="{{ route('user.myAccount') }}" class="default-text">
 				<div class="usermenu-Panel">
 					<div class="usermenu-PanelTitle"><i class="mdi-action-assignment"></i> Orders</div>
 					<div class="usermenu-PanelContent"></div>
 				</div>
 			</a>
-			<a href="{{ route('user.logout') }}">
+			<a href="{{ route('user.logout') }}" class="default-text">
 				<div class="usermenu-Panel">
 					<div class="usermenu-PanelTitle"><i class="mdi-action-assignment"></i> Logout</div>
 					<div class="usermenu-PanelContent"></div>
@@ -29,7 +29,7 @@
 		</div>
 		<p><br></p>
 	</div>
-	<div class="col-md-9">
+	<div class="col-md-9 col-xs-12">
 		@if(count($orders) == 0)
 		<div class="fsn-box pck-box-shadow text-center" >
 			<h3>Hey, There are no any Order history available 

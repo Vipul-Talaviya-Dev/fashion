@@ -7,7 +7,7 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
 	<form action="{{ route('user.shippingDetail') }}" method="post">
 		{{ csrf_field() }}
-		<div class="col-md-8 col-sm-6 col-xs-6 order-boxos pck-box-shadow">
+		<div class="col-md-8 col-sm-6 col-xs-12 order-boxos pck-box-shadow">
 			<div class="">
 				<div class="panel-heading">Shipping Detail</div>
 				<div class="panel-body">
@@ -76,8 +76,8 @@
 				<p><br></p>
 			</div>
 		</div>
-		<div class="col-md-4 col-sm-6 col-xs-6 ">
-			<div class="order-boxos pck-box-shadow">
+		<div class="col-md-4 col-sm-6 col-xs-12">
+			<div class="">
 				<h5 class="order-boxos-header">Order Summary</h5><hr>
 				<div class="order-boxos-items">
 					<?php

@@ -8,6 +8,9 @@
 .black-text {
     color: #000000 !important;
 }
+.default-text {
+    color: #ff9b05 !important;
+}
 #preloader {
     position: fixed;
     top: 0;
@@ -135,12 +138,14 @@
     font-size:1em;
     background:#212121;
     text-decoration:none;
+    margin: 20px 0 0 0;
 }
 .checkout-btn:hover{
     background:#ff9b05;
 }
 .cart-thumb-img {
     width: 60px;
+    display: inline-block;
     height: auto;
 }
 .pck-box-shadow {
@@ -243,4 +248,14 @@
     background: #fff;
     padding: 20px;
     margin: 30px;
+}
+.agile_ecommerce_tab_left h5 {
+    color: #ff9b05;
+}
+.agileinfo_new_products_grid {
+    padding: 8px;
+}
+.agileinfo_new_products_grid:hover {
+    border: 1px solid #ff9b05;
+    border-radius: 5px;
 }

@@ -44,8 +44,9 @@
                                         <th>Cart Amount (Rs.)</th>
                                         <th>Payment Reference</th>
                                         <th>Payment Status</th>
-                                        <th>Status</th>
                                         <th>Order Date</th>
+                                        <th>Status</th>
+                                        <th>Invoice</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
@@ -65,6 +66,8 @@
                                         @else
                                         <td><span class="label label-default">Checkout</span></td>
                                         @endif
+                                        <td class="text-center"><a href="{{ route('admin.invoice', ['id' => $order->id]) }}" title="Get Invoice" target="_blank"><i class="fa fa-print"></i></a>
+                                        </td>
                                         <td class="text-center"><a href="{{ route('admin.orderDetail', ['id' => $order->id]) }}"><i class="icon-eye"></i></a>
                                         </td>
                                     </tr>

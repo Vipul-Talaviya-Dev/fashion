@@ -89,10 +89,10 @@
 		<p><br></p>
 		<hr>
 		<div class="row">
-			<div class="col-md-6 col-sm-6 pull-left">
+			<div class="col-md-6 col-sm-6 col-xs-12 pull-left">
 				<a href="/" class="checkout-btn"><i class="glyphicon glyphicon-menu-left" aria-hidden="true"></i> Continue Shopping</a>
 			</div>
-			<div class="col-md-6 col-sm-6 pull-right">
+			<div class="col-md-6 col-sm-6 col-xs-12 pull-right">
 				<a href="javascript:void(0);" class="checkout-btn pull-right" id="orderContinue"> Checkout <i class="glyphicon glyphicon-menu-right" aria-hidden="true"></i></a>
 			</div>
 		</div>

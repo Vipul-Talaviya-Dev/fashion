@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Models\Brand;
 use App\Models\Product;
+use App\Models\Banner;
 use App\Models\WindowImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,6 +20,7 @@ class HomeController extends Controller
         	'brands' => Brand::latest()->get(),
         	'products' => Product::with(['category.parent.parent'])->latest()->limit(4)->get(),
         	'windowImages' => WindowImage::latest()->limit(2)->get(),
+            'banners' => Banner::latest()->limit(4)->get()
         ]);
     }
 }

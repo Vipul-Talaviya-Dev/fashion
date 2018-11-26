@@ -8,11 +8,22 @@
 
 @section('content')
 <!-- banner -->
-<div class="banner" id="home1">
+<div class="">
+	<div class="bannerImg sliderfig" style="margin: 1em 0 0;">
+		<ul id="banner">			
+			@foreach($banners as $banner)
+				<li title="{{ $banner->name }}" style="padding: 0px;">
+					<img src="{{ \Cloudder::secureShow($banner->image) }}" alt="{{ $banner->name }}" class="img-responsive" />
+				</li>
+			@endforeach
+		</ul>
+	</div>
+</div>
+<!-- <div class="banner" id="home1">
 	<div class="container">
 		<h3>fashions fade, <span>style is eternal</span></h3>
 	</div>
-</div>
+</div> -->
 <!-- //banner -->
 
 <!-- special-deals -->
@@ -46,41 +57,37 @@
 		<div class="agileinfo_new_products_grids">
 			@foreach($products as $product)
 				<div class="col-md-3 agileinfo_new_products_grid">
-					<div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
-						<div class="hs-wrapper hs-wrapper1">
-							<img src="{{ \Cloudder::secureShow($product->thumb_image) }}" alt="{{ $product->name }}" class="img-responsive" />
-							<?php 
-								$images = explode(',', $product->small_image);
-								foreach ($images as $image) {
-									echo '<img src="'.\Cloudder::secureShow($image).'" alt="'.$product->name.'" class="img-responsive" />';
-									
-								}
-							?>
-							<div class="w3_hs_bottom w3_hs_bottom_sub">
-								<ul>
-									<li>
-										<a href="" ><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-									</li>
-								</ul>
+					<?php
+						if($product->category && $product->category->parent && $product->category->parent->parent) {
+							$url = $product->category->parent->parent->slug.'/'.$product->category->parent->slug.'/'.$product->category->slug.'/'.$product->slug;
+						} else if($product->category && $product->category->parent) {
+							$url = 'products/'.$product->category->parent->slug.'/'.$product->category->slug.'/'.$product->slug;
+						} else {
+							$url = 'products/all/'.$product->category->slug.'/'.$product->slug;
+						}
+					?>
+					<a href="/shop/{{$url}}" class="">
+						<div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
+							<div class="hs-wrapper hs-wrapper1">
+								<img src="{{ \Cloudder::secureShow($product->thumb_image) }}" alt="{{ $product->name }}" class="img-responsive" />
+								<!-- <div class="w3_hs_bottom w3_hs_bottom_sub">
+									<ul>
+										<li>
+											<a href="" ><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+										</li>
+									</ul>
+								</div> -->
+							</div>
+							<h5>{{ $product->name }}</h5>
+							<div class="simpleCart_shelfItem">
+								<p>
+									<!-- <span>Rs. {{ $product->max_price }}</span>  -->
+									Rs. <i class="item_price">{{ $product->price }}</i>
+								</p>
+								<!-- <p><a class="item_add" href="javascript:void(0);">Add to cart</a></p> -->
 							</div>
 						</div>
-						<h5>
-							<?php
-								if($product->category && $product->category->parent && $product->category->parent->parent) {
-									$url = $product->category->parent->parent->slug.'/'.$product->category->parent->slug.'/'.$product->category->slug.'/'.$product->slug;
-								} else if($product->category && $product->category->parent) {
-									$url = 'products/'.$product->category->parent->slug.'/'.$product->category->slug.'/'.$product->slug;
-								} else {
-									$url = 'products/all/'.$product->category->slug.'/'.$product->slug;
-								}
-								echo '<a href="shop/'.$url.'">'.$product->name.'</a>';
-							?>
-						</h5>
-						<div class="simpleCart_shelfItem">
-							<p><span>Rs. {{ $product->max_price }}</span> Rs. <i class="item_price">{{ $product->price }}</i></p>
-							<p><a class="item_add" href="javascript:void(0);">Add to cart</a></p>
-						</div>
-					</div>
+					</a>
 				</div>
 			@endforeach
 			<div class="clearfix"> </div>
@@ -93,7 +100,7 @@
 	<div class="container">
 		<h3>Top Brands</h3>
 		<div class="sliderfig">
-			<ul id="flexiselDemo1">			
+			<ul id="brands">			
 				@foreach($brands as $brand)
 					<li title="{{ $brand->name }}">
 						<img src="{{ \Cloudder::secureShow($brand->image) }}" alt="{{ $brand->name }}" class="img-responsive" />
@@ -124,39 +131,15 @@
 @endsection
 
 @section('js')
-<script src="/front/js/easyResponsiveTabs.js" type="text/javascript"></script>
-<script src="/front/js/jquery.magnific-popup.js" type="text/javascript"></script>
-<script src="/front/js/jquery.countdown.js" type="text/javascript"></script>
 <script src="/front/js/script.js" type="text/javascript"></script>
-<script src="/front/js/jquery.wmuSlider.js" type="text/javascript"></script>
 <script src="/front/js/jquery.flexisel.js" type="text/javascript"></script>
-<script src="/front/js/modernizr.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-    // easyResponsiveTabs.js
     $(document).ready(function () {
-    	$('#horizontalTab').easyResponsiveTabs({
-            type: 'default', //Types: default, vertical, accordion           
-            width: 'auto', //auto or any width like 600px
-            fit: true   // 100% fit in a container
-        });
-        // magnific-popup.js
-        $('.popup-with-zoom-anim').magnificPopup({
-        	type: 'inline',
-        	fixedContentPos: false,
-        	fixedBgPos: true,
-        	overflowY: 'auto',
-        	closeBtnInside: true,
-        	preloader: false,
-        	midClick: true,
-        	removalDelay: 300,
-        	mainClass: 'my-mfp-zoom-in'
-        });
-
-        $('.example1').wmuSlider(); // wmuSlider
+        // $('.example1').wmuSlider(); // wmuSlider
     });
     // jquery.flexisel.js 
     $(window).load(function() {
-    	$("#flexiselDemo1").flexisel({
+    	$("#brands").flexisel({
     		visibleItems: 4,
     		animationSpeed: 1000,
     		autoPlay: true,
@@ -178,6 +161,17 @@
     			}
     		}
     	});
+    	$("#banner").flexisel({
+    		visibleItems: 1,
+    		animationSpeed: 1000,
+    		autoPlay: true,
+    		autoPlaySpeed: 5000,            
+    		pauseOnHover: false,
+    		enableResponsiveBreakpoints: true,
+    	});
+
+    	$(".bannerImg").find(".nbs-flexisel-nav-left").remove();
+    	$(".bannerImg").find(".nbs-flexisel-nav-right").remove();
     });
 </script>
 @endsection

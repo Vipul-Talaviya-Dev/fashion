@@ -112,7 +112,7 @@
 	</div>
 </div>
 <!-- Detail End -->
-<div class="additional_info">
+<div class="additional_info" style="padding: 0;">
 	<div class="container">
 		<div class="sap_tabs">	
 			<div id="horizontalTab1" style="display: block; width: 100%; margin: 0px;">
@@ -224,39 +224,37 @@
 			<ul id="flexiselDemo2">
 				@foreach($relatedProducts as $relatedProduct)
 					<li>
-						<div class="w3l_related_products_grid">
-							<div class="agile_ecommerce_tab_left dresses_grid">
-								<div class="hs-wrapper hs-wrapper3">
-									<img src="{{ \Cloudder::secureShow($relatedProduct->thumb_image) }}" alt="{{ $relatedProduct->name }}" class="img-responsive" />
-									<?php 
-										$images = explode(',', $relatedProduct->small_image);
-										foreach ($images as $image) {
-											echo '<img src="'.\Cloudder::secureShow($image).'" alt="'.$relatedProduct->name.'" class="img-responsive" />';
-										}
-									?>
-									<div class="w3_hs_bottom">
-										<div class="flex_ecommerce">
-											<a href="javascript:void(0);"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-										</div>
+						<?php
+							if($relatedProduct->category && $relatedProduct->category->parent && $relatedProduct->category->parent->parent) {
+								$url = $relatedProduct->category->parent->parent->slug.'/'.$relatedProduct->category->parent->slug.'/'.$relatedProduct->category->slug.'/'.$relatedProduct->slug;
+							} else if($relatedProduct->category && $relatedProduct->category->parent) {
+								$url = 'products/'.$relatedProduct->category->parent->slug.'/'.$relatedProduct->category->slug.'/'.$relatedProduct->slug;
+							} else {
+								$url = 'products/all/'.$relatedProduct->category->slug.'/'.$relatedProduct->slug;
+							}
+							// echo '<a href="/shop/'.$url.'">'.$relatedProduct->name.'</a>';
+						?>
+						<a href="/shop/{{ $url }}">
+							<div class="w3l_related_products_grid">
+								<div class="agile_ecommerce_tab_left dresses_grid">
+									<div class="hs-wrapper hs-wrapper3">
+										<img src="{{ \Cloudder::secureShow($relatedProduct->thumb_image) }}" alt="{{ $relatedProduct->name }}" class="img-responsive" />
+										<?php 
+											$images = explode(',', $relatedProduct->small_image);
+											foreach ($images as $image) {
+												echo '<img src="'.\Cloudder::secureShow($image).'" alt="'.$relatedProduct->name.'" class="img-responsive" />';
+											}
+										?>
+									</div>
+									<h5>{{ $product->name }}</h5>
+									<div class="simpleCart_shelfItem">
+										<p class="flexisel_ecommerce_cart">
+											Rs. <i class="item_price">{{ $relatedProduct->price }}</i>
+										</p>
 									</div>
 								</div>
-								<h5>
-									<?php
-										if($relatedProduct->category && $relatedProduct->category->parent && $relatedProduct->category->parent->parent) {
-											$url = $relatedProduct->category->parent->parent->slug.'/'.$relatedProduct->category->parent->slug.'/'.$relatedProduct->category->slug.'/'.$relatedProduct->slug;
-										} else if($relatedProduct->category && $relatedProduct->category->parent) {
-											$url = 'products/'.$relatedProduct->category->parent->slug.'/'.$relatedProduct->category->slug.'/'.$relatedProduct->slug;
-										} else {
-											$url = 'products/all/'.$relatedProduct->category->slug.'/'.$relatedProduct->slug;
-										}
-										echo '<a href="/shop/'.$url.'">'.$relatedProduct->name.'</a>';
-									?>
-								</h5>
-								<div class="simpleCart_shelfItem">
-									<p class="flexisel_ecommerce_cart"><span>Rs. {{ $relatedProduct->max_price }}</span> Rs. <i class="item_price">{{ $relatedProduct->price }}</i></p>
-								</div>
 							</div>
-						</div>
+						</a>
 					</li>
 				@endforeach
 			</ul>
@@ -274,9 +272,15 @@
 	$(window).load(function() {
 		$('.flexslider').flexslider({
 			animation: "slide",
+			visibleItems: 1,
+    		animationSpeed: 1000,
+    		autoPlay: true,
+    		autoPlaySpeed: 5000,            
+    		pauseOnHover: false,
+    		enableResponsiveBreakpoints: true,
 			// controlNav: false,
-			direction: "horizontal",
-			controlNav: "thumbnails",
+			// direction: "horizontal",
+			// controlNav: "thumbnails",
 
 		});
 		$("#flexiselDemo2").flexisel({

@@ -107,39 +107,36 @@
 						<div class="clearfix"> </div>
 					</div>
 					<div class="w3ls_dresses_grid_right_grid3">
+						<?php $count = 1; ?>
 						@foreach($products as $product)
 						<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_dresses">
-							<div class="agile_ecommerce_tab_left dresses_grid">
-								<div class="hs-wrapper hs-wrapper2">
-									<img src="{{ \Cloudder::secureShow($product->thumb_image) }}" alt="{{ $product->name }}" class="img-responsive" />
-									<div class="w3_hs_bottom w3_hs_bottom_sub1">
-										<ul>
-											<li>
-												<a href="javascript:void(0);"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-											</li>
-										</ul>
+							<?php
+								if($product->category && $product->category->parent && $product->category->parent->parent) {
+									$url = $product->category->parent->parent->slug.'/'.$product->category->parent->slug.'/'.$product->category->slug.'/'.$product->slug;
+								} else if($product->category && $product->category->parent) {
+									$url = 'products/'.$product->category->parent->slug.'/'.$product->category->slug.'/'.$product->slug;
+								} else {
+									$url = 'products/all/'.$product->category->slug.'/'.$product->slug;
+								}
+							?>
+							<a href="/shop/{{ $url }}">
+								<div class="agile_ecommerce_tab_left dresses_grid">
+									<div class="hs-wrapper hs-wrapper2">
+										<img src="{{ \Cloudder::secureShow($product->thumb_image) }}" alt="{{ $product->name }}" class="img-responsive" />
+									</div>
+									<h5>{{ $product->name }}</h5>
+									<div class="simpleCart_shelfItem">
+										<p>Rs. <i class="item_price">{{ $product->price }}</i></p>
+										<!-- <p><a class="item_add" href="javascript:void(0);">Add to cart</a></p> -->
 									</div>
 								</div>
-								<h5>
-									<?php
-										if($product->category && $product->category->parent && $product->category->parent->parent) {
-											$url = $product->category->parent->parent->slug.'/'.$product->category->parent->slug.'/'.$product->category->slug.'/'.$product->slug;
-										} else if($product->category && $product->category->parent) {
-											$url = 'products/'.$product->category->parent->slug.'/'.$product->category->slug.'/'.$product->slug;
-										} else {
-											$url = 'products/all/'.$product->category->slug.'/'.$product->slug;
-										}
-										echo '<a href="/shop/'.$url.'">'.$product->name.'</a>';
-									?>
-								</h5>
-								<div class="simpleCart_shelfItem">
-									<p><span>Rs. {{ $product->max_price }}</span> Rs. <i class="item_price">{{ $product->price }}</i></p>
-									<p><a class="item_add" href="javascript:void(0);">Add to cart</a></p>
-								</div>
-								<!-- <div class="dresses_grid_pos">
-									<h6>New</h6>
-								</div> -->
-							</div>
+							</a>
+							@if($count == 3)
+								<p><br></p>
+								<?php $count = 1; ?>
+							@else
+								<?php $count++;?>
+							@endif
 						</div>
 						@endforeach
 						<div class="clearfix"> </div>

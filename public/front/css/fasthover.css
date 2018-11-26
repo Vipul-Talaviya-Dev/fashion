@@ -87,13 +87,13 @@
 	animation-delay: 3.5s;
 	z-index: 2;
 }
-.agile_ecommerce_tab_left:hover .hs-wrapper img,.hs-wrapper:hover img{
+/*.agile_ecommerce_tab_left:hover .hs-wrapper img,.hs-wrapper:hover img{
 	-webkit-animation-play-state: running;
 	-moz-animation-play-state: running;
 	-o-animation-play-state: running;
 	-ms-animation-play-state: running;
 	animation-play-state: running;
-}
+}*/
 .hs-overlay{
 	position: absolute;
 	width: 100%;
