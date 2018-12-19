@@ -89,7 +89,6 @@ aria-hidden="true">
 										<input type="password" class="password" name="password" placeholder="Password" required="">
 										<div class="sign-up">
 											<button type="button" class="login-btn" id="userLogin">Sign in</button>
-											<!-- <input type="submit" value="Sign in"/> -->
 										</div>
 									</div>
 								</div> 

@@ -31,6 +31,7 @@
 <script src="/front/js/material.min.js" type="text/javascript"></script>
 <!-- <script src="/front/js/simpleCart.min.js" type="text/javascript"></script> -->
 <script src="/front/js/toast.js" type="text/javascript"></script>
+<script src="/front/js/easyResponsiveTabs.js" type="text/javascript"></script>
 <script src="/front/js/script.js" type="text/javascript"></script>
 
 @yield('js')
@@ -43,6 +44,12 @@
 
         $("body").on("click", ".loginModel", function() {
             $('#logingId').modal('show');
+        });
+
+        $('#horizontalTab').easyResponsiveTabs({
+            type: 'default', //Types: default, vertical, accordion           
+            width: 'auto', //auto or any width like 600px
+            fit: true   // 100% fit in a container
         });
     });
 </script>

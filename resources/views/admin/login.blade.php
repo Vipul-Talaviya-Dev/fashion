@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Login panel</title>
+    <title>Admin Login panel | Fashion</title>
 
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet"
@@ -35,38 +35,12 @@
 <body class="login-container">
 
 <!-- Main navbar -->
-<div class="navbar navbar-inverse">
+<div class="navbar navbar-inverse" style="min-height: 80px;background-color: #e8e8e8;border-color: #e8e8e8;">
     <div class="navbar-header">
-        <a class="navbar-brand" href="{{ route('admin.login') }}"><img src="/assets/images/logo_light.png" alt=""></a>
-
-        <ul class="nav navbar-nav pull-right visible-xs-block">
-            <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
-        </ul>
-    </div>
-
-    <div class="navbar-collapse collapse" id="navbar-mobile">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a href="#">
-                    <i class="icon-display4"></i> <span
-                            class="visible-xs-inline-block position-right"> Go to website</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="#">
-                    <i class="icon-user-tie"></i> <span
-                            class="visible-xs-inline-block position-right"> Contact admin</span>
-                </a>
-            </li>
-
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon-cog3"></i>
-                    <span class="visible-xs-inline-block position-right"> Options</span>
-                </a>
-            </li>
-        </ul>
+        <a class="navbar-brand" href="{{ route('admin.login') }}">
+            <img src="/front/images/logo.png" alt="Fashion" class="img-responsive" style="height: 50px;" />
+            <!-- <img src="/assets/images/logo_light.png" alt=""> -->
+        </a>
     </div>
 </div>
 <!-- /main navbar -->
@@ -121,10 +95,6 @@
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Sign in <i
                                         class="icon-circle-right2 position-right"></i></button>
-                        </div>
-
-                        <div class="text-center">
-                            <a href="login_password_recover.html">Forgot password?</a>
                         </div>
                     </div>
                 </form>

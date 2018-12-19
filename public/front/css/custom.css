@@ -8,8 +8,16 @@
 .black-text {
     color: #000000 !important;
 }
+.white-text {
+    color: #FFFFFF !important;
+}
 .default-text {
     color: #ff9b05 !important;
+}
+.menu {
+    background: #d0a65e;
+    padding: 5px;
+    text-align: right;
 }
 #preloader {
     position: fixed;

@@ -17,7 +17,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $products = Product::latest()->search($request->input('search'), ['name']);
+        $products = Product::latest()->search($request->get('search'), ['name']);
         
         return view('admin.product.index', [
             'categories' => Category::all(),
@@ -27,7 +27,6 @@ class ProductController extends Controller
 
     public function add()
     {
-        // \Session::forget('product');
         return view('admin.product.add', [
             'categories' => Category::parents()->active()->get(),
             'brands' => Brand::active()->get(),
@@ -112,13 +111,16 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = Product::with(['category', 'variations.color', 'variations.size', 'brand'])->where('id', $id)->first();
-        $category = Category::find($product->category->parent_id);
-        $brands = Brand::active()->get();
+        if(!$product = Product::with(['variations'])->find($id)) {
+            return redirect()->back();
+        }
+        
         return view('admin.product.update', [
             'product' => $product,
-            'category' => $category,
-            'brands' => $brands,
+            'categories' => Category::parents()->active()->get(),
+            'brands' => Brand::active()->get(),
+            'colors' => Color::active()->get(),
+            'sizes' => Size::active()->get(),
         ]);
 
         return view('admin.product.update');
@@ -126,75 +128,77 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $variations = array_combine($request->quantity, $request->variationID);
+        if(!$product = Product::find($id)) {
+            return redirect()->back();
+        }
 
         $this->validate($request, [
             'name' => 'required',
             'brand' => 'required|exists:brands,id',
-            'maxPrice' => 'required|numeric',
-            'price' => 'required|numeric',
-            'status' => 'required|numeric',
+            'maxPrice' => 'required|numeric|min:1',
+            'price' => 'required|numeric|min:1',
+            'categoryId' => 'nullable|exists:categories,id',
+            'colors' => 'required|array|min:1',
+            'sizes' => 'required|array|min:1',
+            'prices' => 'required|array|min:1',
+            'quantities' => 'nullable|array|min:1',
+            'existQuantities' => 'required|array|min:1',
+            'thumbImage' => 'nullable|image',
+            'smallImages' => 'nullable|array|min:1',
+            'highlights' => 'required',
+            'shortDescription' => 'required',
+            'description' => 'required',
+            'meta_keyword' => 'required',
+            'meta_description' => 'required',
         ]);
 
-        $discount = $request->maxPrice - $request->price;
-        $total = ($discount / $request->maxPrice) * 100;
-
-        $product = Product::find(base64_decode($id));
-        $product->name = $request->name;
-        $product->brand_id = $request->brand;
-        $product->price = $request->price;
-        $product->max_price = $request->maxPrice;
-        $product->discount = floor($total);
-        $product->description = $request->description;
-        $product->status = $request->status;
-        $product->save();
-
-        $upDiscount = Discount::where('product_id', $product->id)->first();
-        $upDiscount->discount = floor($total);
-        $upDiscount->save();
-
-        $product->attributeValues()->sync($request['attribute']);
-
-        foreach ($variations as $key => $val) {
-            $variation = Variation::find($val);
-            $variation->quantity = $key;
-            $variation->save();
+        if($request->get('categoryId')) {
+            $product->category_id = $request->get('categoryId');
         }
-
-        if (!empty($request->colorImages)) {
-            foreach ($request->colorImages as $key => $image) {
-                $pImage = ProductImage::where('product_id', $product->id)->where('color_id', $key)->first();
-                \Cloudder::destroy($pImage->name);
-                ProductImage::where('product_id', $product->id)->where('color_id', $key)->delete();
-            }
-        }
-        if (!empty($request->colorImages)) {
-            foreach ($request->colorImages as $key => $image) {
-                foreach ($image as $value) {
-                    ProductImage::create([
-                        'product_id' => $product->id,
-                        'color_id' => $key,
-                        'name' => \Cloudder::upload($value, [])->getPublicId(),
-                    ]);
+        if ($request->get('existQuantities')) {
+            foreach ($request->get('existQuantities') as $variationId => $qty) {
+                if($variation = Variation::find($variationId)) {
+                    $variation->qty = $qty;
+                    $variation->save();
                 }
             }
         }
 
-
-//        Variation::where('product_id', '=', $id)->delete();
-//        $colors = $request->color;
-//
-//        for ($i = 0; $i < count($colors); $i++) {
-//            Variation::create([
-//                'product_id' => $id,
-//                'color_id' => $request->color[$i],
-//                'size_id' => $request->size[$i],
-//                'quantity' => $request->quantity[$i]
-//            ]);
-//        }
-        {
-            return redirect('/product')->with('success', 'Product has been updated successfully.');
+        if($request->file('smallImages')) {
+            $subImages = [];
+            for ($i = 0; $i < count($request->file('smallImages')); $i++) {
+                $subImages[] = Cloudder::upload($request->file('smallImages')[$i], [])->getPublicId();
+            }
+            $product->small_image = implode(',', $subImages);
         }
+
+        if($request->file('thumbImage')) {
+            $product->thumb_image = Cloudder::upload($request->file('thumbImage'), [])->getPublicId();
+        }
+        if (count($request->get('colors')) > 1) {
+            for ($i = 0; $i < count($request->get('colors')); $i++) {
+                Variation::create([
+                    'product_id' => $product->id,
+                    'color_id' => $request->get('colors')[$i],
+                    'size_id' => $request->get('sizes')[$i],
+                    'price' => $request->get('prices')[$i],
+                    'qty' => $request->get('quantities')[$i],
+                ]);
+            }
+        }
+
+        $product->brand_id = $request->get('brand');
+        $product->name = $request->get('name');
+        $product->max_price = $request->get('maxPrice');
+        $product->price = $request->get('price');
+        $product->meta_keyword = $request->get('meta_keyword');
+        $product->meta_description = $request->get('meta_description');
+        $product->highlights = $request->get('highlights');
+        $product->description = $request->get('description');
+        $product->short_description = $request->get('shortDescription');
+        $product->save();
+
+        return redirect(route('admin.products'))->with(['success' => 'successfully update your product.']);
     }
 
     public function subCategory(Request $request)
