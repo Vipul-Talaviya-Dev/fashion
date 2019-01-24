@@ -1,5 +1,5 @@
 @extends('admin.layouts.main')
-@section('title', 'Prodcuts')
+@section('title', 'Product Variations ')
 @section('page-header')
     <div class="page-header page-header-default">
         <div class="breadcrumb-line">
@@ -28,8 +28,8 @@
                 <!-- Traffic sources -->
                 <div class="panel panel-flat">
                     <div class="panel-heading">
-                        <h1 class="panel-title">Product List
-                            <a href="{{ route('admin.product.add')  }}" class="btn btn-info pull-right text-white">ADD NEW</a>
+                        <h1 class="panel-title">Product Variations List
+                            <a href="{{ route('admin.product.variationInsert', ['id' => $product->id])  }}" class="btn btn-info pull-right text-white">ADD NEW</a>
                         </h1>
                     </div>
                     <hr/>
@@ -41,41 +41,35 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Product</th>
-                                        <th>Add Variation</th>
-                                        <th>View Variation</th>
-                                        <th>Status</th>
+                                        <th>Color</th>
+                                        <th>Size</th>
+                                        <th>Price</th>
+                                        <th>Qty</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @if(isset($products))
-                                        @foreach($products as $key => $product)
+                                        @foreach($variations as $key => $variation)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $product->name }}</td>
-                                                <td><a href="{{ route('admin.product.variationInsert', $product->id) }}" class="btn btn-info btn-sm"><i class="fa fa-plus"></i> </a></td>
-                                                <td><a href="{{ route('admin.product.variations', $product->id) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a></td>
-                                                @if($product->status == 1)
-                                                    <td><span class="label label-success">Active</span></td>
-                                                @else
-                                                    <td><span class="label label-default">In-Active</span></td>
-                                                @endif
+                                                <td>{{ $variation->color->name }}</td>
+                                                <td>{{ $variation->size->name }}</td>
+                                                <td>{{ $variation->price }}</td>
+                                                <td>{{ $variation->qty }}</td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('admin.product.edit', $product->id) }}"><i class="icon-pencil5"></i> Edit</a>
+                                                    <a href="{{ route('admin.product.variationEdit', $variation->id) }}"><i class="icon-pencil5"></i> Edit</a>
                                                 </td>
                                             </tr>
                                         @endforeach
-                                    @endif
                                     </tbody>
                                 </table>
                             </div>
                             <div class="pull-right">
-                                @if(isset($products))
-                                    {!! $products->appends([
-                                        'search' => request('search'),
-                                        'category' => request('category'),
-                                    ])->render() !!}
-                                @endif
+                                {!! $variations->appends([
+                                    'search' => request('search'),
+                                    'category' => request('category'),
+                                ])->render() !!}
                             </div>
                         </div>
                     </div>

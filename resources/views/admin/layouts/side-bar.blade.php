@@ -26,12 +26,12 @@
                         <ul>
                             <li><a href="{{ route('admin.colors') }}"><i class="icon-droplet"></i> Color</a></li>
                             <li><a href="{{ route('admin.sizes') }}"><i class="icon-height"></i> Size</a></li>
-                            <li><a href="{{ route('admin.brands') }}"><i class="icon-price-tags"></i> Brand</a></li>
+                            <!-- <li><a href="{{ route('admin.brands') }}"><i class="icon-price-tags"></i> Brand</a></li> -->
                             <li><a href="{{ route('admin.categories') }}"><i class="icon-price-tags"></i> Category</a></li>
                             <li><a href="{{ route('admin.products') }}"><i class="icon-basket"></i> Product</a></li>
                         </ul>
                     </li>
-                        <li><a href="{{ route('admin.offers') }}"><i class="icon-gift"></i> <span>Offers</span></a></li>
+                        <!-- <li><a href="{{ route('admin.offers') }}"><i class="icon-gift"></i> <span>Offers</span></a></li> -->
                         <li>
                             <a href="{{ route('admin.orders') }}"><i class="icon-bag"></i> <span>Order's</span></a>
                             <ul>
@@ -44,7 +44,7 @@
                             <a href="javascript:void(0);"><i class="icon-tree6"></i> <span>Module</span></a>
                             <ul>
                                 <li><a href="{{ route('admin.banners') }}"><i class="icon-stack3"></i> Banner</a></li>
-                                <li><a href="{{ route('admin.windowImages') }}"><i class="icon-stack3"></i> Window Images</a></li>
+                                <li><a href="{{ route('admin.windowImages') }}"><i class="icon-stack3"></i> Home Images</a></li>
                                 <!-- <li><a href="javascript:void(0);"><i class="icon-stack3"></i> Module</a></li> -->
                             </ul>
                         </li>
@@ -52,13 +52,6 @@
                             <a href="javascript:void(0);"><i class="icon-users2"></i> <span>User</span></a>
                             <ul>
                                 <li><a href="javascript:void(0);"><i class="icon-users"></i> Customer</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);"><i class="icon-balance"></i> <span>FashHunt</span></a>
-                            <ul>
-                                <li><a href="javascript:void(0);"><i class="icon-balance"></i> Backend</a></li>
-                                <li><a href="javascript:void(0);"><i class="icon-coin-dollar"></i> Payout</a></li>
                             </ul>
                         </li>
                     </ul>

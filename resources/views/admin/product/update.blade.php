@@ -73,142 +73,23 @@
                     @endforeach
                 </div>
             </div>
+            
             <div class="row">
-                <div class="form-group col-md-3">
-                    <label>Select Brand:</label>
-                    <select name="brand" data-placeholder="Select Brand Name" class="form-control">
-                        <option value=""> -- Select Brand --</option>
-                        @foreach($brands as $brand)
-                            <option value="{{ $brand->id }}" 
-                                @if($brand->id == $product->brand_id)
-                                    selected
-                                @endif
-                            > {{ $brand->name }}</option>
-                        @endforeach
-                    </select>
-                    @foreach($errors->get('brand') as $error)
-                    <span style="color: red;">{{$error}}</span>
-                    @endforeach
-                </div>
-                <div class="form-group col-md-3">
-                    <label>Price: <span class="text-danger">*</span></label>
-                    <input type="number" name="price" placeholder="Enter Price" class="form-control required" value="{{ $product->price ?: old('price') }}" pattern="[0-9]" min="0" required>
-                    @foreach($errors->get('price') as $error)
-                    <span style="color: red;">{{$error}}</span>
-                    @endforeach
-                </div>
-                <div class="form-group col-md-3">
-                    <label>MaxPrice: <span class="text-danger">*</span></label>
-                    <input type="number" name="maxPrice" placeholder="Enter Max Price" class="form-control required" value="{{ $product->max_price ?: old('maxPrice') }}" pattern="[0-9]" min="0" required>
-                    @foreach($errors->get('maxPrice') as $error)
-                    <span style="color: red;">{{$error}}</span>
-                    @endforeach
-                </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                     <label>Meta Keyword: <span class="text-danger">*</span></label>
                     <input type="text" name="meta_keyword" value="{{ $product->meta_keyword ?: old('meta_keyword') }}" class="form-control metaKeyword" data-fouc required="">
                     @foreach($errors->get('meta_keyword') as $error)
                     <span style="color: red;">{{$error}}</span>
                     @endforeach
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Meta Description :<span class="text-danger">*</span></label>
-                        <textarea name="meta_description" class="form-control required" required placeholder="Enter Meta Description">{{ $product->meta_description ?: old('meta_description') }}</textarea>
-                        @foreach($errors->get('meta_description') as $error)
-                        <span style="color: red;">{{$error}}</span>
-                        @endforeach
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Thumb Image :</label>
-                        <input type="file" name="thumbImage" class="form-control" accept=".jpeg, .jpg, .png">
-                        <span class="help-block">Accepted formats: jpeg, jpg, png. Max file size 2Mb</span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Small Image :</label>
-                        <input type="file" name="smallImages[]" class="form-control" accept=".jpeg, .jpg, .png" multiple>
-                        <span class="help-block">Accepted formats: jpeg, jpg, png. Max file size 2Mb</span>
-                    </div>
+                <div class="col-md-4 form-group">
+                    <label>Meta Description :<span class="text-danger">*</span></label>
+                    <textarea name="meta_description" class="form-control required" required placeholder="Enter Meta Description">{{ $product->meta_description ?: old('meta_description') }}</textarea>
+                    @foreach($errors->get('meta_description') as $error)
+                    <span style="color: red;">{{$error}}</span>
+                    @endforeach
                 </div>
             </div>
-            @foreach($product->variations as $variation)
-                <div class="row">
-                    <div class="form-group col-md-3">
-                        <label>Color:</label>
-                        <select class="form-control color" disabled>
-                            <option value="">Choose a Color...</option>
-                            @foreach($colors as $color)
-                            <option value="{{ $color->id }}"
-                                @if($variation->color_id == $color->id)
-                                    selected
-                                @endif 
-                             style="background-color: {{ $color->code }}">{{ $color->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label>Size:</label>
-                        <select class="form-control" disabled>
-                            <option value="">Choose a Size...</option>
-                            @foreach($sizes as $size)
-                            <option value="{{ $size->id }}" @if($variation->size_id == $size->id)
-                                    selected
-                                @endif >{{ $size->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label>Price:</label>
-                        <input type="number" placeholder="Enter Product Price" class="form-control" pattern="[0-9]" min="0" readonly value="{{ $variation->price }}">
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label>Quantity: <span class="text-danger">*</span></label>
-                        <input type="number" name="existQuantities[{{ $variation->id }}]" placeholder="Enter Quantity" class="form-control" required pattern="[0-9]" min="0" value="{{ $variation->qty }}"> 
-                    </div>
-                </div>
-            @endforeach
-            <hr>
-            <div class="addmore">
-                <div id="product0">
-                    <div class="row">
-                        <div class="form-group col-md-3">
-                            <label>Color:</label>
-                            <select name="colors[]" class="form-control color" >
-                                <option value="">Choose a Color...</option>
-                                @foreach($colors as $color)
-                                <option value="{{ $color->id }}" style="background-color: {{ $color->code }}">{{ $color->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label>Size:</label>
-                            <select name="sizes[]" class="form-control" >
-                                <option value="">Choose a Size...</option>
-                                @foreach($sizes as $size)
-                                <option value="{{ $size->id }}">{{ $size->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label>Price:</label>
-                            <input type="number" name="prices[]" placeholder="Enter Product Price" class="form-control"  pattern="[0-9]" min="0" >
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label>Quantity:</label>
-                            <input type="number" name="quantities[]" placeholder="Enter Quantity" class="form-control"  pattern="[0-9]" min="0">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <input type="button" id="add" class="btn bg-teal" name="add" value="ADD MORE">
-            </div><p><br></p>
             <div class="row">
                 <label>Description :</label>
                 <textarea name="description" id="editor" rows="4" cols="4" class="form-control required" data-placeholder="Enter Product Details" required>{!! $product->description ?: old('description') !!}</textarea>
@@ -218,20 +99,12 @@
             </div>
             <p><br></p>
             <div class="row">
-                <label>Short Description :</label>
-                <textarea name="shortDescription" rows="4" cols="4" class="form-control required"  required>{{ $product->short_description ?: old('shortDescription') }}</textarea> 
-                @foreach($errors->get('shortDescription') as $error)
+                <label>Chart :</label>
+                <textarea name="chart" id="editor1" rows="4" cols="4" class="form-control required"  required>{!! $product->chart ?: old('chart') !!}</textarea> 
+                @foreach($errors->get('chart') as $error)
                 <span style="color: red;">{{$error}}</span>
                 @endforeach
-            </div>  
-            <p><br></p>
-            <div class="row">
-                <label>Highlights :</label>
-                <textarea name="highlights" rows="4" cols="4" class="form-control required" placeholder="Enter Product Short Details. Example: Fabric: Cotton, Slim Fit Henley T-shirt" required>{{ $product->highlights ?: old('highlights') }}</textarea> 
-                @foreach($errors->get('highlights') as $error)
-                <span style="color: red;">{{$error}}</span>
-                @endforeach
-            </div>
+            </div> 
             <p><br></p>
             <div class="row pull-right">
                 <button type="submit" class="btn btn-primary stepy-finish">

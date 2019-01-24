@@ -1,11 +1,11 @@
 @extends('admin.layouts.main')
-@section('title', 'Window Image Add')
+@section('title', 'Home Image Add')
 @section('page-header')
     <div class="page-header page-header-default">
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
                 <li><a href="{{ route('admin.dashboard') }}"><i class="icon-home2 position-left"></i> Home</a></li>
-                <li class="active">Window Image</li>
+                <li class="active">Home Image</li>
             </ul>
         </div>
     </div>
@@ -19,7 +19,7 @@
                 <!-- Traffic sources -->
                 <div class="panel panel-flat">
                     <div class="panel-heading">
-                        <h1 class="panel-title">Window Image Add</h1>
+                        <h1 class="panel-title">Home Image Add</h1>
                     </div>
                     <hr/>
                     <!-- Single row selection -->
@@ -61,10 +61,14 @@
 
                                             <div class="form-group">
                                                 <div class="col-lg-1"></div>
-                                                <label class="col-lg-2 control-label text-semibold">Image file
-                                                    upload:</label>
+                                                <label class="col-lg-2 control-label text-semibold">Select Product:</label>
                                                 <div class="col-lg-8">
-                                                    <input type="file" name="image" class="file-styled" accept=".jpeg, .jpg, .png, .gif">
+                                                    <select name="productId" class="form-control">
+                                                        <option value="">-- Select Product --</option>
+                                                        @foreach($products as $product)
+                                                        <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                                        @endforeach
+                                                    </select>
                                                     @if($errors->get('image'))
                                                         @foreach($errors->get('image') as $error)
                                                             <span style="color: red;"><i class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>
@@ -100,6 +104,19 @@
                                                 <label class="col-lg-2 control-label text-semibold">Description:</label>
                                                 <div class="col-lg-8">
                                                     <textarea name="description" class="form-control" rows="5">{{ old('description') }}</textarea>
+                                                </div>
+                                                <div class="col-lg-1"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-1"></div>
+                                                <label class="col-lg-2 control-label text-semibold">OrderBy :</label>
+                                                <div class="col-lg-8">
+                                                    <input type="number" name="order" value="{{ old('order') }}" class="form-control"  placeholder="Enter Order By" autocomplete="off" required="">
+                                                    @if($errors->get('order'))
+                                                        @foreach($errors->get('order') as $error)
+                                                            <span style="color: red;"><i class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>
+                                                        @endforeach
+                                                    @endif
                                                 </div>
                                                 <div class="col-lg-1"></div>
                                             </div>

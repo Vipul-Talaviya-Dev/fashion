@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Cloudder;
 use App\Models\WindowImage;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,7 +19,9 @@ class WindowImageController extends Controller
 
     public function add()
     {
-        return view('admin.windowImage.add');
+        return view('admin.windowImage.add', [
+            'products' => Product::active()->get()
+        ]);
     }
 
     public function create(Request $request)
@@ -27,19 +30,21 @@ class WindowImageController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'url' => 'required|url',
-            'image' => 'required|image',
+            'productId' => 'required|numeric',
+            'order' => 'required|numeric|min:0',
             'status' => 'required|numeric',
         ]);
 
         WindowImage::create([
             'title' => $request->get('title'),
             'link' => $request->get('url'),
-            'image' => Cloudder::upload($file, [])->getPublicId(),
+            'product_id' => $request->get('productId'),
+            'order' => $request->get('order'),
             'description' => $request->get('description'),
             'status' => $request->get('status'),
         ]);
 
-        return redirect(route('admin.windowImages'))->with('success', 'Window Image has been inserted successfully.');
+        return redirect(route('admin.windowImages'))->with('success', 'Home Image has been inserted successfully.');
     }
 
     public function edit($id)
@@ -49,7 +54,8 @@ class WindowImageController extends Controller
         }
 
         return view('admin.windowImage.update', [
-            'windowImage' => $windowImage
+            'windowImage' => $windowImage,
+            'products' => Product::get()
         ]);
     }
 
@@ -63,16 +69,16 @@ class WindowImageController extends Controller
             'name' => 'required',
             'url' => 'required|url',
             'status' => 'required|numeric',
+            'productId' => 'required|numeric',
+            'order' => 'required|numeric|min:0',
         ]);
 
-        if ($request->file('image')) {
-            \Cloudder::destroy($banner->image);
-            $windowImage->image = Cloudder::upload($request->file('image'), [])->getPublicId();
-        }
         $windowImage->title = $request->get('name');
         $windowImage->link = $request->get('url');
         $windowImage->description = $request->get('description');
         $windowImage->status = $request->get('status');
+        $windowImage->product_id = $request->get('productId');
+        $windowImage->order = $request->get('order');
         $windowImage->save();
         
         return redirect(route('admin.windowImages'))->with('success', 'Window Image has been updated successfully.');

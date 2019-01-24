@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-flat">
-                <div class="panel-heading"><h1 class="panel-title">Category</h1></div><hr/>
+                <div class="panel-heading"><h1 class="panel-title">Category <a href="{{ route('admin.categories')  }}" class="btn btn-info pull-right text-white">List</a></h1></div><hr/>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="panel-body">
@@ -42,7 +42,7 @@
                                         </div>
                                         <div class="col-lg-9">
                                             <select data-placeholder="Select a Sub Category..."
-                                            class="select-results-color form-control" id="subCategory" name="parent_id">
+                                            class="select-results-color form-control" id="subCategory" name="category_id">
                                         </select>
                                     </div>
                                 </div>
@@ -95,9 +95,6 @@
                                             <div class="col-lg-6">
                                                 <button type="submit" class="btn btn-info">Submit <i
                                                     class="icon-arrow-right14 position-right"></i></button>
-                                                    <button type="reset" class="btn btn-default" id="reset">Reset <i
-                                                        class="icon-reload-alt position-right"></i></button>
-                                                    </div>
                                                 </div>
                                             </fieldset>
                                         </form>

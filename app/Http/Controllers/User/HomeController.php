@@ -17,10 +17,9 @@ class HomeController extends Controller
     	// $pro = Product::with(['category.parent.parent'])->find(3);
     	// dd($pro->category->parent->parent->slug.'/'.$pro->category->parent->slug.'/'.$pro->category->slug);
         return view('user.index', [
-        	'brands' => Brand::latest()->get(),
         	'products' => Product::with(['category.parent.parent'])->latest()->limit(4)->get(),
         	'windowImages' => WindowImage::latest()->limit(2)->get(),
-            'banners' => Banner::latest()->limit(4)->get()
+            'banners' => Banner::latest()->get()
         ]);
     }
 }

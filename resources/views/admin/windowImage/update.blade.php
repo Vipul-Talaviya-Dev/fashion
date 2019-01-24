@@ -1,11 +1,11 @@
 @extends('admin.layouts.main')
-@section('title', 'Update Window Image')
+@section('title', 'Update Home Image')
 @section('page-header')
     <div class="page-header page-header-default">
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
                 <li><a href="{{ route('admin.dashboard') }}"><i class="icon-home2 position-left"></i> Home</a></li>
-                <li class="active">Window Image</li>
+                <li class="active">Home Image</li>
             </ul>
         </div>
     </div>
@@ -19,7 +19,7 @@
                 <!-- Traffic sources -->
                 <div class="panel panel-flat">
                     <div class="panel-heading">
-                        <h1 class="panel-title">Window Image Update</h1>
+                        <h1 class="panel-title">Home Image Update</h1>
                     </div>
                     <hr/>
                     <!-- Single row selection -->
@@ -60,10 +60,14 @@
 
                                             <div class="form-group">
                                                 <div class="col-lg-1"></div>
-                                                <label class="col-lg-2 control-label text-semibold">Image file
-                                                    upload:</label>
+                                                <label class="col-lg-2 control-label text-semibold">Select Product:</label>
                                                 <div class="col-lg-8">
-                                                    <input type="file" name="image" class="file-styled"  accept=".jpeg, .jpg, .png, .gif">
+                                                    <select name="productId" class="form-control">
+                                                        <option value="">-- Select Product --</option>
+                                                        @foreach($products as $product)
+                                                        <option value="{{ $product->id }}" {{ ($product->id == $windowImage->product_id) ? 'selected' : '' }}>{{ $product->name }}</option>
+                                                        @endforeach
+                                                    </select>
                                                     @if($errors->get('image'))
                                                         @foreach($errors->get('image') as $error)
                                                             <span style="color: red;"><i class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>
@@ -103,6 +107,20 @@
                                                 </div>
                                                 <div class="col-lg-1"></div>
                                             </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-1"></div>
+                                                <label class="col-lg-2 control-label text-semibold">OrderBy :</label>
+                                                <div class="col-lg-8">
+                                                    <input type="number" name="order" value="{{ $windowImage->order ?: old('order') }}" class="form-control"  placeholder="Enter Order By" autocomplete="off" required="">
+                                                    @if($errors->get('order'))
+                                                        @foreach($errors->get('order') as $error)
+                                                            <span style="color: red;"><i class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                                <div class="col-lg-1"></div>
+                                            </div>
+
                                             {{--Status--}}
                                             <div class="text-right">
                                                 <button type="submit" class="btn btn-primary">Submit <i class="icon-arrow-right14 position-right"></i></button>

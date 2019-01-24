@@ -35,16 +35,16 @@ class CategoryController extends Controller
     public function create(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|unique:categories,name',
+            'name' => 'required',
         ]);
         
         Category::create([
-            'parent_id' => $request->get('parent_id') !== 0 ? $request->get('parent_id') : 0,
+            'parent_id' => ($request->get('category_id') ? $request->get('category_id') : $request->get('parent_id')),
             'name' => trim($request->get('name')),
             'slug' => trim(str_slug($request->get('name'))),
             'status' => $request->get('status'),
         ]);
-        return redirect(route('admin.categories'))->with('success','Category has been inserted successfully.');
+        return redirect(route('admin.category.add'))->with('success','Category has been inserted successfully.');
         
     }
 

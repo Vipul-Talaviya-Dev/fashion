@@ -13,6 +13,7 @@ class Variation extends Model
         'product_id',
         'color_id',
         'size_id',
+        'images',
         'price',
         'qty',
     ];

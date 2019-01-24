@@ -63,6 +63,13 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
+                    <label>Price: <span class="text-danger">*</span></label>
+                    <input type="number" name="price" placeholder="Enter Price" class="form-control required" value="{{ old('price') }}" pattern="[0-9]" min="0" required>
+                    @foreach($errors->get('price') as $error)
+                    <span style="color: red;">{{$error}}</span>
+                    @endforeach
+                </div>
+                <div class="form-group col-md-4">
                     <label>Meta Keyword: <span class="text-danger">*</span></label>
                     <input type="text" name="meta_keyword" value="T-shirt, Jens" class="form-control metaKeyword" data-fouc required="">
                     @foreach($errors->get('meta_keyword') as $error)
@@ -71,15 +78,52 @@
                 </div>
                 <div class="col-md-4 form-group">
                     <label>Meta Description :<span class="text-danger">*</span></label>
-                    <textarea name="meta_description" class="form-control required" required placeholder="Enter Meta Description">{{ old('meta_description') }}</textarea>
+                    <textarea name="meta_description" class="form-control required" required placeholder="Enter Meta Description"></textarea>
                     @foreach($errors->get('meta_description') as $error)
                     <span style="color: red;">{{$error}}</span>
                     @endforeach
                 </div>
             </div>
-<!--             <div class="row">
+            <div class="addmore">
+                <div id="product0">
+                    <div class="row">
+                        <div class="form-group col-md-2">
+                            <label>Color: <span class="text-danger">*</span></label>
+                            <select name="colors[]" class="form-control color" required>
+                                <option value="">Choose a Color...</option>
+                                @foreach($colors as $color)
+                                <option value="{{ $color->id }}" style="background-color: {{ $color->code }}">{{ $color->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>Size: <span class="text-danger">*</span></label>
+                            <select name="sizes[][]" class="form-control sizes" id="size_0" multiple=""  required>
+                                <option value="">Choose a Size...</option>
+                                @foreach($sizes as $size)
+                                <option value="{{ $size->id }}">{{ $size->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>Price: <span class="text-danger">*</span></label>
+                            <input type="number" name="prices[]" placeholder="Enter Product Price" class="form-control" required pattern="[0-9]" min="0" required>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>Quantity: <span class="text-danger">*</span></label>
+                            <input type="number" name="quantities[]" placeholder="Enter Quantity" class="form-control" required pattern="[0-9]" min="0">
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label>Image :<span class="text-danger">*</span></label>
+                            <input type="file" name="images[][]" class="form-control required" required accept=".jpeg, .jpg, .png" multiple>
+                            <span class="help-block">Accepted formats: jpeg, jpg, png. Max file size 2Mb</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <input type="button" id="add" class="btn bg-teal" name="add" value="ADD MORE">
-            </div><p><br></p> -->
+            </div><p><br></p>
             <div class="row">
                 <label>Description :</label>
                 <textarea name="description" id="editor" rows="4" cols="4" class="form-control required" data-placeholder="Enter Product Details" required>{{ old('description') }}</textarea>

@@ -18,6 +18,7 @@ class CreateVariationsTable extends Migration
             $table->integer('product_id')->unsigned();
             $table->integer('color_id')->unsigned();
             $table->integer('size_id')->unsigned()->nullable();
+            $table->text('images')->nullable();
             $table->integer('price');
             $table->integer('qty');
             $table->timestamps();

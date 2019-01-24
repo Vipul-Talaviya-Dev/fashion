@@ -14,8 +14,9 @@ class WindowImage extends Model
     protected $fillable = [
     	'title',
     	'link',
-    	'image',
+    	'product_id',
     	'description',
+        'order',
     	'status',
     ];
 

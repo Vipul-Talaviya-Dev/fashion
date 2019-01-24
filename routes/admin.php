@@ -66,9 +66,14 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
         Route::get('products', 'ProductController@index')->name('products');
         Route::get('product/add', 'ProductController@add')->name('product.add');
         Route::post('product/create', 'ProductController@create')->name('product.create');
-        Route::post('product/insert', 'ProductController@insert')->name('product.insert');
         Route::get('product/{id}/edit', 'ProductController@edit')->name('product.edit');
         Route::post('product/{id}/update', 'ProductController@update')->name('product.update');
+
+        Route::get('product/{id}/variations', 'ProductVariationController@index')->name('product.variations');
+        Route::get('product/{id}/variation/add', 'ProductVariationController@variationInsert')->name('product.variationInsert');
+        Route::post('product/{id}/variation/create', 'ProductVariationController@variationCreate')->name('product.variationCreate');
+        Route::get('product/{id}/variation/edit', 'ProductVariationController@variationEdit')->name('product.variationEdit');
+        Route::post('product/{id}/variation/update', 'ProductVariationController@variationUpdate')->name('product.variationUpdate');
 
         // Order Controller
         Route::get('orders', 'OrderController@index')->name('orders');

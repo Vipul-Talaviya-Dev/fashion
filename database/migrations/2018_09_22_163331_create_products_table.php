@@ -16,18 +16,11 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('category_id')->unsigned();
-            $table->integer('brand_id')->unsigned()->nullable();
             $table->string('name');
             $table->string('slug');
-            $table->unsignedInteger('price');
-            $table->unsignedInteger('max_price');
-            $table->unsignedInteger('discount')->default(0);
             $table->double('weight', 15, 8)->default(0);
-            $table->string('thumb_image');
-            $table->longText('small_image');
             $table->longText('description')->nullable();
-            $table->text('short_description')->nullable();
-            $table->text('highlights')->nullable();
+            $table->longText('chart')->nullable();
             $table->text('meta_keyword')->nullable();
             $table->text('meta_description')->nullable();
             $table->tinyInteger('cod')->comment('1: Yes, 2: No')->default(2);
@@ -35,7 +28,6 @@ class CreateProductsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('brand_id')->references('id')->on('brands');
         });
     }
 

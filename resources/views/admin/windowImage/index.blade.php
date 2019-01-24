@@ -1,11 +1,11 @@
 @extends('admin.layouts.main')
-@section('title', 'Window Images')
+@section('title', 'Home Images')
 @section('page-header')
     <div class="page-header page-header-default">
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
                 <li><a href="{{ route('admin.dashboard') }}"><i class="icon-home2 position-left"></i> Home</a></li>
-                <li class="active">Window Images</li>
+                <li class="active">Home Images</li>
             </ul>
         </div>
     </div>
@@ -19,7 +19,7 @@
                 <!-- Traffic sources -->
                 <div class="panel panel-flat">
                     <div class="panel-heading">
-                        <h1 class="panel-title">Window Images</h1>
+                        <h1 class="panel-title">Home Images</h1>
                     </div>
                     <hr/>
                     <div class="container-fluid">
@@ -41,8 +41,8 @@
                                         <th>Sr. No.</th>
                                         <th>Title</th>
                                         <th>URL </th>
-                                        <th>Image</th>
                                         <th>Description</th>
+                                        <th>Order</th>
                                         <th>Status</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
@@ -54,13 +54,8 @@
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $windowImage->title }}</td>
                                                 <td><a href="{{$windowImage->link}}" target="_blank" class="btn btn-sm btn-info">View URL</a></td>
-                                                @if(!empty($windowImage->image))
-                                                    <td><img src="{{ \Cloudder::secureShow($windowImage->image) }}" alt="" style="max-height: 100px; max-width: 200px"></td>
-                                                @else
-                                                    <td><span class="label label-default">No</span></td>
-                                                @endif
-
                                                 <td>{{ $windowImage->description }}</td>
+                                                <td>{{ $windowImage->order }}</td>
                                                 @if($windowImage->status == 1)
                                                     <td><span class="label label-success">Active</span></td>
                                                 @else

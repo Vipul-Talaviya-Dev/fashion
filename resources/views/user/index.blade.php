@@ -95,22 +95,6 @@
 	</div>
 </div>
 <!-- //new-products -->
-<!-- top-brands -->
-<div class="top-brands">
-	<div class="container">
-		<h3>Top Brands</h3>
-		<div class="sliderfig">
-			<ul id="brands">			
-				@foreach($brands as $brand)
-					<li title="{{ $brand->name }}">
-						<img src="{{ \Cloudder::secureShow($brand->image) }}" alt="{{ $brand->name }}" class="img-responsive" />
-					</li>
-				@endforeach
-			</ul>
-		</div>
-	</div>
-</div>
-<!-- //top-brands -->
 <!-- newsletter -->
 <div class="newsletter">
 	<div class="container">

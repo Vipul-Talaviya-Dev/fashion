@@ -15,13 +15,15 @@ class CreateWindowImagesTable extends Migration
     {
         Schema::create('window_images', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('product_id')->unsigned();
             $table->string('title')->nullable();
             $table->string('link');
-            $table->string('image');
+            $table->integer('order')->unsigned()->default(0);
             $table->longText('description')->nullable();
             $table->tinyInteger('status')->comment('1: Active, 2: In-active')->default(1);
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 

@@ -21,31 +21,17 @@
                     <div class="panel-heading">
                         <h1 class="panel-title">
                             Color
+                            <a href="{{ route('admin.color.add')  }}" class="btn btn-info pull-right text-white">ADD NEW</a>
                         </h1>
                     </div>
                     <hr/>
                     <div class="container-fluid">
-                        <a href="{{ route('admin.color.add') }}">
-                            <button class="btn btn-block-group pull-right"
-                                    style="margin-right: 40px; margin-top: 20px;"><i
-                                        class="icon-plus22 position-left"></i>ADD COLOR
-                            </button>
-                        </a>
                         <div class="content">
                             <div class="panel panel-flat">
-                                <form class="form-horizontal">
-                                    <div class="col-md-6" style="margin-top: 20px;">
-                                        <input type="text" class="form-control" name="search" value="{{ request()->get('search') }}" placeholder="Search" autocomplete="off">
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a href="{{ route('admin.colors') }}" class="btn btn-labeled btn-rounded btn-info" style="margin-top: 20px;"><b><i class="icon-reset"></i></b> Rrefresh
-                                        </a>
-                                    </div>
-                                </form>
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>Sr. No.</th>
+                                        <th>#</th>
                                         <th>Color Name</th>
                                         <th>Color Code</th>
                                         <th>Color</th>
