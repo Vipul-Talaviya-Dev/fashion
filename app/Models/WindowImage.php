@@ -14,7 +14,7 @@ class WindowImage extends Model
     protected $fillable = [
     	'title',
     	'link',
-    	'product_id',
+    	'image',
     	'description',
         'order',
     	'status',
@@ -39,4 +39,5 @@ class WindowImage extends Model
     {
         return $query->whereStatus(self::INACTIVE);
     }
+
 }

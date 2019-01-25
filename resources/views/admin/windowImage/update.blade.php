@@ -60,14 +60,10 @@
 
                                             <div class="form-group">
                                                 <div class="col-lg-1"></div>
-                                                <label class="col-lg-2 control-label text-semibold">Select Product:</label>
+                                                <label class="col-lg-2 control-label text-semibold">Image file
+                                                    upload:</label>
                                                 <div class="col-lg-8">
-                                                    <select name="productId" class="form-control">
-                                                        <option value="">-- Select Product --</option>
-                                                        @foreach($products as $product)
-                                                        <option value="{{ $product->id }}" {{ ($product->id == $windowImage->product_id) ? 'selected' : '' }}>{{ $product->name }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <input type="file" name="image" class="file-styled" accept=".jpeg, .jpg, .png, .gif">
                                                     @if($errors->get('image'))
                                                         @foreach($errors->get('image') as $error)
                                                             <span style="color: red;"><i class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>

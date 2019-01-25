@@ -27,91 +27,142 @@
 <!-- //banner -->
 
 <!-- special-deals -->
-<div class="special-deals">
-	<div class="container">
-		<h2>Special Deals</h2>
-		<div class="w3agile_special_deals_grids">
-			@foreach($windowImages as $windowImage)
-				<a href="{{$windowImage->link}}">
-					<div class="col-md-6 w3agile_special_deals_grid_left">
-						<div class="w3agile_special_deals_grid_left_grid">
-							<img src="{{ \Cloudder::secureShow($windowImage->image) }}" alt="{{ $windowImage->title }}" class="img-responsive" />
-							<!-- <div class="w3agile_special_deals_grid_left_grid_pos1">
-								<h5>30%<span>Off/-</span></h5>
-							</div> -->
-							<div class="w3agile_special_deals_grid_left_grid_pos">
-								<h4>{{ $windowImage->title }} </h4>
-							</div>
-						</div>
-					</div>
-				</a><div class="clearfix"></div>
-			@endforeach
-		</div>
-	</div>
-</div>
+<section class="banner-home-bottom text-center">  
+  <div class="" style="width: 95%;margin: auto;">
+    <div class="col-sm-12">
+      <br><br>
+      <h2 class="title"><span>NEW SEASON</span> bestsellers</h2>
+      <div class="sub-title">&nbsp;</div>
+    </div>
+    <ul class="clearfix shop-by-occasion-banner">
+      <div class="">
+      	@if(isset($windowImages[1]))
+        <li class="col-sm-8 wow fadeInUp animated padd-5 row-1 animated" data-wow-delay="150ms" style="visibility: visible; animation-delay: 150ms;">        
+          <a href="{{ $windowImages[1]['url'] }}" class="w3agile_special_deals_grid_left_grid">
+            <img src="{{ $windowImages[1]['image'] }}" class="img-responsive"> 
+            <h4>
+              <span class="jockey-one">{{ $windowImages[1]['title'] }}</span>
+            </h4>
+            <div class="shop-now">Shop Now</div>
+          </a>
+        </li>
+        @endif
+        @if(isset($windowImages[2]))
+        <li class="col-sm-4 wow fadeInUp animated padd-5 animated" data-wow-delay="150ms" style="visibility: visible; animation-delay: 150ms;">        
+          <a href="{{ $windowImages[2]['url'] }}" class="w3agile_special_deals_grid_left_grid">
+            <img src="{{ $windowImages[2]['image'] }}" class="img-responsive"> 
+            <h4>
+              <span class="jockey-one"> {{ $windowImages[2]['title'] }}</span>
+            </h4>
+            <div class="shop-now">Shop Now</div>
+          </a>
+        </li>
+        @endif
+      </div>
+      <div class="clearfix"></div>
+      
+      <div class="">
+      	@if(isset($windowImages[3]))
+        <li class="col-sm-4 wow fadeInUp animated padd-5 animated" data-wow-delay="300ms" style="visibility: visible; animation-delay: 300ms;">        
+          <a href="{{ $windowImages[3]['url'] }}" class="w3agile_special_deals_grid_left_grid">
+            <img src="{{ $windowImages[3]['image'] }}" class="img-responsive"> 
+            <h4>
+              <span class="jockey-one"> {{ $windowImages[3]['title'] }}</span>
+            </h4>
+            <div class="shop-now">Shop Now</div>
+          </a>
+        </li>
+        @endif
+        @if(isset($windowImages[4]))
+        <li class="col-sm-4 wow fadeInUp animated padd-5 animated" data-wow-delay="300ms" style="visibility: visible; animation-delay: 300ms;">        
+          <a href="{{ $windowImages[4]['url'] }}" class="w3agile_special_deals_grid_left_grid">
+            <img src="{{ $windowImages[4]['image'] }}" class="img-responsive">
+            <h4>
+              <span class="jockey-one">{{ $windowImages[4]['title'] }}</span>
+            </h4> 
+            <div class="shop-now">Shop Now</div>
+          </a>
+        </li>
+        @endif
+        @if(isset($windowImages[5]))
+        <li class="col-sm-4 wow fadeInUp animated padd-5 animated" data-wow-delay="300ms" style="visibility: visible; animation-delay: 300ms;">        
+          <a href="{{ $windowImages[5]['url'] }}" class="w3agile_special_deals_grid_left_grid">
+            <img src="{{ $windowImages[5]['image'] }}" class="img-responsive"> 
+            <h4>
+              <span class="jockey-one">{{ $windowImages[5]['title'] }}</span>
+            </h4>
+            <div class="shop-now">Shop Now</div>
+          </a>
+        </li>
+        @endif
+      </div>
+      <div class="row-3">
+      	@if(isset($windowImages[6]))
+        <li class="col-sm-6 wow fadeInUp animated padd-5 animated" data-wow-delay="450ms" style="visibility: visible; animation-delay: 450ms;">        
+          <a href="{{ $windowImages[6]['url'] }}" class="w3agile_special_deals_grid_left_grid">
+            <img src="{{ $windowImages[6]['image'] }}" class="img-responsive"> 
+            <h4>
+              <span class="jockey-one">{{ $windowImages[6]['title'] }}</span>
+            </h4>
+            <div class="shop-now">Shop Now</div>
+          </a>
+        </li>
+        @endif
+        @if(isset($windowImages[7]))
+        <li class="col-sm-6 wow fadeInUp animated padd-5 animated" data-wow-delay="450ms" style="visibility: visible; animation-delay: 450ms;">        
+          <a href="{{ $windowImages[7]['url'] }}" class="w3agile_special_deals_grid_left_grid">
+            <img src="{{ $windowImages[7]['image'] }}" class="img-responsive"> 
+            <h4>
+              <span class="jockey-one">{{ $windowImages[7]['title'] }}</span>
+            </h4>
+            <div class="shop-now">Shop Now</div>
+          </a>
+        </li>
+        @endif
+      </div>
+      <div class="clearfix"></div>
+      
+      <div class="">
+      	@if(isset($windowImages[8]))
+        <li class="col-sm-4 wow fadeInUp animated padd-5 animated" data-wow-delay="300ms" style="visibility: visible; animation-delay: 300ms;">        
+          <a href="{{ $windowImages[8]['url'] }}" class="w3agile_special_deals_grid_left_grid">
+            <img src="{{ $windowImages[8]['image'] }}" class="img-responsive"> 
+            <h4>
+              <span class="jockey-one"> {{ $windowImages[8]['title'] }}</span>
+            </h4>
+            <div class="shop-now">Shop Now</div>
+          </a>
+        </li>
+        @endif
+        @if(isset($windowImages[9]))
+        <li class="col-sm-4 wow fadeInUp animated padd-5 animated" data-wow-delay="300ms" style="visibility: visible; animation-delay: 300ms;">        
+          <a href="{{ $windowImages[9]['url'] }}" class="w3agile_special_deals_grid_left_grid">
+            <img src="{{ $windowImages[9]['image'] }}" class="img-responsive">
+            <h4>
+              <span class="jockey-one">{{ $windowImages[9]['title'] }}</span>
+            </h4> 
+            <div class="shop-now">Shop Now</div>
+          </a>
+        </li>
+        @endif
+        @if(isset($windowImages[10]))
+        <li class="col-sm-4 wow fadeInUp animated padd-5 animated" data-wow-delay="300ms" style="visibility: visible; animation-delay: 300ms;">        
+          <a href="{{ $windowImages[10]['url'] }}" class="w3agile_special_deals_grid_left_grid">
+            <img src="{{ $windowImages[10]['image'] }}" class="img-responsive"> 
+            <h4>
+              <span class="jockey-one">{{ $windowImages[10]['title'] }}</span>
+            </h4>
+            <div class="shop-now">Shop Now</div>
+          </a>
+        </li>
+        @endif
+      </div>
+    </ul>
+  </div>
+  <a href="javascript:void();"><div class="shop-now">Shop Now</div></a>
+</section>
+
 <!-- //special-deals -->
-<!-- new-products -->
-<div class="new-products">
-	<div class="container">
-		<h3>New Products</h3>
-		<div class="agileinfo_new_products_grids">
-			@foreach($products as $product)
-				<div class="col-md-3 agileinfo_new_products_grid">
-					<?php
-						if($product->category && $product->category->parent && $product->category->parent->parent) {
-							$url = $product->category->parent->parent->slug.'/'.$product->category->parent->slug.'/'.$product->category->slug.'/'.$product->slug;
-						} else if($product->category && $product->category->parent) {
-							$url = 'products/'.$product->category->parent->slug.'/'.$product->category->slug.'/'.$product->slug;
-						} else {
-							$url = 'products/all/'.$product->category->slug.'/'.$product->slug;
-						}
-					?>
-					<a href="/shop/{{$url}}" class="">
-						<div class="agile_ecommerce_tab_left agileinfo_new_products_grid1">
-							<div class="hs-wrapper hs-wrapper1">
-								<img src="{{ \Cloudder::secureShow($product->thumb_image) }}" alt="{{ $product->name }}" class="img-responsive" />
-								<!-- <div class="w3_hs_bottom w3_hs_bottom_sub">
-									<ul>
-										<li>
-											<a href="" ><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
-										</li>
-									</ul>
-								</div> -->
-							</div>
-							<h5>{{ $product->name }}</h5>
-							<div class="simpleCart_shelfItem">
-								<p>
-									<!-- <span>Rs. {{ $product->max_price }}</span>  -->
-									Rs. <i class="item_price">{{ $product->price }}</i>
-								</p>
-								<!-- <p><a class="item_add" href="javascript:void(0);">Add to cart</a></p> -->
-							</div>
-						</div>
-					</a>
-				</div>
-			@endforeach
-			<div class="clearfix"> </div>
-		</div>
-	</div>
-</div>
-<!-- //new-products -->
-<!-- newsletter -->
-<div class="newsletter">
-	<div class="container">
-		<div class="col-md-6 w3agile_newsletter_left">
-			<h3>SUBSCRIBE TO EMAILER</h3>
-			<!-- <p>Excepteur sint occaecat cupidatat non proident, sunt.</p> -->
-		</div>
-		<div class="col-md-6 w3agile_newsletter_right">
-			<form method="post">
-				<input type="email" name="Email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-				<input type="submit" value="" />
-			</form>
-		</div>
-		<div class="clearfix"> </div>
-	</div>
-</div>
-<!-- //newsletter -->
 @endsection
 
 @section('js')

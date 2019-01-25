@@ -14,11 +14,18 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-    	// $pro = Product::with(['category.parent.parent'])->find(3);
-    	// dd($pro->category->parent->parent->slug.'/'.$pro->category->parent->slug.'/'.$pro->category->slug);
+    	$images = [];
+    	foreach (WindowImage::latest()->limit(10)->get() as $key => $image) {
+    		$data = [
+    			'title' => $image->title,
+    			'image' => \Cloudder::secureShow($image->image),
+    			'url' => $image->link
+    		];
+    		$images[$key+1] = $data;
+    	}
+    	
         return view('user.index', [
-        	'products' => Product::with(['category.parent.parent'])->latest()->limit(4)->get(),
-        	'windowImages' => WindowImage::latest()->limit(2)->get(),
+        	'windowImages' => $images,
             'banners' => Banner::latest()->get()
         ]);
     }

@@ -19,9 +19,7 @@ class WindowImageController extends Controller
 
     public function add()
     {
-        return view('admin.windowImage.add', [
-            'products' => Product::active()->get()
-        ]);
+        return view('admin.windowImage.add');
     }
 
     public function create(Request $request)
@@ -33,12 +31,14 @@ class WindowImageController extends Controller
             'productId' => 'required|numeric',
             'order' => 'required|numeric|min:0',
             'status' => 'required|numeric',
+            'image' => 'required|image'
         ]);
+
 
         WindowImage::create([
             'title' => $request->get('title'),
             'link' => $request->get('url'),
-            'product_id' => $request->get('productId'),
+            'image' => Cloudder::upload($file, [])->getPublicId(),
             'order' => $request->get('order'),
             'description' => $request->get('description'),
             'status' => $request->get('status'),
@@ -55,7 +55,6 @@ class WindowImageController extends Controller
 
         return view('admin.windowImage.update', [
             'windowImage' => $windowImage,
-            'products' => Product::get()
         ]);
     }
 
@@ -69,15 +68,19 @@ class WindowImageController extends Controller
             'name' => 'required',
             'url' => 'required|url',
             'status' => 'required|numeric',
-            'productId' => 'required|numeric',
             'order' => 'required|numeric|min:0',
+            'image' => 'nullable|image',
         ]);
+
+        if ($request->file('image')) {
+            \Cloudder::destroy($windowImage->image);
+            $windowImage->image = Cloudder::upload($request->file('image'), [])->getPublicId();
+        }
 
         $windowImage->title = $request->get('name');
         $windowImage->link = $request->get('url');
         $windowImage->description = $request->get('description');
         $windowImage->status = $request->get('status');
-        $windowImage->product_id = $request->get('productId');
         $windowImage->order = $request->get('order');
         $windowImage->save();
         

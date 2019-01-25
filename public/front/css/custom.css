@@ -267,3 +267,76 @@
     border: 1px solid #ff9b05;
     border-radius: 5px;
 }
+/**
+ * Home Page Start
+ */
+.banner-home-bottom {
+    clear: both;
+}
+.title {
+    font-size: 48px;
+    font-weight: 800;
+    letter-spacing: 0;
+    margin: 0;
+    text-transform: uppercase;
+    span {
+        color: #b0b0b0;
+    }
+}
+.sub-title {
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin: 0 0 35px 0;
+    text-transform: none;
+}
+.banner-home-bottom ul {
+    padding-left: 0;
+    list-style: none;
+}
+#shop-by-occasion li, .banner-home-bottom li {
+    overflow: hidden;
+}
+.banner-home-bottom li {
+    position: relative;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.padd-5 {
+    padding: 0 5px !important;
+}
+.shop-by-occasion-banner a {
+    display: block;
+}
+.shop-by-occasion-banner h4 {
+   left: 0;
+    margin: 0 auto;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 100%;
+    line-height: 1.25em;
+    padding: 0;
+    font-size: 16px;
+}
+.shop-by-occasion-banner span {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.shop-by-occasion-banner .shop-now {
+    background: rgba(243, 183, 81, 0.88) none repeat scroll 0 0;
+    border: 1px solid;
+    bottom: 38px;
+    color: #ffffff;
+    left: 0;
+    margin: 0 auto;
+    padding: 10px 0;
+    position: absolute;
+    right: 0;
+    text-transform: uppercase;
+    width: 150px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+}
