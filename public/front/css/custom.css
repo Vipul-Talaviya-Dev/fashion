@@ -340,3 +340,16 @@
     font-family: 'Lato', sans-serif;
     font-weight: 500;
 }
+.more-product {
+    background: rgba(243, 183, 81, 0.88) none repeat scroll 0 0;
+    color: #ffffff;
+    margin: 0 auto;
+    padding: 10px 0;
+    right: 0;
+    text-transform: uppercase;
+    width: 165px;
+    left: 0;
+}
+/**
+ * Home Page End
+ */

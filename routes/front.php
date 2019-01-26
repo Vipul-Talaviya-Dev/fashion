@@ -13,7 +13,7 @@
 
 Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 	Route::get('/', 'HomeController@index')->name('index');
-	Route::get('/{mainCategory}/{subCategory}/{thirdCategory?}', 'ProductController@index')->name('products');
+	Route::get('products', 'ProductController@index')->name('products');
 	Route::get('/shop/{mainCategory?}/{subCategory?}/{thirdCategory?}/{productUrl?}', 'ProductController@productDetail')->name('productDetail');
 	Route::get('/product/add/to/cart/item', 'ProductController@addToCard')->name('addToCard');
 	Route::get('/cart', 'ProductController@cart')->name('cart');

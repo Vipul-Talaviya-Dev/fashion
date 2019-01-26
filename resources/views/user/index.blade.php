@@ -159,7 +159,7 @@
       </div>
     </ul>
   </div>
-  <a href="javascript:void();"><div class="shop-now">Shop Now</div></a>
+  <a href="{{ route('user.products') }}"><div class="more-product">Load More</div></a>
 </section>
 
 <!-- //special-deals -->

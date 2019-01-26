@@ -10,8 +10,7 @@
 	<tr>
 		<td width="100%">
 			<a href="javascript:void(0);">
-				<h1 class="CToWUd">LOGO</h1>
-				<!-- <img src="" alt="Online fashion store" align="center" title="Online fashion store" class="CToWUd"> -->
+				<img src="/front/images/logo.png" style="width: 52%;" alt="Online fashion store" align="center" title="Online fashion store" class="CToWUd">
 			</a>
 		</td>
     </tr>
@@ -70,8 +69,12 @@
 					<td>{{ $key+1 }}</td>
 					<td>
 					<div align="center">
-						<a style="text-decoration:none" width="200px" href="{{ \Cloudder::secureShow($orderProduct->product->thumb_image) }}" target="_blank">
-						<img border="0" src="{{ \Cloudder::secureShow($orderProduct->product->thumb_image) }}" style="width:80px;min-height:auto" class="CToWUd">
+						<?php
+							$variation = $orderProduct->product->variations()->find($orderProduct->variation_id);
+							$image = explode(',', $variation->images);
+						?>
+						<a style="text-decoration:none" width="200px" href="{{ \Cloudder::secureShow($image[0]) }}" target="_blank">
+						<img border="0" src="{{ \Cloudder::secureShow($image[0]) }}" style="width:80px;min-height:auto" class="CToWUd">
 						</a><br>
 						<span>{{ $orderProduct->product->name }} <br> (Order Id: {{ $cs_order_id }})</span>
 					</div>

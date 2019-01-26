@@ -23,16 +23,17 @@
 				?>
 				@foreach(\Session::get('cart') as $cartId => $cart)
 				<?php
-				$cartId++;
-				$product = \App\Models\Product::find($cart['cart_product_id']);
-				$variation = $product->variations()->find($cart['variation_id']);
+					$cartId++;
+					$product = \App\Models\Product::find($cart['cart_product_id']);
+					$variation = $product->variations()->find($cart['variation_id']);
 
-				$total += $product->price;
-				$finalAmount = $total;
+					$total += $variation->price;
+					$finalAmount = $total;
+					$image = explode(',', $variation->images);
 				?>
 				<tr class="rem{{ $cartId }}">
 					<td class="invert">{{ $cartId }}</td>
-					<td class="invert-image"><img src="{{ \Cloudder::secureShow($product->thumb_image) }}" data-imagezoom="true" class="img-responsive cart-thumb-img" alt="{{ $product->name }}"></td>
+					<td class="invert-image"><img src="{{ \Cloudder::secureShow($image[0]) }}" data-imagezoom="true" class="img-responsive cart-thumb-img" alt="{{ $product->name }}"></td>
 					<td class="invert">
 						<p>{{ $product->name }}</p><br>
 						<p>Color: <b>{{ $variation->color->name }}</b></p><br>
@@ -52,9 +53,9 @@
 					<td class="cart-td-border" style="display:none;">
 						<input type="hidden" class="p_id" value="{{ $product->id }}">
 						<input type="hidden" class="variation_id" value="{{ $variation->id }}">
-						<span id="product_subtotal1{{ $variation->id }}" >{{ $product->price }}</span>
+						<span id="product_subtotal1{{ $variation->id }}" >{{ $variation->price }}</span>
 					</td>
-					<td class="invert">Rs. <span class="cart-subtotal sellingprice" id="product_subtotal{{ $variation->id }}">{{ $product->price }}</span></td>
+					<td class="invert">Rs. <span class="cart-subtotal sellingprice" id="product_subtotal{{ $variation->id }}">{{ $variation->price }}</span></td>
 					<td class="invert">
 						<div class="rem">
 							<div class="close1 removeItem" style="right: 60px;" data-id="{{ $cart['cart_id'] }}"></div>

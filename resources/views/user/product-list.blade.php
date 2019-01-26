@@ -91,9 +91,6 @@
 				</div>
 				<div class="col-md-8 w3ls_dresses_grid_right">
 					<div class="w3ls_dresses_grid_right_grid2">
-						<div class="w3ls_dresses_grid_right_grid2_left">
-							<h3>Showing Results: {{ count($products) }}</h3>
-						</div>
 						<div class="w3ls_dresses_grid_right_grid2_right">
 							<select name="select_item" class="select_item">
 								<option selected="selected">Default sorting</option>
@@ -122,11 +119,16 @@
 							<a href="/shop/{{ $url }}">
 								<div class="agile_ecommerce_tab_left dresses_grid">
 									<div class="hs-wrapper hs-wrapper2">
-										<img src="{{ \Cloudder::secureShow($product->thumb_image) }}" alt="{{ $product->name }}" class="img-responsive" />
+										<?php
+											$variation = $product->variation;
+											$v = explode(',', $variation->images);
+											$image = $v[0];
+										?>
+										<img src="{{ \Cloudder::secureShow($image) }}" alt="{{ $product->name }}" class="img-responsive" />
 									</div>
 									<h5>{{ $product->name }}</h5>
 									<div class="simpleCart_shelfItem">
-										<p>Rs. <i class="item_price">{{ $product->price }}</i></p>
+										<p>Rs. <i class="item_price">{{ $variation->price }}</i></p>
 										<!-- <p><a class="item_add" href="javascript:void(0);">Add to cart</a></p> -->
 									</div>
 								</div>
@@ -145,6 +147,7 @@
 				<div class="clearfix"> </div>
 			</div>
 		</div>
+			<div align="center">{{ $products->links() }}</div>
 	</div>
 @endsection
 

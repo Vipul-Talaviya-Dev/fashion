@@ -10,12 +10,6 @@
 	.flex-control-thumbs img {
 		height: 135px;
 	}
-	.resp-tab-active {
-	    border:1px solid #fff;
-	    text-shadow: none;
-	    color: #fff;
-	    background:#fff;
-	}
 </style>
 @endsection
 @section('content')
@@ -25,15 +19,13 @@
 		<div class="col-md-4 single-left">
 			<div class="flexslider">
 				<ul class="slides">
-					<?php
-						$images = explode(',', $variation->images);
-					?>
-					<li data-thumb="{{ \Cloudder::secureShow($images[0]) }}">
+					<li data-thumb="{{ \Cloudder::secureShow($product->thumb_image) }}">
 						<div class="thumb-image">
-							<img src="{{ \Cloudder::secureShow($images[0]) }}" data-imagezoom="true" class="img-responsive" alt="{{ $product->name }}">
+							<img src="{{ \Cloudder::secureShow($product->thumb_image) }}" data-imagezoom="true" class="img-responsive" alt="{{ $product->name }}">
 						</div>
 					</li>
 					<?php
+						$images = explode(',', $product->small_image);
 						if(count($images) > 0) {
 							foreach ($images as $img) {
 								echo '<li data-thumb="'.\Cloudder::secureShow($img).'">
@@ -65,14 +57,18 @@
 					</span>
 				</div>
 			@endif
+			<div class="description">
+				<h5><i>Description</i></h5>
+				<p>{{ $product->short_description }}</p>
+			</div>
 			<div class="color-quality">
 				<div class="color-quality-left">
 					<h5>Color : </h5>
 					<ul>
-						@if($colorVariations)
-							@foreach($colorVariations as $colorVariation)
+						@if($product->variations)
+							@foreach($product->variations as $variation)
 								<li>
-									<a href="javascript:void(0);" class="btn varbtn colorVariation" data-col="{{ $colorVariation->color_id }}"><span style="background: {{ $colorVariation->color->code  }}"></span> {{ $colorVariation->color->name }}</a>
+									<a href="javascript:void(0);" class="btn varbtn colorVariation" data-col="{{ $variation->color_id }}"><span style="background: {{ $variation->color->code  }}"></span> {{ $variation->color->name }}</a>
 								</li>
 							@endforeach
 						@endif
@@ -80,10 +76,10 @@
 					<p><br></p>
 					<h5>Select Size : </h5>
 					<ul>
-						@if($sizeVariations)
-							@foreach($sizeVariations as $sizeVariation)
+						@if($product->variations)
+							@foreach($product->variations as $variation)
 								<li>
-									<a href="javascript:void(0);" class="btn varbtn variation" name="size" id="varbtn-{{ $sizeVariation->size_id }}" data-id="{{ $sizeVariation->size_id }}" data-variation="{{ $sizeVariation->id }}" data-product="{{ $product->id }}" data-col="{{ $sizeVariation->color_id }}"> {{ $sizeVariation->size->name }}</a><input type="radio" name="variation" class="radio-cust radio-variation" id="{{ $sizeVariation->size_id }}" data-col="{{ $sizeVariation->color_id }}" style="display:none;" value="{{ $sizeVariation->size_id }}">
+									<a href="javascript:void(0);" class="btn varbtn variation" name="size" id="varbtn-{{ $variation->size_id }}" data-id="{{ $variation->size_id }}" data-variation="{{ $variation->id }}" data-product="{{ $product->id }}" data-col="{{ $variation->color_id }}"> {{ $variation->size->name }}</a><input type="radio" name="variation" class="radio-cust radio-variation" id="{{ $variation->size_id }}" data-col="{{ $variation->color_id }}" style="display:none;" value="{{ $variation->size_id }}">
 								</li>
 							@endforeach
 						@endif
@@ -101,12 +97,12 @@
 				<div class="clearfix"> </div>
 			</div>
 			<div class="simpleCart_shelfItem">
-				<p>Rs. <i class="item_price">{{ $variation->price }}</i></p>
+				<p><span>Rs. {{ $product->max_price }}</span> Rs. <i class="item_price">{{ $product->price }}</i></p>
 				<p>
-					@if($variation->qty == 0)
-						<a href="javascript:void(0);">Out Of Stock</a>
-					@else
+					@if(array_sum($product->variations()->pluck('qty')->toArray()) > 0)
 						<a class="item_add" href="javascript:void(0);">Add to cart</a>
+					@else
+						<a href="javascript:void(0);">Out Of Stock</a>
 					@endif	
 				</p>
 			</div>
@@ -116,18 +112,18 @@
 	</div>
 </div>
 <!-- Detail End -->
-
 <div class="additional_info" style="padding: 0;">
 	<div class="container">
 		<div class="sap_tabs">	
 			<div id="horizontalTab1" style="display: block; width: 100%; margin: 0px;">
 				<ul>
-					<li class="resp-tab-item" aria-controls="tab_item-0" role="tab"></li>
+					<li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span>Product Information</span></li>
 					@if(false)
 						<li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Reviews</span></li>
 					@endif	
 				</ul>		
 				<div class="tab-1 resp-tab-content additional_info_grid" aria-labelledby="tab_item-0">
+					<h3>{{ $product->name }}</h3>
 					<p>{!!  $product->description !!}</p>
 				</div>	
 				@if(false)
@@ -242,7 +238,7 @@
 								<div class="agile_ecommerce_tab_left dresses_grid">
 									<div class="hs-wrapper hs-wrapper3">
 										<?php
-											$variationProduct = $relatedProduct->variation;
+											$variationProduct = $product->variations()->first();
 											$v = explode(',', $variationProduct->images);
 											$image = $v[0];
 										?>
@@ -253,7 +249,7 @@
 											}
 										?>
 									</div>
-									<h5>{{ $relatedProduct->name }}</h5>
+									<h5>{{ $product->name }}</h5>
 									<div class="simpleCart_shelfItem">
 										<p class="flexisel_ecommerce_cart">
 											Rs. <i class="item_price">{{ $variationProduct->price }}</i>

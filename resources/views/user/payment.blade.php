@@ -23,7 +23,9 @@
 			<div class="order-header">
 				<div class="container">
 					<div class="col-md-2">
-						<h2>Logo</h2>
+						<h2>
+			                <img src="/front/images/logo.png" alt="Fashion" style="width: 52%;" class="img-responsive" />
+				        </h2>
 						<!-- <img class="order-logo" src="/front/images/4.png" alt="Online Fashion store "> -->
 					</div>
 					<div class="col-md-10">
@@ -72,22 +74,23 @@
 								<h2 style="font-size: 1.6667em;">Order Summary</h2>
 								<div align="left">
 									<?php
-									$total = 0;
-									$finalAmount = 0;
-									?>
-									@foreach(\Session::get('order')['product'] as $key => $data)
-									<?php
-									$key++;
-									$product = \App\Models\Product::find($data['product_id']);
-									$variation = $product->variations()->find($data['variation_id']);
+										$total = 0;
+										$finalAmount = 0;
+										?>
+										@foreach(\Session::get('order')['product'] as $key => $data)
+										<?php
+										$key++;
+										$product = \App\Models\Product::find($data['product_id']);
+										$variation = $product->variations()->find($data['variation_id']);
 
-									$total += ($product->price * $data['qty']);
-									$finalAmount = $total;
+										$total += ($variation->price * $data['qty']);
+										$finalAmount = $total;
+										$image = explode(',', $variation->images);
 									?>
 										<div class="row">
 											<div class="col-xs-3 col-md-2">
 												<a href="javascript:void(0);">
-													<img src="{{ \Cloudder::secureShow($product->thumb_image) }}" alt="{{ $product->name }}" class="cart-img-thumb">
+													<img src="{{ \Cloudder::secureShow($image[0]) }}" alt="{{ $product->name }}" class="cart-img-thumb">
 												</a>
 											</div>
 											<div class="col-xs-4 col-md-5 order-pay">
@@ -97,7 +100,7 @@
 												</h5>
 											</div>
 											<div class="col-xs-3 col-md-2 font-size-13">{{ $data['qty'] }} x Qty</div>
-											<div class="col-xs-2 col-md-3 font-size-13">Rs. {{ ($product->price * $data['qty']) }}</div>
+											<div class="col-xs-2 col-md-3 font-size-13">Rs. {{ ($variation->price * $data['qty']) }}</div>
 										</div>
 										<hr>
 									@endforeach

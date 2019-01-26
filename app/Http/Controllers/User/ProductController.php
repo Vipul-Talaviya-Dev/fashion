@@ -11,25 +11,17 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Models\Variation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
-    public function index($mainCategory, $subCategory, $thirdCategory, Request $request)
+    public function index(Request $request)
     {
-    	$products = new Product;
-    	$category = new Category;	
-    	if($thirdCategory == 'all') {
-    		$category = $category->where('slug', $subCategory)->first(); 
-    	} else {
-			$category = $category->where('slug', $thirdCategory)->first(); 
-    	}
-		$products = $products->with(['category.parent.parent'])->where('category_id', $category->id)->get();
-
         return view('user.product-list', [
-        	'products' => $products
+        	'products' => Product::latest()->with(['variation', 'category.parent'])->paginate(15)
         ]);
     }
 
@@ -37,14 +29,18 @@ class ProductController extends Controller
     {
     	// Session::flush('cart');
     	// Session::forget('cart');
-    	if(!$product = Product::with(['variations.color'])->where('slug', $productUrl)->first()) {
+    	if(!$product = Product::with(['variations.color', 'variations.size'])->where('slug', $productUrl)->first()) {
     		return redirect()->back();
     	}
+
     	$categoryIds = Category::whereIn('slug', [$subCategory, $thirdCategory])->get()->pluck('id')->toArray();
-    	$relatedProducts = Product::with(['variations.color', 'variations.size'])->whereIn('category_id', $categoryIds)->inRandomOrder()->limit(15)->get();
+    	$relatedProducts = Product::with(['variation', 'category'])->whereIn('category_id', $categoryIds)->inRandomOrder()->limit(15)->get();
 
     	return view('user.product-detail', [
     		'product' => $product,
+            'variation' => $product->variation,
+            'colorVariations' => Variation::with(['color'])->where('product_id', $product->id)->groupBy('color_id')->get(),
+            'sizeVariations' => Variation::with(['size'])->where('color_id', $product->variation->color_id)->where('product_id', $product->id)->get(),
     		'relatedProducts' => $relatedProducts
     	]);
     }
@@ -257,11 +253,14 @@ class ProductController extends Controller
 	        $orderProduct->user_id = $user->id;
 	        $orderProduct->product_id = $product->id;
 	        $orderProduct->variation_id = $variation->id;
-	        $orderProduct->price = $product->price;
-	        $orderProduct->max_price = $product->max_price;
+	        $orderProduct->price = $variation->price;
+	        $orderProduct->max_price = $variation->price;
 	        $orderProduct->qty = $data['qty'];
 	        $orderProduct->status = 1;
 	        $orderProduct->save();
+
+            $variation->qty = $variation->qty - $data['qty'];
+            $variation->save();
         }
 
     	Session::forget('cart');
@@ -278,7 +277,7 @@ class ProductController extends Controller
     	if(Session::get('orderId') == null) {
     		return redirect(route('user.index'));
     	}
-        $order = Order::with(['orderProducts.product'])->find(Session::get('orderId'));
+        $order = Order::with(['orderProducts.product.variations'])->find(Session::get('orderId'));
         $user = Auth::user();
         $address = Address::where('user_id', $user->id)->first();
 

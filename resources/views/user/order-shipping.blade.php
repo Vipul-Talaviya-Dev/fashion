@@ -86,16 +86,17 @@
 					?>
 					@foreach(\Session::get('order')['product'] as $key => $data)
 					<?php
-					$key++;
-					$product = \App\Models\Product::find($data['product_id']);
-					$variation = $product->variations()->find($data['variation_id']);
+						$key++;
+						$product = \App\Models\Product::find($data['product_id']);
+						$variation = $product->variations()->find($data['variation_id']);
 
-					$total += ($product->price * $data['qty']);
-					$finalAmount = $total;
+						$total += ($variation->price * $data['qty']);
+						$finalAmount = $total;
+						$image = explode(',', $variation->images);
 					?>
 					<div class="order-boxos-item">
 						<div class="order-boxos-item-image">
-							<img src="{{ \Cloudder::secureShow($product->thumb_image) }}" alt="{{ $product->name }}">
+							<img src="{{ \Cloudder::secureShow($image[0]) }}" alt="{{ $product->name }}">
 						</div>
 						<div class="order-boxos-item-detail">
 							<h5 style="line-height: 19px;">{{ $product->name }} <br>
@@ -103,7 +104,7 @@
 								<span class="cart-variation"><span>Color : {{ $variation->color->name }}</span></span>
 							</h5>
 							<div class="pull-left">Quantity : {{ $data['qty'] }}</div>
-							<div class="pull-right">Rs. {{ ($product->price * $data['qty']) }}</div>
+							<div class="pull-right">Rs. {{ ($variation->price * $data['qty']) }}</div>
 						</div>
 					</div>
 					@endforeach

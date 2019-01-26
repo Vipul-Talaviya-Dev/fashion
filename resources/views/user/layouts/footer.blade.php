@@ -85,8 +85,8 @@ aria-hidden="true">
 							<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
 								<div class="facts">
 									<div class="register">
-										<input type="email" name="email" class="keyup-email email" placeholder="Email Address"  required="">
-										<input type="password" class="password" name="password" placeholder="Password" required="">
+										<input type="email" name="email" class="keyup-email email" placeholder="Email Address"  required="" autocomplete="off">
+										<input type="password" class="password" name="password" placeholder="Password" required="" autocomplete="off">
 										<div class="sign-up">
 											<button type="button" class="login-btn" id="userLogin">Sign in</button>
 										</div>
