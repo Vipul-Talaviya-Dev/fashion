@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Cloudder;
 use App\Models\Order;
+use App\Models\User;
 use App\Models\Address;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,7 +22,7 @@ class OrderController extends Controller
 
 	public function orderDetail(Request $request, $id)
 	{
-		if(!$order = Order::with(['orderProducts.product', 'user'])->find($id)) {
+		if(!$order = Order::with(['orderProducts.product.variations', 'user'])->find($id)) {
 			return redirect()->back()->with('error', 'Invalid Selected Id');
 		}
 
@@ -43,4 +44,14 @@ class OrderController extends Controller
 			'user' => $order->user
 		]);
 	}
+
+	public function users(Request $request)
+	{
+		$users = User::latest();
+
+		return view('admin.user.index', [
+			'users' => $users->paginate(10)
+		]);
+	}
+
 }

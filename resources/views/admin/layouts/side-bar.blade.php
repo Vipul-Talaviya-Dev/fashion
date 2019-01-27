@@ -33,9 +33,9 @@
                     </li>
                         <!-- <li><a href="{{ route('admin.offers') }}"><i class="icon-gift"></i> <span>Offers</span></a></li> -->
                         <li>
-                            <a href="{{ route('admin.orders') }}"><i class="icon-bag"></i> <span>Order's</span></a>
+                            <a href="javascript:void(0);"><i class="icon-bag"></i> <span>Order's</span></a>
                             <ul>
-                                <li><a href="javascript:void(0);"><i class="icon-bag"></i> Order</a></li>
+                                <li><a href="{{ route('admin.orders') }}"><i class="icon-bag"></i> Order</a></li>
                                 <li><a href="javascript:void(0);"><i class="icon-cart-add"></i> Assign
                                 Order</a></li>
                             </ul>
@@ -48,12 +48,7 @@
                                 <!-- <li><a href="javascript:void(0);"><i class="icon-stack3"></i> Module</a></li> -->
                             </ul>
                         </li>
-                        <li>
-                            <a href="javascript:void(0);"><i class="icon-users2"></i> <span>User</span></a>
-                            <ul>
-                                <li><a href="javascript:void(0);"><i class="icon-users"></i> Customer</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="{{ route('admin.users') }}"><i class="icon-users"></i> User</a></li>
                     </ul>
                 </div>
             </div>

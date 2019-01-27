@@ -67,10 +67,14 @@
                                 </thead>
                                 <tbody>
                                     @foreach($order->orderProducts as $key => $orderProduct)
+                                    <?php
+                                        $variation = $orderProduct->product->variations()->find($orderProduct->variation_id);
+                                        $images = explode(',', $variation->images);
+                                    ?>
                                     <tr>
                                         <td>{{ $order->id }}</td>
                                         <td>{{ $order->user->name }}<br>({{ $order->user->mobile }})</td>
-                                        <td><img src="{{ \Cloudder::secureShow($orderProduct->product->thumb_image) }}" data-imagezoom="true" style="width: 50px;" class="img-responsive" alt="{{ $orderProduct->product->name }}"></td>
+                                        <td><img src="{{ \Cloudder::secureShow($images[0]) }}" data-imagezoom="true" style="width: 50px;" class="img-responsive" alt="{{ $orderProduct->product->name }}"></td>
                                         <td>{{ $orderProduct->qty }}</td>
                                         <td>{{ $orderProduct->price }}</td>
                                         <td>{{ $order->created_at }}</td>

@@ -38,16 +38,17 @@
 		</div>
 		@endif
 		@foreach($orders as $order)
+		<?php
+			$variation = $order->product->variations()->find($order->variation_id);
+			$images = explode(',', $variation->images);
+		?>
 		<div class="shopping-order-box">
 			<div class="row">
 				<div class="col-md-3">
-					<span class="timetitle btimes"><a href="{{ \Cloudder::secureShow($order->product->thumb_image) }}"><img class="track-img-thumb" src="{{ \Cloudder::secureShow($order->product->thumb_image) }}" alt="{{ $order->product->name }}" width="72" height="72"></a></span>
+					<span class="timetitle btimes"><a href="{{ \Cloudder::secureShow($images[0]) }}"><img class="track-img-thumb" src="{{ \Cloudder::secureShow($images[0]) }}" alt="{{ $order->product->name }}" width="72" height="72"></a></span>
 				</div>
 				<div class="col-md-3">
 					<!-- <span class="timetitle atimes"><a href="/product/"></a></span><p><br></p> -->
-					<?php
-					$variation = $order->product->variations()->find($order->variation_id);
-					?>
 					<span class="bus-order-location">Size : {{ $variation->size->name }}</span><p><br></p><a href="javascript:void(0);" target="_blank" class="btn btn-cart btn-xs black-text">GET INVOICE<div class="ripple-wrapper"></div></a>
 				</div>
 				<div class="col-md-3 text-center">

@@ -100,7 +100,7 @@
     border: 1px solid #cecece;
 }
 .varselected {
-    background: #a74b86!important;
+    background: #d0a65e!important;
     padding: 6px 12px;
     font-weight: 800;
     color: #fff!important;
@@ -113,7 +113,7 @@
     border: 1px solid #cecece;
 }
 .colorSelected {
-    background: #ff9b05 !important;
+    background: #d0a65e !important;
     padding: 6px 12px;
     font-weight: 800;
     color: #fff!important;

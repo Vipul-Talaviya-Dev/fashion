@@ -77,4 +77,9 @@ class User extends Authenticatable
     {
         return $query->where('users.status', self::INACTIVE);
     }
+
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
 }

@@ -104,6 +104,7 @@ $(document).ready(function() {
         $(".has-error").remove();
         var b = $(".email").val();
         var a = $(".password").val();
+        var r = $(".redirect").val();
         var t = $('meta[name="csrf-token"]').attr('content');
         var c = false;
         if (b == "") {
@@ -131,7 +132,11 @@ $(document).ready(function() {
                     }
                     if(res.status == true) {
                         toastr.success(res.success);
-                        page_redirect('/my-account');
+                        if(r) {
+                            page_redirect(r);
+                        } else {
+                            page_redirect('/my-account');
+                        }
                     }
                 }
             });
@@ -144,6 +149,7 @@ $(document).ready(function() {
         var a = $(".signupPassword").val();
         var cP = $(".confirmPassword").val();
         var n = $(".signupName").val();
+        var r = $(".redirect").val();
         var t = $('meta[name="csrf-token"]').attr('content');
         var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         var mobile_no_reg = /^[789][0-9]{9}$/;
@@ -197,6 +203,7 @@ $(document).ready(function() {
      $("body").on("click", "#otpBtn", function() {
         $(".has-error").remove();
         var n = $(".otp").val();
+        var r = $(".redirect").val();
         var t = $('meta[name="csrf-token"]').attr('content');
         var b = false;
         if (n == "") {
@@ -220,7 +227,11 @@ $(document).ready(function() {
                     }
                     if(res.status == true) {
                         toastr.success(res.success);
-                        page_redirect('/my-account');
+                        if(r) {
+                            page_redirect(r);
+                        } else {
+                            page_redirect('/my-account');
+                        }
                     }
                 }
             });

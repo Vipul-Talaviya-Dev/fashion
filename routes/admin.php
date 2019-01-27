@@ -79,6 +79,9 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
         Route::get('orders', 'OrderController@index')->name('orders');
         Route::get('order/{id}/detail', 'OrderController@orderDetail')->name('orderDetail');
         Route::get('order/{id}/invoice', 'OrderController@invoice')->name('invoice');
+
+        // User
+        Route::get('users', 'OrderController@users')->name('users');
     });
 });
 

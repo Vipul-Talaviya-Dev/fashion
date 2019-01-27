@@ -16,6 +16,12 @@
 	    color: #fff;
 	    background:#fff;
 	}
+	.modal-header {
+	    padding: 1em 1em 0;	
+	}
+	.close {
+	    font-size: 2em;
+	}
 </style>
 @endsection
 @section('content')
@@ -72,7 +78,7 @@
 						@if($colorVariations)
 							@foreach($colorVariations as $colorVariation)
 								<li>
-									<a href="javascript:void(0);" class="btn varbtn colorVariation" data-col="{{ $colorVariation->color_id }}"><span style="background: {{ $colorVariation->color->code  }}"></span> {{ $colorVariation->color->name }}</a>
+									<a href="{{ $url.'/'.base64_encode($colorVariation->id).'/'.str_random(25) }}" class="btn varbtn {{ $variation->color_id == $colorVariation->color->id ? 'colorSelected' : '' }}" data-col="{{ $colorVariation->color_id }}"><span style="background: {{ $colorVariation->color->code  }}"></span> {{ $colorVariation->color->name }}</a>
 								</li>
 							@endforeach
 						@endif
@@ -99,6 +105,9 @@
 					?>	
 				</div>
 				<div class="clearfix"> </div>
+				<p><br></p>
+				<a href="javascript:void(0);" data-toggle="modal" data-target="#chart">Chart</a>
+				<p><br></p>
 			</div>
 			<div class="simpleCart_shelfItem">
 				<p>Rs. <i class="item_price">{{ $variation->price }}</i></p>
@@ -267,6 +276,20 @@
 			</ul>
 		</div>
 	</div>
+<!-- Modal -->
+<div id="chart" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Chart <a type="button" class="close" data-dismiss="modal">&times;</a></h4>
+      </div><hr>
+      <div class="modal-body">{!! $product->chart !!}</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 
 @section('js')

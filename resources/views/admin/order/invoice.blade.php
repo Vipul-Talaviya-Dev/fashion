@@ -15,8 +15,7 @@
     <div id="container">
       <section id="memo">
         <div class="logo">
-          <h1>Logo</h1>
-          <!-- <img data-logo="{company_logo}" /> -->
+          <img src="/front/images/logo.png" alt="Fashion" class="img-responsive" />
         </div>
         <!-- <div class="company-info">
           <div>{company_name}</div>

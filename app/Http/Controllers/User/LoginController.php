@@ -12,6 +12,11 @@ use Illuminate\Validation\Rule;
 
 class LoginController extends Controller
 {
+    public function loginForm() 
+    {
+        return view('user.login');
+    }
+
     public function login(Request $request)
     {
         if (!$user = User::where('email', $request->get('email'))->first()) {
@@ -40,7 +45,7 @@ class LoginController extends Controller
     {
         $rules = array(
             'name' => 'required',
-            'mobile' => 'required|unique:users,mobile',
+            'mobile' => 'required|numeric|min:10',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
         );

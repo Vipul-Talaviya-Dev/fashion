@@ -27,21 +27,42 @@ class ProductController extends Controller
 
     public function productDetail($mainCategory, $subCategory, $thirdCategory, $productUrl, Request $request)
     {
-    	// Session::flush('cart');
-    	// Session::forget('cart');
-    	if(!$product = Product::with(['variations.color', 'variations.size'])->where('slug', $productUrl)->first()) {
+        // Session::flush('cart');
+        // Session::forget('cart');
+        if(!$product = Product::with(['variations.color', 'variations.size'])->where('slug', $productUrl)->first()) {
+            return redirect()->back();
+        }
+
+        $categoryIds = Category::whereIn('slug', [$subCategory, $thirdCategory])->get()->pluck('id')->toArray();
+        $relatedProducts = Product::with(['variation', 'category'])->whereIn('category_id', $categoryIds)->inRandomOrder()->limit(15)->get();
+
+        return view('user.product-detail', [
+            'product' => $product,
+            'variation' => $product->variation,
+            'colorVariations' => Variation::with(['color'])->where('product_id', $product->id)->groupBy('color_id')->get(),
+            'sizeVariations' => Variation::with(['size'])->where('color_id', $product->variation->color_id)->where('product_id', $product->id)->get(),
+            'relatedProducts' => $relatedProducts,
+            'url' => '/shop/'.$mainCategory.'/'.$subCategory.'/'.$thirdCategory.'/'.$productUrl
+        ]);
+    }
+    
+    public function productDetailWithColor($mainCategory, $subCategory, $thirdCategory, $productUrl, $id, $code, Request $request)
+    {
+    	if(!$product = Product::with(['variation.color', 'variation.size'])->where('slug', $productUrl)->first()) {
     		return redirect()->back();
     	}
-
+        $variation = $product->variations()->find(base64_decode($id));
+        
     	$categoryIds = Category::whereIn('slug', [$subCategory, $thirdCategory])->get()->pluck('id')->toArray();
     	$relatedProducts = Product::with(['variation', 'category'])->whereIn('category_id', $categoryIds)->inRandomOrder()->limit(15)->get();
 
     	return view('user.product-detail', [
     		'product' => $product,
-            'variation' => $product->variation,
+            'variation' => $variation,
             'colorVariations' => Variation::with(['color'])->where('product_id', $product->id)->groupBy('color_id')->get(),
-            'sizeVariations' => Variation::with(['size'])->where('color_id', $product->variation->color_id)->where('product_id', $product->id)->get(),
-    		'relatedProducts' => $relatedProducts
+            'sizeVariations' => Variation::with(['size'])->where('color_id', $variation->color_id)->where('product_id', $product->id)->get(),
+    		'relatedProducts' => $relatedProducts,
+            'url' => '/shop/'.$mainCategory.'/'.$subCategory.'/'.$thirdCategory.'/'.$productUrl
     	]);
     }
 
@@ -143,8 +164,14 @@ class ProductController extends Controller
     	if(Session::get('order') == null) {
     		return redirect(route('user.index'));
     	}
-
-    	return view('user.order-shipping');
+        Session::put('redirect', route('user.orderShipping'));
+        if (!\Auth::check()) {
+            return redirect(route('user.loginForm'));
+        }
+        $user = Auth::user();
+    	return view('user.order-shipping', [
+            'address' => $user->address
+        ]);
     }
 
     public function shippingDetail(Request $request)
@@ -152,10 +179,14 @@ class ProductController extends Controller
     	if(Session::get('order') == null) {
     		return redirect(route('user.index'));
     	}
+        $user = Auth::user();
+        
+        if($user->address) {
+            return redirect(route('user.payment'));
+        }
 
     	$this->validate($request, [
     		'name' => 'required',
-    		'email' => 'required|email',
     		'mobile' => 'required|numeric|digits_between:10,12',
     		'address' => 'required',
     		'pincode' => 'required|numeric|digits:6',
@@ -163,43 +194,18 @@ class ProductController extends Controller
     		'state' => 'required|alpha',
     		// 'country' => 'required|alpha',
     	]);
-
-    	if($user = User::where('email', $request->get('email'))->first()) {
-            $address = Address::create([
-                'user_id' => $user->id,
-                'name' => $request->get('name'),
-                'mobile' => $request->get('mobile'),
-                'address' => $request->get('address'),
-                'pincode' => $request->get('pincode'),
-                'city' => $request->get('city'),
-                'state' => $request->get('state'),
-                'country' => $request->get('country') ?: 'India',
-                'default' => 1,
-            ]);
-    		Auth::login($user);
-    	} else {
-	    	$user = User::create([
-	    		'name' => $request->get('name'),
-	    		'email' => $request->get('email'),
-	    		'mobile' => $request->get('mobile'),
-	    		'password' => \Hash::make('123456'),
-	    		'referral_code' => User::referralCode(),
-	    	]);
-
-	    	$address = Address::create([
-	    		'user_id' => $user->id,
-	    		'name' => $request->get('name'),
-	    		'mobile' => $request->get('mobile'),
-	    		'address' => $request->get('address'),
-	    		'pincode' => $request->get('pincode'),
-	    		'city' => $request->get('city'),
-	    		'state' => $request->get('state'),
-	    		'country' => $request->get('country') ?: 'India',
-	    		'default' => 1,
-	    	]);
-
-	    	Auth::login(User::find($user->id));
-    	}
+        
+    	$address = Address::create([
+    		'user_id' => $user->id,
+    		'name' => $request->get('name'),
+    		'mobile' => $request->get('mobile'),
+    		'address' => $request->get('address'),
+    		'pincode' => $request->get('pincode'),
+    		'city' => $request->get('city'),
+    		'state' => $request->get('state'),
+    		'country' => $request->get('country') ?: 'India',
+    		'default' => 1,
+        ]);
 
     	return redirect(route('user.payment'));
     }
