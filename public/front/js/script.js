@@ -200,7 +200,7 @@ $(document).ready(function() {
         }
     });
      
-     $("body").on("click", "#otpBtn", function() {
+    $("body").on("click", "#otpBtn", function() {
         $(".has-error").remove();
         var n = $(".otp").val();
         var r = $(".redirect").val();
@@ -238,4 +238,43 @@ $(document).ready(function() {
         }
     });
 
+    // Address Add
+    $("body").on("click", ".createAddress", function() {
+        $(".has-error").remove();
+        var n = $("input[name='name']").val();
+        var m = $("input[name='mobile']").val();
+        var p = $("input[name='pincode']").val();
+        var c = $("input[name='city']").val();
+        var s = $("input[name='state']").val();
+        var a = $("textarea[name='address']").val();
+        var r = $(".redirect").val();
+        var t = $('meta[name="csrf-token"]').attr('content');
+        var b = false;
+        if (n == "" || m == "" || p == "" || c == "" || s == "" || a == "" || r == "") {
+            alert('Kindly All Field Required!');
+            b = true;
+        }
+        if(b == false) {
+            show_loader();
+            $.ajax({
+                url: "/create-address",
+                headers: {
+                    'X-CSRF-TOKEN': t
+                },
+                dataType: "json",
+                type: "POST",
+                data: {"name": n, "mobile": m, "address": a, "pincode": p, "city": c, "state": s},
+                success: function(res) {
+                    hide_loader();
+                    if(res.status == false) {
+                        toastr.warning(res.error);
+                    }
+                    if(res.status == true) {
+                        toastr.success(res.success);
+                        location.reload();
+                    }
+                }
+            });
+        }
+    });
  });

@@ -16,6 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->integer('address_id')->unsigned();
             $table->integer('voucher_id')->nullable()->unsigned();
             $table->integer('offer_id')->nullable()->unsigned();
             $table->tinyInteger('payment_mode')->default(1)->comment("1: COD, 2: DebitCard, 3: Net Banking");
@@ -29,6 +30,7 @@ class CreateOrdersTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('address_id')->references('id')->on('addresses');
             $table->foreign('voucher_id')->references('id')->on('vouchers');
             $table->foreign('offer_id')->references('id')->on('offers');
         });

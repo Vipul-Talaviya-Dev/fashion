@@ -45,7 +45,7 @@
 		<div class="shopping-order-box">
 			<div class="row">
 				<div class="col-md-3">
-					<span class="timetitle btimes"><a href="{{ \Cloudder::secureShow($images[0]) }}"><img class="track-img-thumb" src="{{ \Cloudder::secureShow($images[0]) }}" alt="{{ $order->product->name }}" width="72" height="72"></a></span>
+					<span class="timetitle btimes"><a href="javascript:void(0);"><img class="track-img-thumb" src="{{ \Cloudder::secureShow($images[0]) }}" alt="{{ $order->product->name }}" width="72" height="72"></a></span>
 				</div>
 				<div class="col-md-3">
 					<!-- <span class="timetitle atimes"><a href="/product/"></a></span><p><br></p> -->

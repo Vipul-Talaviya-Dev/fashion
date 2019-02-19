@@ -2,83 +2,60 @@
 
 @section('title', 'Order Shipping')
 
+@section('css')
+<style type="text/css">
+.modal-title {
+	padding-left: 0; 
+}
+.modal-header {
+	min-height: 16.42857143px;
+	padding: 15px;
+	border-bottom: 1px solid #e5e5e5;
+}
+.modal button.close {
+	width: auto; 
+	margin-top: -12px;
+}
+</style>
+@endsection
 @section('content')
 <hr>
 <div class="col-md-12 col-sm-12 col-xs-12">
 	<form action="{{ route('user.shippingDetail') }}" method="post">
 		{{ csrf_field() }}
-		<div class="col-md-8 col-sm-6 col-xs-12 order-boxos pck-box-shadow">
+		<div class="col-md-8 col-sm-6 col-xs-12 order-boxos">
 			<div class="">
-				<div class="panel-heading">Shipping Detail</div>
+				<div class="panel-heading">Your Address Details</div>
 				<div class="panel-body">
-					@if($address)
-					<div class="col-xs-6 col-sm-3 col-md-3 item">
-						<div class="thumbnail">
-							<div class="caption">
-								<h6>{{ $address->name }}</h6>
-								<p>{{ $address->address }}, {{ $address->city }} - {{ $address->pincode }}, {{ $address->state }}, {{ $address->country }}</p>
-								<h6>{{ $address->mobile }}</h6>
+					@foreach($addresses as $address)
+						<div class="col-md-6">
+							<div class="notification-area">
+								<div class="info-box">
+									<p>
+										<b class="black-text">{{ $address->name }}</b><br><br>
+										{{ $address->address }}<br>
+										{{ $address->city }} - {{ $address->pincode }},<br>{{ $address->state }}, {{ $address->country }}<br>
+										Phone: <span class="black-text">{{ $address->mobile }}</span><br>
+									</p>
+								</div>
+								<div class="add-box-footer">
+									<label>
+										<input type="radio" name="addressOption" id="selectAddress" value="{{ $address->id }}">
+										Select <b class="black-text">Home</b> Address
+									</label>
+									<span class="pull-right">
+										<a href="javascript:void(0)" class="dlt-thrush delete_address" data-add="{{ $address->id }}"><i class="fa fa-trash-o"></i> Delete </a>
+									</span>
+								</div>
 							</div>
 						</div>
-					</div>
-					@else
-						<div class="form-group col-md-4 {{ $errors->has('name') ? 'has-error' : ''  }}">
-							<label>Name :</label>
-							<input type="text" name="name" class="form-control" autocomplete="off" value="{{ old('name') }}" required>
-							@foreach($errors->get('name') as $error)
-							<span style="color: red;">{{$error}}</span>
-							@endforeach
-						</div>
-						<div class="form-group col-md-4 {{ $errors->has('mobile') ? 'has-error' : ''  }}">
-							<label>Mobile :</label>
-							<input type="number" name="mobile" class="form-control" value="{{ old('mobile') }}" autocomplete="off" required>
-							@foreach($errors->get('mobile') as $error)
-							<span style="color: red;">{{$error}}</span>
-							@endforeach
-						</div>
-						<div class="form-group col-md-4 {{ $errors->has('pincode') ? 'has-error' : ''  }}">
-							<label>pinCode :</label>
-							<input type="number" name="pincode" class="form-control" autocomplete="off" value="{{ old('pincode') }}" required>
-							@foreach($errors->get('pincode') as $error)
-							<span style="color: red;">{{$error}}</span>
-							@endforeach
-						</div>
-						<div class="form-group col-md-4 {{ $errors->has('city') ? 'has-error' : ''  }}">
-							<label>City :</label>
-							<input type="text" name="city" class="form-control" autocomplete="off" value="{{ old('city') }}" required>
-							@foreach($errors->get('city') as $error)
-							<span style="color: red;">{{$error}}</span>
-							@endforeach
-						</div>
-						<div class="form-group col-md-4 {{ $errors->has('state') ? 'has-error' : ''  }}">
-							<label>State :</label>
-							<input type="text" name="state" class="form-control" autocomplete="off" value="{{ old('state') }}" required>
-							@foreach($errors->get('state') as $error)
-							<span style="color: red;">{{$error}}</span>
-							@endforeach
-						</div>
-						<div class="form-group col-md-4 {{ $errors->has('address') ? 'has-error' : ''  }}">
-							<label>Address :</label>
-							<textarea name="address" class="form-control" rows="5" placeholder="Enter Address (Plot no. / House No. , Street, Society, Area, Etc)" autocomplete="off" required>{{ old('address') }}</textarea>
-							@foreach($errors->get('address') as $error)
-							<span style="color: red;">{{$error}}</span>
-							@endforeach
-						</div>
-						@if(false)
-						<div class="form-group col-md-4 {{ $errors->has('country') ? 'has-error' : ''  }}">
-							<label>Country :</label>
-							<input type="text" name="country" class="form-control" autocomplete="off" value="{{ old('country') }}" required>
-							@foreach($errors->get('country') as $error)
-							<span style="color: red;">{{$error}}</span>
-							@endforeach
-						</div>
-						@endif
-					@endif
+					@endforeach
 					<!-- <div class="col-md-12 col-sm-12 col-xs-12">
 						<button type="submit" class="btn btn-default">Submit</button>
 					</div> -->
 				</div>
 				<p><br></p>
+				<button style="margin-left: 47px;" type="button" class="btn btn-success addAdddress"><i class="fa fa-plus"></i> Add New Address<div class="ripple-wrapper"></div></button>
 			</div>
 		</div>
 		<div class="col-md-4 col-sm-6 col-xs-12">
@@ -139,8 +116,61 @@
 		</div>
 	</form>
 </div>
+<div class="col-md-12 col-sm-12 col-xs-12"><p><br></p></div>
+<hr>
+<!-- Address -->
+<div id="myModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content" style="width: 50%;margin-left: 30%;">
+			<div class="modal-header">
+				<h4 class="modal-title">
+					Add New Address
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="form-group">
+						<label>Name :</label>
+						<input type="text" name="name" class="form-control name" autocomplete="off" value="{{ old('name') }}" required>
+					</div>
+					<div class="form-group">
+						<label>Mobile :</label>
+						<input type="number" name="mobile" class="form-control mobile" value="{{ old('mobile') }}" autocomplete="off" required>
+					</div>
+					<div class="form-group">
+						<label>pinCode :</label>
+						<input type="number" name="pincode" class="form-control pincode" autocomplete="off" value="{{ old('pincode') }}" required>
+					</div>
+					<div class="form-group">
+						<label>City :</label>
+						<input type="text" name="city" class="form-control city" autocomplete="off" value="{{ old('city') }}" required>
+					</div>
+					<div class="form-group">
+						<label>State :</label>
+						<input type="text" name="state" class="form-control state" autocomplete="off" value="{{ old('state') }}" required>
+					</div>
+					<div class="form-group">
+						<label>Address :</label>
+						<textarea name="address" class="form-control address" rows="5" placeholder="Enter Address (Plot no. / House No. , Street, Society, Area, Etc)" autocomplete="off" required>{{ old('address') }}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default createAddress">Submit</button>
+			</div>
+		</div>
 
+	</div>
+</div>
 @endsection
-@section('js')
 
+@section('js')
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('body').on('click', '.addAdddress', function() {
+			$('#myModal').modal();
+		});
+	});
+</script>
 @endsection

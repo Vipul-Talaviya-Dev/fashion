@@ -169,8 +169,9 @@ class ProductController extends Controller
             return redirect(route('user.loginForm'));
         }
         $user = Auth::user();
+
     	return view('user.order-shipping', [
-            'address' => $user->address
+            'addresses' => $user->addresses
         ]);
     }
 
@@ -181,32 +182,11 @@ class ProductController extends Controller
     	}
         $user = Auth::user();
         
-        if($user->address) {
-            return redirect(route('user.payment'));
+        if($request->get('addressOption') == "") {
+            return redirect()->back()->with(['error' => 'Select Your Address...']);
         }
 
-    	$this->validate($request, [
-    		'name' => 'required',
-    		'mobile' => 'required|numeric|digits_between:10,12',
-    		'address' => 'required',
-    		'pincode' => 'required|numeric|digits:6',
-    		'city' => 'required|alpha',
-    		'state' => 'required|alpha',
-    		// 'country' => 'required|alpha',
-    	]);
-        
-    	$address = Address::create([
-    		'user_id' => $user->id,
-    		'name' => $request->get('name'),
-    		'mobile' => $request->get('mobile'),
-    		'address' => $request->get('address'),
-    		'pincode' => $request->get('pincode'),
-    		'city' => $request->get('city'),
-    		'state' => $request->get('state'),
-    		'country' => $request->get('country') ?: 'India',
-    		'default' => 1,
-        ]);
-
+        Session::put('addressId', $request->get('addressOption'));
     	return redirect(route('user.payment'));
     }
 
@@ -216,7 +196,8 @@ class ProductController extends Controller
     		return redirect(route('user.index'));
     	}
     	$user = Auth::user();
-    	$address = Address::where('user_id', $user->id)->first();
+    	$address = $user->addresses()->find(Session::get('addressId'));
+
     	return view('user.payment', [
     		'user' => $user,
     		'address' => $address,
@@ -233,6 +214,7 @@ class ProductController extends Controller
 
         $order = new Order;
         $order->user_id = $user->id;
+        $order->address_id = Session::get('addressId');
         if(Session::get('voucher')) {
         	$order->voucher_id = Session::get('voucher');
         }
@@ -272,7 +254,8 @@ class ProductController extends Controller
     	Session::forget('cart');
     	Session::forget('order');
     	Session::forget('voucher');
-    	Session::forget('offer');
+        Session::forget('offer');
+    	Session::forget('addressId');
 
     	Session::put('orderId', $orderId);
         return redirect(route('user.thanks'));
@@ -285,7 +268,7 @@ class ProductController extends Controller
     	}
         $order = Order::with(['orderProducts.product.variations'])->find(Session::get('orderId'));
         $user = Auth::user();
-        $address = Address::where('user_id', $user->id)->first();
+        $address = $user->addresses()->find($order->address_id);
 
         Mail::send('user.email.order-place', [
             'order' => $order,

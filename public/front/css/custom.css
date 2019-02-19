@@ -353,3 +353,19 @@
 /**
  * Home Page End
  */
+
+.notification-area {
+    border: 1px solid #eee;
+}
+.info-box {
+    padding: 20px 15px;
+    color: #9e9e9e;
+}
+.info-box p {
+    font-size: 1.167em;
+}
+.add-box-footer {
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border-top: 0;
+}
