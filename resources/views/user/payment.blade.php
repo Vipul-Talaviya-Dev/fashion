@@ -48,7 +48,7 @@
 			<section id="content" class="gray-area">
 				<div class="container">
 					<div class="row">
-						<div class="row bs-wizard" style="border-bottom:0;">
+						<!-- <div class="row bs-wizard" style="border-bottom:0;">
 							<div class="col-xs-4 bs-wizard-step complete">
 								<div class="text-center bs-wizard-stepnum">Step 1</div>
 								<div class="progress"><div class="progress-bar"></div></div>
@@ -67,7 +67,7 @@
 								<a href="#" class="bs-wizard-dot"></a>
 								<div class="bs-wizard-info text-center">Order Place</div>
 							</div>
-						</div>
+						</div> -->
 						<!-- Shopping Cart Details-->
 						<div class="col-md-7">
 							<div class="pck-box pck-box-shadow">
@@ -120,21 +120,13 @@
 								<div class="panel-collapse collapse in" id="promotional">
 									<div class="panel-body">
 										<div class="row">
-											<div class="col-md-6">
-												<label style="margin-top: 7px;">Enter Gift Voucher (?)</label>
+											<div class="col-md-10">
+												<label style="margin-top: 7px;">Enter MemberShip Code (?)</label>
 												<div class="input-group">
 													<input class="pck-input adv gift_voucher_data" type="text" autocomplete="off">
 													<span class="input-group-btn"><button type="button" class="btn btn-danger apply_gift_voucher">Apply</button></span>
 												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="radio radio-inline checked">
-													<label><input type="radio" name="offer_type" value="2" checked=""><span class="circle"></span><span class="check"></span> Coupon Code</label>
-												</div>
-												<div class="input-group">
-													<input class="pck-input adv offer_value" type="text" autocomplete="off" placeholder="Enter Coupon Code">
-													<span class="input-group-btn"><button type="button" class="btn btn-warning apply_offer">Apply</button></span>
-												</div>
+												<span style="display: block;"><b>Note:</b> You Will Purchase (Rs. 2000/-) Up Shopping to get discount.</span>
 											</div>
 										</div>
 
@@ -148,6 +140,7 @@
 										<div class="info-box">
 											<p><b>{{ $address->name }}</b><br><br>
 												{{ $address->address }}<br>
+												{{ $address->address_1 }}<br>
 												{{ $address->city }} - {{ $address->pincode }}, {{ $address->state }}<br>Phone: {{ $address->mobile }}<br>
 											</p>
 										</div>
@@ -165,11 +158,10 @@
 								<div class="panel-collapse collapse in" id="collapse-2">
 									<div class="panel-body">
 										<!-- Credit Card -->
-										@if(false)
 										<div class="radio radio-danger">
 											<label><input type="radio" class="payment_option" name="payment_option" value="101"><span class="circle"></span><span class="check"></span> Credit Card</label>
 											<ul class="payment_card_img">
-												<li><img src="https://tymkpck001.s3.amazonaws.com/assets/images/discover-curved-32px.png"></li><li><img src="https://tymkpck001.s3.amazonaws.com/assets/images/american-express-curved-32px.png"></li><li><img src="https://tymkpck001.s3.amazonaws.com/assets/images/mastercard-curved-32px.png"></li><li><img src="https://tymkpck001.s3.amazonaws.com/assets/images/visa-curved-32px.png"></li>
+												<li><img src="/front/images/discover-curved-32px.png"></li><li><img src="/front/images/american-express-curved-32px.png"></li><li><img src="/front/images/mastercard-curved-32px.png"></li><li><img src="/front/images/visa-curved-32px.png"></li>
 											</ul>
 										</div>
 										<br>
@@ -179,7 +171,7 @@
 										<div class="radio radio-danger">
 											<label><input type="radio" class="payment_option" name="payment_option" value="102"><span class="circle"></span><span class="check"></span> Debit Card</label>
 											<ul class="payment_card_img">
-												<li><img src="https://tymkpck001.s3.amazonaws.com/assets/images/rupay-curved-32px.png"></li><li><img src="https://tymkpck001.s3.amazonaws.com/assets/images/maestro-curved-32px.png"></li><li><img src="https://tymkpck001.s3.amazonaws.com/assets/images/mastercard-curved-32px.png"></li><li><img src="https://tymkpck001.s3.amazonaws.com/assets/images/visa-curved-32px.png"></li>
+												<li><img src="/front/images/rupay-curved-32px.png"></li><li><img src="/front/images/maestro-curved-32px.png"></li><li><img src="/front/images/mastercard-curved-32px.png"></li><li><img src="/front/images/visa-curved-32px.png"></li>
 											</ul>
 										</div>
 										<hr>
@@ -188,8 +180,8 @@
 											<a class="pull-right label label-success" data-style="toast" data-content="This is a toast! Lorem lipsum dolor sit amet..." data-toggle="snackbar" data-timeout="0">Details</a>
 										</div><hr>
 										<div class="radio radio-danger">
-											<label><input type="radio" class="payment_option" name="payment_option" value="501"><span class="circle"></span><span class="check"></span> Cash On Delivery</label>
-											<button class="btn btn-danger btn-xs pull-right cod_place_btn" type="submit" name="PLACE_ORDER" style="    margin-top: -25px;">Place Order</button>
+											<label><input type="radio" class="payment_option" name="payment_option" value="1"><span class="circle"></span><span class="check"></span> Cash On Delivery</label>
+											<button class="btn btn-danger btn-xs pull-right cod_place_btn" type="submit" name="PLACE_ORDER" >Place Order</button>
 										</div><hr>
 										<div class="radio radio-danger">
 											<label><input type="radio" class="payment_option" name="payment_option" value="104"><span class="circle"></span><span class="check"></span> EMI Option</label>
@@ -197,11 +189,10 @@
 										<div class="radio radio-danger">
 											<label><input type="radio" class="payment_option" name="payment_option" value="107"><span class="circle"></span><span class="check"></span> UPI</label>
 										</div>
-										<hr>
-										@endif
-										<div class="radio radio-danger">
+										<!-- <hr> -->
+										<!-- <div class="radio radio-danger">
 											<label><input type="radio" class="payment_option" name="payment_option" value="1" checked><span class="circle"></span><span class="check"></span> Order Place</label>
-										</div>
+										</div> -->
 									</div>
 								</div>
 							</div>

@@ -2,6 +2,10 @@
 
 @section('title', 'Online Shopping')
 
+@section('css')
+<link href="/front/css/slick.css" rel="stylesheet" type="text/css" property="" media="all" />
+@endsection
+
 @section('content')
 <!-- banner -->
 <div class="">
@@ -9,18 +13,14 @@
 		<ul id="banner">			
 			@foreach($banners as $banner)
 				<li title="{{ $banner->name }}" style="padding: 0px;">
-					<img src="{{ \Cloudder::secureShow($banner->image) }}" alt="{{ $banner->name }}" class="img-responsive" />
+          <a href="{{ $banner->url }}">
+  					<img src="{{ \Cloudder::secureShow($banner->image) }}" alt="{{ $banner->name }}" class="img-responsive" />
+          </a>
 				</li>
 			@endforeach
 		</ul>
 	</div>
 </div>
-<!-- <div class="banner" id="home1">
-	<div class="container">
-		<h3>fashions fade, <span>style is eternal</span></h3>
-	</div>
-</div> -->
-<!-- //banner -->
 
 <!-- special-deals -->
 <section class="banner-home-bottom text-center">  
@@ -163,46 +163,17 @@
 
 @section('js')
 <script src="/front/js/script.js" type="text/javascript"></script>
-<script src="/front/js/jquery.flexisel.js" type="text/javascript"></script>
+<script src="/front/js/slick.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        // $('.example1').wmuSlider(); // wmuSlider
-    });
-    // jquery.flexisel.js 
     $(window).load(function() {
-    	$("#brands").flexisel({
-    		visibleItems: 4,
-    		animationSpeed: 1000,
-    		autoPlay: true,
-    		autoPlaySpeed: 3000,            
-    		pauseOnHover: true,
-    		enableResponsiveBreakpoints: true,
-    		responsiveBreakpoints: { 
-    			portrait: { 
-    				changePoint:480,
-    				visibleItems: 1
-    			}, 
-    			landscape: { 
-    				changePoint:640,
-    				visibleItems:2
-    			},
-    			tablet: { 
-    				changePoint:768,
-    				visibleItems: 3
-    			}
-    		}
-    	});
-    	$("#banner").flexisel({
-    		visibleItems: 1,
-    		animationSpeed: 1000,
-    		autoPlay: true,
-    		autoPlaySpeed: 5000,            
-    		pauseOnHover: false,
-    		enableResponsiveBreakpoints: true,
-    	});
-
-    	$(".bannerImg").find(".nbs-flexisel-nav-left").remove();
-    	$(".bannerImg").find(".nbs-flexisel-nav-right").remove();
+      $('#banner').slick({
+        dots: false,
+        infinite: false,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        prevArrow: false,
+        nextArrow: false
+      });
     });
 </script>
 @endsection

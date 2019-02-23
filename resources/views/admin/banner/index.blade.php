@@ -19,22 +19,17 @@
                 <!-- Traffic sources -->
                 <div class="panel panel-flat">
                     <div class="panel-heading">
-                        <h1 class="panel-title">Banners</h1>
+                        <h1 class="panel-title">
+                            <span>Banners</span>
+                            <a href="{{ route('admin.banner.add') }}">
+                                <button class="btn btn-block-group pull-right" style="margin-right: 40px; margin-top: 20px;"><i class="icon-plus22 position-left"></i>ADD Banner </button>
+                            </a>
+                        </h1>
                     </div>
                     <hr/>
-                    <div class="container-fluid">
-                        <a href="{{ route('admin.banner.add') }}">
-                            <button class="btn btn-block-group pull-right" style="margin-right: 40px; margin-top: 20px;"><i class="icon-plus22 position-left"></i>ADD Banner </button>
-                        </a>
-                        <div class="content">
-                            <div class="panel panel-flat">
-                                <form class="form-horizontal">
-                                    <div class="col-md-6" style="margin-top: 20px;">
-                                        <input type="text" class="form-control" name="search"
-                                               value="{{ request()->get('search') }}" placeholder="Search" autocomplete="off">
-                                    </div>
-                                    <div class="col-md-1"><a href="{{ route('admin.banners') }}" class="btn btn-labeled btn-rounded btn-info" style="margin-top: 20px;"><b><i class="icon-reset"></i></b> Rrefresh</a></div>
-                                </form>
+                    <div class="">
+                        <div class="panel panel-flat">
+                            <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                     <tr>
@@ -76,14 +71,13 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="pull-right">
-                                {!! $banners->render() !!}
-                            </div>
+                        </div>
+                        <div class="pull-right">
+                            {!! $banners->render() !!}
                         </div>
                     </div>
                 </div>
             </div>
-            {{--vfsdf--}}
         </div>
         <!-- /content area -->
 

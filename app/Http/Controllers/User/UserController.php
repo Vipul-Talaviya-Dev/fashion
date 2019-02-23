@@ -19,7 +19,9 @@ class UserController extends Controller
     	$user = Auth::user();
     	$orders = OrderProduct::latest()->with(['product.variations'])->where('user_id', $user->id)->get();
     	return view('user.my-account', [
-    		'orders' => $orders
+    		'orders' => $orders,
+            'cart' => true,
+            'footer' => true
     	]);
     }
 
@@ -51,6 +53,7 @@ class UserController extends Controller
                 'name' => $request->get('name'),
                 'mobile' => $request->get('mobile'),
                 'address' => $request->get('address'),
+                'address_1' => $request->get('address1'),
                 'pincode' => $request->get('pincode'),
                 'city' => $request->get('city'),
                 'state' => $request->get('state'),

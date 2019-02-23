@@ -14,7 +14,10 @@ class LoginController extends Controller
 {
     public function loginForm() 
     {
-        return view('user.login');
+        return view('user.login', [
+            'cart' => true,
+            'footer' => true
+        ]);
     }
 
     public function login(Request $request)

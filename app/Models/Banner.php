@@ -28,12 +28,12 @@ class Banner extends Model
     public function scopeActive($query)
     {
         /** @var self $query */
-        return $query->where('stores.status',self::ACTIVE);
+        return $query->where('banners.status',self::ACTIVE);
     }
 
     public function scopeInActive($query)
     {
         /** @var self $query */
-        return $query->where('stores.status', self::INACTIVE);
+        return $query->where('banners.status', self::INACTIVE);
     }
 }

@@ -24,7 +24,9 @@ class HomeController extends Controller
     	
         return view('user.index', [
         	'windowImages' => $images,
-            'banners' => Banner::latest()->get()
+            'banners' => Banner::latest()->active()->get(),
+            'cart' => false,
+            'footer' => true
         ]);
     }
 }

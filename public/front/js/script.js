@@ -38,7 +38,7 @@ $(document).ready(function() {
     $("body").on("click", ".item_add", function() {
         var p = $(".varselected").attr("data-product");
         var v = $(".varselected").attr("data-variation");
-        // var q = $(".qty").val();
+        var byNow = $(this).attr("data-byNow");
         if (typeof p === "undefined" || typeof v === "undefined") {
             toastr.warning("Select Size.");
             return false
@@ -54,20 +54,26 @@ $(document).ready(function() {
             $.ajax({
              type: 'GET',
              url: '/product/add/to/cart/item?product_id='+p+'&variation_id='+v,
-			    // data: {'product_id': p, 'variation_id': v },
 			    success: function (data) {
                  if (data.status) {
-                     $('.backetItem').html(data.totalItem);
+                    $('.backetItem').html(data.totalItem);
+                    $('.your-cart').html('');
+                    $(".your-cart").load('/carts');
+                    setTimeout(function myFunction() {
+                        $("#cartLoad").modal();
+                        $("#cartLoad").show();
+                        hide_loader();
+                    }, 3000);
                  } else {
                     toastr.warning(data.error);
                 }
-                hide_loader();
             }
         });
         }
     });
     // Remove Cart Item
     $("body").on("click", ".removeItem", function() {
+        $(".your-cart").html('');
     	var id = $(this).attr("data-id");
     	show_loader();
         $.ajaxSetup({
@@ -79,11 +85,37 @@ $(document).ready(function() {
           success: function (data) {
               if (data.status) {
                   $('.backetItem').html(data.totalItem);
-                  window.location.reload();
+                  $(".your-cart").load('/carts');
+                    setTimeout(function myFunction() {
+                        $('.modal-backdrop').remove();
+                        /*$(document).ajaxComplete(function() {
+                            $('#preloader').css('display','none');
+                        });*/
+                        $("#cartLoad").modal();
+                        $("#cartLoad").show();
+                        hide_loader();
+                    }, 4000);
               }
-              hide_loader();
+              // hide_loader();
           }
       });
+    });
+
+    $("body").on("click", ".cart-list", function() {
+        $(".your-cart").html('');
+        show_loader();
+        /*$.ajaxSetup ({
+            cache: false
+        });*/
+        $(".your-cart").load('/carts');
+        setTimeout(function myFunction() {
+            /*$(document).ajaxComplete(function() {
+                $('#preloader').css('display','none');
+            });*/
+            $("#cartLoad").modal();
+            $("#cartLoad").show();
+            hide_loader();
+        }, 3000);
     });
     /**
      * [Check Email on type]
@@ -142,13 +174,14 @@ $(document).ready(function() {
             });
         }
     });
-     $("body").on("click", "#signUp", function() {
+    $("body").on("click", "#signUp", function() {
         $(".has-error").remove();
         var c = $(".signupMobile").val();
         var d = $(".signupEmail").val();
         var a = $(".signupPassword").val();
         var cP = $(".confirmPassword").val();
-        var n = $(".signupName").val();
+        var fn = $(".fName").val();
+        var ln = $(".lName").val();
         var r = $(".redirect").val();
         var t = $('meta[name="csrf-token"]').attr('content');
         var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -170,8 +203,12 @@ $(document).ready(function() {
             $(".signupPassword").after('<span class="has-error">Enter Password</span>');
             b = true
         }
-        if (n == "") {
-            $(".signupName").after('<span class="has-error">Enter Name</span>');
+        if (fn == "") {
+            $(".fName").after('<span class="has-error">Enter First Name</span>');
+            b = true
+        }
+        if (ln == "") {
+            $(".lName").after('<span class="has-error">Enter Last Name</span>');
             b = true
         }
         if (b == false) {
@@ -184,7 +221,7 @@ $(document).ready(function() {
                 },
                 dataType: "json",
                 type: "POST",
-                data: {"name": n, "email": d, "password": a, "mobile": c},
+                data: {"name": fn+' '+ln, "email": d, "password": a, "mobile": c},
                 success: function(res) {
                     hide_loader();
                     if(res.status == false) {
@@ -246,7 +283,8 @@ $(document).ready(function() {
         var p = $("input[name='pincode']").val();
         var c = $("input[name='city']").val();
         var s = $("input[name='state']").val();
-        var a = $("textarea[name='address']").val();
+        var a = $("input[name='address']").val();
+        var a1 = $("input[name='address1']").val();
         var r = $(".redirect").val();
         var t = $('meta[name="csrf-token"]').attr('content');
         var b = false;
@@ -263,7 +301,7 @@ $(document).ready(function() {
                 },
                 dataType: "json",
                 type: "POST",
-                data: {"name": n, "mobile": m, "address": a, "pincode": p, "city": c, "state": s},
+                data: {"name": n, "mobile": m, "address": a, "address1": a1, "pincode": p, "city": c, "state": s},
                 success: function(res) {
                     hide_loader();
                     if(res.status == false) {
@@ -277,4 +315,65 @@ $(document).ready(function() {
             });
         }
     });
- });
+});
+
+$(document).ready(function () {
+    $("body").on("click", ".btn-number", function(e) {
+        e.preventDefault();
+        fieldName = $(this).attr('data-field');
+        type      = $(this).attr('data-type');
+        var input = $("input[name='"+fieldName+"']");
+        var price = document.getElementById('product_subtotal1'+fieldName).innerHTML;
+        var currentVal = parseInt(input.val());
+        if (!isNaN(currentVal)) {
+            if(type == 'minus') {
+                if(currentVal > input.attr('min')) {
+                    input.val(currentVal - 1).change();
+                    document.getElementById('product_subtotal'+fieldName).innerHTML = price *(currentVal - 1);
+                    $('.error-'+fieldName).remove();
+                } 
+                if(parseInt(input.val()) == input.attr('min')) {
+                    $('.error-'+fieldName).remove();
+                    $(this).attr('disabled', true);
+                }
+
+            } else if (type == 'plus') {
+                if(currentVal < input.attr('max')) {
+                    input.val(currentVal + 1).change();
+                    document.getElementById('product_subtotal'+fieldName).innerHTML = price *(currentVal + 1);
+                }
+                if(parseInt(input.val()) == input.attr('max')) {
+                    $('.error-'+fieldName).remove();
+                    $('.max-qty-reach-'+fieldName).after('<span class="input-error error-'+fieldName+'" style="color: red;">Max Quantity Reach</span>');
+                    $(this).attr('disabled', true);
+                }
+            }
+        } else {
+            input.val(0);
+        }
+        //total of selling price
+        var sum = 0;
+        $('.sellingprice').each(function(){
+            sum += parseInt($(this).text());  
+        });
+        document.getElementById('total').innerHTML = sum;
+        //final amount
+        document.getElementById('finalPrice').innerHTML = parseInt(sum);
+    });
+
+    $("body").on("focusin", ".input-number", function(){
+        $(this).data('oldValue', $(this).val());
+    });
+    $("body").on("change", ".input-number", function() {
+        minValue =  parseInt($(this).attr('min'));
+        maxValue =  parseInt($(this).attr('max'));
+        valueCurrent = parseInt($(this).val());
+        name = $(this).attr('name');
+        if(valueCurrent >= minValue) {
+            $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+        } 
+        if(valueCurrent <= maxValue) {
+            $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+        } 
+    });
+});

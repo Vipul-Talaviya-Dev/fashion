@@ -5,6 +5,15 @@
 .margin-top-25 {
     margin-top: 25px;
 }
+.margin-top-10 {
+    margin-top: 10px;
+}
+.padding-top-10 {
+    padding-top: 10px;
+}
+.width-10 {
+    width: 10%;
+}
 .black-text {
     color: #000000 !important;
 }
@@ -113,8 +122,8 @@
     border: 1px solid #cecece;
 }
 .colorSelected {
-    background: #d0a65e !important;
-    padding: 6px 12px;
+    /*background: #d0a65e !important;*/
+    padding: 15px 15px;
     font-weight: 800;
     color: #fff!important;
     box-shadow: 0 1px 6px 0 rgba(0,0,0,.12), 0 1px 6px 0 rgba(0,0,0,.12);
@@ -355,7 +364,8 @@
  */
 
 .notification-area {
-    border: 1px solid #eee;
+    border: 2px solid #eee;
+    margin: 2px;
 }
 .info-box {
     padding: 20px 15px;
@@ -368,4 +378,13 @@
     padding: 10px 15px;
     background-color: #f5f5f5;
     border-top: 0;
+}
+.product-detail {
+    overflow-y: scroll;
+    height: 350px;
+}
+.removeItem {
+    background-color: transparent;
+    color: #000;
+    border: 1px solid #fff;
 }

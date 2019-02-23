@@ -1,4 +1,5 @@
 <!-- footer -->
+@if($footer)
 <div class="footer">
 	<div class="container">
 		<div class="w3_footer_grids">
@@ -61,6 +62,7 @@
 		</div>
 	</div>
 </div>
+@endif
 
 <div class="modal fade" id="logingId" tabindex="-1" role="dialog" aria-labelledby="logingId"
 aria-hidden="true">
@@ -98,7 +100,8 @@ aria-hidden="true">
 								<div class="facts">
 									<div class="register">
 										<div id="registrationCheck">
-											<input placeholder="Name" name="name" type="text" class="signupName" required autocomplete="off">
+											<input placeholder="First Name" name="name" type="text" class="fName" required autocomplete="off">
+											<input placeholder="Last Name" name="name" style="margin: 1em 0 0;" type="text" class="lName" required autocomplete="off">
 											<input placeholder="Mobile" name="mobile" type="text" class="signupMobile" required style="margin: 1em 0 0;" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" autocomplete="off">
 											<input placeholder="Email Address" name="email" class="signupEmail keyup-email" type="email" required autocomplete="off">	
 											<input placeholder="Password" name="password" class="signupPassword" type="password" required autocomplete="off">	

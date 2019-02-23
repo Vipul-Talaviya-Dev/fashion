@@ -52,33 +52,29 @@
 					?>
 				</ul>
 			</div>
+			<p><br></p>
+			<p><br></p>
+			<div class="simpleCart_shelfItem">
+				<p>
+					@if($variation->qty == 0)
+						<a href="javascript:void(0);">Out Of Stock</a>
+					@else
+						<a class="item_add pull-right" href="javascript:void(0);" data-byNow="1">Buy Now</a>
+						<a class="item_add" href="javascript:void(0);" data-byNow="0">Add to cart</a>
+					@endif	
+				</p>
+			</div>
 		</div>
 		<div class="col-md-8 single-right">
-			<h3>{{ $product->name }}</h3>
-			@if(false)
-				<div class="rating1">
-					<span class="starRating">
-						<input id="rating5" type="radio" name="rating" value="5">
-						<label for="rating5">5</label>
-						<input id="rating4" type="radio" name="rating" value="4">
-						<label for="rating4">4</label>
-						<input id="rating3" type="radio" name="rating" value="3" checked>
-						<label for="rating3">3</label>
-						<input id="rating2" type="radio" name="rating" value="2">
-						<label for="rating2">2</label>
-						<input id="rating1" type="radio" name="rating" value="1">
-						<label for="rating1">1</label>
-					</span>
-				</div>
-			@endif
+			<h3>{{ $product->name }} <a href="javascript:void(0);" class="pull-right default-text" data-toggle="modal" data-target="#chart">Chart</a></h3>
 			<div class="color-quality">
 				<div class="color-quality-left">
 					<h5>Color : </h5>
 					<ul>
 						@if($colorVariations)
 							@foreach($colorVariations as $colorVariation)
-								<li>
-									<a href="{{ $url.'/'.base64_encode($colorVariation->id).'/'.str_random(25) }}" class="btn varbtn {{ $variation->color_id == $colorVariation->color->id ? 'colorSelected' : '' }}" data-col="{{ $colorVariation->color_id }}"><span style="background: {{ $colorVariation->color->code  }}"></span> {{ $colorVariation->color->name }}</a>
+								<li style="{{ $variation->color_id == $colorVariation->color->id ? 'border: 1px solid #000;padding: 1px;' : '' }}">
+									<a href="{{ $url.'/'.base64_encode($colorVariation->id).'/'.str_random(25) }}" class="btn varbtn {{ $variation->color_id == $colorVariation->color->id ? 'colorSelected' : '' }}" data-col="{{ $colorVariation->color_id }}" style="background: {{ $colorVariation->color->code  }};padding: 15px 15px;" title="{{ $colorVariation->color->name }}"></a>
 								</li>
 							@endforeach
 						@endif
@@ -95,145 +91,27 @@
 						@endif
 					</ul>
 				</div>
-				<div class="color-quality-right">
-					<strong>Estimated Delivery</strong><br>
-					<?php $date = strtotime("+7 day");
-						echo date('M d', $date);
-						echo "&nbsp&nbsp"."To"."&nbsp&nbsp";
-						$date = strtotime("+10 day");
-						echo date('M d , Y', $date);
-					?>	
-				</div>
+				<div class="color-quality-right"></div>
 				<div class="clearfix"> </div>
-				<p><br></p>
-				<a href="javascript:void(0);" data-toggle="modal" data-target="#chart">Chart</a>
 				<p><br></p>
 			</div>
 			<div class="simpleCart_shelfItem">
 				<p>Rs. <i class="item_price">{{ $variation->price }}</i></p>
-				<p>
-					@if($variation->qty == 0)
-						<a href="javascript:void(0);">Out Of Stock</a>
-					@else
-						<a class="item_add" href="javascript:void(0);">Add to cart</a>
-					@endif	
-				</p>
 			</div>
-
+			<div>
+				<h3 class="margin-top-25">Product Details</h3>
+			</div>
+			<div class="additional_info_grid product-detail">
+				<p>{!!  $product->description !!}</p>
+			</div>
 		</div>
 		<div class="clearfix"> </div>
 	</div>
 </div>
 <!-- Detail End -->
-
-<div class="additional_info" style="padding: 0;">
-	<div class="container">
-		<div class="sap_tabs">	
-			<div id="horizontalTab1" style="display: block; width: 100%; margin: 0px;">
-				<ul>
-					<li class="resp-tab-item" aria-controls="tab_item-0" role="tab"></li>
-					@if(false)
-						<li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span>Reviews</span></li>
-					@endif	
-				</ul>		
-				<div class="tab-1 resp-tab-content additional_info_grid" aria-labelledby="tab_item-0">
-					<p>{!!  $product->description !!}</p>
-				</div>	
-				@if(false)
-				<div class="tab-2 resp-tab-content additional_info_grid" aria-labelledby="tab_item-1">
-					<h4>(2) Reviews</h4>
-					<div class="additional_info_sub_grids">
-						<div class="col-xs-2 additional_info_sub_grid_left">
-							<img src="/front/images/1.png" alt=" " class="img-responsive" />
-						</div>
-						<div class="col-xs-10 additional_info_sub_grid_right">
-							<div class="additional_info_sub_grid_rightl">
-								<a href="javascript:void(0);">Laura</a>
-								<h5>April 03, 2016.</h5>
-								<p>Quis autem vel eum iure reprehenderit qui in ea voluptate 
-									velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat 
-								quo voluptas nulla pariatur.</p>
-							</div>
-							<div class="additional_info_sub_grid_rightr">
-								<div class="rating">
-									<div class="rating-left">
-										<img src="/front/images/star-.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="/front/images/star-.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="/front/images/star-.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="/front/images/star.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="/front/images/star.png" alt=" " class="img-responsive">
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="additional_info_sub_grids">
-						<div class="col-xs-2 additional_info_sub_grid_left">
-							<img src="/front/images/2.png" alt=" " class="img-responsive" />
-						</div>
-						<div class="col-xs-10 additional_info_sub_grid_right">
-							<div class="additional_info_sub_grid_rightl">
-								<a href="javascript:void(0);">Michael</a>
-								<h5>April 04, 2016.</h5>
-								<p>Quis autem vel eum iure reprehenderit qui in ea voluptate 
-									velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat 
-								quo voluptas nulla pariatur.</p>
-							</div>
-							<div class="additional_info_sub_grid_rightr">
-								<div class="rating">
-									<div class="rating-left">
-										<img src="/front/images/star-.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="/front/images/star-.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="/front/images/star.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="/front/images/star.png" alt=" " class="img-responsive">
-									</div>
-									<div class="rating-left">
-										<img src="/front/images/star.png" alt=" " class="img-responsive">
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="review_grids">
-						<h5>Add A Review</h5>
-						<form action="#" method="post">
-							<input type="text" name="Name" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}" required="">
-							<input type="email" name="Email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-							<input type="text" name="Telephone" value="Telephone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Telephone';}" required="">
-							<textarea name="Review" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Add Your Review';}" required="">Add Your Review</textarea>
-							<input type="submit" value="Submit" >
-						</form>
-					</div>
-				</div> 	
-				@endif		        					            	      
-			</div>	
-		</div>
-	</div>
-</div>
-
-<div class="w3l_related_products">
+<div class="" style="background-color: #f1f1f1;">
 		<div class="container">
-			<h3>Related Products</h3>
+			<h3 class="margin-top-25">Related Products</h3>
 			<ul id="flexiselDemo2">
 				@foreach($relatedProducts as $relatedProduct)
 					<li>

@@ -90,6 +90,7 @@
 					</div>
 				</div>
 				<div class="col-md-8 w3ls_dresses_grid_right">
+					@if(false)
 					<div class="w3ls_dresses_grid_right_grid2">
 						<div class="w3ls_dresses_grid_right_grid2_right">
 							<select name="select_item" class="select_item">
@@ -103,6 +104,7 @@
 						</div>
 						<div class="clearfix"> </div>
 					</div>
+					@endif
 					<div class="w3ls_dresses_grid_right_grid3">
 						<?php $count = 1; ?>
 						@foreach($products as $product)
@@ -126,7 +128,7 @@
 										?>
 										<img src="{{ \Cloudder::secureShow($image) }}" alt="{{ $product->name }}" class="img-responsive" />
 									</div>
-									<h5>{{ $product->name }}</h5>
+									<h5>{{ (strlen($product->name) > 15) ? substr($product->name, 0, 15).'...' : $product->name }}</h5>
 									<div class="simpleCart_shelfItem">
 										<p>Rs. <i class="item_price">{{ $variation->price }}</i></p>
 										<!-- <p><a class="item_add" href="javascript:void(0);">Add to cart</a></p> -->
@@ -149,34 +151,4 @@
 		</div>
 			<div align="center">{{ $products->links() }}</div>
 	</div>
-@endsection
-
-@section('js')
-<script type="text/javascript" src="/front/js/jquery.flexisel.js"></script>
-<script type="text/javascript">
-$(window).load(function() {
-	$("#flexiselDemo2").flexisel({
-		visibleItems:4,
-		animationSpeed: 1000,
-		autoPlay: true,
-		autoPlaySpeed: 3000,    		
-		pauseOnHover: true,
-		enableResponsiveBreakpoints: true,
-		responsiveBreakpoints: { 
-			portrait: { 
-				changePoint:480,
-				visibleItems: 1
-			}, 
-			landscape: { 
-				changePoint:640,
-				visibleItems:2
-			},
-			tablet: { 
-				changePoint:768,
-				visibleItems: 3
-			}
-		}
-	});
-});
-</script>
 @endsection

@@ -17,7 +17,7 @@ class Address extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'name', 'mobile', 'address', 'pincode', 'city', 'state', 'country', 'default'
+        'user_id', 'name', 'mobile', 'address', 'address_1', 'pincode', 'city', 'state', 'country', 'default'
     ];
 
     protected $dates = [

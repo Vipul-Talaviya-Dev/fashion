@@ -3,9 +3,8 @@
 @section('title', 'My Account')
 
 @section('content')
-<hr>
 <div class="col-md-12 col-sm-12 col-xs-12" style="background-color: #f3f3f3;">
-	<div class="col-md-3 col-xs-12">
+	<div class="col-md-3 col-xs-12 margin-top-10">
 		<div class="usermenu-Container">
 			<div class="usermenu-Head"><h2>My Account </h2></div>
 			<a href="javascript:void(0);" class="default-text">
@@ -29,7 +28,7 @@
 		</div>
 		<p><br></p>
 	</div>
-	<div class="col-md-9 col-xs-12">
+	<div class="col-md-9 col-xs-12 margin-top-10">
 		@if(count($orders) == 0)
 		<div class="fsn-box pck-box-shadow text-center" >
 			<h3>Hey, There are no any Order history available 

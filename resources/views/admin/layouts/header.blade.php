@@ -1,7 +1,7 @@
 
 <div class="navbar navbar-inverse">
     <div class="navbar-header">
-        <a class="navbar-brand" href="javascript:void(0);"><img src="/assets/images/logo_light.png" alt=""></a>
+        <a class="navbar-brand" href="javascript:void(0);"><img src="/front/images/logo.png" alt=""></a>
 
         <ul class="nav navbar-nav visible-xs-block">
             <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -16,7 +16,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown dropdown-user">
                 <a class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="/assets/images/images (11).jpg" alt="">
+                    <!-- <img src="/assets/images/images (11).jpg" alt=""> -->
                     <span>{{ ucwords(Session::get('admin')->name)}}</span>
                     <i class="caret"></i>
                 </a>

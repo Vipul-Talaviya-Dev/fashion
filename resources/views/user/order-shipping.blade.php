@@ -34,6 +34,7 @@
 									<p>
 										<b class="black-text">{{ $address->name }}</b><br><br>
 										{{ $address->address }}<br>
+										{{ $address->address_1 }}<br>
 										{{ $address->city }} - {{ $address->pincode }},<br>{{ $address->state }}, {{ $address->country }}<br>
 										Phone: <span class="black-text">{{ $address->mobile }}</span><br>
 									</p>
@@ -41,11 +42,11 @@
 								<div class="add-box-footer">
 									<label>
 										<input type="radio" name="addressOption" id="selectAddress" value="{{ $address->id }}">
-										Select <b class="black-text">Home</b> Address
+										Select <b class="black-text">Your</b> Address
 									</label>
-									<span class="pull-right">
+									<!-- <span class="pull-right">
 										<a href="javascript:void(0)" class="dlt-thrush delete_address" data-add="{{ $address->id }}"><i class="fa fa-trash-o"></i> Delete </a>
-									</span>
+									</span> -->
 								</div>
 							</div>
 						</div>
@@ -58,7 +59,7 @@
 				<button style="margin-left: 47px;" type="button" class="btn btn-success addAdddress"><i class="fa fa-plus"></i> Add New Address<div class="ripple-wrapper"></div></button>
 			</div>
 		</div>
-		<div class="col-md-4 col-sm-6 col-xs-12">
+		<div class="col-md-4 col-sm-6 col-xs-12 pck-box-shadow">
 			<div class="">
 				<h5 class="order-boxos-header">Order Summary</h5><hr>
 				<div class="order-boxos-items">
@@ -136,11 +137,19 @@
 					</div>
 					<div class="form-group">
 						<label>Mobile :</label>
-						<input type="number" name="mobile" class="form-control mobile" value="{{ old('mobile') }}" autocomplete="off" required>
+						<input type="text" name="mobile" class="form-control mobile" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" value="{{ old('mobile') }}" autocomplete="off" required>
+					</div>
+					<div class="form-group">
+						<label>Address :</label>
+						<input type="text" name="address" class="form-control address" autocomplete="off" required>
+					</div>
+					<div class="form-group">
+						<label>Address 1:</label>
+						<input type="text" name="address1" class="form-control address1" autocomplete="off" required>
 					</div>
 					<div class="form-group">
 						<label>pinCode :</label>
-						<input type="number" name="pincode" class="form-control pincode" autocomplete="off" value="{{ old('pincode') }}" required>
+						<input type="text" name="pincode" onkeydown="return max_length(this,event,6)" onkeypress="return isNumberKey(event)" class="form-control pincode" autocomplete="off" value="{{ old('pincode') }}" required>
 					</div>
 					<div class="form-group">
 						<label>City :</label>
@@ -149,10 +158,6 @@
 					<div class="form-group">
 						<label>State :</label>
 						<input type="text" name="state" class="form-control state" autocomplete="off" value="{{ old('state') }}" required>
-					</div>
-					<div class="form-group">
-						<label>Address :</label>
-						<textarea name="address" class="form-control address" rows="5" placeholder="Enter Address (Plot no. / House No. , Street, Society, Area, Etc)" autocomplete="off" required>{{ old('address') }}</textarea>
 					</div>
 				</div>
 			</div>

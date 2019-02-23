@@ -19,7 +19,8 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 	Route::get('/shop/{mainCategory?}/{subCategory?}/{thirdCategory?}/{productUrl?}', 'ProductController@productDetail')->name('productDetail');
 	Route::get('/shop/{mainCategory?}/{subCategory?}/{thirdCategory?}/{productUrl?}/{id}/{code}', 'ProductController@productDetailWithColor');
 	Route::get('/product/add/to/cart/item', 'ProductController@addToCard')->name('addToCard');
-	Route::get('/cart', 'ProductController@cart')->name('cart');
+	// Route::get('/cart', 'ProductController@cart')->name('cart');
+	Route::get('/carts', 'ProductController@carts')->name('carts');
 	Route::post('/cart-order-detail', 'ProductController@cartOrderDetail')->name('cartOrderDetail');
 	Route::get('/login', 'LoginController@loginForm')->name('loginForm');
 	Route::post('/login', 'LoginController@login')->name('login');

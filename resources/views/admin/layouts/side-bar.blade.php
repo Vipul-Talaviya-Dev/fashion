@@ -1,6 +1,6 @@
 <div class="sidebar sidebar-main">
     <div class="sidebar-content">
-        <div class="sidebar-user">
+        <!-- <div class="sidebar-user">
             <div class="category-content">
                 <div class="media">
                     <a href="javascript:void(0);" class="media-left"><img src="/assets/images/images (11).jpg" class="img-circle img-sm" alt=""></a>
@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="sidebar-category sidebar-category-visible">
             <div class="category-content no-padding">
                 <ul class="navigation navigation-main navigation-accordion">

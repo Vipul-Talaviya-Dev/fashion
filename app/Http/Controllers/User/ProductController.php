@@ -21,7 +21,9 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         return view('user.product-list', [
-        	'products' => Product::latest()->with(['variation', 'category.parent'])->paginate(15)
+        	'products' => Product::latest()->with(['variation', 'category.parent'])->paginate(25),
+            'cart' => true,
+            'footer' => false
         ]);
     }
 
@@ -42,7 +44,9 @@ class ProductController extends Controller
             'colorVariations' => Variation::with(['color'])->where('product_id', $product->id)->groupBy('color_id')->get(),
             'sizeVariations' => Variation::with(['size'])->where('color_id', $product->variation->color_id)->where('product_id', $product->id)->get(),
             'relatedProducts' => $relatedProducts,
-            'url' => '/shop/'.$mainCategory.'/'.$subCategory.'/'.$thirdCategory.'/'.$productUrl
+            'url' => '/shop/'.$mainCategory.'/'.$subCategory.'/'.$thirdCategory.'/'.$productUrl,
+            'cart' => true,
+            'footer' => true
         ]);
     }
     
@@ -62,7 +66,9 @@ class ProductController extends Controller
             'colorVariations' => Variation::with(['color'])->where('product_id', $product->id)->groupBy('color_id')->get(),
             'sizeVariations' => Variation::with(['size'])->where('color_id', $variation->color_id)->where('product_id', $product->id)->get(),
     		'relatedProducts' => $relatedProducts,
-            'url' => '/shop/'.$mainCategory.'/'.$subCategory.'/'.$thirdCategory.'/'.$productUrl
+            'url' => '/shop/'.$mainCategory.'/'.$subCategory.'/'.$thirdCategory.'/'.$productUrl,
+            'cart' => true,
+            'footer' => true
     	]);
     }
 
@@ -126,7 +132,15 @@ class ProductController extends Controller
     	if(Session::get('cart') == null) {
     		return redirect(route('user.index'));
     	}
-    	return view('user.cart');
+    	return view('user.cart', [
+            'cart' => false,
+            'footer' => false
+        ]);
+    }
+
+    public function carts()
+    {
+        return view('user.carts');
     }
 
     public function cartOrderDetail(Request $request)
@@ -171,7 +185,9 @@ class ProductController extends Controller
         $user = Auth::user();
 
     	return view('user.order-shipping', [
-            'addresses' => $user->addresses
+            'addresses' => $user->addresses,
+            'cart' => false,
+            'footer' => false
         ]);
     }
 
@@ -201,6 +217,8 @@ class ProductController extends Controller
     	return view('user.payment', [
     		'user' => $user,
     		'address' => $address,
+            'cart' => false,
+            'footer' => false
     	]);
     }
 
@@ -286,6 +304,8 @@ class ProductController extends Controller
     		'order' => $order,
             'user' => $user,
             'address' => $address,
+            'cart' => false,
+            'footer' => true
     	]);
     }
 }
