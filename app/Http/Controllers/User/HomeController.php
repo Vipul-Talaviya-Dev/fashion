@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\Banner;
+use App\Models\Contact;
 use App\Models\WindowImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,5 +29,32 @@ class HomeController extends Controller
             'cart' => false,
             'footer' => true
         ]);
+    }
+
+    public function contact()
+    {
+        return view('user.contact', [
+            'cart' => false,
+            'footer' => true
+        ]);
+    }
+
+    public function addContact(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'mobile' => 'required|numeric',
+            'message' => 'required',
+        ]);
+
+        Contact::create([
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'mobile' => $request->get('mobile'),
+            'message' => $request->get('message'),
+        ]);
+
+        return redirect()->back()->with(['success' => 'Thank You Contact Us.']);
     }
 }

@@ -25,6 +25,36 @@ class UserController extends Controller
     	]);
     }
 
+    public function profile()
+    {
+        $user = Auth::user();
+        $name = explode(' ', $user->name);
+        return view('user.my-profile', [
+            'user' => $user,
+            'fname' => $name[0],
+            'lname' => isset($name[1]) ? $name[1] : '',
+            'cart' => true,
+            'footer' => true
+        ]);
+    }
+
+    public function profileUpdate(Request $request)
+    {
+        $this->validate($request, [
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'mobile' => 'required|numeric',
+        ]);
+
+        $user = Auth::user();
+
+        $user->name = $request->get('firstName').' '.$request->get('lastName');
+        $user->mobile = $request->get('mobile');
+        $user->save();
+
+        return redirect()->back()->with(['success' => 'Profile Updated Successfully..']);
+    }
+
     public function createAddress(Request $request)
     {
         $rules = array(

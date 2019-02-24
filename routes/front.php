@@ -15,6 +15,9 @@ Route::get('/vipul', function() {
 });
 Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 	Route::get('/', 'HomeController@index')->name('index');
+	Route::get('contact-us', 'HomeController@contact')->name('contact');
+	Route::post('contact', 'HomeController@addContact')->name('addContact');
+
 	Route::get('products', 'ProductController@index')->name('products');
 	Route::get('/shop/{mainCategory?}/{subCategory?}/{thirdCategory?}/{productUrl?}', 'ProductController@productDetail')->name('productDetail');
 	Route::get('/shop/{mainCategory?}/{subCategory?}/{thirdCategory?}/{productUrl?}/{id}/{code}', 'ProductController@productDetailWithColor');
@@ -31,14 +34,15 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 	
 	Route::group(['middleware' => 'userAuth'], function () {
 		Route::post('/order-shipping-detail', 'ProductController@shippingDetail')->name('shippingDetail');
+		Route::get('/my-account', 'UserController@index')->name('myAccount');
+		Route::get('my-profile', 'UserController@profile')->name('myProfile');
+		Route::post('my-update', 'UserController@profileUpdate')->name('profileUpdate');
 
 		Route::post('/create-address', 'UserController@createAddress')->name('createAddress');
-		Route::get('/my-account', 'UserController@index')->name('myAccount');
 		Route::get('/payment', 'ProductController@payment')->name('payment');
 		Route::post('/order-place', 'ProductController@orderPlace')->name('order-place');
 		Route::get('/thanks', 'ProductController@thanks')->name('thanks');
 	});
 
-	Route::get('contact-us', function () { return "Contact"; })->name('contact');
 	Route::get('logout', 'UserController@logout')->name('logout');
 });

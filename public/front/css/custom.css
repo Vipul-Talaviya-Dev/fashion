@@ -1,4 +1,4 @@
-.has-error {
+.has-error, .error {
     color: red;
     display: block;
 }
@@ -351,6 +351,7 @@
 }
 .more-product {
     background: rgba(243, 183, 81, 0.88) none repeat scroll 0 0;
+    border: 1px solid #f4c066;
     color: #ffffff;
     margin: 0 auto;
     padding: 10px 0;

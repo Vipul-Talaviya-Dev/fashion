@@ -8,6 +8,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
     Route::group(['middleware' => 'adminAuth'], function () {
         // Dashboard Controller
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+        Route::get('contacts', 'DashboardController@contacts')->name('contacts');
         // Category Controller
         Route::get('categories', 'CategoryController@index')->name('categories');
         Route::get('category/add', 'CategoryController@add')->name('category.add');

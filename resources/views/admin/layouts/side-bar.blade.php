@@ -31,7 +31,6 @@
                             <li><a href="{{ route('admin.products') }}"><i class="icon-basket"></i> Product</a></li>
                         </ul>
                     </li>
-                        <!-- <li><a href="{{ route('admin.offers') }}"><i class="icon-gift"></i> <span>Offers</span></a></li> -->
                         <li>
                             <a href="javascript:void(0);"><i class="icon-bag"></i> <span>Order's</span></a>
                             <ul>
@@ -49,6 +48,8 @@
                             </ul>
                         </li>
                         <li><a href="{{ route('admin.users') }}"><i class="icon-users"></i> User</a></li>
+                         <li><a href="{{ route('admin.offers') }}"><i class="icon-gift"></i> <span>Offers</span></a></li>
+                          <li><a href="{{ route('admin.contacts') }}"><i class="icon-phone"></i> <span>Contacts</span></a></li>
                     </ul>
                 </div>
             </div>
