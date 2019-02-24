@@ -1,3 +1,6 @@
+<?php
+    $content = \App\Models\AppContent::find(1);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

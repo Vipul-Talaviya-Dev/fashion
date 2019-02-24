@@ -21,6 +21,7 @@
                 <ul class="navigation navigation-main navigation-accordion">
                     <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
                     <li class="active"><a href="{{ route('admin.dashboard') }}"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                    <li><a href="{{ route('admin.appContent') }}"><i class="fa fa-cog"></i> <span>App Content</span></a></li>
                     <li>
                         <a href="javascript:void(0);"><i class="icon-basket"></i> <span>Product</span></a>
                         <ul>

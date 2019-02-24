@@ -9,6 +9,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
         // Dashboard Controller
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
         Route::get('contacts', 'DashboardController@contacts')->name('contacts');
+        Route::get('app-content', 'DashboardController@appContent')->name('appContent');
+        Route::post('app-content', 'DashboardController@appContentUpdate')->name('appContentUpdate');
         // Category Controller
         Route::get('categories', 'CategoryController@index')->name('categories');
         Route::get('category/add', 'CategoryController@add')->name('category.add');

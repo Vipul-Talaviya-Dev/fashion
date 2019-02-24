@@ -6,9 +6,9 @@
 			<div class="col-md-4 w3_footer_grid">
 				<h3>Contact</h3>
 				<ul class="address">
-					<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>1234k Avenue, 4th block, <span>New York City.</span></li>
-					<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">info@example.com</a></li>
-					<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
+					<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i> {{ $content->address }}</li>
+					<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:{{ $content->support_email }}">{{ $content->support_email }}</a></li>
+					<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i> {{ substr($content->support_mobile, 0, 3) .'-'. substr($content->support_mobile, 3, 3) .'-'. substr($content->support_mobile, 6) }}</li>
 				</ul>
 			</div>
 			<div class="col-md-4 w3_footer_grid">
@@ -24,9 +24,9 @@
 				<h4>Follow Us</h4>
 				<div class="agileits_social_button">
 					<ul>
-						<li><a href="javascript:void(0);" class="facebook"> </a></li>
-						<li><a href="javascript:void(0);" class="twitter"> </a></li>
-						<li><a href="javascript:void(0);" class="google"> </a></li>
+						<li><a href="{{ $content->fb_link ? $content->fb_link : 'javascript:void(0);' }}" target="_blank" class="facebook"> </a></li>
+						<li><a href="{{ $content->twitter_link ? $content->twitter_link : 'javascript:void(0);' }}" target="_blank" class="twitter"> </a></li>
+						<li><a href="{{ $content->google_link ? $content->google_link : 'javascript:void(0);' }}" target="_blank" class="google"> </a></li>
 						<li><a href="javascript:void(0);" class="pinterest"> </a></li>
 					</ul>
 				</div>
