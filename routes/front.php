@@ -38,10 +38,14 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 		Route::get('my-profile', 'UserController@profile')->name('myProfile');
 		Route::post('my-update', 'UserController@profileUpdate')->name('profileUpdate');
 
-		Route::post('/create-address', 'UserController@createAddress')->name('createAddress');
+		
 		Route::get('/payment', 'ProductController@payment')->name('payment');
 		Route::post('/order-place', 'ProductController@orderPlace')->name('order-place');
 		Route::get('/thanks', 'ProductController@thanks')->name('thanks');
+		
+		Route::get('addresses', 'AddressController@index')->name('addresses');
+		Route::get('address/{id}/delete', 'AddressController@delete')->name('addressDelete');
+		Route::post('create-address', 'AddressController@createAddress')->name('createAddress');
 	});
 
 	Route::get('logout', 'UserController@logout')->name('logout');

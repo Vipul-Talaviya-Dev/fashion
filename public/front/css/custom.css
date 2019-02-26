@@ -1,3 +1,7 @@
+a {
+    color: #ff9b3d;
+    font-weight: 500;
+}
 .has-error, .error {
     color: red;
     display: block;
@@ -387,4 +391,10 @@
     background-color: transparent;
     color: #000;
     border: 1px solid #fff;
+}
+/*Address Page*/
+.addresses-box {
+    background: rgba(255,255,255,.98);
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,.2);
+    margin: 0px 0px 15px -10px;
 }

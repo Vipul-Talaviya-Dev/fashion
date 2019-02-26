@@ -7,6 +7,12 @@
 				<div class="usermenu-PanelContent"></div>
 			</div>
 		</a>
+		<a href="{{ route('user.addresses') }}" class="default-text">
+			<div class="usermenu-Panel">
+				<div class="usermenu-PanelTitle"><i class="mdi-action-account-circle"></i> Addresses</div>
+				<div class="usermenu-PanelContent"></div>
+			</div>
+		</a>
 		<a href="{{ route('user.myAccount') }}" class="default-text">
 			<div class="usermenu-Panel">
 				<div class="usermenu-PanelTitle"><i class="mdi-action-assignment"></i> Orders</div>
