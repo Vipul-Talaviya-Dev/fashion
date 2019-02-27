@@ -285,6 +285,7 @@ $(document).ready(function() {
         var s = $("input[name='state']").val();
         var a = $("input[name='address']").val();
         var a1 = $("input[name='address1']").val();
+        var id = $("input[name='id']").val();
         var r = $(".redirect").val();
         var t = $('meta[name="csrf-token"]').attr('content');
         var b = false;
@@ -301,7 +302,7 @@ $(document).ready(function() {
                 },
                 dataType: "json",
                 type: "POST",
-                data: {"name": n, "mobile": m, "address": a, "address1": a1, "pincode": p, "city": c, "state": s},
+                data: {"name": n, "mobile": m, "address": a, "address1": a1, "pincode": p, "city": c, "state": s, "id": id},
                 success: function(res) {
                     hide_loader();
                     if(res.status == false) {
@@ -314,6 +315,34 @@ $(document).ready(function() {
                 }
             });
         }
+    });
+
+    $("body").on("click", ".update_address", function() {
+        show_loader();
+        $('#addressHeader').html("Update Your Address");
+        var id = $(this).attr('data-id');
+        var url = '/address/'+id+'/edit';
+        $.ajax({
+          type: 'GET',
+          url: url,
+          success: function (data) {
+                if(data.status) {
+                    var ad = data.address; 
+                    $("input[name='id']").val(ad.id);
+                    $("input[name='name']").val(ad.name);
+                    $("input[name='mobile']").val(ad.mobile);
+                    $("input[name='pincode']").val(ad.pincode);
+                    $("input[name='city']").val(ad.city);
+                    $("input[name='state']").val(ad.state);
+                    $("input[name='address']").val(ad.address);
+                    $("input[name='address1']").val(ad.address_1);
+                    $('#myModal').modal();
+                    hide_loader();
+                } else {
+                    hide_loader();
+                }
+            }
+        });
     });
 });
 

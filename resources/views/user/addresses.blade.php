@@ -39,7 +39,7 @@
 							</div>
 							<div class="add-box-footer" style="padding: 14px 18px 26px 2px;">
 								<span class="pull-left">
-									<a href="javascript:void(0)" class="dlt-thrush update_address" data-add="{{ $address->id }}"><i class="fa fa-edit"></i> Update </a>
+									<a href="javascript:void(0)" class="dlt-thrush update_address" data-id="{{ $address->id }}"><i class="fa fa-edit"></i> Update </a>
 								</span>
 
 								<span class="pull-right">
@@ -63,7 +63,7 @@
 		<div class="modal-content" style="width: 50%;margin-left: 30%;">
 			<div class="modal-header">
 				<h4 class="modal-title">
-					Add New Address
+					<span id="addressHeader"></span>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</h4>
 			</div>
@@ -96,6 +96,7 @@
 					<div class="form-group">
 						<label>State :</label>
 						<input type="text" name="state" class="form-control state" autocomplete="off" value="{{ old('state') }}" required>
+						<input type="hidden" name="id" value="0">
 					</div>
 				</div>
 			</div>
@@ -111,6 +112,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('body').on('click', '.addAdddress', function() {
+			$('#addressHeader').html("Add New Address");
 			$('#myModal').modal();
 		});
 	});

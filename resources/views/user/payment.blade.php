@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Payment</title>
+	<title>Payment  | Fashion</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link href="/front/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
@@ -14,6 +14,20 @@
 	<link href="/front/css/popuo-box.css" rel="stylesheet" type="text/css" property="" media="all" />
 	<link href='https://fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+		.modal-title {
+			padding-left: 0; 
+		}
+		.modal-header {
+			min-height: 16.42857143px;
+			padding: 15px;
+			border-bottom: 1px solid #e5e5e5;
+		}
+		.modal button.close {
+			width: auto; 
+			margin-top: -12px;
+		}
+	</style>
 </head>
 
 <body>
@@ -26,7 +40,6 @@
 						<h2>
 			                <img src="/front/images/logo.png" alt="Fashion" style="width: 52%;" class="img-responsive" />
 				        </h2>
-						<!-- <img class="order-logo" src="/front/images/4.png" alt="Online Fashion store "> -->
 					</div>
 					<div class="col-md-10">
 						<div class="pull-right">
@@ -115,25 +128,27 @@
 								</div>
 							</div>
 							<!-- Coupons & Gift Vouchers-->
-							<div class="panel panel-default">
+							<div class="panel panel-default pck-box-shadow">
 								<div class="panel-heading"><h4 class="panel-title white-text"><a data-toggle="collapse" data-parent="#accordion" href="#promotional">Apply Your Offer or Gift Voucher</a></h4></div>
 								<div class="panel-collapse collapse in" id="promotional">
 									<div class="panel-body">
-										<div class="row">
-											<div class="col-md-10">
-												<label style="margin-top: 7px;">Enter MemberShip Code (?)</label>
-												<div class="input-group">
-													<input class="pck-input adv gift_voucher_data" type="text" autocomplete="off">
-													<span class="input-group-btn"><button type="button" class="btn btn-danger apply_gift_voucher">Apply</button></span>
-												</div>
-												<span style="display: block;"><b>Note:</b> You Will Purchase (Rs. 2000/-) Up Shopping to get discount.</span>
+										<div class="col-md-12 col-xs-12">
+											<label style="margin-top: 7px;">Enter MemberShip Code (?)</label>
+											<div class="input-group" style="width: 50%;">
+												<input class="pck-input adv gift_voucher_data" type="text" autocomplete="off" value="{{ Auth::user()->member_ship_code }}">
+												<span class="input-group-btn"><button type="button" class="btn btn-danger apply_gift_voucher">Apply</button></span>
 											</div>
+											<span style="display: block;">
+												<b>Note:</b> You Will Purchase (Rs. 2000/-) Up Shopping to get discount.
+												@if(\Auth::user()->member_ship_code == null)
+												<a class="pull-right getCode" style="cursor: pointer;">Get Code</a>
+												@endif
+											</span>
 										</div>
-
 									</div>
 								</div>
 							</div>
-							<div class="panel panel-default">
+							<div class="panel panel-default pck-box-shadow">
 								<div class="panel-heading"><h4 class="panel-title">Shipping Address Details</h4></div>
 								<div class="panel-body">
 									<div class="notification-area">
@@ -203,6 +218,28 @@
 			</section>
 		</form>
 	</div>
+@if(\Auth::user()->member_ship_code == null)
+<div id="myModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content" style="width: 50%;margin-left: 30%;">
+			<div class="modal-header">
+				<h4 class="modal-title">
+					MemberShip Code
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<h5 style="margin-top: 15px;">Are you sure you want to get membership ?</h5>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<a href="{{ route('user.getMemberShip') }}" class="btn btn-default" id="getMemberCode">Confirm</a>
+			</div>
+		</div>
+	</div>
+</div>
+@endif
 	@include('user.layouts.footer')
 	<!-- Core JS files -->
 	<script src="/front/js/jquery.min.js" type="text/javascript"></script>
@@ -217,6 +254,11 @@
 				event.preventDefault();
 				$('html,body').animate({scrollTop: "0px"},1000);
 			});
+			@if(\Auth::user()->member_ship_code == null)
+				$('body').on('click', '.getCode', function() {
+					$('#myModal').modal();
+				});
+			@endif
 		});
 	</script>
 </body>

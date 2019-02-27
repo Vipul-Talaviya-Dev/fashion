@@ -55,6 +55,15 @@ class UserController extends Controller
         return redirect()->back()->with(['success' => 'Profile Updated Successfully..']);
     }
 
+    public function getMemberShip()
+    {
+        $user = Auth::user();
+        $user->member_ship_code = $user->memberShipCode();
+        $user->save();  
+
+        return redirect()->back()->with(['success' => 'Successfully to get your membership code..']);
+    }
+
     public function logout()
     {
         Auth::logout();
