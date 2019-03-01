@@ -163,7 +163,8 @@ class ProductController extends Controller
 		}
 		$orders['total'] = $total;
 		$orders['final_amount'] = $final_amount;
-		Session::put('CART_AMOUNT', $final_amount);
+        Session::put('CART_AMOUNT', $final_amount);
+		Session::put('discount', 0);
 		Session::put('order', $orders);
 
 		// For Basket Counting // 
@@ -221,6 +222,36 @@ class ProductController extends Controller
             'footer' => false
     	]);
     }
+    /**
+     * [memberShipCodeCheck User]
+     * @param  Request $request [code]
+     * @return [type]           [description]
+     */
+    public function memberShipCodeCheck(Request $request)
+    {
+        if(!$memberCode = User::where('member_ship_code', $request->get('code'))->first()) {
+            return response()->json([
+                'status' => false,
+                'error' => 'Invalid MemberShip Code...'
+            ]);
+        }
+
+        if(Session::get('CART_AMOUNT') >= 2000) {
+            $discount = round(Session::get('CART_AMOUNT')*10/100);
+            Session::put('discount', $discount);
+            
+            return response()->json([
+                'status' => true,
+                'success' => 'Successfully Apply Your MemberShip Code!!!'
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'error' => 'You do not Get Discount'
+        ]);
+
+    }
 
     public function orderPlace(Request $request)
     {
@@ -245,7 +276,7 @@ class ProductController extends Controller
         $order->cart_amount = Session::get('order')['total'];
         $order->discount = Session::get('discount') ?: 0;
         // $order->extra_discount = $request->get('data');
-        $order->total = Session::get('order')['final_amount'];
+        $order->total = Session::get('order')['final_amount'] - Session::get('discount');
         $order->status = 1;
         $order->save();
         
@@ -269,7 +300,9 @@ class ProductController extends Controller
             $variation->save();
         }
 
-    	Session::forget('cart');
+        Session::forget('cart');
+        Session::forget('discount');
+    	Session::forget('CART_AMOUNT');
     	Session::forget('order');
     	Session::forget('voucher');
         Session::forget('offer');

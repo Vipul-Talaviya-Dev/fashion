@@ -28,7 +28,7 @@
 				<div class="panel-heading">Your Address Details</div>
 				<div class="panel-body">
 					@foreach($addresses as $address)
-						<div class="col-md-6">
+						<div class="col-md-6 col-xs-12 padding-left-0">
 							<div class="notification-area">
 								<div class="info-box">
 									<p>
@@ -122,7 +122,7 @@
 <!-- Address -->
 <div id="myModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-		<div class="modal-content" style="width: 50%;margin-left: 30%;">
+		<div class="modal-content order-shipping-modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title">
 					Add New Address

@@ -39,7 +39,8 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 		Route::post('my-update', 'UserController@profileUpdate')->name('profileUpdate');
 
 		Route::get('get-membership', 'UserController@getMemberShip')->name('getMemberShip');
-		
+		Route::get('check-membership-code', 'ProductController@memberShipCodeCheck')->name('memberShipCodeCheck');
+
 		Route::get('/payment', 'ProductController@payment')->name('payment');
 		Route::post('/order-place', 'ProductController@orderPlace')->name('order-place');
 		Route::get('/thanks', 'ProductController@thanks')->name('thanks');

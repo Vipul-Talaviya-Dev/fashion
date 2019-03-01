@@ -59,8 +59,8 @@
 					@if($variation->qty == 0)
 						<a href="javascript:void(0);">Out Of Stock</a>
 					@else
-						<a class="item_add pull-right" href="javascript:void(0);" data-byNow="1">Buy Now</a>
-						<a class="item_add" href="javascript:void(0);" data-byNow="0">Add to cart</a>
+						<a class="item_add text-center buynow pull-right" href="javascript:void(0);" data-byNow="1">Buy Now</a>
+						<a class="item_add text-center" href="javascript:void(0);" data-byNow="0">Add to cart</a>
 					@endif	
 				</p>
 			</div>

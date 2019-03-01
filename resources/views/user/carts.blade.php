@@ -1,4 +1,4 @@
-<div id="cartLoad" class="modal fade in" role="dialog">
+<div id="cartLoad" class="modal fade in top-65" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header" style="border-bottom: 1px solid #e5e5e5;">
@@ -36,7 +36,7 @@
 							?>
 							<tr class="rem{{ $cartId }}">
 								<td class="invert">{{ $cartId }}</td>
-								<td class="invert-image"><img src="{{ \Cloudder::secureShow($image[0]) }}" data-imagezoom="true" class="img-responsive cart-thumb-img" alt="{{ $product->name }}"></td>
+								<td class="invert-image"><img src="{{ \Cloudder::secureShow($image[0]) }}" class="img-responsive cart-thumb-img" alt="{{ $product->name }}"></td>
 								<td class="invert">
 									<p>{{ $product->name }}</p><br>
 									<p>Color: <b>{{ $variation->color->name }}</b></p><br>

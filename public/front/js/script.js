@@ -52,23 +52,24 @@ $(document).ready(function() {
                 cache: false
             });
             $.ajax({
-             type: 'GET',
-             url: '/product/add/to/cart/item?product_id='+p+'&variation_id='+v,
-			    success: function (data) {
-                 if (data.status) {
-                    $('.backetItem').html(data.totalItem);
-                    $('.your-cart').html('');
-                    $(".your-cart").load('/carts');
-                    setTimeout(function myFunction() {
-                        $("#cartLoad").modal();
-                        $("#cartLoad").show();
+                 type: 'GET',
+                 url: '/product/add/to/cart/item?product_id='+p+'&variation_id='+v,
+    			    success: function (data) {
+                     if (data.status) {
+                        $('.backetItem').html(data.totalItem);
+                        $('.your-cart').html('');
+                        $(".your-cart").load('/carts');
+                        setTimeout(function myFunction() {
+                            $("#cartLoad").modal();
+                            $("#cartLoad").show();
+                            hide_loader();
+                        }, 3000);
+                     } else {
+                        toastr.warning(data.error);
                         hide_loader();
-                    }, 3000);
-                 } else {
-                    toastr.warning(data.error);
+                    }
                 }
-            }
-        });
+            });
         }
     });
     // Remove Cart Item
@@ -405,4 +406,35 @@ $(document).ready(function () {
             $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
         } 
     });
+
+    // Apply Discount
+    $("body").on("click", ".apply_code", function() {
+        var p = $(".member_ship_code").val();
+        if (typeof p === "undefined") {
+            toastr.warning("Required MemberShip Code.");
+            return false
+        }
+        if (!p) {
+            toastr.warning("Required MemberShip Code.");
+            return false
+        } else {
+            show_loader();
+            $.ajaxSetup({
+                cache: false
+            });
+            $.ajax({
+                 type: 'GET',
+                 url: '/check-membership-code?code='+p,
+                    success: function (data) {
+                     if (data.status) {
+                        toastr.success(data.success);
+                        location.reload();
+                     } else {
+                        toastr.warning(data.error);
+                    }
+                    hide_loader();
+                }
+            });
+        }
+    }); 
 });

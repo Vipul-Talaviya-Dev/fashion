@@ -36,12 +36,12 @@
 		<header id="header" class="navbar-static-top">
 			<div class="order-header">
 				<div class="container">
-					<div class="col-md-2">
+					<div class="col-md-2 col-xs-12">
 						<h2>
 			                <img src="/front/images/logo.png" alt="Fashion" style="width: 52%;" class="img-responsive" />
 				        </h2>
 					</div>
-					<div class="col-md-10">
+					<div class="col-md-10 col-xs-12">
 						<div class="pull-right">
 							<div class="order-header-menu">
 								<!-- <i class="fa fa-phone order-header-icon"></i>
@@ -120,10 +120,14 @@
 										<div class="row order-cart-summary" style="line-height: 2">
 											<div class="col-md-6">Sub Total</div>
 											<div class="col-md-6 order-cart-amount">Rs. {{ $total }}</div>
+											@if(Session::get('discount') > 0)
+											<div class="col-md-6">Member Ship Discount</div>
+											<div class="col-md-6 order-cart-amount"> [-] Rs. {{ Session::get('discount') }}</div>
+											@endif
 											<div class="col-md-6">Delivery Charges</div>
 											<div class="col-md-6 order-cart-amount"> [+] Rs. 0</div>
 											<div class="col-md-6 total">Total Amount</div>
-											<div class="col-md-6 order-cart-amount total">Rs. {{ $finalAmount }}</div>
+											<div class="col-md-6 order-cart-amount total">Rs. {{ $finalAmount - Session::get('discount') }}</div>
 										</div>
 								</div>
 							</div>
@@ -135,8 +139,8 @@
 										<div class="col-md-12 col-xs-12">
 											<label style="margin-top: 7px;">Enter MemberShip Code (?)</label>
 											<div class="input-group" style="width: 50%;">
-												<input class="pck-input adv gift_voucher_data" type="text" autocomplete="off" value="{{ Auth::user()->member_ship_code }}">
-												<span class="input-group-btn"><button type="button" class="btn btn-danger apply_gift_voucher">Apply</button></span>
+												<input class="pck-input adv member_ship_code" type="text" autocomplete="off" value="{{ Auth::user()->member_ship_code }}">
+												<span class="input-group-btn"><button type="button" class="btn btn-danger apply_code">Apply</button></span>
 											</div>
 											<span style="display: block;">
 												<b>Note:</b> You Will Purchase (Rs. 2000/-) Up Shopping to get discount.

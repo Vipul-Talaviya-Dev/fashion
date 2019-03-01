@@ -33,7 +33,7 @@
 				?>
 				<tr class="rem{{ $cartId }}">
 					<td class="invert">{{ $cartId }}</td>
-					<td class="invert-image"><img src="{{ \Cloudder::secureShow($image[0]) }}" data-imagezoom="true" class="img-responsive cart-thumb-img" alt="{{ $product->name }}"></td>
+					<td class="invert-image"><img src="{{ \Cloudder::secureShow($image[0]) }}" class="img-responsive cart-thumb-img" alt="{{ $product->name }}"></td>
 					<td class="invert">
 						<p>{{ $product->name }}</p><br>
 						<p>Color: <b>{{ $variation->color->name }}</b></p><br>
