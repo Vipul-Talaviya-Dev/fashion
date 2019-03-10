@@ -40,7 +40,7 @@
                                 </h5>
                             </div>
                             <div class="form-group has-feedback has-feedback-left">
-                                <input type="text" class="form-control" name="email" placeholder="Email" autocomplete="off">
+                                <input type="text" class="form-control" name="email" placeholder="Email" autocomplete="off" required>
                                 <div class="form-control-feedback">
                                     <i class="icon-mention text-muted"></i>
                                 </div>
@@ -51,7 +51,7 @@
                                 @endif
                             </div>
                             <div class="form-group has-feedback has-feedback-left">
-                                <input type="password" name="password" class="form-control" placeholder="Password">
+                                <input type="password" name="password" class="form-control" placeholder="Password" required>
                                 <div class="form-control-feedback">
                                     <i class="icon-lock2 text-muted"></i>
                                 </div>

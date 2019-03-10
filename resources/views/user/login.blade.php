@@ -63,7 +63,7 @@
 				<div class="col-md-12">
 					<ul class="social">
 						<li class="social_facebook"><a href="javascript:void(0);" class="entypo-facebook"></a></li>
-						<li class="social_dribbble"><a href="javascript:void(0);" class="entypo-dribbble"></a></li>
+						<li class="social_dribbble"><a href="{{ route('user.socialLogin', ['service' => 'google']) }}" class="entypo-dribbble"></a></li>
 						<li class="social_twitter"><a href="javascript:void(0);" class="entypo-twitter"></a></li>
 						<li class="social_behance"><a href="javascript:void(0);" class="entypo-behance"></a></li>
 					</ul>

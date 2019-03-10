@@ -18,7 +18,7 @@
         <div class="cart box_1">
             <a href="javascript:void(0);" class="cart-list">
                 <div class="total">
-                    (<span id="backetItem" class="backetItem">{{ ((\Session::get('cart') =="") ? 0 : count(\Session::get('cart'))) }}</span>)
+                    <span id="backetItem" class="backetItem">{{ ((\Session::get('cart') =="") ? 0 : count(\Session::get('cart'))) }}</span>
                 </div>
                 <img src="/front/images/bag.png" alt="cart">
             </a>

@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use App\Models\Order;
+use App\Models\User;
 use App\Models\Contact;
 use App\Models\Product;
 use App\Models\AppContent;
 use App\Models\OrderProduct;
+use App\Models\Variation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +18,12 @@ class DashboardController extends Controller
 
     public function index()
     {
-        return view('admin.dashbord.index');
+        return view('admin.dashbord.index', [
+            'user' => User::count(),
+            'newOrder' => Order::where('status', 1)->count(),
+            'sellProductQty' => OrderProduct::sum('qty'),
+            'totalProductQty' => Variation::sum('qty'),
+        ]);
     }
 
     public function contacts()

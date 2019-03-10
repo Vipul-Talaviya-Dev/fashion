@@ -132,6 +132,20 @@ a {
     box-shadow: 0 1px 6px 0 rgba(0,0,0,.12), 0 1px 6px 0 rgba(0,0,0,.12);
     transition: box-shadow .28s cubic-bezier(.4,0,.2,1);
 }
+.backetItem {
+    position: absolute;
+    top: 70px;
+    right: 7%;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #d0a65e;
+    color: white;
+    text-align: center;
+}
+.cart-list img {
+    width: 100%;
+}
 .cart-totals {
     border: 0;
     background: transparent;
@@ -410,6 +424,17 @@ a {
 */
 
 @media (max-width: 568px) {
+    .box_1 {
+        margin: 50px 0px -45px 0px;
+    }
+    .backetItem {
+        top: 164px;
+        right: 43.5%;
+    }
+    .cart-list img {
+        width: auto;
+    }
+
     .padding-left-0{
         padding-left: 0px; 
     }
