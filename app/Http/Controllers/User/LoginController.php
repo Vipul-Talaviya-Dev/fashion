@@ -7,6 +7,7 @@ use Session;
 use Validator;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Socialite;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
 
@@ -18,6 +19,32 @@ class LoginController extends Controller
             'cart' => true,
             'footer' => true
         ]);
+    }
+
+    public function redirect($service)
+    {
+        return Socialite::driver($service)->redirect();
+    }
+
+    public function socialCallBackHandle($service)
+    {
+        try {
+            if($socialUser = Socialite::with($service)->user()) {
+                if(!$user = User::where('email', $socialUser->email)->first()) {
+                    $user = User::create([
+                        'name' => $socialUser->name,
+                        'email' => $socialUser->email,
+                        'referral_code' => User::referralCode(),
+                    ]);
+                }
+                Auth::login($user);
+                return redirect('/')->with(['success' => 'Successfully Login..']);
+            }
+        } catch(Exception $e) {
+            return redirect('/')->with(['error' => $e->getMessage()]);
+        }
+
+        return redirect('/')->with(['error' => 'Oops something went wrong..']);
     }
 
     public function login(Request $request)
