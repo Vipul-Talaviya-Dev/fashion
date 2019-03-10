@@ -30,6 +30,7 @@ class UserController extends Controller
         $user = Auth::user();
         $name = explode(' ', $user->name);
         return view('user.my-profile', [
+            'addresses' => $user->addresses,
             'user' => $user,
             'fname' => $name[0],
             'lname' => isset($name[1]) ? $name[1] : '',

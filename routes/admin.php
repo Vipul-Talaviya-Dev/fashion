@@ -85,6 +85,14 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
 
         // User
         Route::get('users', 'OrderController@users')->name('users');
+
+        // Sub Admin Controller
+        Route::get('subAdmins', 'SubAdminController@index')->name('subAdmins');
+        Route::get('subAdmin/add', 'SubAdminController@add')->name('subAdmin.add');
+        Route::post('subAdmin/create', 'SubAdminController@create')->name('subAdmin.create');
+        Route::get('subAdmin/{id}/edit', 'SubAdminController@edit')->name('subAdmin.edit');
+        Route::post('subAdmin/{id}/update', 'SubAdminController@update')->name('subAdmin.update');
+        Route::get('subAdmin/delete', 'SubAdminController@delete')->name('subAdmin.delete');
     });
 });
 

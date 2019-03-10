@@ -11,8 +11,12 @@ class Admin extends Model
 	use SoftDeletes;
 	use Eloquence;
 
+	const ADMIN = 1, SUBADMIN = 2;
+
 	protected $fillable = [
 		'name',
+		'role',
+		'modules_id',
 		'email',
 		'password'
 	];
@@ -23,4 +27,5 @@ class Admin extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
 }

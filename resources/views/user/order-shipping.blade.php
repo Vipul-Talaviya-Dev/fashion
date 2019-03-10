@@ -21,7 +21,7 @@
 @section('content')
 <hr>
 <div class="col-md-12 col-sm-12 col-xs-12">
-	<form action="{{ route('user.shippingDetail') }}" method="post">
+	<form action="{{ route('user.shippingDetail') }}" method="post" id="form">
 		{{ csrf_field() }}
 		<div class="col-md-8 col-sm-6 col-xs-12 order-boxos">
 			<div class="">
@@ -111,7 +111,7 @@
 					</table>
 				</div>
 				<div class="form-group spacet-20">
-					<input type="submit" class="btn btn-block btn-danger" name="Payment" value="Order Place">
+					<input type="submit" class="btn btn-block btn-danger" name="Payment" value="Go To Payment ">
 				</div>
 			</div>
 		</div>
@@ -125,7 +125,7 @@
 		<div class="modal-content order-shipping-modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title">
-					Add New Address
+					Add Address
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</h4>
 			</div>
@@ -171,8 +171,15 @@
 @endsection
 
 @section('js')
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		$("#form").validate({
+      	rules: {
+         addressOption: 'required',
+      	}
+      });
+
 		$('body').on('click', '.addAdddress', function() {
 			$('#myModal').modal();
 		});

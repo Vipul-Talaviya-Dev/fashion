@@ -437,3 +437,6 @@ a {
         margin-left: auto;
     }
 }
+.banner-bottom, .team, .checkout, .additional_info, .team-bottom, .single, .mail, .special-deals, .about, .faq, .typo, .new-products, .banner-bottom1, .top-brands, .dresses, .w3l_related_products {
+    padding: 2em 0;
+}

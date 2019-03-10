@@ -253,7 +253,9 @@
 	<script src="/front/js/script.js" type="text/javascript"></script>
 
 	<script type="text/javascript">
-		$(document).ready(function($) {
+		$(document).ready(function() {
+			$('#myModal').modal();
+			
 			$("body").on("click", ".scroll", function(event){     
 				event.preventDefault();
 				$('html,body').animate({scrollTop: "0px"},1000);

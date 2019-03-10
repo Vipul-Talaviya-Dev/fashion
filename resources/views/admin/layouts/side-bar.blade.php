@@ -16,12 +16,66 @@
                 </div>
             </div>
         </div> -->
+        <?php
+            $admin  = \Session::get('admin');
+            if($admin->modules_id != null) {
+                $moduleIds = explode(',', $admin->modules_id);
+            } else {
+                if($admin->role == 1) {
+                    $moduleIds = \App\Models\Module::pluck('id')->toArray();
+                } else {
+                    $moduleIds = [];
+                }
+            }
+        ?>
+
         <div class="sidebar-category sidebar-category-visible">
             <div class="category-content no-padding">
                 <ul class="navigation navigation-main navigation-accordion">
                     <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-                    <li class="active"><a href="{{ route('admin.dashboard') }}"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                    @if($admin->role == 1)
+                    <li class="active"><a href="{{ route('admin.subAdmins') }}"><i class="icon-home4"></i> <span>Sub Admin</span></a></li>
+                    @endif
+                    @if(in_array(1, $moduleIds))
+                    <li class=""><a href="{{ route('admin.dashboard') }}"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                    @endif
+                    @if(in_array(2, $moduleIds))
                     <li><a href="{{ route('admin.appContent') }}"><i class="fa fa-cog"></i> <span>App Content</span></a></li>
+                    @endif
+                    @if(in_array(3, $moduleIds))
+                    <li><a href="{{ route('admin.colors') }}"><i class="icon-droplet"></i> Color</a></li>
+                    @endif
+                    @if(in_array(4, $moduleIds))
+                    <li><a href="{{ route('admin.sizes') }}"><i class="icon-height"></i> Size</a></li>
+                    @endif
+                    @if(in_array(5, $moduleIds))
+                    <li><a href="{{ route('admin.categories') }}"><i class="icon-price-tags"></i> Category</a></li>
+                    @endif
+                    @if(in_array(6, $moduleIds))
+                    <li><a href="{{ route('admin.products') }}"><i class="icon-basket"></i> Product</a></li>
+                    @endif
+                    @if(in_array(7, $moduleIds))
+                    <li><a href="{{ route('admin.orders') }}"><i class="icon-bag"></i> Order</a></li>
+                    @endif
+                    @if(in_array(8, $moduleIds))
+                    <li><a href="javascript:void(0);"><i class="icon-cart-add"></i> Assign Order</a></li>
+                    @endif
+                    @if(in_array(9, $moduleIds))
+                    <li><a href="{{ route('admin.banners') }}"><i class="icon-stack3"></i> Banner</a></li>
+                    @endif
+                    @if(in_array(10, $moduleIds))
+                    <li><a href="{{ route('admin.windowImages') }}"><i class="icon-stack3"></i> Home Images</a></li>
+                    @endif
+                    @if(in_array(11, $moduleIds))
+                    <li><a href="{{ route('admin.users') }}"><i class="icon-users"></i> User</a></li>
+                    @endif
+                    @if(in_array(12, $moduleIds))
+                    <li><a href="{{ route('admin.offers') }}"><i class="icon-gift"></i> <span>Offers</span></a></li>
+                    @endif
+                    @if(in_array(13, $moduleIds))
+                    <li><a href="{{ route('admin.contacts') }}"><i class="icon-phone"></i> <span>Contacts</span></a></li>
+                    @endif
+                    @if(false)
                     <li>
                         <a href="javascript:void(0);"><i class="icon-basket"></i> <span>Product</span></a>
                         <ul>
@@ -32,27 +86,25 @@
                             <li><a href="{{ route('admin.products') }}"><i class="icon-basket"></i> Product</a></li>
                         </ul>
                     </li>
-                        <li>
-                            <a href="javascript:void(0);"><i class="icon-bag"></i> <span>Order's</span></a>
-                            <ul>
-                                <li><a href="{{ route('admin.orders') }}"><i class="icon-bag"></i> Order</a></li>
-                                <li><a href="javascript:void(0);"><i class="icon-cart-add"></i> Assign
-                                Order</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0);"><i class="icon-tree6"></i> <span>Module</span></a>
-                            <ul>
-                                <li><a href="{{ route('admin.banners') }}"><i class="icon-stack3"></i> Banner</a></li>
-                                <li><a href="{{ route('admin.windowImages') }}"><i class="icon-stack3"></i> Home Images</a></li>
-                                <!-- <li><a href="javascript:void(0);"><i class="icon-stack3"></i> Module</a></li> -->
-                            </ul>
-                        </li>
-                        <li><a href="{{ route('admin.users') }}"><i class="icon-users"></i> User</a></li>
-                         <li><a href="{{ route('admin.offers') }}"><i class="icon-gift"></i> <span>Offers</span></a></li>
-                          <li><a href="{{ route('admin.contacts') }}"><i class="icon-phone"></i> <span>Contacts</span></a></li>
-                    </ul>
-                </div>
+                    <li>
+                        <a href="javascript:void(0);"><i class="icon-bag"></i> <span>Order's</span></a>
+                        <ul>
+                            <li><a href="{{ route('admin.orders') }}"><i class="icon-bag"></i> Order</a></li>
+                            <li><a href="javascript:void(0);"><i class="icon-cart-add"></i> Assign
+                            Order</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);"><i class="icon-tree6"></i> <span>Module</span></a>
+                        <ul>
+                            <li><a href="{{ route('admin.banners') }}"><i class="icon-stack3"></i> Banner</a></li>
+                            <li><a href="{{ route('admin.windowImages') }}"><i class="icon-stack3"></i> Home Images</a></li>
+                            <!-- <li><a href="javascript:void(0);"><i class="icon-stack3"></i> Module</a></li> -->
+                        </ul>
+                    </li>
+                    @endif
+                </ul>
             </div>
         </div>
     </div>
+</div>

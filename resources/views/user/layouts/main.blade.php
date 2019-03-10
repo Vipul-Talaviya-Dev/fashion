@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @yield('meta')
-    
+    <link rel="icon" href="/front/images/favicon.png" >
     <link href="/front/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/front/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/front/css/material.min.css" rel="stylesheet" type="text/css" media="all" />

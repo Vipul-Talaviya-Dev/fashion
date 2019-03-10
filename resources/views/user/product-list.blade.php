@@ -108,6 +108,7 @@
 					<div class="w3ls_dresses_grid_right_grid3">
 						<?php $count = 1; ?>
 						@foreach($products as $product)
+						@if($product->variation)
 						<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_dresses">
 							<?php
 								if($product->category && $product->category->parent && $product->category->parent->parent) {
@@ -142,6 +143,7 @@
 								<?php $count++;?>
 							@endif
 						</div>
+						@endif
 						@endforeach
 						<div class="clearfix"> </div>
 					</div>

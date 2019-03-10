@@ -28,7 +28,6 @@ class WindowImageController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'url' => 'required|url',
-            'productId' => 'required|numeric',
             'order' => 'required|numeric|min:0',
             'status' => 'required|numeric',
             'image' => 'required|image'

@@ -74,4 +74,6 @@
 @endsection
 
 @section('content')
+<div class="content" style="height: 80vh;">
+</div>
 @endsection

@@ -3,18 +3,18 @@
     @if(!\Auth::check())
         <a href="javascript:void(0);" style="margin-top: -20px;" class="loginModel white-text pull-right">Login & Signup</a>
     @else
-        <a href="{{ route('user.myAccount') }}" style="margin-top: -20px;" class="white-text pull-right">My Account</a>
+        <a href="{{ route('user.myAccount') }}" style="margin-top: -20px;" class="white-text pull-right">{{ \Auth::user()->name }}</a>
     @endif
 </div>
 <div class="header padding-top-10">
-    <div class="container" align="{{ ($cart) ? '' : 'center' }}">
+    <div class="container" align="center">
         <div class="{{ ($cart) ? 'w3l_login' : 'width-10' }}">
             <a href="{{ route('user.index') }}" style="width: 10%;height: 0px;border: 0;">
                 <img src="/front/images/logo.png" alt="Fashion" class="img-responsive">
             </a>
         </div>
         @if($cart)
-        <div class="w3l_logo"></div>
+        <!-- <div class="w3l_logo"></div> -->
         <div class="cart box_1">
             <a href="javascript:void(0);" class="cart-list">
                 <div class="total">

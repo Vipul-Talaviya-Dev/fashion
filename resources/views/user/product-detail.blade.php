@@ -53,17 +53,6 @@
 				</ul>
 			</div>
 			<p><br></p>
-			<p><br></p>
-			<div class="simpleCart_shelfItem">
-				<p>
-					@if($variation->qty == 0)
-						<a href="javascript:void(0);">Out Of Stock</a>
-					@else
-						<a class="item_add text-center buynow pull-right" href="javascript:void(0);" data-byNow="1">Buy Now</a>
-						<a class="item_add text-center" href="javascript:void(0);" data-byNow="0">Add to cart</a>
-					@endif	
-				</p>
-			</div>
 		</div>
 		<div class="col-md-8 single-right">
 			<h3>{{ $product->name }} <a href="javascript:void(0);" class="pull-right default-text" data-toggle="modal" data-target="#chart">Chart</a></h3>
@@ -98,14 +87,23 @@
 			<div class="simpleCart_shelfItem">
 				<p>Rs. <i class="item_price">{{ $variation->price }}</i></p>
 			</div>
-			<div>
-				<h3 class="margin-top-25">Product Details</h3>
-			</div>
-			<div class="additional_info_grid product-detail">
-				<p>{!!  $product->description !!}</p>
+			<div class="simpleCart_shelfItem">
+					@if($variation->qty == 0)
+						<p><a href="javascript:void(0);">Out Of Stock</a></p>
+					@else
+						<p><a class="item_add text-center buynow" href="javascript:void(0);" data-byNow="1">Buy Now</a></p>
+						<p><a class="item_add text-center" href="javascript:void(0);" data-byNow="0">Add to cart</a>
+						</p>
+					@endif	
 			</div>
 		</div>
-		<div class="clearfix"> </div>
+		<div class="clearfix"></div><br>
+		<div>
+			<h3 class="margin-top-25">Product Details</h3>
+		</div>
+		<div class="additional_info_grid product-detail">
+			<p>{!!  $product->description !!}</p>
+		</div>
 	</div>
 </div>
 <!-- Detail End -->
@@ -114,6 +112,7 @@
 			<h3 class="margin-top-25">Related Products</h3>
 			<ul id="flexiselDemo2">
 				@foreach($relatedProducts as $relatedProduct)
+					@if($relatedProduct->variation)
 					<li>
 						<?php
 							if($relatedProduct->category && $relatedProduct->category->parent && $relatedProduct->category->parent->parent) {
@@ -150,6 +149,7 @@
 							</div>
 						</a>
 					</li>
+					@endif
 				@endforeach
 			</ul>
 		</div>
