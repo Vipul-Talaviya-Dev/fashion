@@ -23,6 +23,7 @@ class Order extends Model
 		'discount',
 		'extra_discount',
 		'total',
+		'payment_response',
 		'status'
 	];
 
@@ -33,6 +34,10 @@ class Order extends Model
    */
 	protected $dates = ['deleted_at'];
 
+	public function orderId()
+	{
+		return 'FHN'.date('Ymd', strtotime($this->created_at)).$this->id;
+	}
 
 	public function orderProducts()
 	{

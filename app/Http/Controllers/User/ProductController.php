@@ -271,7 +271,7 @@ class ProductController extends Controller
         	$order->offer_id = Session::get('offer');
         }
 
-        $order->payment_mode = 1;
+        $order->payment_mode = $request->get('payment_option');
         $order->payment_status = 1;
         $order->cart_amount = Session::get('order')['total'];
         $order->discount = Session::get('discount') ?: 0;
@@ -293,7 +293,7 @@ class ProductController extends Controller
 	        $orderProduct->price = $variation->price;
 	        $orderProduct->max_price = $variation->price;
 	        $orderProduct->qty = $data['qty'];
-	        $orderProduct->status = 1;
+	        $orderProduct->status = ($request->get('payment_option') == 1) ? 3 : 1;
 	        $orderProduct->save();
 
             $variation->qty = $variation->qty - $data['qty'];
@@ -309,36 +309,10 @@ class ProductController extends Controller
     	Session::forget('addressId');
 
     	Session::put('orderId', $orderId);
-        return redirect(route('user.thanks'));
-    }
-
-    public function thanks(Request $request)
-    {
-    	if(Session::get('orderId') == null) {
-    		return redirect(route('user.index'));
-    	}
-        $order = Order::with(['orderProducts.product.variations'])->find(Session::get('orderId'));
-        $user = Auth::user();
-        $address = $user->addresses()->find($order->address_id);
-
-        Mail::send('user.email.order-place', [
-            'order' => $order,
-            'user' => $user,
-            'address' => $address
-        ], function ($message) use ($user) {
-            $message->from('vipulpatel1152@gmail.com', 'Developer Mail')
-                ->subject('Order Placed')
-                ->to($user->email, $user->name);
-        });
-
-        Session::forget('orderId');
-
-    	return view('user.thanks', [
-    		'order' => $order,
-            'user' => $user,
-            'address' => $address,
-            'cart' => false,
-            'footer' => true
-    	]);
+        if($request->get('payment_option') == 1) {
+            return redirect(route('user.thanks'));
+        } else {
+            return redirect(route('user.orderConfirm'));
+        }
     }
 }

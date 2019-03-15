@@ -1,5 +1,6 @@
 <?php
-	$cs_order_id = 'FHN'.date('Ymd', strtotime($order['created_at'])).$order->id;
+	// $cs_order_id = 'FHN'.date('Ymd', strtotime($order['created_at'])).$order->id;
+	$cs_order_id = $order->orderId();
 ?>
  <table width="100%" border="0" style="padding:24px;background-color:rgb(243,243,243)" cellspacing="0" cellpadding="0" align="center">
 <tbody>

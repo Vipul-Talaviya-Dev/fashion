@@ -45,7 +45,11 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 
 		Route::get('/payment', 'ProductController@payment')->name('payment');
 		Route::post('/order-place', 'ProductController@orderPlace')->name('order-place');
-		Route::get('/thanks', 'ProductController@thanks')->name('thanks');
+
+		Route::get('order-confirm', 'PaymentController@orderConfirm')->name('orderConfirm');
+		Route::post('payment-success','PaymentController@thanks')->name('paymentsuccess');
+		Route::post('payment-failure','PaymentController@thanks')->name('paymentfailure');
+		Route::get('thanks', 'PaymentController@thanks')->name('thanks');
 		
 		Route::get('addresses', 'AddressController@index')->name('addresses');
 		Route::get('address/{id}/delete', 'AddressController@delete')->name('addressDelete');

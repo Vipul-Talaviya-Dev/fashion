@@ -188,14 +188,14 @@
 										<hr>
 										<!-- Debit Card -->
 										<div class="radio radio-danger">
-											<label><input type="radio" class="payment_option" name="payment_option" value="102"><span class="circle"></span><span class="check"></span> Debit Card</label>
+											<label><input type="radio" class="payment_option" name="payment_option" value="2"><span class="circle"></span><span class="check"></span> Debit Card</label>
 											<ul class="payment_card_img">
 												<li><img src="/front/images/rupay-curved-32px.png"></li><li><img src="/front/images/maestro-curved-32px.png"></li><li><img src="/front/images/mastercard-curved-32px.png"></li><li><img src="/front/images/visa-curved-32px.png"></li>
 											</ul>
 										</div>
 										<hr>
 										<div class="radio radio-danger">
-											<label><input type="radio" class="payment_option" name="payment_option" value="103"><span class="circle"></span><span class="check"></span> Net Banking</label>
+											<label><input type="radio" class="payment_option" name="payment_option" value="3"><span class="circle"></span><span class="check"></span> Net Banking</label>
 											<a class="pull-right label label-success" data-style="toast" data-content="This is a toast! Lorem lipsum dolor sit amet..." data-toggle="snackbar" data-timeout="0">Details</a>
 										</div><hr>
 										<div class="radio radio-danger">
