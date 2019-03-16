@@ -75,6 +75,15 @@
                     @if(in_array(13, $moduleIds))
                     <li><a href="{{ route('admin.contacts') }}"><i class="icon-phone"></i> <span>Contacts</span></a></li>
                     @endif
+                    @if(in_array(14, $moduleIds))
+                    <li><a href="{{ route('admin.content.edit', ['id' => 1]) }}"><i class="fa fa-cog"></i> <span>About</span></a></li>
+                    @endif
+                    @if(in_array(15, $moduleIds))
+                    <li><a href="{{ route('admin.content.edit', ['id' => 2]) }}"><i class="fa fa-cog"></i> <span>FAQ</span></a></li>
+                    @endif
+                    @if(in_array(16, $moduleIds))
+                    <li><a href="{{ route('admin.content.edit', ['id' => 3]) }}"><i class="fa fa-cog"></i> <span>Term & Condition</span></a></li>
+                    @endif
                     @if(false)
                     <li>
                         <a href="javascript:void(0);"><i class="icon-basket"></i> <span>Product</span></a>

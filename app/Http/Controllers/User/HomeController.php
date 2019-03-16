@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\Banner;
+use App\Models\Content;
 use App\Models\Contact;
 use App\Models\WindowImage;
 use Illuminate\Http\Request;
@@ -56,5 +57,32 @@ class HomeController extends Controller
         ]);
 
         return redirect()->back()->with(['success' => 'Thank You Contact Us.']);
+    }
+
+    public function about()
+    {
+        return view('user.content', [
+            'content' => Content::find(1),
+            'cart' => false,
+            'footer' => true
+        ]);
+    }
+
+    public function faq()
+    {
+        return view('user.content', [
+            'content' => Content::find(2),
+            'cart' => false,
+            'footer' => true
+        ]);
+    }
+
+    public function termCondition()
+    {
+        return view('user.content', [
+            'content' => Content::find(3),
+            'cart' => false,
+            'footer' => true
+        ]);
     }
 }

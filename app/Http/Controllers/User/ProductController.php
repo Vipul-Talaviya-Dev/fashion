@@ -6,6 +6,7 @@ use Mail;
 use Auth;
 use Session;
 use App\Models\User;
+use App\Models\AppContent;
 use App\Models\Address;
 use App\Models\Product;
 use App\Models\Category;
@@ -184,9 +185,10 @@ class ProductController extends Controller
             return redirect(route('user.loginForm'));
         }
         $user = Auth::user();
-
+        $deliverCharge = AppContent::find(1);
     	return view('user.order-shipping', [
             'addresses' => $user->addresses,
+            'deliverCharge' => $deliverCharge->delivery_charge,
             'cart' => false,
             'footer' => false
         ]);
@@ -214,10 +216,12 @@ class ProductController extends Controller
     	}
     	$user = Auth::user();
     	$address = $user->addresses()->find(Session::get('addressId'));
+        $deliverCharge = AppContent::find(1);
 
     	return view('user.payment', [
     		'user' => $user,
     		'address' => $address,
+            'deliverCharge' => $deliverCharge->delivery_charge,
             'cart' => false,
             'footer' => false
     	]);
@@ -260,7 +264,7 @@ class ProductController extends Controller
     	}
 
         $user = Auth::user();
-
+        $deliverCharge = AppContent::find(1);
         $order = new Order;
         $order->user_id = $user->id;
         $order->address_id = Session::get('addressId');
@@ -273,10 +277,11 @@ class ProductController extends Controller
 
         $order->payment_mode = $request->get('payment_option');
         $order->payment_status = 1;
-        $order->cart_amount = Session::get('order')['total'];
+        $order->cart_amount = (Session::get('order')['final_amount'] - Session::get('discount')) + $deliverCharge->delivery_charge;
         $order->discount = Session::get('discount') ?: 0;
         // $order->extra_discount = $request->get('data');
-        $order->total = Session::get('order')['final_amount'] - Session::get('discount');
+        $order->total = (Session::get('order')['final_amount'] - Session::get('discount')) + $deliverCharge->delivery_charge;
+        $order->delivery_charge = $deliverCharge->delivery_charge;
         $order->status = 1;
         $order->save();
         

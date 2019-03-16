@@ -53,6 +53,10 @@
 												<td colspan="4" align="right">Total</td>
 												<td align="left">Rs. {{ $order->total }}</td>
 											</tr>
+											<tr class="thanks_summary_text">
+												<td colspan="4" align="right">Delivery Charge(+)</td>
+												<td align="left">Rs. {{ $order->delivery_charge }}</td>
+											</tr>
 											@if($order->voucher_id > 0)	
 												<tr class="thanks_summary_text">
 													<td colspan="4" align="right">Applied Discount (-)</td>

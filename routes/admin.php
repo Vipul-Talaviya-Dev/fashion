@@ -93,6 +93,11 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
         Route::get('subAdmin/{id}/edit', 'SubAdminController@edit')->name('subAdmin.edit');
         Route::post('subAdmin/{id}/update', 'SubAdminController@update')->name('subAdmin.update');
         Route::get('subAdmin/delete', 'SubAdminController@delete')->name('subAdmin.delete');
+
+        // ContentController
+        Route::get('content/{id}/edit', 'ContentController@edit')->name('content.edit');
+        Route::post('content/{id}/update', 'ContentController@update')->name('content.update');
+
     });
 });
 

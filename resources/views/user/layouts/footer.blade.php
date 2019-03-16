@@ -14,9 +14,10 @@
 			<div class="col-md-4 w3_footer_grid">
 				<h3>Information</h3>
 				<ul class="info"> 
-					<li><a href="javascript:void(0);">About Us</a></li>
+					<li><a href="{{ route('user.about') }}">About Us</a></li>
 					<li><a href="{{ route('user.contact') }}">Contact Us</a></li>
-					<li><a href="javascript:void(0);">FAQ's</a></li>
+					<li><a href="{{ route('user.faq') }}">FAQ's</a></li>
+					<li><a href="{{ route('user.term') }}">Term & Condition</a></li>
 				</ul>
 			</div>
 			<div class="col-md-4 w3_footer_grid">
@@ -27,7 +28,7 @@
 						<li><a href="{{ $content->fb_link ? $content->fb_link : 'javascript:void(0);' }}" target="_blank" class="facebook"> </a></li>
 						<li><a href="{{ $content->twitter_link ? $content->twitter_link : 'javascript:void(0);' }}" target="_blank" class="twitter"> </a></li>
 						<li><a href="{{ $content->google_link ? $content->google_link : 'javascript:void(0);' }}" target="_blank" class="google"> </a></li>
-						<li><a href="javascript:void(0);" class="pinterest"> </a></li>
+						<li><a href="{{ $content->instagram_link ? $content->instagram_link : 'javascript:void(0);' }}" class="instagram"></a></li>
 					</ul>
 				</div>
 			</div>

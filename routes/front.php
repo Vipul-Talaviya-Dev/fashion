@@ -17,6 +17,9 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 	Route::get('/', 'HomeController@index')->name('index');
 	Route::get('contact-us', 'HomeController@contact')->name('contact');
 	Route::post('contact', 'HomeController@addContact')->name('addContact');
+	Route::get('about', 'HomeController@about')->name('about');
+	Route::get('faq', 'HomeController@faq')->name('faq');
+	Route::get('term-condition', 'HomeController@termCondition')->name('term');
 
 	Route::get('products', 'ProductController@index')->name('products');
 	Route::get('/shop/{mainCategory?}/{subCategory?}/{thirdCategory?}/{productUrl?}', 'ProductController@productDetail')->name('productDetail');

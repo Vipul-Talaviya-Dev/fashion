@@ -100,12 +100,12 @@
 								<td class="text-right">Rs. {{ $total }}</td>
 							</tr>
 							<tr>
-								<td class="text-left">Total shipping Charges</td>
-								<td class="text-right green">Rs. 0</td>
+								<td class="text-left">Delivery Charge [+]</td>
+								<td class="text-right green">Rs. {{ $deliverCharge }}</td>
 							</tr>
-							<tr>
+							<tr style="border-top: 1px solid;">
 								<td class="text-left">Total Amount</td>
-								<td class="text-right"><strong>Rs. {{ $finalAmount }}</strong></td>
+								<td class="text-right"><strong>Rs. {{ $finalAmount+$deliverCharge }}</strong></td>
 							</tr>
 						</tbody>
 					</table>

@@ -406,6 +406,12 @@ a {
     color: #000;
     border: 1px solid #fff;
 }
+.agileits_social_button ul li a.instagram {
+    background: url(../images/instagram-logo.png) no-repeat 9px 9px #414141;
+    display: block;
+    width: 35px;
+    height: 35px;
+}
 /*Address Page*/
 .addresses-box {
     background: rgba(255,255,255,.98);

@@ -24,7 +24,8 @@ class Order extends Model
 		'extra_discount',
 		'total',
 		'payment_response',
-		'status'
+		'delivery_charge',
+		'status',
 	];
 
 	/**

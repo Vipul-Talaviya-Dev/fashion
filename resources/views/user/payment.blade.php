@@ -125,9 +125,9 @@
 											<div class="col-md-6 order-cart-amount"> [-] Rs. {{ Session::get('discount') }}</div>
 											@endif
 											<div class="col-md-6">Delivery Charges</div>
-											<div class="col-md-6 order-cart-amount"> [+] Rs. 0</div>
+											<div class="col-md-6 order-cart-amount"> [+] Rs. {{ $deliverCharge }}</div>
 											<div class="col-md-6 total">Total Amount</div>
-											<div class="col-md-6 order-cart-amount total">Rs. {{ $finalAmount - Session::get('discount') }}</div>
+											<div class="col-md-6 order-cart-amount total">Rs. {{ ($finalAmount - Session::get('discount')) + $deliverCharge }}</div>
 										</div>
 								</div>
 							</div>

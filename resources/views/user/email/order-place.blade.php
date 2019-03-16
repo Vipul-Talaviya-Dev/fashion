@@ -11,7 +11,7 @@
 	<tr>
 		<td width="100%">
 			<a href="javascript:void(0);">
-				<img src="/front/images/logo.png" style="width: 52%;" alt="Online fashion store" align="center" title="Online fashion store" class="CToWUd">
+				<img src="{{ url('/') }}/front/images/logo.png" style="width: 20%;" alt="Online fashion store" align="center" title="Online fashion store" class="CToWUd">
 			</a>
 		</td>
     </tr>
@@ -95,7 +95,7 @@
 			<table>
 			<tbody>
 				<tr>
-					<td><div style="padding-left:300px;padding-right:10px;font-size:15px;margin-top:10px;font-family:Arial,Helvetica,sans-serif;color:green">Delivery Charge(+)</div></td><td> Rs. 0</td>
+					<td><div style="padding-left:300px;padding-right:10px;font-size:15px;margin-top:10px;font-family:Arial,Helvetica,sans-serif;color:green">Delivery Charge(+)</div></td><td> Rs. {{ $order->delivery_charge }}</td>
 				</tr>
 				<tr><td><div style="padding-left:350px;padding-right:10px;font-size:18px;margin-top:10px;font-family:Arial,Helvetica,sans-serif;color:#34495e">Total </div></td><td> Rs. {{ $order->cart_amount }}</td></tr>
 			</tbody>
