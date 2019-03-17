@@ -275,7 +275,7 @@ class ProductController extends Controller
         	$order->offer_id = Session::get('offer');
         }
 
-        $order->payment_mode = $request->get('payment_option');
+        $order->payment_mode = $request->get('payment_option') ? $request->get('payment_option') : 2;
         $order->payment_status = 1;
         $order->cart_amount = (Session::get('order')['final_amount'] - Session::get('discount')) + $deliverCharge->delivery_charge;
         $order->discount = Session::get('discount') ?: 0;
