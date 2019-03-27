@@ -172,6 +172,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         JD\Cloudder\CloudderServiceProvider::class,
         Sofa\Eloquence\BaseServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -232,7 +233,7 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Cloudder' => JD\Cloudder\Facades\Cloudder::class,
-
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

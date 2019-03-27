@@ -58,7 +58,7 @@
                     <li><a href="{{ route('admin.orders') }}"><i class="icon-bag"></i> Order</a></li>
                     @endif
                     @if(in_array(8, $moduleIds))
-                    <li><a href="javascript:void(0);"><i class="icon-cart-add"></i> Assign Order</a></li>
+                    <!-- <li><a href="javascript:void(0);"><i class="icon-cart-add"></i> Assign Order</a></li> -->
                     @endif
                     @if(in_array(9, $moduleIds))
                     <li><a href="{{ route('admin.banners') }}"><i class="icon-stack3"></i> Banner</a></li>

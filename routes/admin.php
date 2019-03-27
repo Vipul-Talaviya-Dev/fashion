@@ -81,6 +81,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
         // Order Controller
         Route::get('orders', 'OrderController@index')->name('orders');
         Route::get('order/{id}/detail', 'OrderController@orderDetail')->name('orderDetail');
+        Route::post('order/{id}/statusChange', 'OrderController@statusChange')->name('statusChange');
         Route::get('order/{id}/invoice', 'OrderController@invoice')->name('invoice');
 
         // User

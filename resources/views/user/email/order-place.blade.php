@@ -11,7 +11,7 @@
 	<tr>
 		<td width="100%">
 			<a href="javascript:void(0);">
-				<img src="{{ url('/') }}/front/images/logo.png" style="width: 20%;" alt="Online fashion store" align="center" title="Online fashion store" class="CToWUd">
+				<img src="{{ URL::asset('front/images/logo.png') }}" style="width: 20%;" alt="Online fashion store" align="center" title="Online fashion store" class="CToWUd">
 			</a>
 		</td>
     </tr>

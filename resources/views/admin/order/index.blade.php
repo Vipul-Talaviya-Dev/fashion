@@ -32,19 +32,43 @@
                 </div>
                 <hr/>
                 <div class="container-fluid">
-                    <div class="content">
-                        <div class="panel panel-flat">
-                            <table class="table">
+                    <div class="">
+                        <div class="row">
+                            <form method="get">
+                                <div class="form-group col-md-2">
+                                    <label>Start Date</label>
+                                    <input type="date" name="startDate" class="form-control" placeholder="Start Date" autocomplete="off" value="{{ request('startDate') }}">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>End Date</label>
+                                    <input type="date" name="endDate" class="form-control" placeholder="End Date" autocomplete="off" value="{{ request('endDate') }}">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>Order Status</label>
+                                    <select name="status" class="form-control">
+                                        <option value="">-- Select Status --</option>
+                                        @foreach(\App\Helper\Helper::orderStatus() as $key => $status)
+                                            <option value="{{ $key }}" {{ (request('status') == $key) ? 'selected' : '' }}>{{ $status }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <p>&nbsp;</p>
+                                    <button class="btn btn-info" type="submit" style="margin-top: -5px;">Search</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>Order Id</th>
+                                        <th>Order Date</th>
                                         <th>User Name</th>
                                         <th>Total (Rs.)</th>
                                         <th>Discount (Rs.)</th>
                                         <th>Cart Amount (Rs.)</th>
-                                        <th>Payment Reference</th>
                                         <th>Payment Status</th>
-                                        <th>Order Date</th>
                                         <th>Status</th>
                                         <th>Invoice</th>
                                         <th class="text-center">Actions</th>
@@ -53,18 +77,27 @@
                                 <tbody>
                                     @foreach($orders as $key => $order)
                                     <tr>
-                                        <td>{{ $order->id }}</td>
-                                        <td>{{ $order->user->name }}</td>
+                                        <td>{{ $order->orderId() }}</td>
+                                        <td style="white-space: nowrap;">{{ $order->created_at->toDateString() }}</td>
+                                        <td style="white-space: nowrap;">{{ $order->user->name }}</td>
                                         <td>{{ $order->total }}</td>
                                         <td>{{ $order->discount }}</td>
                                         <td>{{ $order->cart_amount }}</td>
-                                        <td>{{ $order->payment_reference ?: 'N/A' }}</td>
-                                        <td>{{ $order->payment_status }}</td>
-                                        <td>{{ $order->created_at }}</td>
-                                        @if($order->status == 1)
-                                        <td><span class="label label-success">Success</span></td>
-                                        @else
-                                        <td><span class="label label-default">Checkout</span></td>
+                                        <td>
+                                            @if($order->payment_status == 1)
+                                                <span class="label label-danger">No</span>
+                                            @else
+                                                <span class="label label-success">Yes</span>
+                                            @endif
+                                        </td>
+                                        @if($order->status == 1 || $order->status == 2)
+                                            <td><span class="label label-default">{{ \App\Helper\Helper::orderStatus($order->status) }}</span></td>
+                                        @elseif($order->status == 3 || $order->status == 6)
+                                            <td><span class="label label-success">{{ \App\Helper\Helper::orderStatus($order->status) }}</span></td>
+                                        @elseif($order->status == 4 || $order->status == 5 || $order->status == 7)
+                                            <td><span class="label label-info">{{ \App\Helper\Helper::orderStatus($order->status) }}</span></td>
+                                        @elseif($order->status == 8)
+                                            <td><span class="label label-danger">{{ \App\Helper\Helper::orderStatus($order->status) }}</span></td>
                                         @endif
                                         <td class="text-center"><a href="{{ route('admin.invoice', ['id' => $order->id]) }}" title="Get Invoice" target="_blank"><i class="fa fa-print"></i></a>
                                         </td>
@@ -75,11 +108,11 @@
                                 </tbody>
                             </table>
                         </div>
+                        <hr>
                         <div class="pull-right">
-                            {!! $orders->appends([
-                                'search' => request('search')
-                                ])->render() 
+                            {!! $orders->appends($_GET)->render() 
                             !!}
+                            <p><br></p>
                             </div>
                         </div>
                     </div>

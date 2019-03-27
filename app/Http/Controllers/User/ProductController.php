@@ -298,7 +298,8 @@ class ProductController extends Controller
 	        $orderProduct->price = $variation->price;
 	        $orderProduct->max_price = $variation->price;
 	        $orderProduct->qty = $data['qty'];
-	        $orderProduct->status = ($request->get('payment_option') == 1) ? 3 : 1;
+            $orderProduct->status = ($request->get('payment_option') == 1) ? 3 : 1;
+	        $orderProduct->payment_status = ($request->get('payment_option') == 1) ? 2 : 1;
 	        $orderProduct->save();
 
             $variation->qty = $variation->qty - $data['qty'];
