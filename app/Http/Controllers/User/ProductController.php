@@ -5,7 +5,9 @@ namespace App\Http\Controllers\User;
 use Mail;
 use Auth;
 use Session;
+use App\Models\Size;
 use App\Models\User;
+use App\Models\Color;
 use App\Models\AppContent;
 use App\Models\Address;
 use App\Models\Product;
@@ -21,8 +23,23 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
+        $products = Product::latest()->with(['category.parent']);
+        if($request->get('sizes')) {
+            $products = $products->with(['variation' => function($q) use($request) {
+                return $q->whereIn('size_id', explode(',', $request->get('sizes')));
+            }]);
+        }
+
+        if($request->get('colors')) {
+            $products = $products->with(['variation' => function($q) use($request) {
+                return $q->whereIn('color_id', explode(',', $request->get('colors')));
+            }]);
+        }
+
         return view('user.product-list', [
-        	'products' => Product::latest()->with(['variation', 'category.parent'])->paginate(25),
+        	'products' => $products->paginate(25),
+            'sizes' => Size::active()->get(),
+            'colors' => Color::active()->get(),
             'cart' => true,
             'footer' => false
         ]);

@@ -56,6 +56,11 @@
                                     <p>&nbsp;</p>
                                     <button class="btn btn-info" type="submit" style="margin-top: -5px;">Search</button>
                                 </div>
+
+                                <div class="form-group col-md-2">
+                                    <p>&nbsp;</p>
+                                    <button class="btn btn-info" type="submit" name="excel" value="1" style="margin-top: -5px;">Export</button>
+                                </div>
                             </form>
                         </div>
                         <div class="table-responsive">

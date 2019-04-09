@@ -1,90 +1,78 @@
 @extends('user.layouts.main')
 
-@section('title', 'Fashion')
+@section('title', 'Our Product List')
+
+@section('css')
+<link rel="stylesheet" href="/front/css/product-filter.css" type="text/css" media="screen" />
+<style type="text/css">
+	.body {
+		background: #f3f3f3;
+	}
+</style>
+@endsection
 
 @section('content')
 <div class="dresses">
 		<div class="container">
 			<div class="w3ls_dresses_grids">
 				<div class="col-md-4 w3ls_dresses_grid_left">
-					<div class="w3ls_dresses_grid_left_grid">
-						<h3>Categories</h3>
-						<div class="w3ls_dresses_grid_left_grid_sub">
-							<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-							  <div class="panel panel-default">
-								<div class="panel-heading" role="tab" id="headingOne">
-								  <h4 class="panel-title asd">
-									<a class="pa_italic" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-									  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>New Arrivals
-									</a>
-								  </h4>
+					<div class="filters">
+						<div class="product-filter col-md-12">
+							<div class="bhgxx2 col-md-12">
+								<div class="list">
+									<section class="reset-filter-part">
+					                    <div class="filter-title">
+					                        <div class="filter-text"><span>Filters</span></div>
+					                        <a href="{{ route('user.products') }}" class="filter-clear-all"><span>Clear all</span></a>
+					                    </div>
+					                </section>
+					                <section class="size-list">
+					                    <div class="_3xglSm _1iMC4O">
+					                        <div class="_2yccxO D0YrLF">Size</div><svg width="20" height="27" viewBox="0 0 16 27" xmlns="http://www.w3.org/2000/svg" class="_3KyMh7 _2Gnm9R"><path d="M16 23.207L6.11 13.161 16 3.093 12.955 0 0 13.161l12.955 13.161z" fill="#f8f8f8" class="_1ooUW7"></path></svg>
+					                    </div>
+					                    <?php
+					                    	$serchSizes = (request('sizes') ? explode(',', request('sizes')) : []);
+					                    ?>
+					                    @foreach($sizes as $size)
+						                    <div class="_3mk-PQ">
+						                        <div class="_36jUgy">
+						                            <div class="_4IiNRh _2mtkou" title="{{ $size->name }}">
+						                                <div class="_2wQvxh _1WV8jE">
+						                                    <div class="_2kFyHg _2mtkou"><label><input type="checkbox" class="_3uUUD5 sizes" value="{{ $size->id }}"
+						                                    @if(in_array($size->id, $serchSizes))
+						                                    	checked
+						                                    @endif 
+					                                    	><div class="_1p7h2j"></div><div class="_1GEhLw">{{ $size->name }}</div></label></div>
+						                                </div>
+						                            </div>
+						                        </div>
+						                    </div>
+					                    @endforeach
+					                </section>
+					                <section class="size-list">
+					                    <div class="_3xglSm _1iMC4O">
+					                        <div class="_2yccxO D0YrLF">Color</div><svg width="20" height="27" viewBox="0 0 16 27" xmlns="http://www.w3.org/2000/svg" class="_3KyMh7 _2Gnm9R"><path d="M16 23.207L6.11 13.161 16 3.093 12.955 0 0 13.161l12.955 13.161z" fill="#f8f8f8" class="_1ooUW7"></path></svg>
+					                    </div>
+					                    <?php
+					                    	$serchColors = (request('colors') ? explode(',', request('colors')) : []);
+					                    ?>
+					                    @foreach($colors as $color)
+						                    <div class="_3mk-PQ">
+						                        <div class="_36jUgy">
+						                            <div class="_4IiNRh _2mtkou" title="{{ $color->name }}">
+						                                <div class="_2wQvxh _1WV8jE">
+						                                    <div class="_2kFyHg _2mtkou"><label><input type="checkbox" class="_3uUUD5 colors" value="{{ $color->id }}"
+						                                    	@if(in_array($color->id, $serchColors))
+							                                    	checked
+							                                    @endif
+					                                    	><div class="_1p7h2j"></div><div class="_1GEhLw">{{ $color->name }}</div></label></div>
+						                                </div>
+						                            </div>
+						                        </div>
+						                    </div>
+					                    @endforeach
+					                </section>
 								</div>
-								<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-								  <div class="panel-body panel_text">
-									<ul>
-										<li><a href="dresses.html">Dresses</a></li>
-										<li><a href="sweaters.html">Sweaters</a></li>
-										<li><a href="skirts.html">Shorts & Skirts</a></li>
-										<li><a href="jeans.html">Jeans</a></li>
-										<li><a href="shirts.html">Shirts</a></li>
-									</ul>
-								  </div>
-								</div>
-							  </div>
-							  <div class="panel panel-default">
-								<div class="panel-heading" role="tab" id="headingTwo">
-								  <h4 class="panel-title asd">
-									<a class="pa_italic collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-									  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>Foot Wear
-									</a>
-								  </h4>
-								</div>
-								<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-								   <div class="panel-body panel_text">
-									<ul>
-										<li><a href="sandals.html">Flats</a></li>
-										<li><a href="sandals.html">Sandals</a></li>
-										<li><a href="sandals.html">Boots</a></li>
-										<li><a href="sandals.html">Heals</a></li>
-										<li><a href="sandals.html">Shirts</a></li>
-									</ul>
-								  </div>
-								</div>
-							  </div>
-							</div>
-							<ul class="panel_bottom">
-								<li><a href="products.html">Summer Store</a></li>
-								<li><a href="dresses.html">New In Clothing</a></li>
-								<li><a href="sandals.html">New In Shoes</a></li>
-								<li><a href="products.html">Latest Watches</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="w3ls_dresses_grid_left_grid">
-						<h3>Color</h3>
-						<div class="w3ls_dresses_grid_left_grid_sub">
-							<div class="ecommerce_color">
-								<ul>
-									<li><a href="#"><i></i> Red(5)</a></li>
-									<li><a href="#"><i></i> Brown(2)</a></li>
-									<li><a href="#"><i></i> Yellow(3)</a></li>
-									<li><a href="#"><i></i> Violet(6)</a></li>
-									<li><a href="#"><i></i> Orange(2)</a></li>
-									<li><a href="#"><i></i> Blue(1)</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="w3ls_dresses_grid_left_grid">
-						<h3>Size</h3>
-						<div class="w3ls_dresses_grid_left_grid_sub">
-							<div class="ecommerce_color ecommerce_size">
-								<ul>
-									<li><a href="#">Medium</a></li>
-									<li><a href="#">Large</a></li>
-									<li><a href="#">Extra Large</a></li>
-									<li><a href="#">Small</a></li>
-								</ul>
 							</div>
 						</div>
 					</div>
@@ -151,6 +139,28 @@
 				<div class="clearfix"> </div>
 			</div>
 		</div>
-			<div align="center">{{ $products->links() }}</div>
+			<div align="center">{!! $products->appends($_GET)->render() !!}</div>
 	</div>
+@endsection
+
+@section('js')
+<script type="text/javascript">
+	$(document).ready(function() {
+		var sizes = "{{ (request('sizes') ? request('sizes') : '') }}",
+		colors = "{{ (request('colors') ? request('colors') : '') }}";
+		$("body").on("click", ".sizes", function() {
+			sizes = $('.sizes:checked').map(function() { return this.value; }).get().join(',');
+			searchRedirect(sizes, colors);
+		});
+
+		$("body").on("click", ".colors", function() {
+			colors = $('.colors:checked').map(function() { return this.value; }).get().join(',');
+			searchRedirect(sizes, colors);
+		});
+
+		function searchRedirect(sizes, colors) {
+			window.location.href= "{{ route('user.products') }}?sizes="+sizes+"&colors="+colors;
+		}
+	})
+</script>
 @endsection
