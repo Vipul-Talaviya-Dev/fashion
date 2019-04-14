@@ -316,7 +316,7 @@ class ProductController extends Controller
 	        $orderProduct->max_price = $variation->price;
 	        $orderProduct->qty = $data['qty'];
             $orderProduct->status = ($request->get('payment_option') == 1) ? 3 : 1;
-	        $orderProduct->payment_status = ($request->get('payment_option') == 1) ? 2 : 1;
+	        // $orderProduct->payment_status = ($request->get('payment_option') == 1) ? 2 : 1;
 	        $orderProduct->save();
 
             $variation->qty = $variation->qty - $data['qty'];
@@ -337,5 +337,36 @@ class ProductController extends Controller
         } else {
             return redirect(route('user.orderConfirm'));
         }
+    }
+
+    public function thanks(Request $request)
+    {
+        if(Session::get('orderId') == null) {
+            return redirect(route('user.index'));
+        }
+
+        $order = Order::with(['orderProducts.product.variations'])->find(Session::get('orderId'));
+        $user = Auth::user();
+        $address = $user->addresses()->find($order->address_id);
+
+        Mail::send('user.email.order-place', [
+            'order' => $order,
+            'user' => $user,
+            'address' => $address
+        ], function ($message) use ($user) {
+            $message->from('vipulpatel1152@gmail.com', 'Developer Mail')
+                ->subject('Order Placed')
+                ->to($user->email, $user->name);
+        });
+
+        Session::forget('orderId');
+
+        return view('user.thanks', [
+            'order' => $order,
+            'user' => $user,
+            'address' => $address,
+            'cart' => false,
+            'footer' => true
+        ]);
     }
 }

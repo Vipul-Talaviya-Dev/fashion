@@ -99,37 +99,6 @@ class PaymentController extends Controller
     	return redirect(route('user.thanks'));
     }
 
-    public function thanks(Request $request)
-    {
-    	if(Session::get('orderId') == null) {
-    		return redirect(route('user.index'));
-    	}
-
-    	$order = Order::with(['orderProducts.product.variations'])->find(Session::get('orderId'));
-    	$user = Auth::user();
-        $address = $user->addresses()->find($order->address_id);
-
-        Mail::send('user.email.order-place', [
-            'order' => $order,
-            'user' => $user,
-            'address' => $address
-        ], function ($message) use ($user) {
-            $message->from('vipulpatel1152@gmail.com', 'Developer Mail')
-                ->subject('Order Placed')
-                ->to($user->email, $user->name);
-        });
-
-        Session::forget('orderId');
-
-    	return view('user.thanks', [
-    		'order' => $order,
-            'user' => $user,
-            'address' => $address,
-            'cart' => false,
-            'footer' => true
-    	]);
-    }
-
     public function getEndPoint()
     {
         return $this->testMode?$this->testEndPoint:$this->liveEndPoint;

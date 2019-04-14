@@ -126,6 +126,7 @@
 	</tr>
 	
 	<tr><td colspan="2" height="10" style="border-bottom:1px solid #eaedef"></td></tr>
+	@if(false)
 	<tr>
 		<td>
 			<div style="padding-left:185px;">
@@ -137,7 +138,7 @@
 			</div>
 		</td>
 	</tr>
-	
+	@endif
 	<tr><td colspan="2" style="border-bottom:1px solid #eaedef"></td></tr>
 	<tr><td align="center" style="font-weight:bold;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#929292"><div style="padding-bottom:10px">All Rights Reserved. Online Fashion Store</div>
 	<p style="padding:10px 0 0 0;margin:0;border-top:solid 1px #cccccc;font-size:11px;color:#565656">24x7 Customer Support&nbsp; | &nbsp;Policy&nbsp; | &nbsp;Flexible Payment Options&nbsp; | &nbsp;900+ Categories</p>
