@@ -18,7 +18,7 @@ class CreateAdminsTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->tinyInteger('role')->default(1);
+            $table->tinyInteger('role')->default(1)->comment('1: Master Admin, 2: Sub Admin');
              $table->string('modules_id')->nullable();
             $table->timestamps();
             $table->softDeletes();

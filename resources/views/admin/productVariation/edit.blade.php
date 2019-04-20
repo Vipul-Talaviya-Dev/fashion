@@ -37,6 +37,35 @@
             {{ csrf_field() }}
             <div class="row">
                 <div class="form-group col-md-4">
+                    <label>Product: <span class="text-danger">*</span></label>
+                    <select class="form-control" name="productId" required>
+                        <option value="">-- Select Product --</option>
+                        @foreach($products as $product)
+                            <option value="{{ $product->id }}" {{ $product->id == $variation->product_id ? 'selected' : '' }}>{{ $product->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Color: <span class="text-danger">*</span></label>
+                    <select class="form-control" name="colorId" required>
+                        <option value="">-- Select Color --</option>
+                        @foreach($colors as $color)
+                            <option value="{{ $color->id }}" {{ $color->id == $variation->color_id ? 'selected' : '' }}>{{ $color->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Size: <span class="text-danger">*</span></label>
+                    <select class="form-control" name="sizeId" required>
+                        <option value="">-- Select Size --</option>
+                        @foreach($sizes as $size)
+                            <option value="{{ $size->id }}" {{ $size->id == $variation->product_id ? 'selected' : '' }}>{{ $size->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
                     <label>Price: <span class="text-danger">*</span></label>
                     <input type="number" name="price" placeholder="Enter Product Price" class="form-control" required pattern="[0-9]" min="0" required value="{{ $variation->price ?: old('price') }}" autocomplete="off">
                 </div>
@@ -44,8 +73,6 @@
                     <label>Quantity: <span class="text-danger">*</span></label>
                     <input type="number" name="qty" placeholder="Enter Quantity" class="form-control" required pattern="[0-9]" min="0" value="{{ $variation->qty ?: ('qty') }}" autocomplete="off">
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-md-4 form-group">
                     <label>Image :</label>
                     <input type="file" name="images[]" class="form-control" accept=".jpeg, .jpg, .png" multiple>

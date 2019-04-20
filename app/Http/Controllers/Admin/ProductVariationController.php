@@ -84,6 +84,9 @@ class ProductVariationController extends Controller
 
         return view('admin.productVariation.edit', [
             'variation' => $variation,
+            'colors' => Color::active()->get(),
+            'sizes' => Size::active()->get(),
+            'products' => Product::active()->get(),
             'images' => explode(',', $variation->images)
         ]);
     }
@@ -95,6 +98,9 @@ class ProductVariationController extends Controller
         }
 
         $this->validate($request, [
+            'productId' => 'required|exists:products,id',
+            'colorId' => 'required|exists:colors,id',
+            'sizeId' => 'required|exists:sizes,id',
             'price' => 'required|numeric|min:1',
             'qty' => 'required|numeric|min:1',
             'images' => 'nullable|array|min:1',
@@ -107,6 +113,10 @@ class ProductVariationController extends Controller
             }
             $variation->images = implode(',', $images); 
         }
+
+        $variation->product_id = $request->get('productId');
+        $variation->color_id = $request->get('colorId');
+        $variation->size_id = $request->get('sizeId');
         $variation->price = $request->get('price');
         $variation->qty = $request->get('qty');
         $variation->save();

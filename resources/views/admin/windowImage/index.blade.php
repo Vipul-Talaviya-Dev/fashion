@@ -42,7 +42,7 @@
                                         <th>Title</th>
                                         <th>URL </th>
                                         <th>Description</th>
-                                        <th>Order</th>
+                                        <!-- <th>Order</th> -->
                                         <th>Status</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
@@ -55,7 +55,6 @@
                                                 <td>{{ $windowImage->title }}</td>
                                                 <td><a href="{{$windowImage->link}}" target="_blank" class="btn btn-sm btn-info">View URL</a></td>
                                                 <td>{{ $windowImage->description }}</td>
-                                                <td>{{ $windowImage->order }}</td>
                                                 @if($windowImage->status == 1)
                                                     <td><span class="label label-success">Active</span></td>
                                                 @else

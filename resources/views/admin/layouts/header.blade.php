@@ -1,6 +1,6 @@
 
 <div class="navbar navbar-inverse">
-    <div class="navbar-header">
+    <div class="navbar-header" align="center">
         <a class="navbar-brand" href="javascript:void(0);"><img src="/front/images/logo.png" alt=""></a>
 
         <ul class="nav navbar-nav visible-xs-block">
@@ -10,9 +10,9 @@
     </div>
 
     <div class="navbar-collapse collapse" id="navbar-mobile">
-        <ul class="nav navbar-nav">
+        <!-- <ul class="nav navbar-nav">
             <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
-        </ul>
+        </ul> -->
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown dropdown-user">
                 <a class="dropdown-toggle" data-toggle="dropdown">
@@ -22,11 +22,11 @@
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a href="#"><i class="icon-user-plus"></i> My profile</a></li>
+                    <!-- <li><a href="#"><i class="icon-user-plus"></i> My profile</a></li>
                     <li><a href="#"><i class="icon-coins"></i> My balance</a></li>
                     <li><a href="#"><span class="badge bg-teal-400 pull-right">58</span> <i class="icon-comment-discussion"></i> Messages</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#"><i class="icon-cog5"></i> Account settings</a></li>
+                    <li class="divider"></li> -->
+                    <li><a href="{{ route('admin.resetPassword') }}"><i class="icon-cog5"></i> Account settings</a></li>
                     <li><a href="{{ route('admin.logout') }}"><i class="icon-switch2"></i> Logout</a></li>
                 </ul>
             </li>

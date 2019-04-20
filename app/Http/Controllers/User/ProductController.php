@@ -354,7 +354,7 @@ class ProductController extends Controller
             'user' => $user,
             'address' => $address
         ], function ($message) use ($user) {
-            $message->from('vipulpatel1152@gmail.com', 'Developer Mail')
+            $message->from('support@shroud.in', 'Support')
                 ->subject('Order Placed')
                 ->to($user->email, $user->name);
         });

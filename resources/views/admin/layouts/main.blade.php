@@ -16,6 +16,14 @@
     <link href="/css/sweetalert.css" rel="stylesheet" type="text/css">
     <link href="/assests/css/datepicker/bootstrap-datepicker3.css"/>
     @yield('css')
+    <style type="text/css">
+        .navbar-brand {
+            height: 70px;
+        }
+        .navbar-brand > img {
+            height: 50px;
+        }
+    </style>
 </head>
 
 <body>

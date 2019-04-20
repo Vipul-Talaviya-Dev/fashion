@@ -4,6 +4,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
     Route::get('/', 'LoginController@index')->name('login');
     Route::post('check', 'LoginController@check')->name('check');
     Route::get('logout', 'LoginController@logout')->name('logout');
+    Route::get('forgot-password', 'LoginController@forgotPassword')->name('forgotPassword');
+    Route::post('forgotPasswordCheck', 'LoginController@forgotPasswordCheck')->name('forgotPasswordCheck');
 
     Route::group(['middleware' => 'adminAuth'], function () {
         // Dashboard Controller
@@ -11,6 +13,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
         Route::get('contacts', 'DashboardController@contacts')->name('contacts');
         Route::get('app-content', 'DashboardController@appContent')->name('appContent');
         Route::post('app-content', 'DashboardController@appContentUpdate')->name('appContentUpdate');
+
+        Route::get('reset-password', 'DashboardController@resetPassword')->name('resetPassword');
+        Route::post('change-password', 'DashboardController@changePassword')->name('changePassword');
+
         // Category Controller
         Route::get('categories', 'CategoryController@index')->name('categories');
         Route::get('category/add', 'CategoryController@add')->name('category.add');

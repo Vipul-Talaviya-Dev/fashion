@@ -56,7 +56,7 @@
                                                     <td><span class="label label-default">No</span></td>
                                                 @endif
 
-                                                <td>{{ $banner->description }}</td>
+                                                <td>{{ $banner->description ?: 'N/A' }}</td>
                                                 @if($banner->status == 1)
                                                     <td><span class="label label-success">Active</span></td>
                                                 @else

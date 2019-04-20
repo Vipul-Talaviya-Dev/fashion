@@ -28,7 +28,7 @@ class WindowImageController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'url' => 'required|url',
-            'order' => 'required|numeric|min:0',
+            // 'order' => 'required|numeric|min:0',
             'status' => 'required|numeric',
             'image' => 'required|image'
         ]);
@@ -38,7 +38,7 @@ class WindowImageController extends Controller
             'title' => $request->get('title'),
             'link' => $request->get('url'),
             'image' => Cloudder::upload($file, [])->getPublicId(),
-            'order' => $request->get('order'),
+            // 'order' => $request->get('order'),
             'description' => $request->get('description'),
             'status' => $request->get('status'),
         ]);
@@ -67,7 +67,7 @@ class WindowImageController extends Controller
             'name' => 'required',
             'url' => 'required|url',
             'status' => 'required|numeric',
-            'order' => 'required|numeric|min:0',
+            // 'order' => 'required|numeric|min:0',
             'image' => 'nullable|image',
         ]);
 
@@ -80,7 +80,7 @@ class WindowImageController extends Controller
         $windowImage->link = $request->get('url');
         $windowImage->description = $request->get('description');
         $windowImage->status = $request->get('status');
-        $windowImage->order = $request->get('order');
+        // $windowImage->order = $request->get('order');
         $windowImage->save();
         
         return redirect(route('admin.windowImages'))->with('success', 'Window Image has been updated successfully.');

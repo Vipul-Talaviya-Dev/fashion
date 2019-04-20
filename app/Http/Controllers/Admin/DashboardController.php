@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
+use App\Models\Admin;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Contact;
@@ -66,5 +67,27 @@ class DashboardController extends Controller
         $content->save();
 
         return redirect()->back()->with(['success' => 'Updated Successfully..']);
+    }
+
+    public function resetPassword()
+    {
+        return view('admin.reset_password');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required|min:6|same:confirmPassword',
+            'confirmPassword' => 'required',
+        ]);
+        $loginAdmin = \Session::get('admin');
+        $admin = Admin::find($loginAdmin->id);
+
+        $admin->password = bcrypt($request->get('password'));
+        $admin->save();
+
+        \Session::forget('admin');
+
+        return redirect(route('admin.login'))->with(['success' => 'Password has been reset successfully! ']);
     }
 }

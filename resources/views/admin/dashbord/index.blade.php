@@ -75,7 +75,11 @@ Dashboard panel
 @endsection
 
 @section('content')
+<?php
+$admin  = \Session::get('admin');
+?>
 <div class="" style="height: 80vh;">
+@if($admin->role == 1)
     <div class="row">
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
             <div class="card">
@@ -182,5 +186,7 @@ Dashboard panel
             </div>
         </div>
     </div>
+@endif
 </div>
+
 @endsection

@@ -70,6 +70,7 @@
                                         <th>Order Id</th>
                                         <th>Order Date</th>
                                         <th>User Name</th>
+                                        <th>Address</th>
                                         <th>Total (Rs.)</th>
                                         <th>Discount (Rs.)</th>
                                         <th>Cart Amount (Rs.)</th>
@@ -85,6 +86,7 @@
                                         <td>{{ $order->orderId() }}</td>
                                         <td style="white-space: nowrap;">{{ $order->created_at->toDateString() }}</td>
                                         <td style="white-space: nowrap;">{{ $order->user->name }}</td>
+                                        <td style="white-space: nowrap;">{{ $order->address->address }}, <br>{{ $order->address->address_1 }} <br>{{ $order->address->city }}, <br>{{ $order->address->state }} - {{ $order->address->pincode }}</td>
                                         <td>{{ $order->total }}</td>
                                         <td>{{ $order->discount }}</td>
                                         <td>{{ $order->cart_amount }}</td>

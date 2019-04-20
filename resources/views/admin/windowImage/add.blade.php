@@ -103,6 +103,7 @@
                                                 </div>
                                                 <div class="col-lg-1"></div>
                                             </div>
+                                            @if(false)
                                             <div class="form-group">
                                                 <div class="col-lg-1"></div>
                                                 <label class="col-lg-2 control-label text-semibold">OrderBy :</label>
@@ -116,6 +117,7 @@
                                                 </div>
                                                 <div class="col-lg-1"></div>
                                             </div>
+                                            @endif
                                             {{--Status--}}
                                             <div class="text-right">
                                                 <button type="submit" class="btn btn-primary">Submit <i class="icon-arrow-right14 position-right"></i></button>

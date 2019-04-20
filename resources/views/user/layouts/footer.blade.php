@@ -28,7 +28,7 @@
 						<li><a href="{{ $content->fb_link ? $content->fb_link : 'javascript:void(0);' }}" target="_blank" class="facebook"> </a></li>
 						<li><a href="{{ $content->twitter_link ? $content->twitter_link : 'javascript:void(0);' }}" target="_blank" class="twitter"> </a></li>
 						<li><a href="{{ $content->google_link ? $content->google_link : 'javascript:void(0);' }}" target="_blank" class="google"> </a></li>
-						<li><a href="{{ $content->instagram_link ? $content->instagram_link : 'javascript:void(0);' }}" class="instagram"></a></li>
+						<li><a href="{{ $content->instagram_link ? $content->instagram_link : 'javascript:void(0);' }}" class="instagram" target="_blank"></a></li>
 					</ul>
 				</div>
 			</div>

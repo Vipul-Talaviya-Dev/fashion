@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Login panel | Fashion</title>
+    <title>Forgot Password | Fashion</title>
     <link rel="icon" href="/front/images/favicon.png" >
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet"
     type="text/css">
@@ -26,21 +26,17 @@
         <div class="page-content">
             <div class="content-wrapper">
                 <div class="content">
-                    <form method="post" action="{{ route('admin.check') }}">
+                    <form method="post" action="{{ route('admin.forgotPasswordCheck') }}">
                         {{ csrf_field() }}
                         <div class="panel panel-body login-form">
                             <div class="text-center">
-                                <!-- <a class="navbar-brand" href="{{ route('admin.login') }}">
-                                    <img src="/front/images/logo.png" alt="Fashion" class="img-responsive" style="height: 50px;" />
-                                </a> -->
-                                
                                 <div align="center"><img src="/front/images/logo.png" alt="Fashion" class="img-responsive" style="height: auto;width: 50%;" /></div>
                                 <h5 class="content-group">Login to your account
                                     <small class="display-block">Enter your credentials below</small>
                                 </h5>
                             </div>
                             <div class="form-group has-feedback has-feedback-left">
-                                <input type="text" class="form-control" name="email" placeholder="Email" autocomplete="off" required>
+                                <input type="text" class="form-control" name="email" placeholder="Email" autocomplete="off" required value="{{ old('email') }}">
                                 <div class="form-control-feedback">
                                     <i class="icon-mention text-muted"></i>
                                 </div>
@@ -50,21 +46,10 @@
                                 @endforeach
                                 @endif
                             </div>
-                            <div class="form-group has-feedback has-feedback-left">
-                                <input type="password" name="password" class="form-control" placeholder="Password" required>
-                                <div class="form-control-feedback">
-                                    <i class="icon-lock2 text-muted"></i>
-                                </div>
-                                @if($errors->get('password'))
-                                @foreach($errors->get('password') as $error)
-                                <span style="color: red;">{{$error}}</span>
-                                @endforeach
-                                @endif
-                            </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block">Sign in <i
+                                <button type="submit" class="btn btn-primary btn-block">Submit <i
                                     class="icon-circle-right2 position-right"></i></button><br>
-                                    <a href="{{ route('admin.forgotPassword') }}" class="pull-right">Forgot Password</a>
+                                    <a href="{{ route('admin.login') }}" class="pull-right">Login</a>
                                 </div>
                             </div>
                         </form>
