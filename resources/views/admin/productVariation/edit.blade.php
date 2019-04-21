@@ -59,7 +59,7 @@
                     <select class="form-control" name="sizeId" required>
                         <option value="">-- Select Size --</option>
                         @foreach($sizes as $size)
-                            <option value="{{ $size->id }}" {{ $size->id == $variation->product_id ? 'selected' : '' }}>{{ $size->name }}</option>
+                            <option value="{{ $size->id }}" {{ $size->id == $variation->size_id ? 'selected' : '' }}>{{ $size->name }}</option>
                         @endforeach
                     </select>
                 </div>

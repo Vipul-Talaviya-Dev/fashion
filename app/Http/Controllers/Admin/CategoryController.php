@@ -72,6 +72,7 @@ class CategoryController extends Controller
 
         $category->name = trim($request->get('name'));
         $category->slug = trim(str_slug($request->get('name')));
+        $category->status = $request->get('status');
         if($request->get('parentId')) {
             $category->parent_id = $request->get('parentId');
         }
