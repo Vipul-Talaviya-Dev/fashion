@@ -162,7 +162,6 @@
 @endsection
 
 @section('js')
-<script src="/front/js/script.js" type="text/javascript"></script>
 <script src="/front/js/slick.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(window).load(function() {

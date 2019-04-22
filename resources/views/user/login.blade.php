@@ -12,6 +12,7 @@
 					<ul>
 						<li class="resp-tab-item" aria-controls="tab_item-0"><span>Sign in</span></li>
 						<li class="resp-tab-item" aria-controls="tab_item-1"><span>Sign up</span></li>
+						<li class="resp-tab-item" aria-controls="tab_item-2"><span>Forgot Password</span></li>
 					</ul>
 					<input type="hidden" name="redirect" class="redirect" value="{{ \Session::get('redirect') }}">	
 					<div id="message" class="text-center"></div>	
@@ -50,7 +51,27 @@
 								</div>
 							</div>
 						</div>
-					</div> 			        					            	      
+					</div> 	
+
+					<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
+						<div class="facts">
+							<div class="register">
+								<div id="forgotPasswordDiv">
+									<input type="text" name="emailorMobile" class="emailorMobile" placeholder="Email Or Mobile No Enter"  required="" autocomplete="off">
+									<div class="sign-up">
+										<button type="button" class="login-btn" id="forgotPassword">Submit</button>
+									</div>
+								</div>
+								<div id="forgotPasswordOtpDiv" style="display: none;">
+									<p>Don't Share OTP. Your Otp is = <span id="forgotPasswordOtp"></span></p>
+									<input placeholder="Otp" name="otp" type="text" class="forgotPasswordOtp" required autocomplete="off">
+									<div class="sign-up">
+										<input type="button" class="login-btn" id="forgotPasswordOtpBtn" value="Submit"/>
+									</div>
+								</div>
+							</div>
+						</div> 
+					</div>		        					            	      
 				</div>	
 			</div>
 		</div>
@@ -64,8 +85,11 @@
 					<ul class="social">
 						<li class="social_facebook"><a href="javascript:void(0);" class="entypo-facebook"></a></li>
 						<li class="social_dribbble"><a href="{{ route('user.socialLogin', ['service' => 'google']) }}" class="entypo-dribbble"></a></li>
-						<li class="social_twitter"><a href="javascript:void(0);" class="entypo-twitter"></a></li>
-						<li class="social_behance"><a href="javascript:void(0);" class="entypo-behance"></a></li>
+						<li class="social_instagram"><a href="javascript:void(0);" class="entypo-instagram"></a></li>
+						@if(false)
+							<li class="social_twitter"><a href="javascript:void(0);" class="entypo-twitter"></a></li>
+							<li class="social_behance"><a href="javascript:void(0);" class="entypo-behance"></a></li>
+						@endif
 					</ul>
 				</div>
 			</div>

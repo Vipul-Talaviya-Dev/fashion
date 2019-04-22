@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use Mail;
 use Auth;
 use Session;
 use Validator;
@@ -150,6 +151,105 @@ class LoginController extends Controller
         return response()->json([
             'status' => true,
             'success' => "Successfully Registration..",
+        ]);
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        $user = new User;
+        if(is_numeric($request->get('emailorMobile'))) {
+            if($user = $user->where('mobile', $request->get('emailorMobile'))->first()) {
+                $otp = mt_rand(1111, 9999);
+                Session::put('user', [
+                    'mobile' => $user->mobile,
+                    'otp' => $otp,
+                ]);
+                return response()->json([
+                    'status' => true,
+                    'otp' => $otp,
+                    'success' => ""
+                ]);
+
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'error' => "Invalid Mobile No",
+                ]);
+            }
+            $msg = "Invalid Mobile No";
+        } else {
+            if($user = $user->where('email', $request->get('emailorMobile'))->first()) {
+
+                $password = str_random(10);
+                $user->password = bcrypt($password);
+                $user->save();
+
+                Mail::send('admin.email.forgot-password', [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'password' => $password
+                ], function ($message) use ($user) {
+                    $message->from('support@shroud.in', 'Support')
+                        ->subject('Reset account')
+                        ->to($user->email, $user->name);
+                });
+
+                return response()->json([
+                    'status' => true,
+                    'success' => "Please Check Your Mail"
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'error' => "Invalid Email",
+                ]);
+            }
+        }
+    }
+
+
+    public function forgotPasswordOtp(Request $request)
+    {
+        if(Session::get('user') == null) {
+            return redirect(route('user.index'));
+        }
+
+        $rules = array(
+            'otp' => 'required',
+        );
+
+        $validator = Validator::make($request->all(), $rules, []);
+
+        if ($validator->fails()) {
+
+            $error = $validator->errors()->all(':message');
+            return response()->json([
+                'status' => false,
+                'error' => $error[0],
+            ]);
+
+        }
+
+        if($user = User::where('mobile', Session::get('user')['mobile'])->first()) {
+            if((string)Session::get('user')['otp'] == $request->get('otp')) {
+
+                Auth::login($user);
+
+                return response()->json([
+                    'status' => true,
+                    'success' => "",
+                ]);
+            } else {
+                return response()->json([
+                    'status' => false,
+                    'error' => "Invalid Otp",
+                ]);
+            }
+        }
+        Session::forget('user');
+        return response()->json([
+            'status' => false,
+            'success' => "Invalid Otp",
         ]);
     }
 }

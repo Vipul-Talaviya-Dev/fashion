@@ -1434,6 +1434,18 @@ h3.other-nw {
     width: 3em;
     height: 3em;
 }
+.social_instagram{
+    background: #BB4A7F;
+    top: 0%;
+    left: 50%;
+}
+.entypo-instagram:before {
+    content: " ";
+    background:url(../images/instagram-logo.png) no-repeat 12px 11px;
+    display: block;
+    width: 3em;
+    height: 3em;
+}
 .social_dribbble {
 	background: #dc4e41;
 	left: 25%;
@@ -3316,6 +3328,12 @@ td.invert-image a img {
 		width: 2em;
 		height: 2em;
 	}
+    .entypo-instagram:before {
+        background:url(../images/instagram-logo.png) no-repeat 7px 7px;
+        width: 2em;
+        height: 2em;
+        background-size: 50%;
+    }
 	.entypo-behance:before {
 		background: url(../images/img-sp.png) no-repeat -124px -131px;
 		width: 2em;

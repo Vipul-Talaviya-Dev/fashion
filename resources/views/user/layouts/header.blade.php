@@ -1,9 +1,9 @@
-<div class="menu">
-    <div class="white-text text-center"><b>{{ $content->offer_text }}</b></div>
+<div class="menu text-center">
+    <span class="white-text"><b>{{ $content->offer_text }}</b></span>
     @if(!\Auth::check())
-        <a href="javascript:void(0);" style="margin-top: -20px;" class="loginModel white-text pull-right">Login & Signup</a>
+        <a href="javascript:void(0);"  class="loginModel white-text pull-right" style="cursor: pointer;">Login</a>
     @else
-        <a href="{{ route('user.myAccount') }}" style="margin-top: -20px;" class="white-text pull-right">{{ \Auth::user()->name }}</a>
+        <a href="{{ route('user.myAccount') }}"  class="white-text pull-right" style="cursor: pointer;">{{ \Auth::user()->name }}</a>
     @endif
 </div>
 <div class="header padding-top-10">

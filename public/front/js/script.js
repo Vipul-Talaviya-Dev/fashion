@@ -130,10 +130,78 @@ $(document).ready(function() {
             $(this).after('<span class="has-error">Please Enter Valid Email Address.</span>')
         }
     });
+
+    // Forgot password
+    $("body").on("click", "#forgotPassword", function() {
+        $(".has-error").remove();
+        var a = $(".emailorMobile").val();
+        var t = $('meta[name="csrf-token"]').attr('content');
+        var c = false;
+        if (a == "") {
+            $(".emailorMobile").after('<span class="has-error">Enter Email Or Mobilre no.</span>');
+            c = true
+        }
+        if (c == false) {
+            show_loader();
+            $.ajax({
+                url: "/forgotPassword",
+                headers: {
+                    'X-CSRF-TOKEN': t
+                },
+                dataType: "json",
+                type: "POST",
+                data: {"emailorMobile": a},
+                success: function(res) {
+                    hide_loader();
+                    if(res.status == false) {
+                        toastr.warning(res.error);
+                    }
+                    if(res.status == true) {
+                        $("#forgotPasswordDiv").hide();
+                        $("#forgotPasswordOtp").html(res.otp);
+                        $("#forgotPasswordOtpDiv").show();
+                        // toastr.success(res.success);
+                        // window.location.reload();
+                    }
+                }
+            });
+        }
+    }); 
+    $("body").on("click", "#forgotPasswordOtpBtn", function() {
+        $(".has-error").remove();
+        var n = $(".forgotPasswordOtp").val();
+        var r = $(".redirect").val();
+        var t = $('meta[name="csrf-token"]').attr('content');
+        var b = false;
+        if (n == "") {
+            $(".forgotPasswordOtp").after('<span class="has-error">Enter Otp</span>');
+            b = true
+        }
+        if(b == false) {
+            show_loader();
+            $.ajax({
+                url: "/forgotPasswordOtp",
+                headers: {
+                    'X-CSRF-TOKEN': t
+                },
+                dataType: "json",
+                type: "POST",
+                data: {"otp": n},
+                success: function(res) {
+                    hide_loader();
+                    if(res.status) {
+                        page_redirect('reset-password');
+                    } else {
+                        toastr.warning(res.error);
+                    }
+                }
+            });
+        }
+    });
     /**
      * Login
      */
-     $("body").on("click", "#userLogin", function() {
+    $("body").on("click", "#userLogin", function() {
         $(".has-error").remove();
         var b = $(".email").val();
         var a = $(".password").val();
@@ -168,7 +236,7 @@ $(document).ready(function() {
                         if(r) {
                             page_redirect(r);
                         } else {
-                            page_redirect('/my-account');
+                            page_redirect('/products');
                         }
                     }
                 }

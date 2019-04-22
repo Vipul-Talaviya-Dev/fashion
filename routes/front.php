@@ -34,10 +34,15 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 	Route::get('callback/{service}', 'LoginController@socialCallBackHandle')->name('socialCallBackHandle');
 	Route::post('/signUpCheck', 'LoginController@signUpCheck')->name('signUpCheck');
 	Route::post('/signUp', 'LoginController@signUp')->name('signUp');
+	Route::post('forgotPassword', 'LoginController@forgotPassword')->name('forgotPassword');
+	Route::post('forgotPasswordOtp', 'LoginController@forgotPasswordOtp')->name('forgotPasswordOtp');
 	
 	Route::get('/order-shipping', 'ProductController@orderShipping')->name('orderShipping');
 	
 	Route::group(['middleware' => 'userAuth'], function () {
+		Route::get('reset-password', 'UserController@resetPassword')->name('resetPassword');
+		Route::post('reset-password', 'UserController@changePassword')->name('changePassword');
+
 		Route::post('/order-shipping-detail', 'ProductController@shippingDetail')->name('shippingDetail');
 		Route::get('/my-account', 'UserController@index')->name('myAccount');
 		Route::get('my-profile', 'UserController@profile')->name('myProfile');

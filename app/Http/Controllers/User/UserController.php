@@ -65,6 +65,28 @@ class UserController extends Controller
         return redirect()->back()->with(['success' => 'Successfully to get your membership code..']);
     }
 
+    public function resetPassword()
+    {
+        return view('user.change-password', [
+            'cart' => true,
+            'footer' => true
+        ]);
+    }
+
+    public function changePassword(Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required|min:6|same:confirmPassword',
+            'confirmPassword' => 'required',
+        ]);
+       
+        $user = Auth::user();
+        $user->password = bcrypt($request->get('password'));
+        $user->save();
+
+        return redirect()->back()->with(['success' => 'Password has been reset successfully! ']);
+    }
+
     public function logout()
     {
         Auth::logout();

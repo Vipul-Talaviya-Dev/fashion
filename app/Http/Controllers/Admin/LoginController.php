@@ -52,7 +52,7 @@ class LoginController extends Controller
 
         if ($admin = Admin::where('email', $request->get('email'))->first()) {
             $password = str_random(10);
-            $admin->password = bcrypt($request->get('password'));
+            $admin->password = bcrypt($password);
             $admin->save();
 
             Mail::send('admin.email.forgot-password', [
@@ -67,7 +67,7 @@ class LoginController extends Controller
             
            return redirect()->back()->with(['success' => 'Please Check Your Mail. ']);
         } else {
-            return redirect()->back()->with(['error' => 'Invalid Email Or Password. ']);
+            return redirect()->back()->with(['error' => 'Invalid Email. ']);
         }
     }
 }

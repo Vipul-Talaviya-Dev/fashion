@@ -1,6 +1,6 @@
 <div class="col-md-3 col-xs-12 margin-top-10">
 	<div class="usermenu-Container">
-		<div class="usermenu-Head"><h2>My Account </h2></div>
+		<div class="usermenu-Head"><h2 style="font-size: 36px;">My Account </h2></div>
 		<a href="{{ route('user.myProfile') }}" class="default-text">
 			<div class="usermenu-Panel">
 				<div class="usermenu-PanelTitle"><i class="mdi-action-account-circle"></i> Profile</div>
@@ -21,6 +21,13 @@
 				<div class="usermenu-PanelContent"></div>
 			</div>
 		</a>
+		<a href="{{ route('user.resetPassword') }}" class="default-text">
+			<div class="usermenu-Panel">
+				<div class="usermenu-PanelTitle"><i class="mdi-action-assignment"></i> Setting</div>
+				<div class="usermenu-PanelContent"></div>
+			</div>
+		</a>
+
 		<a href="{{ route('user.logout') }}" class="default-text">
 			<div class="usermenu-Panel">
 				<div class="usermenu-PanelTitle"><i class="mdi-action-assignment"></i> Logout</div>
