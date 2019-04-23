@@ -79,6 +79,8 @@ class LoginController extends Controller
             'mobile' => 'required|numeric|min:10',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
+            'birthDate' => 'required|date_format:Y-m-d',
+            'anniversaryDate' => 'nullable|date_format:Y-m-d',
         );
 
         $validator = Validator::make($request->all(), $rules, []);
@@ -98,6 +100,8 @@ class LoginController extends Controller
                 'email' => $request->get('email'),
                 'mobile' => $request->get('mobile'),
                 'password' => $request->get('password'),
+                'birthDate' => $request->get('birthDate'),
+                'anniversaryDate' => $request->get('anniversaryDate'),
                 'otp' => $otp,
             ];
 
@@ -141,6 +145,8 @@ class LoginController extends Controller
             'name' => Session::get('user')['name'],
             'email' => Session::get('user')['email'],
             'mobile' => Session::get('user')['mobile'],
+            'birth_date' => Session::get('user')['birthDate'],
+            'anniversary_date' => Session::get('user')['anniversaryDate'],
             'password' => \Hash::make(Session::get('user')['password']),
             'referral_code' => User::referralCode(),
         ]);
@@ -151,6 +157,17 @@ class LoginController extends Controller
         return response()->json([
             'status' => true,
             'success' => "Successfully Registration..",
+        ]);
+    }
+
+    public function resendOtp(Request $request)
+    {
+        $otp = mt_rand(1111, 9999);
+        Session::get('user')['otp'] = $otp;
+
+        return response()->json([
+            'status' => true,
+            'otp' => $otp,
         ]);
     }
 

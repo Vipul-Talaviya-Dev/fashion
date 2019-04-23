@@ -76,6 +76,7 @@
                 <div class="col-md-4 form-group">
                     <label>Image :</label>
                     <input type="file" name="images[]" class="form-control" accept=".jpeg, .jpg, .png" multiple>
+                    <span><b>Note:</b> 306 X 400 Image Upload.</span>
                     <span class="help-block">Accepted formats: jpeg, jpg, png. Max file size 2Mb</span>
                 </div>
             </div>

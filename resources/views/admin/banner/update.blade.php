@@ -19,7 +19,7 @@
                 <!-- Traffic sources -->
                 <div class="panel panel-flat">
                     <div class="panel-heading">
-                        <h1 class="panel-title">Banner Update</h1>
+                        <h1 class="panel-title">Banner Update <a href="{{ route('admin.banners') }}" class="btn btn-primary white-text pull-right">Banners</a></h1>
                     </div>
                     <hr/>
                     <!-- Single row selection -->
@@ -36,7 +36,7 @@
                                                 <label class="col-lg-2 control-label text-semibold">Name :</label>
                                                 <div class="col-lg-8">
                                                     <input type="text" name="name" value="{{ $banner->name }}" class="form-control" placeholder="Enter Name" autocomplete="off" required="">
-                                                    @if($errors->get('name'))
+                                                     @if($errors->get('name'))
                                                         @foreach($errors->get('name') as $error)
                                                             <span style="color: red;"><i class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>
                                                         @endforeach
@@ -69,6 +69,7 @@
                                                             <span style="color: red;"><i class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>
                                                         @endforeach
                                                     @endif
+                                                    <span><b>Note:</b> 1600 X 700 Image Upload.</span>
                                                 </div>
                                                 <div class="col-lg-1"></div>
                                             </div>

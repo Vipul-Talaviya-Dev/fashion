@@ -19,7 +19,9 @@
                 <!-- Traffic sources -->
                 <div class="panel panel-flat">
                     <div class="panel-heading">
-                        <h1 class="panel-title">Banner Add</h1>
+                        <h1 class="panel-title">Banner Add
+                            <a href="{{ route('admin.banners') }}" class="btn btn-primary white-text pull-right">Banners</a>
+                        </h1>
                     </div>
                     <hr/>
                     <!-- Single row selection -->
@@ -70,6 +72,7 @@
                                                             <span style="color: red;"><i class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>
                                                         @endforeach
                                                     @endif
+                                                    <span><b>Note:</b> 1600 X 700 Image Upload.</span>
                                                 </div>
                                                 <div class="col-lg-1"></div>
                                             </div>

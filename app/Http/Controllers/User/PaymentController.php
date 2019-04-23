@@ -95,6 +95,11 @@ class PaymentController extends Controller
     			$order->status = 3;
     		}
     		$order->save();
+            // Sub Order Update
+            foreach ($order->orderProducts as $key => $orderProduct) {
+                $orderProduct->status = $order->status;
+                $orderProduct->save();  
+            }
     	}
     	return redirect(route('user.thanks'));
     }

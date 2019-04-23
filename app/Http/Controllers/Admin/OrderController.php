@@ -55,6 +55,10 @@ class OrderController extends Controller
 		$order->status = $request->get('status');
 		$order->save();
 		
+		foreach ($order->orderProducts as $key => $orderProduct) {
+			$orderProduct->status = $request->get('status');
+			$orderProduct->save();	
+		}
 		return redirect()->back()->with('success', 'Successfully change order status');
 	}
 

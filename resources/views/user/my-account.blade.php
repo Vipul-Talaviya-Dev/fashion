@@ -28,13 +28,24 @@
 					<span class="bus-order-location">Size : {{ $variation->size->name }}</span><p><br></p><a href="javascript:void(0);" target="_blank" class="btn btn-cart btn-xs black-text">GET INVOICE<div class="ripple-wrapper"></div></a>
 				</div>
 				<div class="col-md-3 text-center">
-					<span class="timetitle atimes">{{ 'FHN'.date('Ymd', strtotime($order->created_at)).$order->order_id }}</span><br>
+					<span class="timetitle atimes">{{ $order->orderProductId() }}</span><br>
 					<span class="font-size-10 green">Placed On {{ date('d M, Y', strtotime($order->created_at)) }}</span>
 				</div>
 				<div class="col-md-3 text-center">
 					<span class="timetitle atimes">Rs. {{ $order->price }}</span><br>
 					<span class="bus-order-location">Qty : {{ $order->qty }} </span>
 				</div>
+			</div>
+			<div class="pull-right">
+				@if($order->status == 1 || $order->status == 2)
+                    <span class="label label-default"><b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b></span>
+                @elseif($order->status == 3 || $order->status == 6)
+                    <span class="label label-success"><b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b></span>
+                @elseif($order->status == 4 || $order->status == 5 || $order->status == 7)
+                    <span class="label label-info"><b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b></span>
+                @elseif($order->status == 8)
+                    <span class="label label-danger"><b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b></span>
+                @endif
 			</div>
 			<p><br></p>
 			@if(false)

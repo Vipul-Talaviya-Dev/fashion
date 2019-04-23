@@ -46,7 +46,7 @@
 			<table>
 				<tbody>
 				<tr>
-				<td style="font-size:13px;padding-top:10px;font-family:Arial,Helvetica,sans-serif;color:#34495e">Please find below, the summary of your order {{ $cs_order_id }} </td>
+				<td style="font-size:13px;padding-top:10px;font-family:Arial,Helvetica,sans-serif;color:#34495e">Please find below, the summary of your order <b>{{ $cs_order_id }}</b> </td>
 				</tr>
 				</tbody>
 			</table>

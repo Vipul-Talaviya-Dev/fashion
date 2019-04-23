@@ -251,6 +251,8 @@ $(document).ready(function() {
         var cP = $(".confirmPassword").val();
         var fn = $(".fName").val();
         var ln = $(".lName").val();
+        var bdate = $(".birthDate").val();
+        var annDate = $(".anniversaryDate").val();
         var r = $(".redirect").val();
         var t = $('meta[name="csrf-token"]').attr('content');
         var reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -280,6 +282,10 @@ $(document).ready(function() {
             $(".lName").after('<span class="has-error">Enter Last Name</span>');
             b = true
         }
+        if (bdate == "") {
+            $(".birthDate").after('<span class="has-error">Enter Birth Date</span>');
+            b = true
+        }
         if (b == false) {
             show_loader();
             $("#otp").html("");
@@ -290,7 +296,7 @@ $(document).ready(function() {
                 },
                 dataType: "json",
                 type: "POST",
-                data: {"name": fn+' '+ln, "email": d, "password": a, "mobile": c},
+                data: {"name": fn+' '+ln, "email": d, "password": a, "mobile": c, "birthDate": bdate, "anniversaryDate": annDate},
                 success: function(res) {
                     hide_loader();
                     if(res.status == false) {
@@ -305,7 +311,43 @@ $(document).ready(function() {
             });
         }
     });
-     
+    
+    $("body").on("click", "#resendOtp", function() {
+        $(".has-error").remove();
+        var t = $('meta[name="csrf-token"]').attr('content');
+        var id = $(this).attr('data-id');
+        var c = false;
+        if (c == false) {
+            show_loader();
+            $.ajax({
+                url: "/resendOtp",
+                headers: {
+                    'X-CSRF-TOKEN': t
+                },
+                dataType: "json",
+                type: "POST",
+                // data: {"emailorMobile": a},
+                success: function(res) {
+                    hide_loader();
+                    if(res.status == false) {
+                        toastr.warning(res.error);
+                    }
+                    if(res.status == true) {
+                        if(id == 1) {
+                            $("#registrationCheck").hide();
+                            $("#otp").html(res.otp);
+                            $("#otpDiv").show();
+                        } else {
+                            $("#forgotPasswordDiv").hide();
+                            $("#forgotPasswordOtp").html(res.otp);
+                            $("#forgotPasswordOtpDiv").show();
+                        }
+                    }
+                }
+            });
+        }
+    }); 
+
     $("body").on("click", "#otpBtn", function() {
         $(".has-error").remove();
         var n = $(".otp").val();

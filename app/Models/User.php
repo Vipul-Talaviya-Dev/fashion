@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'member_ship_code', 'mobile', 'referral_code', 'social_login', 'login_type'
+        'name', 'email', 'password', 'member_ship_code', 'mobile', 'referral_code', 'social_login', 'login_type', 'birth_date', 'anniversary_date'
     ];
 
     /**
@@ -43,9 +43,9 @@ class User extends Authenticatable
      */
     public static function referralCode()
     {
-        $random = 'FHN'.str_random(4);
+        $random = 'SHRD'.str_random(4);
         if (self::where('referral_code', $random)->first()) {
-            $random = 'FHN'.str_random(4);
+            $random = 'SHRD'.str_random(4);
         }
 
         return $random;
@@ -56,9 +56,9 @@ class User extends Authenticatable
      */
     public static function memberShipCode()
     {
-        $random = 'FHN'.str_random(5);
+        $random = 'SHRD'.substr($this->name, 0, 4).str_random(1).date('y', strtotime($this->birth_date));
         if (self::where('member_ship_code', $random)->first()) {
-            $random = 'FHN'.str_random(5);
+            $random = 'SHRD'.substr($this->name, 0, 4).str_random(1).date('y', strtotime($this->birth_date));
         }
 
         return $random;

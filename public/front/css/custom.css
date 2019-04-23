@@ -388,6 +388,7 @@ a {
 .info-box {
     padding: 20px 15px;
     color: #9e9e9e;
+    height: 260px;
 }
 .info-box p {
     font-size: 1.167em;
@@ -470,4 +471,18 @@ a {
 }
 .banner-bottom, .team, .checkout, .additional_info, .team-bottom, .single, .mail, .special-deals, .about, .faq, .typo, .new-products, .banner-bottom1, .top-brands, .dresses, .w3l_related_products {
     padding: 2em 0;
+}
+
+@media (max-width:768px) {
+}
+
+@media (max-width:640px) {
+}
+
+@media (max-width:480px) {
+    .info-box {
+        height: auto;
+    }
+}
+@media (max-width: 320px) {
 }

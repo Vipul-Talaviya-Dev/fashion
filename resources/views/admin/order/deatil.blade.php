@@ -78,7 +78,7 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Order Id</th>
+                                        <th>Order Product Id</th>
                                         <th>User Name</th>
                                         <th>Item Detail</th>
                                         <th>Quality</th>
@@ -93,7 +93,7 @@
                                         $images = explode(',', $variation->images);
                                     ?>
                                     <tr>
-                                        <td>{{ $order->id }}</td>
+                                        <td>{{ $orderProduct->id }}</td>
                                         <td>{{ $order->user->name }}<br>({{ $order->user->mobile }})</td>
                                         <td><img src="{{ \Cloudder::secureShow($images[0]) }}" data-imagezoom="true" style="width: 50px;" class="img-responsive" alt="{{ $orderProduct->product->name }}"></td>
                                         <td>{{ $orderProduct->qty }}</td>

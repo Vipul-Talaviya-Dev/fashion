@@ -88,6 +88,8 @@ aria-hidden="true">
 											<input placeholder="First Name" name="name" type="text" class="fName" required autocomplete="off">
 											<input placeholder="Last Name" name="name" style="margin: 1em 0 0;" type="text" class="lName" required autocomplete="off">
 											<input placeholder="Mobile" name="mobile" type="text" class="signupMobile" required style="margin: 1em 0 0;" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" autocomplete="off">
+											<input placeholder="Birth Date" name="birthDate" class="birthDate" type="date" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Birth Date">
+											<input placeholder="Anniversary Date" name="anniversaryDate" class="anniversaryDate" type="date" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Anniversary Date">
 											<input placeholder="Email Address" name="email" class="signupEmail keyup-email" type="email" required autocomplete="off">	
 											<input placeholder="Password" name="password" class="signupPassword" type="password" required autocomplete="off">	
 											<input placeholder="Confirm Password" name="confirmPassword" class="confirmPassword" type="password" required autocomplete="off">
@@ -97,7 +99,8 @@ aria-hidden="true">
 										</div>
 										<div id="otpDiv" style="display: none;">
 											<p>Don't Share OTP. Your Otp is = <span id="otp"></span></p>
-											<input placeholder="Otp" name="otp" type="text" class="otp" required>
+											<input placeholder="Otp" name="otp" type="text" class="otp" required autocomplete="off">
+											<a class="pull-right" id="resendOtp" data-id="1" style="cursor: pointer;">Resend</a>
 											<div class="sign-up">
 												<input type="button" class="login-btn" id="otpBtn" value="Submit"/>
 											</div>
@@ -118,6 +121,7 @@ aria-hidden="true">
 										<div id="forgotPasswordOtpDiv" style="display: none;">
 											<p>Don't Share OTP. Your Otp is = <span id="forgotPasswordOtp"></span></p>
 											<input placeholder="Otp" name="otp" type="text" class="forgotPasswordOtp" required autocomplete="off">
+											<a class="pull-right" id="resendOtp" data-id="2" style="cursor: pointer;">Resend</a>
 											<div class="sign-up">
 												<input type="button" class="login-btn" id="forgotPasswordOtpBtn" value="Submit"/>
 											</div>

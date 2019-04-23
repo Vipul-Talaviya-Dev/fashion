@@ -30,6 +30,11 @@ class OrderProduct extends Model
    */
 	protected $dates = ['deleted_at'];
 	
+	public function orderProductId()
+	{
+		return 'SHRD'.date('Ymd', strtotime($this->created_at)).$this->id;
+	}
+
 	public function product()
 	{
 		return $this->belongsTo(Product::class);

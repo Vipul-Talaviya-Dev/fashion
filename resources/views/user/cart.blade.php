@@ -36,7 +36,7 @@
 					<td class="invert-image"><img src="{{ \Cloudder::secureShow($image[0]) }}" class="img-responsive cart-thumb-img" alt="{{ $product->name }}"></td>
 					<td class="invert">
 						<p>{{ $product->name }}</p><br>
-						<p>Color: <b>{{ $variation->color->name }}</b></p><br>
+						<p>Color: <span class="btn colorSelected" style="background: {{ $variation->color->code  }};padding: 15px 15px;" title="Christine"></span></p><br>
 						<p>Size: <b>{{ $variation->size->name }}</b></p> 
 					</td>
 					<td class="invert">
@@ -91,7 +91,7 @@
 		<hr>
 		<div class="row">
 			<div class="col-md-6 col-sm-6 col-xs-12 pull-left">
-				<a href="/" class="checkout-btn"><i class="glyphicon glyphicon-menu-left" aria-hidden="true"></i> Continue Shopping</a>
+				<a href="{{ route('user.products') }}" class="checkout-btn"><i class="glyphicon glyphicon-menu-left" aria-hidden="true"></i> Continue Shopping</a>
 			</div>
 			<div class="col-md-6 col-sm-6 col-xs-12 pull-right">
 				<a href="javascript:void(0);" class="checkout-btn pull-right" id="orderContinue"> Checkout <i class="glyphicon glyphicon-menu-right" aria-hidden="true"></i></a>

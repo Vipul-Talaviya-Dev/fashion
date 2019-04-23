@@ -64,6 +64,20 @@
 						</div>
 					</div>
 				</div>
+				<div class="col-md-12 col-xs-12">
+					<div class="form-group col-md-6">
+						<div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+						  <input type="date" name="birth_date" class="form-control" placeholder="Birth Date" value="{{ $user->birth_date ?: old('birth_date') }}" autocomplete="off" required max="{{ date('Y-m-d') }}" title="Birth Date">
+						</div>
+					</div>
+					<div class="form-group col-md-6">
+						<div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+						  <input type="date" name="anniversary_date" class="form-control" placeholder="Anniversary Date" value="{{ $user->anniversary_date ?: old('anniversary_date') }}" autocomplete="off"  max="{{ date('Y-m-d') }}" title="Anniversary Date">
+						</div>
+					</div>
+				</div>
 				<div class="form-group col-md-7 pull-right">
 					<input type="submit" class="more-product" value="Save">
 				</div>
@@ -117,7 +131,7 @@
 			<div class="modal-body">
 				<div class="row">
 					<div class="form-group">
-						<label>Name :</label>
+						<label>Full Name :</label>
 						<input type="text" name="name" class="form-control name" autocomplete="off" value="{{ old('name') }}" required>
 					</div>
 					<div class="form-group">

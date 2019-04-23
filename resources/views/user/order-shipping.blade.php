@@ -132,7 +132,7 @@
 			<div class="modal-body">
 				<div class="row">
 					<div class="form-group">
-						<label>Name :</label>
+						<label>Full Name :</label>
 						<input type="text" name="name" class="form-control name" autocomplete="off" value="{{ old('name') }}" required>
 					</div>
 					<div class="form-group">
