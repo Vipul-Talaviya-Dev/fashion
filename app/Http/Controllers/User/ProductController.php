@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use Mail;
 use Auth;
 use Session;
+use Carbon\Carbon;
+use Validator;
 use App\Models\Size;
 use App\Models\User;
 use App\Models\Color;
@@ -13,6 +15,7 @@ use App\Models\Address;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\Offer;
 use App\Models\OrderProduct;
 use App\Models\Variation;
 use Illuminate\Http\Request;
@@ -228,6 +231,7 @@ class ProductController extends Controller
 
     public function payment()
     {
+        
     	if(Session::get('order') == null) {
     		return redirect(route('user.index'));
     	}
@@ -260,6 +264,7 @@ class ProductController extends Controller
         if(Session::get('CART_AMOUNT') >= 2000) {
             $discount = round(Session::get('CART_AMOUNT')*10/100);
             Session::put('discount', $discount);
+            Session::put('offer', 0);
             
             return response()->json([
                 'status' => true,
@@ -272,6 +277,71 @@ class ProductController extends Controller
             'error' => 'You do not Get Discount'
         ]);
 
+    }
+
+    /**
+     * [offer code apply]
+     * @param  Request $request [code]
+     * @return [type]           [description]
+     */
+    public function promotionApply(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'code'=> 'required|exists:offers,offer_code',
+        ]);
+        
+        if ($validator->fails()) {
+            $error = $validator->errors()->all(':message');
+            $response = [
+                'status' => false,
+                'error' => $error[0],
+            ];
+        } else {
+            if(!$offer = Offer::active()->where('start_date', '<=', Carbon::now()->toDateString())->where('end_date', '>=', Carbon::now()->toDateString())->where('offer_code', $request->get('code'))->first()) {
+                return $response = [
+                    'status' => false,
+                    'error' => "Promotion code has been expired.",
+                ];
+            }
+
+            // Use One Time Or Multiple Time
+            if($offer->use_time == 2) {
+                if(Order::where('user_id', $user->id)->where('offer_id', $offer->id)->first()) {
+                    return $response = [
+                        'status' => false,
+                        'error' => "Promotion code has been used already.",
+                    ];
+                }
+            }
+            $amount_limit = $offer->amount_limit;
+            $discount = 0;
+            $totalAmount = Session::get('CART_AMOUNT');
+            // Check discount
+            if ((int)$amount_limit >= (int)$totalAmount) {
+                $discount = 0; // Discount 0
+            } else {
+                // get Discount
+                if($offer->discount) {
+                    $discount = ($totalAmount*$offer->discount)/100;
+                }
+                // Get amount
+                if($offer->amount) {
+                    if(($totalAmount-$offer->amount) < $totalAmount) {
+                        $discount = $offer->amount;
+                    }
+                }
+
+                Session::put('discount', number_format($discount, 2)); // discount amount
+                Session::put('offer', $offer->id);
+                Session::put('discountPercentage', $offer->discount); //discount percentage
+
+                $response = [
+                    'status' => true,
+                    'success' => "Apply Your Promotion Code Successfully.",
+                ];
+            }   
+        }
+        return $response;
     }
 
     public function orderPlace(Request $request)
@@ -295,7 +365,8 @@ class ProductController extends Controller
         $order->payment_mode = $request->get('payment_option') ? $request->get('payment_option') : 2;
         $order->payment_status = 1;
         $order->cart_amount = (Session::get('order')['final_amount'] - Session::get('discount')) + $deliverCharge->delivery_charge;
-        $order->discount = Session::get('discount') ?: 0;
+        $order->discount = Session::get('discountPercentage') ?: 0;
+        $order->discount_amount = Session::get('discount') ?: 0;
         // $order->extra_discount = $request->get('data');
         $order->total = (Session::get('order')['final_amount'] - Session::get('discount')) + $deliverCharge->delivery_charge;
         $order->delivery_charge = $deliverCharge->delivery_charge;

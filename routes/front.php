@@ -51,6 +51,7 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 
 		Route::get('get-membership', 'UserController@getMemberShip')->name('getMemberShip');
 		Route::get('check-membership-code', 'ProductController@memberShipCodeCheck')->name('memberShipCodeCheck');
+		Route::get('check-offer-code', 'ProductController@promotionApply')->name('promotionApply');
 
 		Route::get('/payment', 'ProductController@payment')->name('payment');
 		Route::post('/order-place', 'ProductController@orderPlace')->name('order-place');

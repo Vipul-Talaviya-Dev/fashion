@@ -12,7 +12,7 @@ class OfferController extends Controller
     public function index(Request $request)
     {
         return view('admin.offer.index',[
-            'offers' => Offer::search($request->input('search'), ['amount'])->paginate(10)
+            'offers' => Offer::latest()->paginate(10)
         ]);
     }
 
@@ -26,11 +26,17 @@ class OfferController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'offerCode' => 'required|unique:offers,offer_code',
-            'discount' => 'required|numeric',
+            'discount'      => 'nullable|numeric|min:0',
+            'amount'      => 'nullable|numeric|min:0',
+            'amount_limit'  => 'required|numeric|min:0',
             'start_date' => 'required|date|before:end_date',
             'end_date' => 'required|date|after:start_date',
             'status' => 'required|numeric',
         ]);
+
+        if(($request->get('discount') =="" || $request->get('discount') == 0) && ($request->get('amount') == "" || $request->get('amount') == 0)) {
+            return redirect()->back()->withInput()->with(['error' => 'Please Add Discount Or Amount']);
+        }
 
         if($request->discount > 99){
             return redirect(route('admin.offers'))->with('error', 'Discount should under 99%.');
@@ -40,8 +46,11 @@ class OfferController extends Controller
             'name' => $request->get('name'),
             'offer_code' => $request->get('offerCode'),
             'discount' => $request->get('discount'),
+            'amount'       => trim(($request->get('amount') ?: 0)),
+            'amount_limit' => $request->get('amount_limit'),
             'start_date' => $request->get('start_date'),
             'end_date' => $request->get('end_date'),
+            'use_time'  => ($request->get('use_time') == 2 ? $request->get('use_time') : 1),
             'status' => $request->get('status')
         ]);
 
@@ -62,10 +71,18 @@ class OfferController extends Controller
         if (!$offer = Offer::find($id)) {
             return redirect()->back()->with('error', 'Something went wrong, Please try again.');
         }
+
+        if(($request->get('discount') =="" || $request->get('discount') == 0) && ($request->get('amount') == "" || $request->get('amount') == 0)) {
+            return redirect()->back()->withInput()->with(['error' => 'Please Add Discount Or Amount']);
+        }
+
+
         $this->validate($request, [
             'name' => 'required',
             'offerCode' => 'required|unique:offers,offer_code,'.$id,
             'discount' => 'required|numeric',
+            'amount'      => 'nullable|numeric|min:0',
+            'amount_limit'  => 'required|numeric|min:0',
             'start_date' => 'required|date|before:end_date',
             'end_date' => 'required|date|after:start_date',
             'status' => 'required|numeric',
@@ -74,6 +91,9 @@ class OfferController extends Controller
         $offer->name = $request->get('name');
         $offer->offer_code = $request->get('offerCode');
         $offer->discount = $request->get('discount');
+        $offer->discount     = ($request->get('amount') ? 0 : trim($request->get('discount')));
+        $offer->amount     = trim(($request->get('amount') ?: 0));
+        $offer->use_time     = ($request->get('use_time') == 2 ? $request->get('use_time') : 1);
         $offer->start_date = $request->get('start_date');
         $offer->end_date = $request->get('end_date');
         $offer->status = $request->get('status');

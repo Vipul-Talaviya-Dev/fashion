@@ -4,23 +4,26 @@ namespace App\Models;
 
 use Sofa\Eloquence\Eloquence;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Offer extends Model
 {
     const ACTIVE = 1, INACTIVE = 2;
-    use Notifiable;
     use SoftDeletes;
     use Eloquence;
     protected $fillable = [
         'name',
         'offer_code',
         'discount',
+        'amount',
+        'amount_limit',
+        'use_time',
         'start_date',
         'end_date',
         'status'
     ];
+
+    protected $dates = ['deleted_at'];
 
     /**
      * scope
@@ -35,4 +38,20 @@ class Offer extends Model
     {
         return $query->whereStatus(self::INACTIVE);
     }
+
+    /**
+     * Mutators
+     */
+
+
+    public function setAmountAttribute($value)
+    {
+        $this->attributes['amount'] = $value * 100;
+    }
+    
+    public function getAmountAttribute($value)
+    {
+        return $value / 100;
+    }
+
 }

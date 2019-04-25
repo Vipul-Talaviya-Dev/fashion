@@ -17,9 +17,12 @@ class CreateOffersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('offer_code')->unique();
-            $table->integer('discount')->unsigned();
+            $table->unsignedInteger('discount')->default(0)->comment('In %');
+            $table->unsignedInteger('amount')->default(0)->comment('In Paisa');
+            $table->unsignedInteger('amount_limit')->default(0);
             $table->date('start_date');
             $table->date('end_date');
+            $table->tinyInteger('use_time')->default(1)->unsigned()->comment('1: Multiple, 2: Single Time');
             $table->tinyInteger('status')->comment('1: Active, 2: In-active')->default(1);
             $table->timestamps();
             $table->softDeletes();

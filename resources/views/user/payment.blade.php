@@ -121,7 +121,7 @@
 											<div class="col-md-6">Sub Total</div>
 											<div class="col-md-6 order-cart-amount">Rs. {{ $total }}</div>
 											@if(Session::get('discount') > 0)
-											<div class="col-md-6">Member Ship Discount</div>
+											<div class="col-md-6">{{ (!Session::get('offer')) ? 'Member Ship Discount' : 'Discount' }}</div>
 											<div class="col-md-6 order-cart-amount"> [-] Rs. {{ Session::get('discount') }}</div>
 											@endif
 											<div class="col-md-6">Delivery Charges</div>
@@ -131,9 +131,9 @@
 										</div>
 								</div>
 							</div>
+							@if(!Session::get('discount'))
 							<!-- Coupons & Gift Vouchers-->
 							<div class="panel panel-default pck-box-shadow">
-								<div class="panel-heading"><h4 class="panel-title white-text"><a data-toggle="collapse" data-parent="#accordion" href="#promotional">Apply Your Offer or Gift Voucher</a></h4></div>
 								<div class="panel-collapse collapse in" id="promotional">
 									<div class="panel-body">
 										<div class="col-md-12 col-xs-12">
@@ -152,6 +152,21 @@
 									</div>
 								</div>
 							</div>
+
+							<div class="panel panel-default pck-box-shadow">
+								<div class="panel-collapse collapse in" id="promotional">
+									<div class="panel-body">
+										<div class="col-md-12 col-xs-12">
+											<label style="margin-top: 7px;">Enter Promotion Code (?)</label>
+											<div class="input-group" style="width: 50%;">
+												<input class="pck-input adv offer_code" type="text" autocomplete="off" value="">
+												<span class="input-group-btn"><button type="button" class="btn btn-danger apply_offer">Apply</button></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							@endif
 							<div class="panel panel-default pck-box-shadow">
 								<div class="panel-heading"><h4 class="panel-title">Shipping Address Details</h4></div>
 								<div class="panel-body">

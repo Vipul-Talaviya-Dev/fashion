@@ -4,6 +4,22 @@
 
 @section('css')
 <link href="/front/css/slick.css" rel="stylesheet" type="text/css" property="" media="all" />
+<style type="text/css">
+/*.vip {
+  position: relative;
+}
+
+.slide__caption {
+  top: 55%;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  z-index: 83;
+  color: #e22020;
+  font-size: -webkit-xxx-large;
+  font-weight: 800;
+}*/
+</style>
 @endsection
 
 @section('content')
@@ -13,7 +29,8 @@
 		<ul id="banner">			
 			@foreach($banners as $banner)
 				<li title="{{ $banner->name }}" style="padding: 0px;">
-          <a href="{{ $banner->url }}">
+          <a href="{{ $banner->url }}" class="vip">
+            <!-- <div class="slide__caption text-center">{{ $banner->description }}</div> -->
   					<img src="{{ \Cloudder::secureShow($banner->image) }}" alt="{{ $banner->name }}" class="img-responsive" />
           </a>
 				</li>
@@ -173,6 +190,8 @@
         prevArrow: false,
         nextArrow: false
       });
+
+      $(".slide__caption").css('position', 'absolute');
     });
 </script>
 @endsection

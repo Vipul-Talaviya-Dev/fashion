@@ -73,7 +73,42 @@
                                                 </div>
                                             </div>
                                             <!-- /first name -->
-
+                                             <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label class="control-label">Amount </label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon"><i class="fa fa-money"></i>
+                                                        </div>
+                                                        <input type="number" name="amount" class="form-control"
+                                                               value="{{ $offer->amount ?: old('amount') }}" id="amount"
+                                                                autocomplete="off"
+                                                               placeholder="Enter Offer In Amount">
+                                                    </div>
+                                                    @if($errors->get('amount'))
+                                                        @foreach($errors->get('amount') as $error)
+                                                            <span style="color: red;"><i
+                                                                        class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label class="control-label">Amount Limit <span
+                                                                class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon"><i class="fa fa-money"></i>
+                                                        </div>
+                                                        <input type="number" name="amount_limit" class="form-control"
+                                                               value="{{ $offer->amount_limit ?: old('amount_limit') }}" id="amount_limit" required="required"
+                                                            autocomplete="off" placeholder="Enter Offer In Amount limit">
+                                                    </div>
+                                                    @if($errors->get('amount_limit'))
+                                                        @foreach($errors->get('amount_limit') as $error)
+                                                            <span style="color: red;"><i
+                                                                        class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                            </div>
                                             <!-- Password field -->
                                             <div class="form-group">
                                                 <div class="col-lg-6">
@@ -156,6 +191,10 @@
                                                     @endif
                                                 </div>
                                         </fieldset>
+                                                <div class="form-group ">
+                                                    <label>Offer Use Single Time</label><br>
+                                                    <input type="checkbox" name="use_time" value="2" @if($offer->use_time==2) {{'checked'}} @endif>
+                                                </div>  
                                         <div class="text-right">
                                             <button type="reset" class="btn btn-default" id="reset">Reset <i
                                                         class="icon-reload-alt position-right"></i></button>

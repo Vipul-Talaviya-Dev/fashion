@@ -547,4 +547,38 @@ $(document).ready(function () {
             });
         }
     }); 
+
+    // Apply Offer Code
+    // Apply Discount
+    $("body").on("click", ".apply_offer", function() {
+        var p = $(".offer_code").val();
+        if (typeof p === "undefined") {
+            toastr.warning("Required Promotion Code.");
+            return false
+        }
+        if (!p) {
+            toastr.warning("Required Promotion Code.");
+            return false
+        } else {
+            show_loader();
+            $.ajaxSetup({
+                cache: false
+            });
+            $.ajax({
+                 type: 'GET',
+                 url: '/check-offer-code?code='+p,
+                    success: function (data) {
+                     if (data.status) {
+                        toastr.success(data.success);
+                        setTimeout(function(){
+                            location.reload();
+                        }, 1000)
+                     } else {
+                        toastr.warning(data.error);
+                    }
+                    hide_loader();
+                }
+            });
+        }
+    }); 
 });

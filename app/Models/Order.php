@@ -21,6 +21,7 @@ class Order extends Model
 		'payment_reference',
 		'cart_amount',
 		'discount',
+		'discount_amount',
 		'extra_discount',
 		'total',
 		'payment_response',
