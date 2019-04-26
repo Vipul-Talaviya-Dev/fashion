@@ -9,7 +9,7 @@
 <div class="header padding-top-10">
     <div class="container" align="center">
         <div class="{{ ($cart) ? 'w3l_login' : 'width-10' }}">
-            <a href="{{ route('user.index') }}" style="width: 10%;height: 0px;border: 0;">
+            <a href="{{ route('user.index') }}" class="main-logo">
                 <img src="/front/images/logo.png" alt="Fashion" class="img-responsive">
             </a>
         </div>

@@ -4,6 +4,7 @@
 	<title>Payment  | Fashion</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="theme-color" content="#f3b449">
 	<link href="/front/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="/front/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="/front/css/material.min.css" rel="stylesheet" type="text/css" media="all" />
@@ -37,9 +38,9 @@
 			<div class="order-header">
 				<div class="container">
 					<div class="col-md-2 col-xs-12">
-						<h2>
-			                <img src="/front/images/logo.png" alt="Fashion" style="width: 52%;" class="img-responsive" />
-				        </h2>
+						<div class="width-10">
+			                <img src="/front/images/logo.png" alt="Fashion" class="img-responsive" />
+				        </div>
 					</div>
 					<div class="col-md-10 col-xs-12">
 						<div class="pull-right">
@@ -82,7 +83,7 @@
 							</div>
 						</div> -->
 						<!-- Shopping Cart Details-->
-						<div class="col-md-7">
+						<div class="col-md-7 col-xs-12">
 							<div class="pck-box pck-box-shadow">
 								<h2 style="font-size: 1.6667em;">Order Summary</h2>
 								<div align="left">
@@ -138,7 +139,7 @@
 									<div class="panel-body">
 										<div class="col-md-12 col-xs-12">
 											<label style="margin-top: 7px;">Enter MemberShip Code (?)</label>
-											<div class="input-group" style="width: 50%;">
+											<div class="input-group width-50">
 												<input class="pck-input adv member_ship_code" type="text" autocomplete="off" value="{{ Auth::user()->member_ship_code }}">
 												<span class="input-group-btn"><button type="button" class="btn btn-danger apply_code">Apply</button></span>
 											</div>
@@ -158,7 +159,7 @@
 									<div class="panel-body">
 										<div class="col-md-12 col-xs-12">
 											<label style="margin-top: 7px;">Enter Promotion Code (?)</label>
-											<div class="input-group" style="width: 50%;">
+											<div class="input-group width-50">
 												<input class="pck-input adv offer_code" type="text" autocomplete="off" value="">
 												<span class="input-group-btn"><button type="button" class="btn btn-danger apply_offer">Apply</button></span>
 											</div>
@@ -183,7 +184,7 @@
 							</div>
 						</div>
 						<!-- Payment Options-->
-						<div class="col-md-5">
+						<div class="col-md-5 col-xs-12">
 							<!--online Payment-->
 							<div class="panel panel-info">
 								<div class="panel-heading">
@@ -195,7 +196,7 @@
 										<div class="radio radio-danger">
 											<label><input type="radio" class="payment_option" name="payment_option" value="101"><span class="circle"></span><span class="check"></span> Credit Card</label>
 											<ul class="payment_card_img">
-												<li><img src="/front/images/discover-curved-32px.png"></li><li><img src="/front/images/american-express-curved-32px.png"></li><li><img src="/front/images/mastercard-curved-32px.png"></li><li><img src="/front/images/visa-curved-32px.png"></li>
+												<li><img class="img-responsive" src="/front/images/discover-curved-32px.png"></li><li><img class="img-responsive" src="/front/images/american-express-curved-32px.png"></li><li><img class="img-responsive" src="/front/images/mastercard-curved-32px.png"></li><li><img class="img-responsive" src="/front/images/visa-curved-32px.png"></li>
 											</ul>
 										</div>
 										<br>
@@ -205,7 +206,7 @@
 										<div class="radio radio-danger">
 											<label><input type="radio" class="payment_option" name="payment_option" value="2"><span class="circle"></span><span class="check"></span> Debit Card</label>
 											<ul class="payment_card_img">
-												<li><img src="/front/images/rupay-curved-32px.png"></li><li><img src="/front/images/maestro-curved-32px.png"></li><li><img src="/front/images/mastercard-curved-32px.png"></li><li><img src="/front/images/visa-curved-32px.png"></li>
+												<li><img class="img-responsive" src="/front/images/rupay-curved-32px.png"></li><li><img class="img-responsive" src="/front/images/maestro-curved-32px.png"></li><li><img class="img-responsive" src="/front/images/mastercard-curved-32px.png"></li><li><img class="img-responsive" src="/front/images/visa-curved-32px.png"></li>
 											</ul>
 										</div>
 										<hr>

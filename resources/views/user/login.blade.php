@@ -2,7 +2,16 @@
 
 @section('title', 'Order Shipping')
 
+@section('css')
+<style type="text/css">
+.row {
+	margin: 0;
+}
+</style>
+@endsection
+
 @section('content')
+<div class="col-md-12"><br></div>
 <hr>
 <div class="col-md-10 col-md-offset-2 col-sm-12 col-xs-12">
 	<div class="row">
@@ -56,7 +65,7 @@
 						</div>
 					</div> 	
 
-					<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
+					<div class="tab-3 resp-tab-content" aria-labelledby="tab_item-2">
 						<div class="facts">
 							<div class="register">
 								<div id="forgotPasswordDiv">
@@ -101,5 +110,5 @@
 		@endif
 	</div>
 </div>
-<div class="col-md-12 col-sm-12 col-xs-12"><p><br></p></div>
+<div class="row"><p><br></p></div>
 @endsection

@@ -41,7 +41,7 @@
 
 <!-- special-deals -->
 <section class="banner-home-bottom text-center">  
-  <div class="" style="width: 95%;margin: auto;">
+  <div class="home-page">
     <div class="col-sm-12">
       <br><br>
       <h2 class="title"><span>NEW SEASON</span> bestsellers</h2>

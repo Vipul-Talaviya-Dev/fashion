@@ -16,11 +16,14 @@
 	width: auto; 
 	margin-top: -12px;
 }
+.row {
+	margin: 0;
+}
 </style>
 @endsection
 @section('content')
 <hr>
-<div class="col-md-12 col-sm-12 col-xs-12">
+<div class="row">
 	<form action="{{ route('user.shippingDetail') }}" method="post" id="form">
 		{{ csrf_field() }}
 		<div class="col-md-8 col-sm-6 col-xs-12 order-boxos">
@@ -56,7 +59,7 @@
 					</div> -->
 				</div>
 				<p><br></p>
-				<button style="margin-left: 47px;" type="button" class="btn btn-success addAdddress"><i class="fa fa-plus"></i> Add New Address<div class="ripple-wrapper"></div></button>
+				<button type="button" class="btn btn-success addAdddress address-btn"><i class="fa fa-plus"></i> Add New Address<div class="ripple-wrapper"></div></button>
 			</div>
 		</div>
 		<div class="col-md-4 col-sm-6 col-xs-12 pck-box-shadow">

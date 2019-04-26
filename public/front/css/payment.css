@@ -178,8 +178,54 @@ section#content {
     height: 50px;
     width: 100%;
 }
-@media (min-width: 1200px)
-	.container {
-	    width: 960px!important;
-	}
+
+
+.width-10 {
+    width: 52%;
+}
+.width-50 {
+    width: 50%;
+}
+
+@media (max-width:768px) {
+    .width-10 {
+        width: 30%;
+        margin-left: 31%;
+    }
+    .width-50 {
+        width: 100%;
+    }
+    ul.payment_card_img {
+        margin: 27px;
+    }
+    ul.payment_card_img > li > img {
+        width: 40px;
+    }
+    .container {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+@media (max-width:640px) {
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .width-10 {
+        width: 30%;
+        margin-left: 31%;
+    }
+    .width-50 {
+        width: 100%;
+    }
+    ul.payment_card_img {
+        margin: 27px;
+    }
+    ul.payment_card_img > li > img {
+        width: 40px;
+    }
+    .container {
+        padding: 0;
+        margin: 0;
+    }
 }
