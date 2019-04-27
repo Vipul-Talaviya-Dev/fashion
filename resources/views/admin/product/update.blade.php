@@ -66,14 +66,34 @@
                     <div class="subCategoryDiv"></div>
                 </span>
                 <div class="form-group col-md-6">
-                    <label>Product Name: <span class="text-danger">*</span></label>
+                    <label>Product Name (User Side Shown): <span class="text-danger">*</span></label>
                     <input type="text" name="name" placeholder="Enter Product Name" class="form-control required" required value="{{ $product->name ?: old('name') }}" autocomplete="off">
                     @foreach($errors->get('name') as $error)
                     <span style="color: red;">{{$error}}</span>
                     @endforeach
                 </div>
             </div>
-            
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label>Product Name (Admin Side Shown): <span class="text-danger">*</span></label>
+                    <input type="text" name="adminProductName" placeholder="Enter Product Name" class="form-control required" required value="{{ $product->admin_side_name_show ?: old('adminProductName') }}" autocomplete="off">
+                    @foreach($errors->get('adminProductName') as $error)
+                    <span style="color: red;">{{$error}}</span>
+                    @endforeach
+                </div>
+                <div class="col-md-4 form-group">
+                    <label>Type :<span class="text-danger">*</span></label>
+                    <select class="form-control" required name="typeId">
+                        <option value="">-- Select Main Category --</option>
+                        @foreach($types as $type)
+                        <option value="{{ $type->id }}" {{ $product->product_type_id == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
+                        @endforeach        
+                    </select>
+                    @foreach($errors->get('typeId') as $error)
+                    <span style="color: red;">{{$error}}</span>
+                    @endforeach
+                </div>
+            </div>
             <div class="row">
                 <div class="form-group col-md-4">
                     <label>Meta Keyword: <span class="text-danger">*</span></label>

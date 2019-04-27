@@ -13,6 +13,7 @@ class Product extends Model
     use Eloquence;
     protected $fillable = [
         'category_id',
+        'product_type_id',
         'name',
         'slug',
         'weight',
@@ -20,6 +21,7 @@ class Product extends Model
         'chart',
         'meta_keyword',
         'meta_description',
+        'admin_side_name_show',
         'status',
         'cod', // Cash on Delivery
     ];

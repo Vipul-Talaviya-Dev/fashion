@@ -72,6 +72,29 @@
 						                    </div>
 					                    @endforeach
 					                </section>
+					                <section class="size-list">
+					                    <div class="_3xglSm _1iMC4O">
+					                        <div class="_2yccxO D0YrLF">Types</div><svg width="20" height="27" viewBox="0 0 16 27" xmlns="http://www.w3.org/2000/svg" class="_3KyMh7 _2Gnm9R"><path d="M16 23.207L6.11 13.161 16 3.093 12.955 0 0 13.161l12.955 13.161z" fill="#f8f8f8" class="_1ooUW7"></path></svg>
+					                    </div>
+					                    <?php
+					                    	$serchTypes = (request('types') ? explode(',', request('types')) : []);
+					                    ?>
+					                    @foreach($types as $type)
+						                    <div class="_3mk-PQ">
+						                        <div class="_36jUgy">
+						                            <div class="_4IiNRh _2mtkou" title="{{ $type->name }}">
+						                                <div class="_2wQvxh _1WV8jE">
+						                                    <div class="_2kFyHg _2mtkou"><label><input type="checkbox" class="_3uUUD5 types" value="{{ $type->id }}"
+						                                    	@if(in_array($type->id, $serchTypes))
+							                                    	checked
+							                                    @endif
+					                                    	><div class="_1p7h2j"></div><div class="_1GEhLw">{{ $type->name }}</div></label></div>
+						                                </div>
+						                            </div>
+						                        </div>
+						                    </div>
+					                    @endforeach
+					                </section>
 								</div>
 							</div>
 						</div>
@@ -155,19 +178,25 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		var sizes = "{{ (request('sizes') ? request('sizes') : '') }}",
-		colors = "{{ (request('colors') ? request('colors') : '') }}";
+		colors = "{{ (request('colors') ? request('colors') : '') }}",
+		types = "{{ (request('types') ? request('types') : '') }}";
 		$("body").on("click", ".sizes", function() {
 			sizes = $('.sizes:checked').map(function() { return this.value; }).get().join(',');
-			searchRedirect(sizes, colors);
+			searchRedirect(sizes, colors, types);
 		});
 
 		$("body").on("click", ".colors", function() {
 			colors = $('.colors:checked').map(function() { return this.value; }).get().join(',');
-			searchRedirect(sizes, colors);
+			searchRedirect(sizes, colors, types);
 		});
 
-		function searchRedirect(sizes, colors) {
-			window.location.href= "{{ route('user.products') }}?sizes="+sizes+"&colors="+colors;
+		$("body").on("click", ".types", function() {
+			types = $('.types:checked').map(function() { return this.value; }).get().join(',');
+			searchRedirect(sizes, colors, types);
+		});
+
+		function searchRedirect(sizes, colors, types) {
+			window.location.href= "{{ route('user.products') }}?sizes="+sizes+"&colors="+colors+'&types='+types;
 		}
 	})
 </script>

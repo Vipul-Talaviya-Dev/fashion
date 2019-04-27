@@ -13,7 +13,7 @@ class ModulesSeeder extends Seeder
      */
     public function run()
     {
-        $menus = ['Dashboard', 'App Content', 'Color', 'Size', 'Category', 'Product', 'Order', 'Assign Order', 'Banner', 'Home Images', 'User', 'Offers', 'Contacts', 'About', 'FAQ', 'Term & Condition'];
+        $menus = ['Dashboard', 'App Content', 'Color', 'Size', 'Category', 'Product', 'Order', 'Assign Order', 'Banner', 'Home Images', 'User', 'Offers', 'Contacts', 'About', 'FAQ', 'Term & Condition', 'Product Types'];
 
         foreach ($menus as $menu) {
 	        Module::create([

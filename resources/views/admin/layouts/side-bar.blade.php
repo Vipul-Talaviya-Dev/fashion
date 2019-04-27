@@ -51,6 +51,9 @@
                     @if(in_array(5, $moduleIds))
                     <li><a href="{{ route('admin.categories') }}"><i class="icon-price-tags"></i> Category</a></li>
                     @endif
+                    @if(in_array(17, $moduleIds))
+                    <li><a href="{{ route('admin.productTypes') }}"><i class="icon-basket"></i> <span>Product Type</span></a></li>
+                    @endif
                     @if(in_array(6, $moduleIds))
                     <li><a href="{{ route('admin.products') }}"><i class="icon-basket"></i> Product</a></li>
                     @endif

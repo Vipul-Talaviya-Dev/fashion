@@ -64,6 +64,13 @@ class LoginController extends Controller
             ]);
         }
 
+        if ($user->status == User::INACTIVE) {
+            return response()->json([
+                'status' => false,
+                'error' => "Your Account has been De-Active.",
+            ]);
+        }
+
         Auth::login($user);
 
         return response()->json([

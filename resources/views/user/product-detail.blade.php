@@ -4,6 +4,11 @@
 	{{ $product->name }}
 @endsection
 
+@section('meta')
+<meta name="description" content="{{ $product->meta_description }}">
+<meta name="keywords" content="{{ $product->meta_keyword }}">
+@endsection
+
 @section('css')
 <link rel="stylesheet" href="/front/css/flexslider.css" type="text/css" media="screen" />
 <style type="text/css">

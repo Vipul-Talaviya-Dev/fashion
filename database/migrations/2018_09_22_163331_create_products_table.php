@@ -16,7 +16,9 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('category_id')->unsigned();
-            $table->string('name');
+            $table->integer('product_type_id')->unsigned()->nullable();
+            $table->string('name')->comment('User side shown');
+            $table->string('admin_side_name_show')->comment('Admin Show Name');
             $table->string('slug');
             $table->double('weight', 15, 8)->default(0);
             $table->longText('description')->nullable();
@@ -28,6 +30,7 @@ class CreateProductsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('product_type_id')->references('id')->on('product_types');
         });
     }
 

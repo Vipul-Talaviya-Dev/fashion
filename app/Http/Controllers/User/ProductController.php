@@ -13,6 +13,7 @@ use App\Models\Color;
 use App\Models\AppContent;
 use App\Models\Address;
 use App\Models\Product;
+use App\Models\ProductType;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Offer;
@@ -39,10 +40,15 @@ class ProductController extends Controller
             }]);
         }
 
+        if($request->get('types')) {
+            $products = $products->whereIn('product_type_id', explode(',', $request->get('types')));
+        }
+
         return view('user.product-list', [
         	'products' => $products->paginate(25),
             'sizes' => Size::active()->get(),
             'colors' => Color::active()->get(),
+            'types' => ProductType::active()->get(),
             'cart' => true,
             'footer' => false
         ]);

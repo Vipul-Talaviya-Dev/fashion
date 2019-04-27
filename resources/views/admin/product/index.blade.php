@@ -40,7 +40,8 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Product</th>
+                                        <th>Product User Side</th>
+                                        <th>Product Admin Side</th>
                                         <th>Add Variation</th>
                                         <th>View Variation</th>
                                         <th>Status</th>
@@ -53,6 +54,7 @@
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $product->name }}</td>
+                                                <td>{{ $product->admin_side_name_show or '-' }}</td>
                                                 <td><a href="{{ route('admin.product.variationInsert', $product->id) }}" class="btn btn-info btn-sm"><i class="fa fa-plus"></i> </a></td>
                                                 <td><a href="{{ route('admin.product.variations', $product->id) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i> </a></td>
                                                 @if($product->status == 1)

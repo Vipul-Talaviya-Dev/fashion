@@ -47,6 +47,14 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
         Route::post('size/{id}/update', 'SizeController@update')->name('size.update');
         Route::get('size/{id}/delete', 'SizeController@delete')->name('size.delete');
 
+        // ProductType Controller
+        Route::get('productType', 'ProductTypeController@index')->name('productTypes');
+        Route::get('productType/add', 'ProductTypeController@add')->name('productType.add');
+        Route::post('productType/create', 'ProductTypeController@create')->name('productType.create');
+        Route::get('productType/{id}/edit', 'ProductTypeController@edit')->name('productType.edit');
+        Route::post('productType/{id}/update', 'ProductTypeController@update')->name('productType.update');
+        Route::get('productType/{id}/delete', 'ProductTypeController@delete')->name('productType.delete');
+
         // Banner Controller
         Route::get('banners', 'BannerController@index')->name('banners');
         Route::get('banner/add', 'BannerController@add')->name('banner.add');
@@ -91,7 +99,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
         Route::get('order/{id}/invoice', 'OrderController@invoice')->name('invoice');
 
         // User
-        Route::get('users', 'OrderController@users')->name('users');
+        Route::get('users', 'UserController@index')->name('users');
+        Route::get('user/add', 'UserController@add')->name('user.add');
+        Route::post('user/create', 'UserController@create')->name('user.create');
+        Route::post('user/change-status', 'UserController@changeStatus')->name('user.changeStatus');
 
         // Sub Admin Controller
         Route::get('subAdmins', 'SubAdminController@index')->name('subAdmins');

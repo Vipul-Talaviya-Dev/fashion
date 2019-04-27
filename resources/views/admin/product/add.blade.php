@@ -20,7 +20,7 @@
 <!-- Default panel -->
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h5 class="panel-title">Product Add</h5>
+        <h5 class="panel-title">Product Add <a href="{{ route('admin.products')  }}" class="btn btn-info pull-right text-white">List</a></h5>
     </div>
     <div class="panel-body">
         @if ($errors->any())
@@ -54,9 +54,30 @@
                 </div>
                 <div class="subCategoryDiv"></div>
                 <div class="form-group col-md-6">
-                    <label>Product Name: <span class="text-danger">*</span></label>
+                    <label>Product Name (User Side Shown): <span class="text-danger">*</span></label>
                     <input type="text" name="name" placeholder="Enter Product Name" class="form-control required" required value="{{ old('name') }}" autocomplete="off">
                     @foreach($errors->get('name') as $error)
+                    <span style="color: red;">{{$error}}</span>
+                    @endforeach
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label>Product Name (Admin Side Shown): <span class="text-danger">*</span></label>
+                    <input type="text" name="adminProductName" placeholder="Enter Product Name" class="form-control required" required value="{{ old('adminProductName') }}" autocomplete="off">
+                    @foreach($errors->get('adminProductName') as $error)
+                    <span style="color: red;">{{$error}}</span>
+                    @endforeach
+                </div>
+                <div class="col-md-4 form-group">
+                    <label>Type :<span class="text-danger">*</span></label>
+                    <select class="form-control" required name="typeId">
+                        <option value="">-- Select Main Category --</option>
+                        @foreach($types as $type)
+                        <option value="{{ $type->id }}" {{ old('typeId') == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
+                        @endforeach        
+                    </select>
+                    @foreach($errors->get('typeId') as $error)
                     <span style="color: red;">{{$error}}</span>
                     @endforeach
                 </div>
