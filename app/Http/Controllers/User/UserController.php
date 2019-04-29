@@ -63,7 +63,7 @@ class UserController extends Controller
     public function getMemberShip()
     {
         $user = Auth::user();
-        $user->member_ship_code = $user->memberShipCode();
+        $user->member_ship_code = $user->memberShipCode($user->name, (($user->birth_date) ? $user->birth_date : date('Y-m-d')));
         $user->save();  
 
         return redirect()->back()->with(['success' => 'Successfully to get your membership code..']);
@@ -90,6 +90,27 @@ class UserController extends Controller
 
         return redirect()->back()->with(['success' => 'Password has been reset successfully! ']);
     }
+
+    public function orderReturn(Request $request)
+    {
+        if(trim($request->get('orderId')) == "" || trim($request->get('reason')) == "" || trim($request->get('message')) == "") {
+            return redirect()->back()->with(['error' => 'something is wrong please try again']);
+        }
+
+        $orderId = substr(trim($request->get('orderId')), 12);
+
+        if(!$order = OrderProduct::where('status', 6)->where('id', $orderId)->first()) {
+            return redirect()->back()->with(['error' => 'something is wrong please try again']);
+        }
+
+        $order->return_reason = trim($request->get('reason'));
+        $order->message = trim($request->get('message'));
+        $order->status = 7;
+        $order->save();
+
+        return redirect()->back()->with(['success' => 'Our delivery boy is come 24 hours to take your order.']);
+    }
+
 
     public function logout()
     {

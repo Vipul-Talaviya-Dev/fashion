@@ -21,6 +21,8 @@ class OrderProduct extends Model
 		'max_price',
 		'qty',
 		'status',
+		'message',
+		'return_reason',
 	];
 
 	/**

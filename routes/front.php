@@ -45,7 +45,8 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 		Route::post('reset-password', 'UserController@changePassword')->name('changePassword');
 
 		Route::post('/order-shipping-detail', 'ProductController@shippingDetail')->name('shippingDetail');
-		Route::get('/my-account', 'UserController@index')->name('myAccount');
+		Route::get('/my-orders', 'UserController@index')->name('myAccount');
+		Route::post('orderReturn', 'UserController@orderReturn')->name('orderReturn');
 		Route::get('my-profile', 'UserController@profile')->name('myProfile');
 		Route::post('my-update', 'UserController@profileUpdate')->name('profileUpdate');
 

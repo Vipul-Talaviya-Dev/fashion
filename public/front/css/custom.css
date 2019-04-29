@@ -31,6 +31,12 @@ a {
     background: #d0a65e;
     padding: 7px;
 }
+.font-size-10 {
+    font-size: 10px;
+}
+.green {
+    color: green;
+}
 #preloader {
     position: fixed;
     top: 0;

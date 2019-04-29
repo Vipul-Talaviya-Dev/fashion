@@ -54,11 +54,11 @@ class User extends Authenticatable
      * [memberShipCode description]
      * @return [type] [description]
      */
-    public static function memberShipCode()
+    public static function memberShipCode($name, $birthDate)
     {
-        $random = 'SHRD'.substr($this->name, 0, 4).str_random(1).date('y', strtotime($this->birth_date));
+        $random = 'SHRD'.substr($name, 0, 4).str_random(1).date('y', strtotime($birthDate));
         if (self::where('member_ship_code', $random)->first()) {
-            $random = 'SHRD'.substr($this->name, 0, 4).str_random(1).date('y', strtotime($this->birth_date));
+            $random = 'SHRD'.substr($name, 0, 4).str_random(1).date('y', strtotime($birthDate));
         }
 
         return $random;

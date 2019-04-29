@@ -168,7 +168,7 @@ $admin  = \Session::get('admin');
                             <ul class="row no-gutters mb-3">
                                 <li class="">
                                     <div class="stats-widget-header">
-                                        <i class="fa fa-home"></i>
+                                        <i class="fa fa-user"></i>
                                     </div>
                                 </li>
                                 <li class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12">
