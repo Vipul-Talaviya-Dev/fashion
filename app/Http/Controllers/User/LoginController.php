@@ -86,8 +86,8 @@ class LoginController extends Controller
             'mobile' => 'required|numeric|min:10',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
-            'birthDate' => 'required|date_format:Y-m-d',
-            'anniversaryDate' => 'nullable|date_format:Y-m-d',
+            'birthDate' => 'required',
+            'anniversaryDate' => 'nullable',
         );
 
         $validator = Validator::make($request->all(), $rules, []);
@@ -107,12 +107,12 @@ class LoginController extends Controller
                 'email' => $request->get('email'),
                 'mobile' => $request->get('mobile'),
                 'password' => $request->get('password'),
-                'birthDate' => $request->get('birthDate'),
-                'anniversaryDate' => $request->get('anniversaryDate'),
-                'otp' => $otp,
+                'birthDate' => date('Y-m-d', strtotime($request->get('birthDate'))),
+                'anniversaryDate' => ($request->get('anniversaryDate')) ? date('Y-m-d', strtotime($request->get('anniversaryDate'))) : NULL,
             ];
 
             Session::put('user', $user);
+            Session::put('otp', $otp);
             return response()->json([
                 'status' => true,
                 'otp' => $otp
@@ -142,7 +142,7 @@ class LoginController extends Controller
 
         }
 
-        if(Session::get('user')['otp'] != $request->get('otp')) {
+        if(Session::get('otp') != $request->get('otp')) {
             return response()->json([
                 'status' => false,
                 'error' => "Invalid Otp",
@@ -169,8 +169,9 @@ class LoginController extends Controller
 
     public function resendOtp(Request $request)
     {
+        Session::forget('otp');
         $otp = mt_rand(1111, 9999);
-        Session::get('user')['otp'] = $otp;
+        Session::put('otp', $otp);
 
         return response()->json([
             'status' => true,
@@ -186,8 +187,9 @@ class LoginController extends Controller
                 $otp = mt_rand(1111, 9999);
                 Session::put('user', [
                     'mobile' => $user->mobile,
-                    'otp' => $otp,
                 ]);
+                Session::put('otp', $otp);
+
                 return response()->json([
                     'status' => true,
                     'otp' => $otp,
@@ -255,7 +257,7 @@ class LoginController extends Controller
         }
 
         if($user = User::where('mobile', Session::get('user')['mobile'])->first()) {
-            if((string)Session::get('user')['otp'] == $request->get('otp')) {
+            if((string)Session::get('otp') == $request->get('otp')) {
 
                 Auth::login($user);
 

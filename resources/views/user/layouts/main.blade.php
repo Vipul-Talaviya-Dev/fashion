@@ -13,6 +13,7 @@
     <link rel="icon" href="/front/images/favicon.png" >
     <link href="/front/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/front/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/front/css/datepicker.min.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/front/css/material.min.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/front/css/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/front/css/fasthover.css" rel="stylesheet" type="text/css" media="all" />
@@ -32,6 +33,7 @@
     <!-- Core JS files -->
     <script src="/front/js/jquery.min.js" type="text/javascript"></script>
     <script src="/front/js/bootstrap-3.1.1.min.js" type="text/javascript"></script>
+    <script src="/front/js/datepicker.min.js" type="text/javascript"></script>
     <script src="/front/js/material.min.js" type="text/javascript"></script>
     <script src="/front/js/toast.js" type="text/javascript"></script>
     <script src="/front/js/easyResponsiveTabs.js" type="text/javascript"></script>
@@ -50,6 +52,18 @@
             });
         });*/
         $(document).ready(function() {
+            $(".birthDate").datepicker({
+                format: "DD-MM-YYYY",
+                autoHide: true,
+                minDate: 0
+            });
+
+            $(".anniversaryDate").datepicker({
+                format: "DD-MM-YYYY",
+                autoHide: true,
+                minDate: 0
+            });
+            
             $("body").on("click", ".scroll", function(event){     
                 event.preventDefault();
                 $('html,body').animate({scrollTop: "0px"},1000);

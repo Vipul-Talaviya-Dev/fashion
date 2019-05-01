@@ -88,8 +88,8 @@ aria-hidden="true">
 											<input placeholder="First Name" name="name" type="text" class="fName" required autocomplete="off">
 											<input placeholder="Last Name" name="name" style="margin: 1em 0 0;" type="text" class="lName" required autocomplete="off">
 											<input placeholder="Mobile" name="mobile" type="text" class="signupMobile" required style="margin: 1em 0 0;" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" autocomplete="off">
-											<input placeholder="Birth Date" name="birthDate" class="birthDate" type="date" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Birth Date">
-											<input placeholder="Anniversary Date" name="anniversaryDate" class="anniversaryDate" type="date" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Anniversary Date">
+											<input placeholder="Birth Date" name="birthDate" class="birthDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Birth Date">
+											<input placeholder="Anniversary Date" name="anniversaryDate" class="anniversaryDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Anniversary Date">
 											<input placeholder="Email Address" name="email" class="signupEmail keyup-email" type="email" required autocomplete="off">	
 											<input placeholder="Password" name="password" class="signupPassword" type="password" required autocomplete="off">	
 											<input placeholder="Confirm Password" name="confirmPassword" class="confirmPassword" type="password" required autocomplete="off">

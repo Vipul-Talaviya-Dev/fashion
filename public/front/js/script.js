@@ -378,7 +378,7 @@ $(document).ready(function() {
                         if(r) {
                             page_redirect(r);
                         } else {
-                            page_redirect('/my-account');
+                            page_redirect('/products');
                         }
                     }
                 }

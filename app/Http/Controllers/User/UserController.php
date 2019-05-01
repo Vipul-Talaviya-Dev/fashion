@@ -45,16 +45,16 @@ class UserController extends Controller
             'firstName' => 'required',
             'lastName' => 'required',
             'mobile' => 'required|numeric',
-            'birth_date' => 'required|date_format:Y-m-d',
-            'anniversary_date' => 'nullable|date_format:Y-m-d',
+            'birth_date' => 'required',
+            'anniversary_date' => 'nullable',
         ]);
 
         $user = Auth::user();
 
         $user->name = $request->get('firstName').' '.$request->get('lastName');
         $user->mobile = $request->get('mobile');
-        $user->birth_date = $request->get('birth_date');
-        $user->anniversary_date = $request->get('anniversary_date') ?: NULL;
+        $user->birth_date = date('Y-m-d', strtotime($request->get('birth_date')));
+        $user->anniversary_date = $request->get('anniversary_date') ? date('Y-m-d', strtotime($request->get('anniversary_date'))) : NULL;
         $user->save();
 
         return redirect()->back()->with(['success' => 'Profile Updated Successfully..']);

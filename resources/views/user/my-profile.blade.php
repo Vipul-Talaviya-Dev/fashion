@@ -68,13 +68,13 @@
 					<div class="form-group col-md-6">
 						<div class="input-group">
 						  <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-						  <input type="date" name="birth_date" class="form-control" placeholder="Birth Date" value="{{ $user->birth_date ?: old('birth_date') }}" autocomplete="off" required max="{{ date('Y-m-d') }}" title="Birth Date">
+						  <input type="text" name="birth_date" class="form-control birthDate" placeholder="Birth Date" value="{{ $user->birth_date ? date('d-m-Y', strtotime($user->birth_date)) : old('birth_date') }}" autocomplete="off" required max="{{ date('Y-m-d') }}" title="Birth Date">
 						</div>
 					</div>
 					<div class="form-group col-md-6">
 						<div class="input-group">
 						  <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-						  <input type="date" name="anniversary_date" class="form-control" placeholder="Anniversary Date" value="{{ $user->anniversary_date ?: old('anniversary_date') }}" autocomplete="off"  max="{{ date('Y-m-d') }}" title="Anniversary Date">
+						  <input type="text" name="anniversary_date" class="form-control anniversaryDate" placeholder="Anniversary Date" value="{{ $user->anniversary_date ? date('d-m-Y', strtotime($user->anniversary_date)) : old('anniversary_date') }}" autocomplete="off"  max="{{ date('Y-m-d') }}" title="Anniversary Date">
 						</div>
 					</div>
 				</div>

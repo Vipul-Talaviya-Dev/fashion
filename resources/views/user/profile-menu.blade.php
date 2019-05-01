@@ -23,7 +23,7 @@
 		</a>
 		<a href="{{ route('user.resetPassword') }}" class="default-text">
 			<div class="usermenu-Panel">
-				<div class="usermenu-PanelTitle"><i class="mdi-action-assignment"></i> Setting</div>
+				<div class="usermenu-PanelTitle"><i class="mdi-action-assignment"></i> Change Password</div>
 				<div class="usermenu-PanelContent"></div>
 			</div>
 		</a>
