@@ -50,40 +50,47 @@
                     </div>
                     <div class="content">
                         <div class="panel panel-flat">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>User Name</th>
-                                        <th>Email</th>
-                                        <th>Mobile</th>
-                                        <th>Member Ship Code</th>
-                                        <th>Create Date</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($users as $key => $user)
-                                    <tr>
-                                        <td>{{ $user->id }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->mobile }}</td>
-                                        <td>{{ $user->member_ship_code ?: 'N/A' }}</td>
-                                        <td>{{ $user->created_at }}</td>
-                                        @if($user->status == 1)
-                                        <td>
-                                            <a href="javascript:void(0);" class="statuChange" data-status="1" data-id="{{ $user->id }}"><span class="label label-success">Active</span></a>
-                                        </td>
-                                        @else
-                                        <td>
-                                            <a href="javascript:void(0);" class="statuChange" data-status="2" data-id="{{ $user->id }}"><span class="label label-default">In-Active</span></a>
-                                        </td>
-                                        @endif
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>User Name</th>
+                                            <th>Email</th>
+                                            <th>Mobile</th>
+                                            <th>Birth Date</th>
+                                            <th>Anniversary Date</th>
+                                            <th>Member Ship Code</th>
+                                            <th>Create Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($users as $key => $user)
+                                        <tr>
+                                            <td>{{ $user->id }}</td>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->mobile }}</td>
+                                            <td>{{ $user->birth_date ? date('d-m-Y', strtotime($user->birth_date)) : 'N/A' }}</td>
+                                            <td>{{ $user->anniversary_date ? date('d-m-Y', strtotime($user->anniversary_date)) : 'N/A' }}</td>
+                                            <td>{!! $user->member_ship_code ? $user->member_ship_code.'<br><span title="Login Count">('.$user->login_count.')</span>' : 'N/A' !!}</td>
+                                            <td>{{ $user->created_at }}</td>
+                                            @if($user->status == 1)
+                                            <td>
+                                                <a href="javascript:void(0);" class="statuChange" data-status="1" data-id="{{ $user->id }}"><span class="label label-success">Active</span></a>
+                                            </td>
+                                            @else
+                                            <td>
+                                                <a href="javascript:void(0);" class="statuChange" data-status="2" data-id="{{ $user->id }}"><span class="label label-default">In-Active</span></a>
+                                            </td>
+                                            @endif
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                                
+                            </div>
                         </div>
                         <div class="pull-right">
                             {!! 

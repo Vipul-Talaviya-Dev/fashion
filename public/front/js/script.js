@@ -34,6 +34,24 @@ function max_length(c, b, a) {
     return true
 }
 
+// TIme Count For Otp
+function startCounter(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.text(minutes + ":" + seconds);
+
+        if (--timer < 0) {
+            page_redirect('/otp-expire');
+        }
+    }, 1000);
+}
+
 $(document).ready(function() {
     $("body").on("click", ".item_add", function() {
         var p = $(".varselected").attr("data-product");
@@ -160,6 +178,9 @@ $(document).ready(function() {
                         $("#forgotPasswordDiv").hide();
                         $("#forgotPasswordOtp").html(res.otp);
                         $("#forgotPasswordOtpDiv").show();
+                        var fiveMinutes = 60 * 5,
+                            display = $('.timeCounter');
+                        startCounter(fiveMinutes, display);
                         // toastr.success(res.success);
                         // window.location.reload();
                     }
@@ -306,6 +327,9 @@ $(document).ready(function() {
                         $("#registrationCheck").hide();
                         $("#otp").html(res.otp);
                         $("#otpDiv").show();
+                        var fiveMinutes = 60 * 5,
+                            display = $('.timeCounter');
+                        startCounter(fiveMinutes, display);
                     }
                 }
             });
@@ -342,6 +366,9 @@ $(document).ready(function() {
                             $("#forgotPasswordOtp").html(res.otp);
                             $("#forgotPasswordOtpDiv").show();
                         }
+                        var fiveMinutes = 60 * 5,
+                        display = $('.timeCounter');
+                        startCounter(fiveMinutes, display);
                     }
                 }
             });

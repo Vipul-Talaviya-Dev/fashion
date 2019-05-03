@@ -29,6 +29,7 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 	Route::get('/carts', 'ProductController@carts')->name('carts');
 	Route::post('/cart-order-detail', 'ProductController@cartOrderDetail')->name('cartOrderDetail');
 	Route::get('/login', 'LoginController@loginForm')->name('loginForm');
+	Route::get('otp-expire', 'LoginController@otpExpire')->name('otpExpire');
 	Route::post('/login', 'LoginController@login')->name('login');
 	Route::post('resendOtp', 'LoginController@resendOtp')->name('resendOtp');
 	Route::get('/social/{service}/login', 'LoginController@redirect')->name('socialLogin');

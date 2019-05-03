@@ -85,6 +85,11 @@ class UserController extends Controller
         ]);
        
         $user = Auth::user();
+
+        if (!\Hash::check($request->get('oldPassword'), $user->password)) {
+            return redirect()->back()->with(['error' => 'Old password is incorrect']);
+        }
+
         $user->password = bcrypt($request->get('password'));
         $user->save();
 

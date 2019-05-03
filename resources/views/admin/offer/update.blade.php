@@ -73,42 +73,44 @@
                                                 </div>
                                             </div>
                                             <!-- /first name -->
-                                             <div class="form-group">
-                                                <div class="col-lg-6">
-                                                    <label class="control-label">Amount </label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-addon"><i class="fa fa-money"></i>
+                                            @if(false)
+                                                 <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label class="control-label">Amount </label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon"><i class="fa fa-money"></i>
+                                                            </div>
+                                                            <input type="number" name="amount" class="form-control"
+                                                                   value="{{ $offer->amount ?: old('amount') }}" id="amount"
+                                                                    autocomplete="off"
+                                                                   placeholder="Enter Offer In Amount">
                                                         </div>
-                                                        <input type="number" name="amount" class="form-control"
-                                                               value="{{ $offer->amount ?: old('amount') }}" id="amount"
-                                                                autocomplete="off"
-                                                               placeholder="Enter Offer In Amount">
+                                                        @if($errors->get('amount'))
+                                                            @foreach($errors->get('amount') as $error)
+                                                                <span style="color: red;"><i
+                                                                            class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>
+                                                            @endforeach
+                                                        @endif
                                                     </div>
-                                                    @if($errors->get('amount'))
-                                                        @foreach($errors->get('amount') as $error)
-                                                            <span style="color: red;"><i
-                                                                        class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>
-                                                        @endforeach
-                                                    @endif
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label class="control-label">Amount Limit <span
-                                                                class="text-danger">*</span></label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-addon"><i class="fa fa-money"></i>
+                                                    <div class="col-lg-6">
+                                                        <label class="control-label">Amount Limit <span
+                                                                    class="text-danger">*</span></label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon"><i class="fa fa-money"></i>
+                                                            </div>
+                                                            <input type="number" name="amount_limit" class="form-control"
+                                                                   value="{{ $offer->amount_limit ?: old('amount_limit') }}" id="amount_limit" required="required"
+                                                                autocomplete="off" placeholder="Enter Offer In Amount limit">
                                                         </div>
-                                                        <input type="number" name="amount_limit" class="form-control"
-                                                               value="{{ $offer->amount_limit ?: old('amount_limit') }}" id="amount_limit" required="required"
-                                                            autocomplete="off" placeholder="Enter Offer In Amount limit">
+                                                        @if($errors->get('amount_limit'))
+                                                            @foreach($errors->get('amount_limit') as $error)
+                                                                <span style="color: red;"><i
+                                                                            class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>
+                                                            @endforeach
+                                                        @endif
                                                     </div>
-                                                    @if($errors->get('amount_limit'))
-                                                        @foreach($errors->get('amount_limit') as $error)
-                                                            <span style="color: red;"><i
-                                                                        class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>
-                                                        @endforeach
-                                                    @endif
-                                                </div>
-                                            </div>
+                                                </div>  
+                                            @endif
                                             <!-- Password field -->
                                             <div class="form-group">
                                                 <div class="col-lg-6">

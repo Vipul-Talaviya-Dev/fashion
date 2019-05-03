@@ -237,8 +237,7 @@ class ProductController extends Controller
 
     public function payment()
     {
-        
-    	if(Session::get('order') == null) {
+        if(Session::get('order') == null) {
     		return redirect(route('user.index'));
     	}
     	$user = Auth::user();
@@ -319,23 +318,24 @@ class ProductController extends Controller
                     ];
                 }
             }
-            $amount_limit = $offer->amount_limit;
+            // $amount_limit = $offer->amount_limit;
             $discount = 0;
             $totalAmount = Session::get('CART_AMOUNT');
+            // get Discount
+            if($offer->discount) {
+                $discount = ($totalAmount*$offer->discount)/100;
+            }
+
             // Check discount
-            if ((int)$amount_limit >= (int)$totalAmount) {
+            if ((int)$discount >= (int)$totalAmount) {
                 $discount = 0; // Discount 0
             } else {
-                // get Discount
-                if($offer->discount) {
-                    $discount = ($totalAmount*$offer->discount)/100;
-                }
                 // Get amount
-                if($offer->amount) {
+                /*if($offer->amount) {
                     if(($totalAmount-$offer->amount) < $totalAmount) {
                         $discount = $offer->amount;
                     }
-                }
+                }*/
 
                 Session::put('discount', number_format($discount, 2)); // discount amount
                 Session::put('offer', $offer->id);

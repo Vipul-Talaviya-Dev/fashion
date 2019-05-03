@@ -71,6 +71,9 @@ class LoginController extends Controller
             ]);
         }
 
+        $user->login_count = ($user->login_count+1);
+        $user->save();
+        
         Auth::login($user);
 
         return response()->json([
@@ -179,6 +182,11 @@ class LoginController extends Controller
         ]);
     }
 
+    public function otpExpire()
+    {
+        Session::forget('otp');
+        return redirect()->back()->with(['error' => 'Your Otp is expired, please try again.']);
+    }
     public function forgotPassword(Request $request)
     {
         $user = new User;

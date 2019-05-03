@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
     	$images = [];
-    	foreach (WindowImage::latest()->limit(10)->get() as $key => $image) {
+    	foreach (WindowImage::active()->latest()->limit(10)->get() as $key => $image) {
     		$data = [
     			'title' => $image->title,
     			'image' => \Cloudder::secureShow($image->image),

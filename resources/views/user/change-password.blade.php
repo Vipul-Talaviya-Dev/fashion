@@ -37,13 +37,20 @@
 				<div class="col-md-12 col-xs-12">
 					<div class="form-group col-md-6">
 						<div class="input-group">
-						  <span class="input-group-addon"><i class="glyphicon glyphicon-clock"></i></span>
-						  <input type="password" name="password" class="form-control" placeholder="Enter Password"  autocomplete="off" required>
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+						  <input type="password" name="oldPassword" class="form-control" placeholder="Enter Old Password"  autocomplete="off" required>
+						</div>
+					</div>
+
+					<div class="form-group col-md-6">
+						<div class="input-group">
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+						  <input type="password" name="password" class="form-control" placeholder="Enter New Password"  autocomplete="off" required>
 						</div>
 					</div>
 					<div class="form-group col-md-6">
 						<div class="input-group">
-						  <span class="input-group-addon"><i class="glyphicon glyphicon-clock"></i></span>
+						  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 						  <input type="password" name="confirmPassword" class="form-control" placeholder="Enter Confirm Password" autocomplete="off" required>
 						</div>
 					</div>

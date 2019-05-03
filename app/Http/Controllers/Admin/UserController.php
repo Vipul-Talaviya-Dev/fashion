@@ -38,20 +38,24 @@ class UserController extends Controller
             'mobile' => 'required|numeric|min:10',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirmPassword',
-            'birthDate' => 'required|date_format:Y-m-d',
-            'anniversaryDate' => 'nullable|date_format:Y-m-d',
+            'birthDate' => 'required',
+            'anniversaryDate' => 'nullable',
 		]);
 
 		$user = User::create([
             'name' => $request->get('firstName').' '.$request->get('lastName'),
             'email' => $request->get('email'),
             'mobile' => $request->get('mobile'),
-            'birth_date' => $request->get('birthDate'),
-            'anniversary_date' => $request->get('anniversaryDate'),
+            'birth_date' => date('Y-m-d', strtotime($request->get('birthDate'))),
+            'anniversary_date' => ($request->get('anniversaryDate')) ? date('Y-m-d', strtotime($request->get('anniversaryDate'))) : NULL,
             'password' => \Hash::make($request->get('password')),
             'referral_code' => User::referralCode(),
         ]);
 
+		if ($request->get('memberCode')) {
+			$user->member_ship_code = User::memberShipCode($user->name, $user->birth_date);
+			$user->save();
+		}
 
         Mail::send('admin.email.forgot-password', [
             'name' => $user->name,

@@ -44,7 +44,13 @@ Category panel
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td><a href="?id={{ $category->id }}" >{{ $category->name }}</a></td>
-                                    <td><span class="label label-success">Active</span></td>
+                                    <td>
+                                        @if($category->status == 1)
+                                            <span class="label label-success">Active </span> 
+                                        @else 
+                                            <span class="label label-danger"> Inactive </span>
+                                        @endif
+                                    </td>
                                     <td class="text-center">
                                         <a href="{{ route('admin.category.edit',$category->id) }}" title="Edit"><i class="icon-pencil5"></i></a>
                                     </td>

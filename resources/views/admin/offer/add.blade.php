@@ -73,7 +73,8 @@
                                             <!-- /first name -->
 
                                             <!-- Password field -->
-                                            <div class="form-group">
+                                            @if(false)
+                                                <div class="form-group">
                                                 <div class="col-lg-6">
                                                     <label class="control-label">Amount </label>
                                                     <div class="input-group">
@@ -108,7 +109,8 @@
                                                         @endforeach
                                                     @endif
                                                 </div>
-                                            </div>
+                                                </div>
+                                            @endif
                                             <div class="form-group">
                                                 <div class="col-lg-6">
                                                     <label class="control-label">Discount </label>
@@ -201,8 +203,6 @@
                                             </div>
                                         </fieldset>
                                         <div class="text-right">
-                                            <button type="reset" class="btn btn-default" id="reset">Reset <i
-                                                        class="icon-reload-alt position-right"></i></button>
                                             <button type="submit" class="btn btn-primary">Submit <i
                                                         class="icon-arrow-right14 position-right"></i></button>
                                         </div>

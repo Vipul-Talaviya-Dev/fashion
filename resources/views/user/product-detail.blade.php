@@ -15,12 +15,12 @@
 	.flex-control-thumbs img {
 		height: 135px;
 	}
-	.resp-tab-active {
+	/*.resp-tab-active {
 	    border:1px solid #fff;
 	    text-shadow: none;
 	    color: #fff;
 	    background:#fff;
-	}
+	}*/
 	.modal-header {
 	    padding: 1em 1em 0;	
 	}
@@ -96,8 +96,9 @@
 					@if($variation->qty == 0)
 						<p><a href="javascript:void(0);">Out Of Stock</a></p>
 					@else
-						<p><a class="item_add text-center buynow" href="javascript:void(0);" data-byNow="1">Buy Now</a></p>
-						<p><a class="item_add text-center" href="javascript:void(0);" data-byNow="0">Add to cart</a>
+						<p>
+							<a class="item_add text-center buynow" href="javascript:void(0);" data-byNow="1">Buy Now</a>
+							<a class="item_add text-center" href="javascript:void(0);" data-byNow="0">Add to cart</a>
 						</p>
 					@endif	
 			</div>

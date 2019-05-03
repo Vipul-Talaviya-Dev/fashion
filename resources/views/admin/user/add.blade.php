@@ -69,14 +69,14 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <label>Birth Date: <span class="text-danger">*</span></label>
-                    <input type="date" name="birthDate" placeholder="Enter Birth Date" class="form-control required" required value="{{ old('birthDate') }}" max="{{ date('Y-m-d') }}" autocomplete="off">
+                    <input type="text" name="birthDate" placeholder="Enter Birth Date" class="form-control required birthDate" required value="{{ old('birthDate') }}" max="{{ date('Y-m-d') }}" autocomplete="off">
                     @foreach($errors->get('birthDate') as $error)
                     <span style="color: red;">{{$error}}</span>
                     @endforeach
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Birth Date: <span class="text-danger">*</span></label>
-                    <input type="date" name="anniversaryDate" placeholder="Enter Anniversary Date" class="form-control required" required value="{{ old('anniversaryDate') }}" max="{{ date('Y-m-d') }}" autocomplete="off">
+                    <label>Anniversary Date: <span class="text-danger">*</span></label>
+                    <input type="text" name="anniversaryDate" placeholder="Enter Anniversary Date" class="form-control required anniversaryDate" required value="{{ old('anniversaryDate') }}" max="{{ date('Y-m-d') }}" autocomplete="off">
                     @foreach($errors->get('anniversaryDate') as $error)
                     <span style="color: red;">{{$error}}</span>
                     @endforeach
@@ -98,6 +98,12 @@
                     @endforeach
                 </div>
             </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label>Generate Member Code: </label><br>
+                    <input type="checkbox" name="memberCode" value="1">
+                </div>
+            </div>
             <p><br></p>
             <div class="row pull-right">
                 <button type="submit" class="btn btn-primary stepy-finish">
@@ -110,4 +116,21 @@
 @endsection
 
 @section('js')
+<script>
+    $(document).ready(function () {
+
+        $(".birthDate").datepicker({
+            todayBtn: 1,
+            minDate: '-0d',
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+        });
+
+        $(".anniversaryDate").datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+        });
+
+    });
+</script>
 @endsection

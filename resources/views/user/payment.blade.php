@@ -137,19 +137,34 @@
 							<div class="panel panel-default pck-box-shadow">
 								<div class="panel-collapse collapse in" id="promotional">
 									<div class="panel-body">
-										<div class="col-md-12 col-xs-12">
-											<label style="margin-top: 7px;">Enter MemberShip Code (?)</label>
-											<div class="input-group width-50">
-												<input class="pck-input adv member_ship_code" type="text" autocomplete="off" value="{{ Auth::user()->member_ship_code }}">
-												<span class="input-group-btn"><button type="button" class="btn btn-danger apply_code">Apply</button></span>
+										@if($user->member_ship_code)
+											<div class="col-md-12 col-xs-12">
+												<label style="margin-top: 7px;">Enter MemberShip Code (?)</label>
+												<div class="input-group width-50">
+													<input class="pck-input adv member_ship_code" type="text" autocomplete="off" value="{{ Auth::user()->member_ship_code }}">
+													<span class="input-group-btn"><button type="button" class="btn btn-danger apply_code">Apply</button></span>
+												</div>
+												<span style="display: block;">
+													<b>Note:</b> You Will Purchase (Rs. 2000/-) Up Shopping to get discount.
+													@if(\Auth::user()->member_ship_code == null)
+													<a class="pull-right getCode" style="cursor: pointer;">Get Code</a>
+													@endif
+												</span>
 											</div>
-											<span style="display: block;">
-												<b>Note:</b> You Will Purchase (Rs. 2000/-) Up Shopping to get discount.
-												@if(\Auth::user()->member_ship_code == null)
+										@else
+											<div class="col-md-12 col-xs-12">
+												<label style="margin-top: 7px;">MemberShip Terms & Conditions.</label>
+												<hr>
+												<ul>
+													<li>1. Purchase worth Rs. 2000/- & get SHROUD membership.</li>
+													<li>2. Members will get flat 20% discount on every purchase.</li>
+													<li>3. Only members will eligible for discount & other offer at SHROUD.</li>
+													<li>4. This membership must not be clubbed with any other offer from SHROUD.</li>
+												</ul>
 												<a class="pull-right getCode" style="cursor: pointer;">Get Code</a>
-												@endif
-											</span>
-										</div>
+											</div>
+										@endif
+
 									</div>
 								</div>
 							</div>

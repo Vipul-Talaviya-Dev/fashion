@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'member_ship_code', 'mobile', 'referral_code', 'social_login', 'login_type', 'birth_date', 'anniversary_date'
+        'name', 'email', 'password', 'member_ship_code', 'mobile', 'referral_code', 'social_login', 'login_type', 'birth_date', 'anniversary_date', 'login_count'
     ];
 
     /**
@@ -56,9 +56,9 @@ class User extends Authenticatable
      */
     public static function memberShipCode($name, $birthDate)
     {
-        $random = 'SHRD'.substr($name, 0, 4).str_random(1).date('y', strtotime($birthDate));
+        $random = 'SHRD'.substr($name, 0, 4).date('jny', strtotime($birthDate));
         if (self::where('member_ship_code', $random)->first()) {
-            $random = 'SHRD'.substr($name, 0, 4).str_random(1).date('y', strtotime($birthDate));
+            $random = 'SHRD'.substr($name, 0, 4).str_random(1).date('jny', strtotime($birthDate));
         }
 
         return $random;

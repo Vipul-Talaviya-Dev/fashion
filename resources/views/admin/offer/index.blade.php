@@ -40,8 +40,10 @@
                                         <th>Name</th>
                                         <th>Offer Code</th>
                                         <th>Discount(%)</th>
-                                        <th>Amount</th>
-                                        <th>Amount Limit</th>
+                                        @if(false)
+                                            <th>Amount</th>
+                                            <th>Amount Limit</th>
+                                        @endif
                                         <th>Start Date</th>
                                         <th>End date</th>
                                         <th>Uses</th>
@@ -56,8 +58,10 @@
                                             <td>{{ $offer->name }}</td>
                                             <td>{{ $offer->offer_code }}</td>
                                             <td>{{ $offer->discount }}</td>
-                                            <td>{{ $offer->amount }}</td>
-                                            <td>{{ $offer->amount_limit }}</td>
+                                            @if(false)
+                                                <td>{{ $offer->amount }}</td>
+                                                <td>{{ $offer->amount_limit }}</td>
+                                            @endif
                                             <td>{{ date('d-m-Y',strtotime($offer->start_date ))}}</td>
                                             <td>{{ date('d-m-Y',strtotime($offer->end_date)) }}</td>
                                             @if($offer->use_time==1)
