@@ -22,6 +22,8 @@ class CreateOrderProductsTable extends Migration
             $table->integer('price')->unsigned()->default(0)->comment("In Paisa");
             $table->integer('max_price')->unsigned()->default(0)->comment("In Paisa");
             $table->integer('qty')->unsigned()->default(0);
+            $table->tinyInteger('return_reason')->comment('1: Damage, 2: Other Reason')->default(0);
+            $table->text('message')->nullable()->comment("Return Order Comment");
             $table->tinyInteger('status')->comment('1: Order Checkout, 2: Order Placed, 3: Order Success, 4: Delivery Boy Pickup Order, 5: Delivery Boy To Customer, 6: Delivered, 7: Return, 8: Canceled')->default(1);
             $table->timestamps();
             $table->softDeletes();

@@ -172,7 +172,7 @@ $admin  = \Session::get('admin');
                                     </div>
                                 </li>
                                 <li class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12">
-                                    <h6 class="title">User</h6>
+                                    <h6 class="title">Total Users</h6>
                                     <h4 class="total" title="Count">{{ $user }}</h4>
                                 </li>
                             </ul>

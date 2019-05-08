@@ -143,11 +143,11 @@
 						<input type="text" name="mobile" class="form-control mobile" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" value="{{ old('mobile') }}" autocomplete="off" required>
 					</div>
 					<div class="form-group">
-						<label>Address :</label>
+						<label>Address 1:</label>
 						<input type="text" name="address" class="form-control address" autocomplete="off" required>
 					</div>
 					<div class="form-group">
-						<label>Address 1:</label>
+						<label>Address 2:</label>
 						<input type="text" name="address1" class="form-control address1" autocomplete="off" required>
 					</div>
 					<div class="form-group">

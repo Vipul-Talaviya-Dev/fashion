@@ -93,7 +93,9 @@ class UserController extends Controller
         $user->password = bcrypt($request->get('password'));
         $user->save();
 
-        return redirect()->back()->with(['success' => 'Password has been reset successfully! ']);
+
+        Auth::logout();
+        return redirect(route('user.loginForm'))->with(['success' => 'Password has been reset successfully! ']);
     }
 
     public function orderReturn(Request $request)

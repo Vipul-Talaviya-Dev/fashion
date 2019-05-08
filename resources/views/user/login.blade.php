@@ -44,8 +44,8 @@
 									<input placeholder="First Name" name="name" type="text" class="fName" required autocomplete="off">
 									<input placeholder="Last Name" name="name" style="margin: 1em 0 0;" type="text" class="lName" required autocomplete="off">
 									<input placeholder="Mobile" name="mobile" type="text" class="signupMobile" required style="margin: 1em 0 0;" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" autocomplete="off">
-									<input placeholder="Birth Date" name="birthDate" class="birthDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Birth Date">
-									<input placeholder="Anniversary Date" name="anniversaryDate" class="anniversaryDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Anniversary Date">
+									<input placeholder="Birth Date" name="birthDate" class="birthDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Birth Date" readonly>
+									<input placeholder="Anniversary Date" name="anniversaryDate" class="anniversaryDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Anniversary Date" readonly>
 									<input placeholder="Email Address" name="email" class="signupEmail keyup-email" type="email" required autocomplete="off">	
 									<input placeholder="Password" name="password" class="signupPassword" type="password" required autocomplete="off">	
 									<input placeholder="Confirm Password" name="confirmPassword" class="confirmPassword" type="password" required autocomplete="off">
@@ -87,8 +87,8 @@
 					</div>		        					            	      
 				</div>	
 			</div>
+			<div id="OR" class="hidden-xs">OR</div>
 		</div>
-		@if(false)
 		<div class="col-md-4 modal_body_right modal_body_right1">
 			<div class="row text-center sign-with">
 				<div class="col-md-12">
@@ -107,7 +107,6 @@
 				</div>
 			</div>
 		</div>
-		@endif
 	</div>
 </div>
 <div class="row"><p><br></p></div>

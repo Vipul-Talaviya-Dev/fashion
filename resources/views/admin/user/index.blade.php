@@ -24,7 +24,7 @@
 <div class="content">
     <!-- Main charts -->
     <div class="row">
-        <div class="col-lg-12">
+        <div class="">
             <!-- Traffic sources -->
             <div class="panel panel-flat">
                 <div class="panel-heading">
@@ -48,7 +48,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="content">
+                    <div class="">
                         <div class="panel panel-flat">
                             <div class="table-responsive">
                                 <table class="table">
@@ -61,6 +61,7 @@
                                             <th>Birth Date</th>
                                             <th>Anniversary Date</th>
                                             <th>Member Ship Code</th>
+                                            <th>Member Login Count</th>
                                             <th>Create Date</th>
                                             <th>Status</th>
                                         </tr>
@@ -74,7 +75,8 @@
                                             <td>{{ $user->mobile }}</td>
                                             <td>{{ $user->birth_date ? date('d-m-Y', strtotime($user->birth_date)) : 'N/A' }}</td>
                                             <td>{{ $user->anniversary_date ? date('d-m-Y', strtotime($user->anniversary_date)) : 'N/A' }}</td>
-                                            <td>{!! $user->member_ship_code ? $user->member_ship_code.'<br><span title="Login Count">('.$user->login_count.')</span>' : 'N/A' !!}</td>
+                                            <td>{!! $user->member_ship_code ? $user->member_ship_code : 'N/A' !!}</td>
+                                            <td>{{ $user->login_count }}</td>
                                             <td>{{ $user->created_at }}</td>
                                             @if($user->status == 1)
                                             <td>

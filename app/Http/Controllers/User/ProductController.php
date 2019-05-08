@@ -267,7 +267,7 @@ class ProductController extends Controller
         }
 
         if(Session::get('CART_AMOUNT') >= 2000) {
-            $discount = round(Session::get('CART_AMOUNT')*10/100);
+            $discount = round(Session::get('CART_AMOUNT')*20/100);
             Session::put('discount', $discount);
             Session::put('offer', 0);
             

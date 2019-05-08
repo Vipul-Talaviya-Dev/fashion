@@ -68,28 +68,40 @@
 					</div>
 					<div class="clearfix"></div>
 					<p><br></p>
-					<div class="row pull-right">	
-						<div class="cart-totals">
-							<table id="shopping-cart-totals-table">
-								<tbody>
-									<tr>
-										<td colspan="4">Subtotal</td>
-										<td> Rs.<span class="price" id="total">{{ $total }}</span></td>
-									</tr>
-									<tr>
-										<td colspan="4">Delivery Charge</td>
-										<td> Rs.<span >0</span></td>
-									</tr>
-								</tbody>
-								<tfoot>
-									<tr>
-										<td colspan="4"><strong>Grand Total</strong></td>
-										<td><strong> Rs. <span id="finalPrice">{{ $finalAmount }}</span></strong></td>
-									</tr>
-								</tfoot>
-							</table>
+					<div class="row">
+						<div class="row pull-left" style="margin-left: 40px;">
+							<label style="margin-top: 7px;">MemberShip Terms & Conditions.</label>
+							<hr>
+							<ul style="list-style: none;">
+								<li>1. Purchase worth Rs. 2000/- & get SHROUD membership.</li>
+								<li>2. Members will get flat 20% discount on every purchase.</li>
+								<li>3. Only members will eligible for discount & other offer at SHROUD.</li>
+								<li>4. This membership must not be clubbed with any other offer from SHROUD.</li>
+							</ul>
 						</div>
-						<div class="clearfix"> </div>
+						<div class="row pull-right">	
+							<div class="cart-totals">
+								<table id="shopping-cart-totals-table">
+									<tbody>
+										<tr>
+											<td colspan="4">Subtotal</td>
+											<td> Rs.<span class="price" id="total">{{ $total }}</span></td>
+										</tr>
+										<tr>
+											<td colspan="4">Delivery Charge</td>
+											<td> Rs.<span >0</span></td>
+										</tr>
+									</tbody>
+									<tfoot>
+										<tr>
+											<td colspan="4"><strong>Grand Total</strong></td>
+											<td><strong> Rs. <span id="finalPrice">{{ $finalAmount }}</span></strong></td>
+										</tr>
+									</tfoot>
+								</table>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
 					</div>
 					<div class="clearfix"> </div>
 				</div>

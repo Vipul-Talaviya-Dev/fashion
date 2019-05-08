@@ -31,6 +31,13 @@
                                     {{ csrf_field() }}
                                     <div class="col-md-12">
                                         <div class="form-group col-md-6">
+                                            <label>Old Password <span class="text-danger">*</span></label>
+                                            <input type="password" name="oldPassword" id="size" autocomplete="off" class="form-control" placeholder="Enter Old Password">
+                                                @foreach($errors->get('oldPassword') as $error)
+                                                    <span style="color: red;display: inline-block;">{{$error}}</span>
+                                                @endforeach
+                                        </div>
+                                        <div class="form-group col-md-6">
                                             <label>Password <span class="text-danger">*</span></label>
                                             <input type="password" name="password" id="size" autocomplete="off" class="form-control" placeholder="Enter Password">
                                                 @foreach($errors->get('password') as $error)

@@ -77,12 +77,17 @@ class DashboardController extends Controller
     public function changePassword(Request $request)
     {
         $this->validate($request, [
+            'oldPassword' => 'required',
             'password' => 'required|min:6|same:confirmPassword',
             'confirmPassword' => 'required',
         ]);
         $loginAdmin = \Session::get('admin');
         $admin = Admin::find($loginAdmin->id);
 
+        if (!\Hash::check($request->get('oldPassword'), $admin->password)) {
+            return redirect()->back()->with(['error' => 'Old password is incorrect']);
+        }
+        
         $admin->password = bcrypt($request->get('password'));
         $admin->save();
 

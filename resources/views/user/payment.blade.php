@@ -161,7 +161,9 @@
 													<li>3. Only members will eligible for discount & other offer at SHROUD.</li>
 													<li>4. This membership must not be clubbed with any other offer from SHROUD.</li>
 												</ul>
-												<a class="pull-right getCode" style="cursor: pointer;">Get Code</a>
+												@if((\Auth::user()->member_ship_code == null) && ($finalAmount >= 2000))
+													<a class="pull-right getCode" style="cursor: pointer;">Get Code</a>
+												@endif
 											</div>
 										@endif
 
@@ -285,13 +287,13 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#myModal').modal();
-			
 			$("body").on("click", ".scroll", function(event){     
 				event.preventDefault();
 				$('html,body').animate({scrollTop: "0px"},1000);
 			});
-			@if(\Auth::user()->member_ship_code == null)
+			@if((\Auth::user()->member_ship_code == null) && ($finalAmount >= 2000))
+				$('#myModal').modal();
+
 				$('body').on('click', '.getCode', function() {
 					$('#myModal').modal();
 				});
