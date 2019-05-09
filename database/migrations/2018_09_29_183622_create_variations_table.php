@@ -16,6 +16,7 @@ class CreateVariationsTable extends Migration
         Schema::create('variations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
+            $table->integer('product_type_id')->unsigned()->nullable();
             $table->integer('color_id')->unsigned();
             $table->integer('size_id')->unsigned()->nullable();
             $table->text('images')->nullable();
@@ -26,6 +27,7 @@ class CreateVariationsTable extends Migration
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('color_id')->references('id')->on('colors');
             $table->foreign('size_id')->references('id')->on('sizes');
+            $table->foreign('product_type_id')->references('id')->on('product_types');
         });
     }
 

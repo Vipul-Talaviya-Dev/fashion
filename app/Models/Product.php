@@ -13,7 +13,6 @@ class Product extends Model
     use Eloquence;
     protected $fillable = [
         'category_id',
-        'product_type_id',
         'name',
         'slug',
         'weight',

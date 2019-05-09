@@ -10,6 +10,7 @@ use App\Models\Color;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Variation;
+use App\Models\ProductType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -37,7 +38,8 @@ class ProductVariationController extends Controller
         return view('admin.productVariation.add', [
             'colors' => Color::active()->get(),
             'sizes' => Size::active()->get(),
-            'product' => $product
+            'product' => $product,
+            'types' => ProductType::active()->get(),
         ]);
     }
 
@@ -50,6 +52,7 @@ class ProductVariationController extends Controller
         $this->validate($request, [
             'colorId' => 'required|exists:colors,id',
             'sizes' => 'required|array|min:1',
+            'typeIds' => 'required|array|min:1',
             'price' => 'required|numeric|min:1',
             'qty' => 'required|numeric|min:1',
             'images' => 'required|array|min:1',
@@ -66,6 +69,7 @@ class ProductVariationController extends Controller
                 'product_id' => $product->id,
                 'color_id' => $request->get('colorId'),
                 'size_id' => $request->get('sizes')[$i],
+                'product_type_id' => $request->get('typeIds')[$i],
                 'images' => implode(',', $images),
                 'price' => $request->get('price'),
                 'qty' => $request->get('qty'),
@@ -87,7 +91,8 @@ class ProductVariationController extends Controller
             'colors' => Color::active()->get(),
             'sizes' => Size::active()->get(),
             'products' => Product::active()->get(),
-            'images' => explode(',', $variation->images)
+            'images' => explode(',', $variation->images),
+            'types' => ProductType::active()->get(),
         ]);
     }
 
@@ -101,6 +106,7 @@ class ProductVariationController extends Controller
             'productId' => 'required|exists:products,id',
             'colorId' => 'required|exists:colors,id',
             'sizeId' => 'required|exists:sizes,id',
+            'typeId' => 'required|exists:product_types,id',
             'price' => 'required|numeric|min:1',
             'qty' => 'required|numeric|min:1',
             'images' => 'nullable|array|min:1',
@@ -115,6 +121,7 @@ class ProductVariationController extends Controller
         }
 
         $variation->product_id = $request->get('productId');
+        $variation->product_type_id = $request->get('typeId');
         $variation->color_id = $request->get('colorId');
         $variation->size_id = $request->get('sizeId');
         $variation->price = $request->get('price');

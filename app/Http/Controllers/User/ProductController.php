@@ -41,7 +41,9 @@ class ProductController extends Controller
         }
 
         if($request->get('types')) {
-            $products = $products->whereIn('product_type_id', explode(',', $request->get('types')));
+            $products = $products->with(['variation' => function($q) use($request) {
+                return $q->whereIn('product_type_id', explode(',', $request->get('types')));
+            }]);
         }
 
         return view('user.product-list', [

@@ -54,12 +54,24 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="col-md-4 form-group">
+                    <label>Type :<span class="text-danger">*</span></label>
+                    <select class="form-control type" multiple  required name="typeIds[]">
+                        <option value="">-- Select Product Type --</option>
+                        @foreach($types as $type)
+                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                        @endforeach        
+                    </select>
+                    @foreach($errors->get('typeId') as $error)
+                    <span style="color: red;">{{$error}}</span>
+                    @endforeach
+                </div>
+            </div>
+            <div class="row">
                 <div class="form-group col-md-4">
                     <label>Price: <span class="text-danger">*</span></label>
                     <input type="number" name="price" placeholder="Enter Product Price" class="form-control" required pattern="[0-9]" min="0" required>
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-4">
                     <label>Quantity: <span class="text-danger">*</span></label>
                     <input type="number" name="qty" placeholder="Enter Quantity" class="form-control" required pattern="[0-9]" min="0">
@@ -92,6 +104,10 @@
     $(document).ready(function () {
         $('.size').select2({
             placeholder: 'Select a Size'
+        });
+
+        $('.type').select2({
+            placeholder: 'Select a type'
         });
     });
     

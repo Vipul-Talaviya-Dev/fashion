@@ -62,27 +62,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label>Product Name (Admin Side Shown): <span class="text-danger">*</span></label>
                     <input type="text" name="adminProductName" placeholder="Enter Product Name" class="form-control required" required value="{{ old('adminProductName') }}" autocomplete="off">
                     @foreach($errors->get('adminProductName') as $error)
                     <span style="color: red;">{{$error}}</span>
                     @endforeach
                 </div>
-                <div class="col-md-4 form-group">
-                    <label>Type :<span class="text-danger">*</span></label>
-                    <select class="form-control" required name="typeId">
-                        <option value="">-- Select Main Category --</option>
-                        @foreach($types as $type)
-                        <option value="{{ $type->id }}" {{ old('typeId') == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
-                        @endforeach        
-                    </select>
-                    @foreach($errors->get('typeId') as $error)
-                    <span style="color: red;">{{$error}}</span>
-                    @endforeach
-                </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-4">
                     <label>Meta Keyword: <span class="text-danger">*</span></label>
                     <input type="text" name="meta_keyword" value="T-shirt, Jens" class="form-control metaKeyword" data-fouc required="">

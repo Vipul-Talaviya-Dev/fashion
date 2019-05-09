@@ -8,7 +8,6 @@ use App\Models\Size;
 use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Product;
-use App\Models\ProductType;
 use App\Models\Category;
 use App\Models\Variation;
 use Illuminate\Http\Request;
@@ -32,7 +31,6 @@ class ProductController extends Controller
             'categories' => Category::parents()->active()->get(),
             'colors' => Color::active()->get(),
             'sizes' => Size::active()->get(),
-            'types' => ProductType::active()->get(),
         ]);
     }
 
@@ -43,7 +41,6 @@ class ProductController extends Controller
             'adminProductName' => 'required',
             // 'brand' => 'nullable|exists:brands,id',
             'categoryId' => 'required|exists:categories,id',
-            'typeId' => 'required|exists:product_types,id',
             // 'colors' => 'required|array|min:1',
             // 'sizes' => 'required|array|min:1',
             // 'prices' => 'required|array|min:1',
@@ -62,7 +59,6 @@ class ProductController extends Controller
         $product = Product::create([
             'name' => trim($request->get('name')),
             'admin_side_name_show' => trim($request->get('adminProductName')),
-            'product_type_id' => trim($request->get('typeId')),
             'slug' => trim(str_slug($request->get('name')).date('YmdHis').$lastId),
             'category_id' => $request->get('categoryId'),
             'brand_id' => 1,
@@ -106,7 +102,6 @@ class ProductController extends Controller
         return view('admin.product.update', [
             'product' => $product,
             'categories' => Category::parents()->active()->get(),
-            'types' => ProductType::active()->get(),
         ]);
 
         return view('admin.product.update');
@@ -126,7 +121,6 @@ class ProductController extends Controller
             'meta_keyword' => 'required',
             'meta_description' => 'required',
             'adminProductName' => 'required',
-            'typeId' => 'required|exists:product_types,id',
         ]);
 
         if($request->get('categoryId')) {
@@ -135,7 +129,6 @@ class ProductController extends Controller
 
         $product->name = $request->get('name');
         $product->admin_side_name_show = $request->get('adminProductName');
-        $product->product_type_id = $request->get('typeId');
         $product->meta_keyword = $request->get('meta_keyword');
         $product->meta_description = $request->get('meta_description');
         $product->description = $request->get('description');

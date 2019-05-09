@@ -23,6 +23,7 @@ class DashboardController extends Controller
             'user' => User::count(),
             'newOrder' => Order::where('status', 1)->count(),
             'sellProductQty' => OrderProduct::sum('qty'),
+            'returnOrders' => OrderProduct::where('status', 7)->count(),
             'totalProductQty' => Variation::sum('qty'),
         ]);
     }

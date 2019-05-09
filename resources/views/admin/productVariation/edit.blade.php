@@ -54,7 +54,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-2">
                     <label>Size: <span class="text-danger">*</span></label>
                     <select class="form-control" name="sizeId" required>
                         <option value="">-- Select Size --</option>
@@ -62,6 +62,18 @@
                             <option value="{{ $size->id }}" {{ $size->id == $variation->size_id ? 'selected' : '' }}>{{ $size->name }}</option>
                         @endforeach
                     </select>
+                </div>
+                 <div class="col-md-2 form-group">
+                    <label>Type :<span class="text-danger">*</span></label>
+                    <select class="form-control type"  required name="typeId">
+                        <option value="">-- Select Product Type --</option>
+                        @foreach($types as $type)
+                        <option value="{{ $type->id }}" {{ $type->id == $variation->product_type_id ? 'selected' : '' }}>{{ $type->name }}</option>
+                        @endforeach        
+                    </select>
+                    @foreach($errors->get('typeId') as $error)
+                    <span style="color: red;">{{$error}}</span>
+                    @endforeach
                 </div>
             </div>
             <div class="row">

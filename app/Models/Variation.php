@@ -11,6 +11,7 @@ class Variation extends Model
 {
     protected $fillable = [
         'product_id',
+        'product_type_id',
         'color_id',
         'size_id',
         'images',
