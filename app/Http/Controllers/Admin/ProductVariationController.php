@@ -69,7 +69,7 @@ class ProductVariationController extends Controller
                 'product_id' => $product->id,
                 'color_id' => $request->get('colorId'),
                 'size_id' => $request->get('sizes')[$i],
-                'product_type_id' => $request->get('typeIds')[$i],
+                'product_type_id' => isset($request->get('typeIds')[$i]) ? $request->get('typeIds')[$i] : NULL,
                 'images' => implode(',', $images),
                 'price' => $request->get('price'),
                 'qty' => $request->get('qty'),
@@ -121,7 +121,10 @@ class ProductVariationController extends Controller
         }
 
         $variation->product_id = $request->get('productId');
-        $variation->product_type_id = $request->get('typeId');
+        if($request->get('typeId')) {
+            $variation->product_type_id = $request->get('typeId');
+        }
+
         $variation->color_id = $request->get('colorId');
         $variation->size_id = $request->get('sizeId');
         $variation->price = $request->get('price');

@@ -47,10 +47,10 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label>Color: <span class="text-danger">*</span></label>
-                    <select class="form-control" name="colorId" required>
+                    <select class="form-control color" name="colorId" required>
                         <option value="">-- Select Color --</option>
                         @foreach($colors as $color)
-                            <option value="{{ $color->id }}" {{ $color->id == $variation->color_id ? 'selected' : '' }}>{{ $color->name }}</option>
+                            <option value="{{ $color->id }}" {{ $color->id == $variation->color_id ? 'selected' : '' }} style="background-color: {{ $color->code }}">{{ $color->name }}</option>
                         @endforeach
                     </select>
                 </div>
