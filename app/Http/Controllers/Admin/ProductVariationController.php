@@ -108,7 +108,7 @@ class ProductVariationController extends Controller
             'sizeId' => 'required|exists:sizes,id',
             'typeId' => 'required|exists:product_types,id',
             'price' => 'required|numeric|min:1',
-            'qty' => 'required|numeric|min:1',
+            'qty' => 'required|numeric|min:0',
             'images' => 'nullable|array|min:1',
         ]);
 

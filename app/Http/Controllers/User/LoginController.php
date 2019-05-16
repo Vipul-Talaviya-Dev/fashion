@@ -18,7 +18,7 @@ class LoginController extends Controller
     {
         return view('user.login', [
             'cart' => true,
-            'footer' => true
+            'footer' => false
         ]);
     }
 

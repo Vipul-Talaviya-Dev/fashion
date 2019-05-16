@@ -61,13 +61,13 @@
             $(".birthDate").datepicker({
                 format: "DD-MM-YYYY",
                 autoHide: true,
-                minDate: 0
+                endDate: '-1'
             });
 
             $(".anniversaryDate").datepicker({
                 format: "DD-MM-YYYY",
                 autoHide: true,
-                minDate: 0
+                endDate: '-1'
             });
             
             $("body").on("click", ".scroll", function(event){     

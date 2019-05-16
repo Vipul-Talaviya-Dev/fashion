@@ -27,6 +27,12 @@
 	.close {
 	    font-size: 2em;
 	}
+	@if($variation->qty == 0)
+		.flexslider {
+	    	filter: blur(2px);
+	    	-webkit-filter: blur(2px);
+	    }
+    @endif
 </style>
 @endsection
 @section('content')
