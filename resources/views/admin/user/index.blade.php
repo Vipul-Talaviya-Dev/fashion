@@ -76,7 +76,13 @@
                                             <td>{{ $user->birth_date ? date('d-m-Y', strtotime($user->birth_date)) : 'N/A' }}</td>
                                             <td>{{ $user->anniversary_date ? date('d-m-Y', strtotime($user->anniversary_date)) : 'N/A' }}</td>
                                             <td>{!! $user->member_ship_code ? $user->member_ship_code : 'N/A' !!}</td>
-                                            <td>{{ $user->login_count }}</td>
+                                            <td>
+                                                @if($user->member_ship_code)
+                                                    {{ $user->login_count }}
+                                                @else
+                                                    0
+                                                @endif
+                                            </td>
                                             <td>{{ $user->created_at }}</td>
                                             @if($user->status == 1)
                                             <td>

@@ -444,6 +444,25 @@ a {
     width: 95%;
     margin: auto;
 }
+.out-stock-img {
+    opacity: .2;
+}
+.out-stock-list-btn {
+    line-height: 8px;
+    border-radius: 3px;
+    background: #d0a65e;
+    color: #fff;
+    outline: transparent solid 1px;
+    border: 0;
+    cursor: pointer;
+    font-weight: 400;
+    position: absolute;
+    top: 120px;
+    left: 75px;
+    padding: 10px;
+    font-size: 14px;
+    z-index: 999;
+}
 /* 
 * Media Query 
 */
@@ -494,6 +513,9 @@ a {
     .varbtn {
         margin: 3px;
     }
+    .out-stock-list-btn { 
+        left: 92px;
+    }
 }
 .banner-bottom, .team, .checkout, .additional_info, .team-bottom, .single, .mail, .special-deals, .about, .faq, .typo, .new-products, .banner-bottom1, .top-brands, .dresses, .w3l_related_products {
     padding: 2em 0;
@@ -515,6 +537,9 @@ a {
     }
     .varbtn {
         margin: 3px;
+    }
+    .out-stock-list-btn { 
+        left: 92px;
     }
 }
 
@@ -540,5 +565,8 @@ a {
     }
     .varbtn {
         margin: 3px;
+    }
+    .out-stock-list-btn { 
+        left: 92px;
     }
 }

@@ -40,7 +40,7 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Variation Id</th>
+                                        <!-- <th>Variation Id</th> -->
                                         <th>Product</th>
                                         <th>Color</th>
                                         <th>Size</th>
@@ -52,8 +52,8 @@
                                     <tbody>
                                         @foreach($variations as $key => $variation)
                                             <tr>
-                                                <td>{{ (($key+1) + (request('page') ? (request('page') ==1) ? 0 : (request('page') * 10)  : 0)) }}</td>
-                                                <td>{{ $variation->id }}</td>
+                                                <td>{{ (($key+1) + (request('page') ? (request('page') ==1) ? 0 : (request('page') * 5)  : 0)) }}</td>
+                                                <!-- <td>{{ $variation->id }}</td> -->
                                                 <td>{{ $product->name }}</td>
                                                 <td>{{ $variation->color->name }}</td>
                                                 <td>{{ $variation->size->name }}</td>

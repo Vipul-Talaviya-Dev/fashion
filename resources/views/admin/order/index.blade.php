@@ -72,8 +72,10 @@
                                         <th>User Name</th>
                                         <th>Address</th>
                                         <th>Total (Rs.)</th>
-                                        <th>Discount (Rs.)</th>
+                                        <th>Discount (%)</th>
+                                        <th>Discount Amount(RS.)</th>
                                         <th>Cart Amount (Rs.)</th>
+                                        <th>Payment Mode</th>
                                         <th>Payment Status</th>
                                         <th>Status</th>
                                         <th>Invoice</th>
@@ -89,7 +91,15 @@
                                         <td style="white-space: nowrap;">{{ $order->address->address }}, <br>{{ $order->address->address_1 }} <br>{{ $order->address->city }}, <br>{{ $order->address->state }} - {{ $order->address->pincode }}</td>
                                         <td>{{ $order->total }}</td>
                                         <td>{{ $order->discount }}</td>
+                                        <td>{{ $order->discount_amount }}</td>
                                         <td>{{ $order->cart_amount }}</td>
+                                        <td>
+                                            @if($order->payment_mode == 1)
+                                                COD
+                                            @else
+                                                OnLine
+                                            @endif    
+                                        </td>
                                         <td>
                                             @if($order->payment_status == 1)
                                                 <span class="label label-danger">No</span>

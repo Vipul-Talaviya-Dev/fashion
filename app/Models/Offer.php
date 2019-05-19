@@ -18,6 +18,7 @@ class Offer extends Model
         'amount',
         'amount_limit',
         'use_time',
+        'use_member',
         'start_date',
         'end_date',
         'status'

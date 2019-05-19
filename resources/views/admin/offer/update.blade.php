@@ -193,9 +193,14 @@
                                                     @endif
                                                 </div>
                                         </fieldset>
-                                                <div class="form-group ">
+                                                <div class="form-group col-md-6">
                                                     <label>Offer Use Single Time</label><br>
                                                     <input type="checkbox" name="use_time" value="2" @if($offer->use_time==2) {{'checked'}} @endif>
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label>Offer Only Use Members</label><br>
+                                                    <input type="checkbox" name="use_member" value="1" @if($offer->use_member==1) {{'checked'}} @endif>
                                                 </div>  
                                         <div class="text-right">
                                             <button type="reset" class="btn btn-default" id="reset">Reset <i

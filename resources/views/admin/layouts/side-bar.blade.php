@@ -87,6 +87,9 @@
                     @if(in_array(16, $moduleIds))
                     <li><a href="{{ route('admin.content.edit', ['id' => 3]) }}"><i class="fa fa-cog"></i> <span>Term & Condition</span></a></li>
                     @endif
+                    @if(in_array(18, $moduleIds))
+                        <li><a href="{{ route('admin.contantImportForm') }}"><i class="fa fa-cog"></i> <span>Contact Import</span></a></li>
+                    @endif
                     @if(false)
                     <li>
                         <a href="javascript:void(0);"><i class="icon-basket"></i> <span>Product</span></a>

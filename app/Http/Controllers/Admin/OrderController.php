@@ -32,7 +32,7 @@ class OrderController extends Controller
 		}
 
 		return view('admin.order.index', [
-			'orders' => $orders->paginate(15)
+			'orders' => $orders->paginate(10)
 		]);
 	}
 
@@ -54,6 +54,10 @@ class OrderController extends Controller
 		}
 
 		$order->status = $request->get('status');
+		if($order->payment_mode == 1) {
+			$order->payment_status = 2;	
+		}
+		
 		$order->save();
 		
 		foreach ($order->orderProducts as $key => $orderProduct) {

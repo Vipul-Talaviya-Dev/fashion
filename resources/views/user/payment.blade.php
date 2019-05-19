@@ -262,7 +262,7 @@
 			<div class="modal-header">
 				<h4 class="modal-title">
 					MemberShip Code
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<button type="button" class="close">&times;</button>
 				</h4>
 			</div>
 			<div class="modal-body">
@@ -291,13 +291,22 @@
 				event.preventDefault();
 				$('html,body').animate({scrollTop: "0px"},1000);
 			});
-			@if((\Auth::user()->member_ship_code == null) && ($finalAmount >= 2000))
+			@if(Cookie::get('userCloseModel'))
+
+			@elseif((\Auth::user()->member_ship_code == null) && ($finalAmount >= 2000))
 				$('#myModal').modal();
 
-				$('body').on('click', '.getCode', function() {
-					$('#myModal').modal();
-				});
 			@endif
+			$('body').on('click', '.getCode', function() {
+				$('#myModal').modal();
+			});
+
+			$("body").on("click", ".close", function() {
+				$('#myModal').modal("hide");
+				<?php
+					Cookie::queue("userCloseModel", 1, 30);
+				?>
+			});
 		});
 	</script>
 </body>

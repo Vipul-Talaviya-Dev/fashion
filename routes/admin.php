@@ -118,6 +118,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
         Route::get('content/{id}/edit', 'ContentController@edit')->name('content.edit');
         Route::post('content/{id}/update', 'ContentController@update')->name('content.update');
 
+        Route::get('contactImportDownloadExcel', 'ContactController@contactImportDownloadExcel')->name('contactImportDownloadExcel');
+        Route::get('contact/import', 'ContactController@index')->name('contantImportForm');
+        Route::post('contact/import', 'ContactController@upload')->name('contantImport');
+
     });
 });
 

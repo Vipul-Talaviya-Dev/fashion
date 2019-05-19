@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use Mail;
 use Auth;
-use Session;
+use Session, Cookie;
 use Carbon\Carbon;
 use Validator;
 use App\Models\Size;
@@ -27,27 +27,23 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $products = Product::latest()->with(['category.parent']);
+
+        $variations = Variation::with(['product.category.parent'])->latest()->groupBy('color_id')->groupBy('product_id');
+
         if($request->get('sizes')) {
-            $products = $products->with(['variation' => function($q) use($request) {
-                return $q->whereIn('size_id', explode(',', $request->get('sizes')));
-            }]);
+            $variations = $variations->whereIn('size_id', explode(',', $request->get('sizes')));
         }
 
         if($request->get('colors')) {
-            $products = $products->with(['variation' => function($q) use($request) {
-                return $q->whereIn('color_id', explode(',', $request->get('colors')));
-            }]);
+            $variations = $variations->whereIn('color_id', explode(',', $request->get('colors')));
         }
 
         if($request->get('types')) {
-            $products = $products->with(['variation' => function($q) use($request) {
-                return $q->whereIn('product_type_id', explode(',', $request->get('types')));
-            }]);
+            $variations = $variations->whereIn('product_type_id', explode(',', $request->get('types')));
         }
 
         return view('user.product-list', [
-        	'products' => $products->paginate(25),
+        	'variations' => $variations->paginate(21),
             'sizes' => Size::active()->get(),
             'colors' => Color::active()->get(),
             'types' => ProductType::active()->get(),
@@ -296,7 +292,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'code'=> 'required|exists:offers,offer_code',
         ]);
-        
+        $user = Auth::user();
         if ($validator->fails()) {
             $error = $validator->errors()->all(':message');
             $response = [
@@ -320,6 +316,16 @@ class ProductController extends Controller
                     ];
                 }
             }
+            // Only Use Member
+            if($offer->use_member) {
+                if($user->member_ship_code == null) {
+                    return $response = [
+                        'status' => false,
+                        'error' => "Promotion code use only shroud member.",
+                    ];   
+                }
+            }
+
             // $amount_limit = $offer->amount_limit;
             $discount = 0;
             $totalAmount = Session::get('CART_AMOUNT');
@@ -338,25 +344,44 @@ class ProductController extends Controller
                         $discount = $offer->amount;
                     }
                 }*/
-
-                Session::put('discount', number_format($discount, 2)); // discount amount
-                Session::put('offer', $offer->id);
-                Session::put('discountPercentage', $offer->discount); //discount percentage
-
-                $response = [
-                    'status' => true,
-                    'success' => "Apply Your Promotion Code Successfully.",
-                ];
             }   
+            
+            Session::put('discount', number_format($discount, 2)); // discount amount
+            Session::put('offer', $offer->id);
+            Session::put('discountPercentage', $offer->discount); //discount percentage
+
+            $response = [
+                'status' => true,
+                'success' => "Apply Your Promotion Code Successfully.",
+            ];
         }
         return $response;
     }
 
     public function orderPlace(Request $request)
     {
+        Cookie::queue(
+            Cookie::forget('userCloseModel')
+        );
+
     	if(Session::get('order') == null) {
     		return redirect(route('user.index'));
     	}
+        // Check qty
+        foreach(Session::get('order')['product'] as $key => $data) {
+            $checkProduct = Variation::where('product_id', $data['product_id'])->where('id', $data['variation_id'])->first();
+            if($checkProduct->qty == 0) {
+                Session::forget('cart');
+                Session::forget('discount');
+                Session::forget('CART_AMOUNT');
+                Session::forget('order');
+                Session::forget('voucher');
+                Session::forget('offer');
+                Session::forget('addressId');
+
+                return redirect(route('user.index'))->with(['error' => $checkProduct->product->name." Out of stock, please select other product"]);
+            }
+        }
 
         $user = Auth::user();
         $deliverCharge = AppContent::find(1);
@@ -376,9 +401,9 @@ class ProductController extends Controller
         $order->discount = Session::get('discountPercentage') ?: 0;
         $order->discount_amount = Session::get('discount') ?: 0;
         // $order->extra_discount = $request->get('data');
-        $order->total = (Session::get('order')['final_amount'] - Session::get('discount')) + $deliverCharge->delivery_charge;
+        $order->total = (Session::get('order')['final_amount']) + $deliverCharge->delivery_charge;
         $order->delivery_charge = $deliverCharge->delivery_charge;
-        $order->status = 1;
+        $order->status = ($request->get('payment_option') == 1) ? 3 : 1;
         $order->save();
         
         $orderId = $order->id;

@@ -118,36 +118,40 @@
 					@endif
 					<div class="w3ls_dresses_grid_right_grid3">
 						<?php $count = 1; ?>
-					@if(count($products) > 0)
-						@foreach($products as $product)
-							@if($product->variation)
+					@if(count($variations) > 0)
+						@foreach($variations as $variation)
 							<div class="col-md-4 agileinfo_new_products_grid agileinfo_new_products_grid_dresses">
 								<?php
-									if($product->category && $product->category->parent && $product->category->parent->parent) {
-										$url = $product->category->parent->parent->slug.'/'.$product->category->parent->slug.'/'.$product->category->slug.'/'.$product->slug;
-									} else if($product->category && $product->category->parent) {
-										$url = 'products/'.$product->category->parent->slug.'/'.$product->category->slug.'/'.$product->slug;
+									if($variation->product->category && $variation->product->category->parent && $variation->product->category->parent->parent) {
+										$url = $variation->product->category->parent->parent->slug.'/'.$variation->product->category->parent->slug.'/'.$variation->product->category->slug.'/'.$variation->product->slug;
+									} else if($variation->product->category && $variation->product->category->parent) {
+										$url = 'products/'.$variation->product->category->parent->slug.'/'.$variation->product->category->slug.'/'.$variation->product->slug;
 									} else {
-										$url = 'products/all/'.$product->category->slug.'/'.$product->slug;
+										$url = 'products/all/'.$variation->product->category->slug.'/'.$variation->product->slug;
 									}
+									$url = $url.'/'.base64_encode($variation->id).'/'.str_random(25);
 								?>
-								<a href="/shop/{{ $url }}">
-									<div class="agile_ecommerce_tab_left dresses_grid">
-										<div class="hs-wrapper hs-wrapper2">
-											<?php
-												$variation = $product->variation;
-												$v = explode(',', $variation->images);
-												$image = $v[0];
-											?>
-											<img src="{{ \Cloudder::secureShow($image) }}" alt="{{ $product->name }}" class="img-responsive" />
+								<div style="position: relative;">
+									<a href="/shop/{{ $url }}">
+										<div class="agile_ecommerce_tab_left dresses_grid">
+											<div class="hs-wrapper hs-wrapper2">
+												<?php
+													$v = explode(',', $variation->images);
+													$image = $v[0];
+												?>
+												<img src="{{ \Cloudder::secureShow($image) }}" alt="{{ $variation->product->name }}" class="img-responsive {{ ($variation->qty == 0) ? 'out-stock-img' : '' }}" />
+											</div>
+											<h5>{{ (strlen($variation->product->name) > 15) ? substr($variation->product->name, 0, 15).'...' : $variation->product->name }}</h5>
+											<div class="simpleCart_shelfItem">
+												<p>Rs. <i class="item_price">{{ $variation->price }}</i></p>
+												<!-- <p><a class="item_add" href="javascript:void(0);">Add to cart</a></p> -->
+											</div>
 										</div>
-										<h5>{{ (strlen($product->name) > 15) ? substr($product->name, 0, 15).'...' : $product->name }}</h5>
-										<div class="simpleCart_shelfItem">
-											<p>Rs. <i class="item_price">{{ $variation->price }}</i></p>
-											<!-- <p><a class="item_add" href="javascript:void(0);">Add to cart</a></p> -->
-										</div>
-									</div>
-								</a>
+									</a>
+									@if($variation->qty == 0)
+										<a href="/shop/{{ $url }}" class="out-stock-list-btn">Out of Stock</a>
+									@endif
+								</div>
 								@if($count == 3)
 									<p><br></p>
 									<?php $count = 1; ?>
@@ -155,7 +159,6 @@
 									<?php $count++;?>
 								@endif
 							</div>
-							@endif
 						@endforeach
 					@else
 						<div class="col-sm-12" align="center">
@@ -170,7 +173,7 @@
 				<div class="clearfix"> </div>
 			</div>
 		</div>
-			<div align="center">{!! $products->appends($_GET)->render() !!}</div>
+			<div align="center">{!! $variations->appends($_GET)->render() !!}</div>
 	</div>
 @endsection
 

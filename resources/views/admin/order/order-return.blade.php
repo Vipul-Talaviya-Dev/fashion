@@ -71,7 +71,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <button class="btn btn-info" type="submit" >Search</button>
+                                                    <button class="btn btn-info" type="submit" >Save</button>
                                                 </div>
                                             </form>
                                         </td>

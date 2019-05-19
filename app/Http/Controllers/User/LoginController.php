@@ -89,8 +89,8 @@ class LoginController extends Controller
             'mobile' => 'required|numeric|min:10',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
-            'birthDate' => 'required',
-            'anniversaryDate' => 'nullable',
+            'birthDate' => 'required|date_format:d-m-Y',
+            'anniversaryDate' => 'nullable|date_format:d-m-Y',
         );
 
         $validator = Validator::make($request->all(), $rules, []);

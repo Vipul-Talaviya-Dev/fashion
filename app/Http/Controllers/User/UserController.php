@@ -45,8 +45,8 @@ class UserController extends Controller
             'firstName' => 'required',
             'lastName' => 'required',
             'mobile' => 'required|numeric',
-            'birth_date' => 'required',
-            'anniversary_date' => 'nullable',
+            'birth_date' => 'required|date_format:d-m-Y',
+            'anniversary_date' => 'nullable|date_format:d-m-Y',
         ]);
 
         $user = Auth::user();

@@ -51,6 +51,7 @@ class OfferController extends Controller
             'start_date' => $request->get('start_date'),
             'end_date' => $request->get('end_date'),
             'use_time'  => ($request->get('use_time') == 2 ? $request->get('use_time') : 1),
+            'use_member' => $request->get('use_member'),
             'status' => $request->get('status')
         ]);
 
@@ -96,6 +97,7 @@ class OfferController extends Controller
         $offer->use_time     = ($request->get('use_time') == 2 ? $request->get('use_time') : 1);
         $offer->start_date = $request->get('start_date');
         $offer->end_date = $request->get('end_date');
+        $offer->use_member = $request->get('use_member') ?: 0;
         $offer->status = $request->get('status');
         $offer->save();
 
