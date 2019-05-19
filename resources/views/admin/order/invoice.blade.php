@@ -32,7 +32,7 @@
 
       <section id="invoice-title-number">
         <span id="title">Invoice</span>
-        <span id="number"># {{ 'FHN'.date('Ymd', strtotime($order['created_at'])).$order->id }}</span>
+        <span id="number"># {{ $order->orderId() }}</span>
         
       </section>
       
@@ -71,18 +71,24 @@
             <th></th>
             <th>Item</th>
             <th>Quantity</th>
+            <th>SGST (2.5%)</th>
+            <th>CGST (2.5%)</th>
             <th>Price</th>
-            <th>Discount</th>
             <th>Total</th>
           </tr>
+          <?php $productTotal = 0;?>
           @foreach($order->orderProducts as $key =>  $orderProduct)
           <tr data-iterate="item">
             <td>{{ $key+1 }}</td>
             <td>{{ $orderProduct->product->name }}</td>
             <td>{{ $orderProduct->qty }}</td>
+            <td>{{ round(($orderProduct->price*2.5)/100, 2) }}</td>
+            <td>{{ round(($orderProduct->price*2.5)/100, 2) }}</td>
             <td>{{ $orderProduct->price }}</td>
-            <td>{{ $orderProduct->discount }}</td>
             <td>{{ $orderProduct->price * $orderProduct->qty }}</td>
+            <?php 
+              $productTotal += ($orderProduct->price * $orderProduct->qty);
+            ?>
           </tr>
           @endforeach
         </table>
@@ -93,21 +99,21 @@
         <table cellpadding="0" cellspacing="0">
           <tr>
             <th>Subtotal :</th>
-            <td>{{ $order->cart_amount }}</td>
-          </tr>
-          
-          <tr data-iterate="tax">
-            <th>Delivery Charge(+) </th>
-            <td>0</td>
-          </tr>
-          
-          <tr class="amount-total">
-            <th> Total</th>
             <td>{{ $order->total }}</td>
           </tr>
           
+          <tr data-iterate="tax">
+            <th>Discount(-) </th>
+            <td>{{ $order->discount_amount }}</td>
+          </tr>
+
+          <tr data-iterate="tax">
+            <th>Delivery Charge(+) </th>
+            <td>{{ $order->delivery_charge }}</td>
+          </tr>
+          
           <tr data-hide-on-quote="true">
-            <th>Grand Total</th>
+            <th>Total</th>
             <td>{{ $order->cart_amount }}</td>
           </tr>
           

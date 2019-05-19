@@ -69,7 +69,7 @@ class ProductVariationController extends Controller
                 'product_id' => $product->id,
                 'color_id' => $request->get('colorId'),
                 'size_id' => $request->get('sizes')[$i],
-                'product_type_id' => isset($request->get('typeIds')[$i]) ? $request->get('typeIds')[$i] : NULL,
+                'product_type_id' => isset($request->get('typeIds')[$i]) ? implode(',', $request->get('typeIds')) : NULL,
                 'images' => implode(',', $images),
                 'price' => $request->get('price'),
                 'qty' => $request->get('qty'),
@@ -106,7 +106,7 @@ class ProductVariationController extends Controller
             'productId' => 'required|exists:products,id',
             'colorId' => 'required|exists:colors,id',
             'sizeId' => 'required|exists:sizes,id',
-            'typeId' => 'required|exists:product_types,id',
+            'typeIds' => 'required|array|min:1',
             'price' => 'required|numeric|min:1',
             'qty' => 'required|numeric|min:0',
             'images' => 'nullable|array|min:1',
@@ -121,8 +121,8 @@ class ProductVariationController extends Controller
         }
 
         $variation->product_id = $request->get('productId');
-        if($request->get('typeId')) {
-            $variation->product_type_id = $request->get('typeId');
+        if($request->get('typeIds')) {
+            $variation->product_type_id = implode(',', $request->get('typeIds'));
         }
 
         $variation->color_id = $request->get('colorId');

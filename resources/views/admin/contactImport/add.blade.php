@@ -23,6 +23,8 @@
                 <div class="panel panel-flat">
                     <div class="panel-heading">
                         <h1 class="panel-title">Contact Import
+                            <a style="margin-left: 10px;" href="{{ route('admin.contantImports') }}" class="btn btn-primary pull-right">contant Import List</a> 
+
                             <a href="{{ route('admin.contactImportDownloadExcel') }}" class="btn btn-primary pull-right">Download Excel</a>
                         </h1>
                     </div>
@@ -56,6 +58,7 @@
                                             </div>
                                         </fieldset>
                                     </form>
+                                    <div><b>Note: Download after first Row to write mobile no.</b></div>
                                 </div>
                                 <!-- /marketing campaigns -->
                             </div>

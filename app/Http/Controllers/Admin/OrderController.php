@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use DB;
+use Mail;
 use Cloudder;
 use App\Models\Order;
 use App\Models\User;
@@ -49,7 +50,7 @@ class OrderController extends Controller
 
 	public function statusChange(Request $request, $id)
 	{
-		if(!$order = Order::find($id)) {
+		if(!$order = Order::with(['user'])->find($id)) {
 			return redirect()->back()->with('error', 'Invalid Selected Id');
 		}
 
@@ -64,6 +65,17 @@ class OrderController extends Controller
 			$orderProduct->status = $request->get('status');
 			$orderProduct->save();	
 		}
+		$user = $order->user;
+		
+		Mail::send('user.email.order-status-change', [
+            'order' => $order,
+            'user' => $user,
+        ], function ($message) use ($user) {
+            $message->from('support@shroud.in', 'Support')
+                ->subject('Shroud Order Status')
+                ->to($user->email, $user->name);
+        });
+
 		return redirect()->back()->with('success', 'Successfully change order status');
 	}
 

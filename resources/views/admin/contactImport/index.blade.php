@@ -1,13 +1,13 @@
 @extends('admin.layouts.main')
 @section('title')
-    Brand panel
+    ContactData Imports
 @endsection
 @section('page-header')
     <div class="page-header page-header-default">
         <div class="breadcrumb-line">
             <ul class="breadcrumb">
                 <li><a href="{{ route('admin.dashboard') }}"><i class="icon-home2 position-left"></i> Home</a></li>
-                <li class="active">Brand</li>
+                <li class="active">Import Contact List</li>
             </ul>
         </div>
     </div>
@@ -22,14 +22,14 @@
                 <div class="panel panel-flat">
                     <div class="panel-heading">
                         <h1 class="panel-title">
-                            Brand
+                            Import Contact List
+
+                            <a href="{{ route('admin.contantImportForm') }}" class="btn btn-primary pull-right"> Contact Import
+                            </a>
                         </h1>
                     </div>
                     <hr/>
                     <div class="container-fluid">
-                        <a href="{{ route('admin.brand.add') }}">
-                            <button class="btn btn-block-group pull-right" style="margin-right: 40px; margin-top: 20px;"><i class="icon-plus22 position-left"></i>ADD BRAND </button>
-                        </a>
                         <div class="content">
                             <div class="panel panel-flat">
                                 <form class="form-horizontal">
@@ -37,41 +37,21 @@
                                         <input type="text" class="form-control" name="search"
                                                value="{{ request()->get('search') }}" placeholder="Search" autocomplete="off">
                                     </div>
-                                    <div class="col-md-1"><a href="{{ route('admin.brands') }}" class="btn btn-labeled btn-rounded btn-info" style="margin-top: 20px;"><b><i class="icon-reset"></i></b> Rrefresh</a></div>
+                                    <div class="col-md-1"><a href="{{ route('admin.contantImports') }}" class="btn btn-labeled btn-rounded btn-info" style="margin-top: 20px;"><b><i class="icon-reset"></i></b> Rrefresh</a></div>
                                 </form>
                                 <table class="table">
                                     <thead>
                                     <tr>
                                         <th>Sr. No.</th>
-                                        <th>Brand Name</th>
-                                        <th>Brand Image</th>
-                                        <th></th>
-                                        <th>Status</th>
-                                        <th class="text-center">Actions</th>
+                                        <th>Mobile</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @if(isset($brands))
-                                        @foreach($brands as $key => $brand)
+                                    @if(isset($contactDataImports))
+                                        @foreach($contactDataImports as $key => $contactDataImport)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $brand->name }}</td>
-                                                @if(!empty($brand->image))
-                                                    <td><img src="{{ \Cloudder::secureShow($brand->image) }}" alt=""
-                                                             style="max-height: 100px; max-width: 200px"></td>
-                                                @else
-                                                    <td><span class="label label-default">No</span></td>
-                                                @endif
-
-                                                <td></td>
-                                                @if($brand->status == 1)
-                                                    <td><span class="label label-success">Active</span></td>
-                                                @else
-                                                    <td><span class="label label-danger">In-Active</span></td>
-                                                @endif
-
-                                                <td class="text-center"><a href="{{ route('admin.brand.edit',$brand->id) }}"><i class="icon-pencil5"></i> Edit</a>
-                                                </td>
+                                                <td>{{ $contactDataImport->mobile }}</td>
                                             </tr>
                                         @endforeach
                                     @endif
@@ -79,7 +59,7 @@
                                 </table>
                             </div>
                             <div class="pull-right">
-                                {!! $brands->render() !!}
+                                {!! $contactDataImports->render() !!}
                             </div>
                         </div>
                     </div>

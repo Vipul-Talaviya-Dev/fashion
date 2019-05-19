@@ -54,7 +54,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-4">
                     <label>Size: <span class="text-danger">*</span></label>
                     <select class="form-control" name="sizeId" required>
                         <option value="">-- Select Size --</option>
@@ -63,18 +63,7 @@
                         @endforeach
                     </select>
                 </div>
-                 <div class="col-md-2 form-group">
-                    <label>Type :<span class="text-danger">*</span></label>
-                    <select class="form-control type"  required name="typeId">
-                        <option value="">-- Select Product Type --</option>
-                        @foreach($types as $type)
-                        <option value="{{ $type->id }}" {{ $type->id == $variation->product_type_id ? 'selected' : '' }}>{{ $type->name }}</option>
-                        @endforeach        
-                    </select>
-                    @foreach($errors->get('typeId') as $error)
-                    <span style="color: red;">{{$error}}</span>
-                    @endforeach
-                </div>
+                
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
@@ -92,12 +81,36 @@
                     <span class="help-block">Accepted formats: jpeg, jpg, png. Max file size 2Mb</span>
                 </div>
             </div>
-
+            <div class="row">
+                <?php
+                    $product_type_ids = [];
+                    if($variation->product_type_id) {
+                        $product_type_ids = explode(',', $variation->product_type_id);
+                    }
+                ?>
+                 <div class="col-md-12 form-group">
+                    <label>Type :<span class="text-danger">*</span></label>
+                    <select class="form-control type"  required name="typeIds[]" multiple>
+                        <option value="">-- Select Product Type --</option>
+                        @foreach($types as $type)
+                        <option value="{{ $type->id }}" 
+                            @if(in_array($type->id, $product_type_ids))
+                                selected
+                            @endif
+                        >{{ $type->name }}</option>
+                        @endforeach        
+                    </select>
+                    @foreach($errors->get('typeId') as $error)
+                    <span style="color: red;">{{$error}}</span>
+                    @endforeach
+                </div>
+            </div>
             <div class="row pull-right">
                 <button type="submit" class="btn btn-primary stepy-finish">
                     Submit <i class="icon-check position-right"></i>
                 </button>
             </div>
+            <p><br></p>
             <p><br></p>
                 <ul style="list-style: none;">
                     @foreach($images as $image)
@@ -120,6 +133,10 @@
     $(document).ready(function () {
         $('.size').select2({
             placeholder: 'Select a Size'
+        });
+
+        $('.type').select2({
+            placeholder: 'Select a type'
         });
     });
     

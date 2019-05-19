@@ -39,9 +39,16 @@ class ProductController extends Controller
         }
 
         if($request->get('types')) {
-            $variations = $variations->whereIn('product_type_id', explode(',', $request->get('types')));
+            $types = explode(',', $request->get('types'));
+            $variations = $variations->whereRaw("find_in_set('".$types[0]."', product_type_id)");
+            foreach ($types as $key => $type) {
+                if($key != 0) {
+                    $variations = $variations->OrWhereRaw("find_in_set('".$type."', product_type_id)");
+                }
+            }
+            
+            // $variations = $variations->where('product_type_id', explode(',', $request->get('types')));
         }
-
         return view('user.product-list', [
         	'variations' => $variations->paginate(21),
             'sizes' => Size::active()->get(),

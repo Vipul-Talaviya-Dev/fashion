@@ -6,7 +6,7 @@
 <tbody>
 <tr>
 <td>
-<table width="540" border="0" align="center" cellpadding="0" cellspacing="0" style="padding:38px 30px 30px 30px;background-color:#fafafa">
+<table width="540" border="0" align="center" cellpadding="0" cellspacing="0" style="padding:38px 30px 30px 15px;background-color:#fafafa">
 	<tbody>
 	<tr>
 		<td width="100%">
@@ -32,7 +32,7 @@
 				<tr>
                     <td style="font-size:13px;padding-top:10px;font-family:Arial,Helvetica,sans-serif;color:#34495e">
 						We will send you another email once the items in your order have been shipped.
-                        Meanwhile, you can check the status of your order on Online Fashion Store.
+                        Meanwhile, you can check the status of your order on Online Shroud Store.
 					</td>
 				</tr>
 				</tbody>
@@ -65,6 +65,7 @@
 					<th width="100px" style="font-family:Arial,Helvetica,sans-serif;color:#34495e;font-size:14px">Subtotal</th>
 				</tr></thead>
 				<tbody>
+					<?php $cgst = 0;?>
 				@foreach($order->orderProducts as $key => $orderProduct)
 				<tr>
 					<td>{{ $key+1 }}</td>
@@ -83,6 +84,9 @@
 					<td style="font-family:Arial,Helvetica,sans-serif;color:#34495e;font-size:13px"><div align="center">Rs. {{ $orderProduct->price }}</div></td>
 					<td style="font-family:Arial,Helvetica,sans-serif;color:#34495e;font-size:13px"><div align="center">{{ $orderProduct->qty }}</div> </td>
 					<td style="font-family:Arial,Helvetica,sans-serif;color:#34495e;font-size:13px"><div align="center">Rs. {{ $orderProduct->price * $orderProduct->qty }}</div> </td>
+					<?php 
+		              $cgst += round(($orderProduct->price*2.5)/100, 2);
+		            ?>
 				</tr>
 				@endforeach
 			</tbody>
@@ -95,9 +99,41 @@
 			<table>
 			<tbody>
 				<tr>
-					<td><div style="padding-left:300px;padding-right:10px;font-size:15px;margin-top:10px;font-family:Arial,Helvetica,sans-serif;color:green">Delivery Charge(+)</div></td><td> Rs. {{ $order->delivery_charge }}</td>
+					<td>
+						<div style="padding-left:250px;padding-right:10px;font-size:15px;margin-top:10px;"><b>Sub Total</b></div>
+					</td>
+					<td><div style="margin-top:10px;">Rs. {{ $order->total - ($cgst*2) }}</div></td>
 				</tr>
-				<tr><td><div style="padding-left:350px;padding-right:10px;font-size:18px;margin-top:10px;font-family:Arial,Helvetica,sans-serif;color:#34495e">Total </div></td><td> Rs. {{ $order->cart_amount }}</td></tr>
+				<tr>
+					<td>
+						<div style="padding-left:250px;padding-right:10px;font-size:15px;margin-top:10px;font-family:Arial,Helvetica,sans-serif;color:green"> <b>SGST(2.5%) (+)</b></div>
+					</td>
+					<td><div style="margin-top:10px;">Rs. {{ $cgst*2 }}</div></td>
+				</tr>
+				<tr>
+					<td>
+						<div style="padding-left:250px;padding-right:10px;font-size:15px;margin-top:10px;font-family:Arial,Helvetica,sans-serif;color:green"> <b>CGST(2.5%) (+)</b></div>
+					</td>
+					<td><div style="margin-top:10px;">Rs. {{ $cgst }}</div></td>
+				</tr>
+				<tr>
+					<td>
+						<div style="padding-left:250px;padding-right:10px;font-size:15px;margin-top:10px;color:red;"><b>Discount (-)</b></div>
+					</td>
+					<td><div style="margin-top:10px;">Rs. {{ $order->discount_amount }}</div></td>
+				</tr>
+				<tr>
+					<td>
+						<div style="padding-left:250px;padding-right:10px;font-size:15px;margin-top:10px;font-family:Arial,Helvetica,sans-serif;color:green"> <b>Delivery Charge(+)</b></div>
+					</td>
+					<td><div style="margin-top:10px;">Rs. {{ $order->delivery_charge }}</div></td>
+				</tr>
+				<tr>
+					<td>
+						<div style="padding-left:250px;padding-right:10px;font-size:18px;margin-top:10px;font-family:Arial,Helvetica,sans-serif;color:#34495e"><b>Total</b> </div>
+					</td>
+					<td> <div style="margin-top:10px;">Rs. {{ $order->cart_amount }}</div></td>
+				</tr>
 			</tbody>
 			</table>
 		</td>
@@ -121,7 +157,7 @@
     </td>
   </tr>
 	<tr><td colspan="2" style="font-size:11px;text-align:center;font-family:Arial,Helvetica,sans-serif;color:#919bac;padding-top:10px">
-        Feedback, suggestions or compliments - do write to <a href="mailto:support@altsolution.in" style="font-size:12px;font-family:Arial,Helvetica,sans-serif;color:#22a7f0;text-decoration:none" target="_blank">Support Mail</a>
+        Feedback, suggestions or compliments - do write to <a href="mailto:support@shroud.in" style="font-size:12px;font-family:Arial,Helvetica,sans-serif;color:#22a7f0;text-decoration:none" target="_blank">Support Mail</a>
 		</td>
 	</tr>
 	
@@ -140,8 +176,8 @@
 	</tr>
 	@endif
 	<tr><td colspan="2" style="border-bottom:1px solid #eaedef"></td></tr>
-	<tr><td align="center" style="font-weight:bold;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#929292"><div style="padding-bottom:10px">All Rights Reserved. Online Fashion Store</div>
-	<p style="padding:10px 0 0 0;margin:0;border-top:solid 1px #cccccc;font-size:11px;color:#565656">24x7 Customer Support&nbsp; | &nbsp;Policy&nbsp; | &nbsp;Flexible Payment Options&nbsp; | &nbsp;900+ Categories</p>
+	<tr><td align="center" style="font-weight:bold;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#929292"><div style="padding-bottom:10px">All Rights Reserved. Online Shroud Store</div>
+	<p style="padding:10px 0 0 0;margin:0;border-top:solid 1px #cccccc;font-size:11px;color:#565656">24x7 Customer Support&nbsp; | &nbsp;Policy&nbsp; | &nbsp;Flexible Payment Options</p>
 	</td>
 	</tr>
 	</tbody>
