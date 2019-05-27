@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
     	$user = Auth::user();
-    	$orders = OrderProduct::latest()->with(['product.variations'])->where('user_id', $user->id)->get();
+    	$orders = OrderProduct::latest()->with(['variation'])->where('user_id', $user->id)->get();
     	return view('user.my-account', [
     		'orders' => $orders,
             'cart' => true,

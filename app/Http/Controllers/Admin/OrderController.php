@@ -39,7 +39,7 @@ class OrderController extends Controller
 
 	public function orderDetail(Request $request, $id)
 	{
-		if(!$order = Order::with(['orderProducts.product.variations', 'user'])->find($id)) {
+		if(!$order = Order::with(['orderProducts.variation', 'user'])->find($id)) {
 			return redirect()->back()->with('error', 'Invalid Selected Id');
 		}
 

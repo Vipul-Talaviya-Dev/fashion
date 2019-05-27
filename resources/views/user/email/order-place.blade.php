@@ -85,7 +85,8 @@
 					<td style="font-family:Arial,Helvetica,sans-serif;color:#34495e;font-size:13px"><div align="center">{{ $orderProduct->qty }}</div> </td>
 					<td style="font-family:Arial,Helvetica,sans-serif;color:#34495e;font-size:13px"><div align="center">Rs. {{ $orderProduct->price * $orderProduct->qty }}</div> </td>
 					<?php 
-		              $cgst += round(($orderProduct->price*2.5)/100, 2);
+		              $cgstAmount = round(($orderProduct->price*2.5)/100, 2);
+		              $cgst += $cgstAmount*$orderProduct->qty;
 		            ?>
 				</tr>
 				@endforeach
@@ -102,13 +103,13 @@
 					<td>
 						<div style="padding-left:250px;padding-right:10px;font-size:15px;margin-top:10px;"><b>Sub Total</b></div>
 					</td>
-					<td><div style="margin-top:10px;">Rs. {{ $order->total - ($cgst*2) }}</div></td>
+					<td><div style="margin-top:10px;">Rs. {{ $order->total - ($cgst) }}</div></td>
 				</tr>
 				<tr>
 					<td>
 						<div style="padding-left:250px;padding-right:10px;font-size:15px;margin-top:10px;font-family:Arial,Helvetica,sans-serif;color:green"> <b>SGST(2.5%) (+)</b></div>
 					</td>
-					<td><div style="margin-top:10px;">Rs. {{ $cgst*2 }}</div></td>
+					<td><div style="margin-top:10px;">Rs. {{ $cgst }}</div></td>
 				</tr>
 				<tr>
 					<td>

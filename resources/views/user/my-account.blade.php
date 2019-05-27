@@ -32,9 +32,8 @@
 		@endif
 		@foreach($orders as $order)
 		<?php
-			$variation = $order->product->variations()->find($order->variation_id);
+			$variation = $order->variation;
 			$images = explode(',', $variation->images);
-
 			$startTime = \Carbon\Carbon::parse($order->updated_at);
 			$finishTime = \Carbon\Carbon::now();
 			$returnTime = $finishTime->diffInHours($startTime);

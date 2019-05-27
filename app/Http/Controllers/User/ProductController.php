@@ -271,7 +271,7 @@ class ProductController extends Controller
             ]);
         }
 
-        if(Session::get('CART_AMOUNT') >= 2000) {
+        // if(Session::get('CART_AMOUNT') >= 2000) {
             $discount = round(Session::get('CART_AMOUNT')*20/100);
             Session::put('discount', $discount);
             Session::put('offer', 0);
@@ -280,7 +280,7 @@ class ProductController extends Controller
                 'status' => true,
                 'success' => 'Successfully Apply Your MemberShip Code!!!'
             ]);
-        }
+        // }
 
         return response()->json([
             'status' => false,

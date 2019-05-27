@@ -71,23 +71,21 @@
             <th></th>
             <th>Item</th>
             <th>Quantity</th>
-            <th>SGST (2.5%)</th>
-            <th>CGST (2.5%)</th>
             <th>Price</th>
             <th>Total</th>
           </tr>
-          <?php $productTotal = 0;?>
+          <?php $productTotal = $cgst = 0;?>
           @foreach($order->orderProducts as $key =>  $orderProduct)
           <tr data-iterate="item">
             <td>{{ $key+1 }}</td>
             <td>{{ $orderProduct->product->name }}</td>
             <td>{{ $orderProduct->qty }}</td>
-            <td>{{ round(($orderProduct->price*2.5)/100, 2) }}</td>
-            <td>{{ round(($orderProduct->price*2.5)/100, 2) }}</td>
             <td>{{ $orderProduct->price }}</td>
             <td>{{ $orderProduct->price * $orderProduct->qty }}</td>
             <?php 
               $productTotal += ($orderProduct->price * $orderProduct->qty);
+              $cgstAmount = round(($orderProduct->price*2.5)/100, 2);
+              $cgst += $cgstAmount*$orderProduct->qty;
             ?>
           </tr>
           @endforeach
@@ -99,22 +97,31 @@
         <table cellpadding="0" cellspacing="0">
           <tr>
             <th>Subtotal :</th>
-            <td>{{ $order->total }}</td>
+            <td>Rs. {{ $order->total - ($cgst) }}</td>
           </tr>
           
           <tr data-iterate="tax">
+            <th>SGST(2.5%) (+) </th>
+            <td>Rs. {{ $cgst }}</td>
+          </tr>
+          <tr data-iterate="tax">
+            <th>CGST(2.5%) (+)</th>
+            <td>Rs. {{ $cgst }}</td>
+          </tr>
+
+          <tr data-iterate="tax">
             <th>Discount(-) </th>
-            <td>{{ $order->discount_amount }}</td>
+            <td>Rs. {{ $order->discount_amount }}</td>
           </tr>
 
           <tr data-iterate="tax">
             <th>Delivery Charge(+) </th>
-            <td>{{ $order->delivery_charge }}</td>
+            <td>Rs. {{ $order->delivery_charge }}</td>
           </tr>
           
           <tr data-hide-on-quote="true">
             <th>Total</th>
-            <td>{{ $order->cart_amount }}</td>
+            <td>Rs. {{ $order->cart_amount }}</td>
           </tr>
           
         </table>

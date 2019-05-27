@@ -201,6 +201,7 @@ class LoginController extends Controller
                 return response()->json([
                     'status' => true,
                     'otp' => $otp,
+                    'email' => false,
                     'success' => ""
                 ]);
 
@@ -230,6 +231,7 @@ class LoginController extends Controller
 
                 return response()->json([
                     'status' => true,
+                    'email' => true,
                     'success' => "Please Check Your Mail"
                 ]);
             } else {

@@ -89,7 +89,7 @@
                                 <tbody>
                                     @foreach($order->orderProducts as $key => $orderProduct)
                                     <?php
-                                        $variation = $orderProduct->product->variations()->find($orderProduct->variation_id);
+                                        $variation = $orderProduct->variation;
                                         $images = explode(',', $variation->images);
                                     ?>
                                     <tr>

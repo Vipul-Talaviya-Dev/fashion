@@ -175,13 +175,16 @@ $(document).ready(function() {
                         toastr.warning(res.error);
                     }
                     if(res.status == true) {
-                        $("#forgotPasswordDiv").hide();
-                        $("#forgotPasswordOtp").html(res.otp);
-                        $("#forgotPasswordOtpDiv").show();
-                        var fiveMinutes = 60 * 5,
-                            display = $('.timeCounter');
-                        startCounter(fiveMinutes, display);
-                        // toastr.success(res.success);
+                        if(res.email == false) {
+                            $("#forgotPasswordDiv").hide();
+                            $("#forgotPasswordOtp").html(res.otp);
+                            $("#forgotPasswordOtpDiv").show();
+                            var fiveMinutes = 60 * 5,
+                                display = $('.timeCounter');
+                            startCounter(fiveMinutes, display);
+                        } else {
+                            toastr.success(res.success);
+                        }
                         // window.location.reload();
                     }
                 }
