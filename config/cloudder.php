@@ -1,4 +1,4 @@
-<?php
+'<?php
 
 return [
 
@@ -24,7 +24,7 @@ return [
         'quality' => 'auto:best',
 //        'width'  => 150,
 //        'height' => 150,
-        'crop'   => 'fit',
+        // 'crop'   => 'fit',
 //        'effect' => null
     ],
 ];

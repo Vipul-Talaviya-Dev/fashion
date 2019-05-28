@@ -71,7 +71,7 @@ class SubAdminController extends Controller
 		$subAdmin->name   = trim($request->get('name'));
         $subAdmin->email  = trim($request->get('email'));
         if(trim($request->get('password'))) {
-        	$subAdmin->password  = trim($request->get('password'));
+        	$subAdmin->password  = bcrypt(trim($request->get('password')));
         }
         $subAdmin->modules_id = implode(', ', $request->get('modules'));
         $subAdmin->save();

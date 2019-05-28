@@ -335,6 +335,7 @@ a {
     position: relative;
     text-align: center;
     margin-bottom: 10px;
+    height: 245px;
 }
 .padd-5 {
     padding: 0 5px !important;
@@ -561,7 +562,7 @@ a {
         margin: 0;
     }
     .menu {
-        padding: 0;
+        padding: 7px;
     }
     .varbtn {
         margin: 3px;

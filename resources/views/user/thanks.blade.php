@@ -30,24 +30,25 @@
 								<hr/>
 								<a href="javascript:void(0)" class="btn btn-success btn-lg">OrderId: {{ $order->orderId() }}</a>
 								<div class="pck-box pck-box-shadow">
-									<table class="table table-striped table-hover ">
-										<thead>
-											<tr class="primary">
-												<th>Sub Order ID</th>
-												<th>Product Name</th>
-												<th>Price</th>
-												<th>Qty</th>
-												<th>SubTotal</th>
-											</tr>
-										</thead>
+									<div class="table-responsive">
+										<table class="table table-striped table-hover ">
+											<thead>
+												<tr class="primary">
+													<th>Sub Order ID</th>
+													<th>Product Name</th>
+													<th>Price</th>
+													<th>Qty</th>
+													<th>SubTotal</th>
+												</tr>
+											</thead>
 											@foreach($order->orderProducts as $orderProduct)
-											<tr class="info">
-												<td>{{ 'FHN'.date('Ymd', strtotime($orderProduct->created_at)).$orderProduct->id }}</td>
-												<td>{{ $orderProduct->product->name }}</td>
-												<td>Rs. {{ $orderProduct->price }}</td>
-												<td>{{ $orderProduct->qty }}</td>
-												<td>Rs. {{ $orderProduct->price * $orderProduct->qty }}</td>
-											</tr>
+												<tr class="info">
+													<td>{{ 'FHN'.date('Ymd', strtotime($orderProduct->created_at)).$orderProduct->id }}</td>
+													<td>{{ $orderProduct->product->name }}</td>
+													<td>Rs. {{ $orderProduct->price }}</td>
+													<td>{{ $orderProduct->qty }}</td>
+													<td>Rs. {{ $orderProduct->price * $orderProduct->qty }}</td>
+												</tr>
 											@endforeach
 											<tr class="thanks_summary_text">
 												<td colspan="4" align="right">Total</td>
@@ -67,8 +68,8 @@
 												<td colspan="4">Final Amount</td>
 												<td align="left">Rs. {{ $order->cart_amount }}</td>
 											</tr>
-										</table>				
-									</div>
+										</table>
+									</div>				
 								</div>
 							@else
 								<h4>OrderId: {{ $order->orderId() }}</h4>
@@ -81,9 +82,9 @@
 							@endif
 						</div>
 					</div>
-				</div>	
+				</div>
 			</section>
-		</div>
+		</div>	
 	</div>
 </div>
 <hr>
