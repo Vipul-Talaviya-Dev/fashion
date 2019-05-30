@@ -11,14 +11,6 @@
 </div>
 @endsection
 
-@section('css')
-<style>
-    .form-control::-webkit-input-placeholder {
-        color: #fff;
-    }
-</style>
-@endsection
-
 @section('content')
 <!-- Content area -->
 <div class="content">
@@ -37,21 +29,29 @@
                 <div class="container-fluid">
                     <div class="row">
                         <form method="get">
-                            <div class="form-group col-md-4"style="margin-left: 23px;">
+                            <div class="form-group col-md-4">
                                 <label>Search</label>
-                                <input type="text" name="search" class="form-control" placeholder ="Search for email" autocomplete="off" value="{{ request('search') }}">
+                                <input type="text" name="search" class="form-control" placeholder ="Search for Name, Email, Mobile, Member Ship Code" autocomplete="off" value="{{ request('search') }}">
                             </div>
+                            <div class="form-group col-md-3">
+                                    <label>Birth Date</label>
+                                    <input type="date" name="birthDate" class="form-control" placeholder="Start Date" autocomplete="off" value="{{ request('birthDate') }}">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Anniversary Date</label>
+                                    <input type="date" name="anniversaryDate" class="form-control" placeholder="End Date" autocomplete="off" value="{{ request('anniversaryDate') }}">
+                                </div>
                             <div class="form-group col-md-2">
                                 <p>&nbsp;</p>
                                 <button class="btn btn-info" type="submit" style="margin-top: -5px;">Search</button>
-                                <a href="{{ route('admin.users') }}" class="btn btn-sm btn-warning"><i class="fa fa-refresh"></i></a>
+                                <a href="{{ route('admin.users') }}" class="btn btn-sm btn-warning" style="margin-top: -5px;"><i class="fa fa-refresh"></i></a>
                             </div>
                         </form>
                     </div>
                     <div class="">
                         <div class="panel panel-flat">
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -67,34 +67,40 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($users as $key => $user)
-                                        <tr>
-                                            <td>{{ $user->id }}</td>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->mobile }}</td>
-                                            <td>{{ $user->birth_date ? date('d-m-Y', strtotime($user->birth_date)) : 'N/A' }}</td>
-                                            <td>{{ $user->anniversary_date ? date('d-m-Y', strtotime($user->anniversary_date)) : 'N/A' }}</td>
-                                            <td>{!! $user->member_ship_code ? $user->member_ship_code : 'N/A' !!}</td>
-                                            <td>
-                                                @if($user->member_ship_code)
-                                                    {{ $user->login_count }}
+                                        @if(count($users) > 0)
+                                            @foreach($users as $key => $user)
+                                            <tr>
+                                                <td>{{ $user->id }}</td>
+                                                <td>{{ $user->name }}</td>
+                                                <td>{{ $user->email }}</td>
+                                                <td>{{ $user->mobile }}</td>
+                                                <td>{{ $user->birth_date ? date('d-m-Y', strtotime($user->birth_date)) : 'N/A' }}</td>
+                                                <td>{{ $user->anniversary_date ? date('d-m-Y', strtotime($user->anniversary_date)) : 'N/A' }}</td>
+                                                <td>{!! $user->member_ship_code ? $user->member_ship_code : 'N/A' !!}</td>
+                                                <td>
+                                                    @if($user->member_ship_code)
+                                                        {{ $user->login_count }}
+                                                    @else
+                                                        0
+                                                    @endif
+                                                </td>
+                                                <td>{{ $user->created_at }}</td>
+                                                @if($user->status == 1)
+                                                <td>
+                                                    <a href="javascript:void(0);" class="statuChange" data-status="1" data-id="{{ $user->id }}"><span class="label label-success">Active</span></a>
+                                                </td>
                                                 @else
-                                                    0
+                                                <td>
+                                                    <a href="javascript:void(0);" class="statuChange" data-status="2" data-id="{{ $user->id }}"><span class="label label-default">In-Active</span></a>
+                                                </td>
                                                 @endif
-                                            </td>
-                                            <td>{{ $user->created_at }}</td>
-                                            @if($user->status == 1)
-                                            <td>
-                                                <a href="javascript:void(0);" class="statuChange" data-status="1" data-id="{{ $user->id }}"><span class="label label-success">Active</span></a>
-                                            </td>
-                                            @else
-                                            <td>
-                                                <a href="javascript:void(0);" class="statuChange" data-status="2" data-id="{{ $user->id }}"><span class="label label-default">In-Active</span></a>
-                                            </td>
-                                            @endif
-                                        </tr>
-                                        @endforeach
+                                            </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <th colspan="10" class="text-center"> Data Not Found</th>
+                                            </tr>
+                                        @endif
                                     </tbody>
                                 </table>
                                 

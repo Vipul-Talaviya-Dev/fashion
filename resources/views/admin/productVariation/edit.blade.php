@@ -88,7 +88,7 @@
                         $product_type_ids = explode(',', $variation->product_type_id);
                     }
                 ?>
-                 <div class="col-md-12 form-group">
+                 <div class="col-md-4 form-group">
                     <label>Type :<span class="text-danger">*</span></label>
                     <select class="form-control type"  required name="typeIds[]" multiple>
                         <option value="">-- Select Product Type --</option>
@@ -104,11 +104,12 @@
                     <span style="color: red;">{{$error}}</span>
                     @endforeach
                 </div>
-            </div>
-            <div class="row pull-right">
-                <button type="submit" class="btn btn-primary stepy-finish">
-                    Submit <i class="icon-check position-right"></i>
-                </button>
+                <div class="pull-right">
+                    <label><p>&nbsp;&nbsp;</p><p>&nbsp;&nbsp;</p></label>
+                    <button type="submit" class="btn btn-primary stepy-finish">
+                        Submit <i class="icon-check position-right"></i>
+                    </button>
+                </div>
             </div>
             <p><br></p>
             <p><br></p>

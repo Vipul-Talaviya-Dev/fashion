@@ -97,7 +97,7 @@
         <table cellpadding="0" cellspacing="0">
           <tr>
             <th>Subtotal :</th>
-            <td>Rs. {{ $order->total - ($cgst) }}</td>
+            <td>Rs. {{ number_format($order->total, 2) }}</td>
           </tr>
           
           <tr data-iterate="tax">
@@ -111,17 +111,17 @@
 
           <tr data-iterate="tax">
             <th>Discount(-) </th>
-            <td>Rs. {{ $order->discount_amount }}</td>
+           <td>Rs. {{ number_format($order->discount_amount, 2) }}</td>
           </tr>
 
           <tr data-iterate="tax">
             <th>Delivery Charge(+) </th>
-            <td>Rs. {{ $order->delivery_charge }}</td>
+            <td>Rs. {{ number_format($order->delivery_charge, 2) }}</td>
           </tr>
           
           <tr data-hide-on-quote="true">
             <th>Total</th>
-            <td>Rs. {{ $order->cart_amount }}</td>
+            <td>Rs. {{ number_format($order->cart_amount, 2) }}</td>
           </tr>
           
         </table>

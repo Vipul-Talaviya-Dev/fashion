@@ -17,9 +17,17 @@ class UserController extends Controller
 		$users = User::latest();
 
 		if($request->get('search')) {
-			$users = $users->where('email', $request->get('search'))->Orwhere('mobile', $request->get('search'))->Orwhere('name', $request->get('search'));
+			$users = $users->where('name', 'LIKE', '%'.$request->get('search').'%')->orWhere('email', 'LIKE', '%'.$request->get('search').'%')->orWhere('mobile', 'LIKE', '%'.$request->get('search').'%')->orWhere('member_ship_code', 'LIKE', '%'.$request->get('search').'%');
 		}
 
+		if ($request->get('birthDate')) {
+			$users = $users->where('birth_date', $request->get('birthDate'));
+		}
+
+		if ($request->get('anniversaryDate')) {
+			$users = $users->where('anniversary_date', $request->get('anniversaryDate'));
+		}
+		
 		return view('admin.user.index', [
 			'users' => $users->paginate(10)
 		]);

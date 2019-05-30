@@ -9,6 +9,9 @@
     .cke_contents {
         height: 450px !important;
     }
+    body {
+        margin: 0px;
+    }
 </style>
 @endsection
 
