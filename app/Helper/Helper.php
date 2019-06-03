@@ -23,4 +23,9 @@ class Helper
         
         return $status;
     }
+
+    public static function dateFormat($date)
+    {
+        return date("d/m/Y", strtotime($date));
+    }
 }

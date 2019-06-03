@@ -97,7 +97,7 @@
         <table cellpadding="0" cellspacing="0">
           <tr>
             <th>Subtotal :</th>
-            <td>Rs. {{ number_format($order->total, 2) }}</td>
+            <td>Rs. {{ number_format(($order->total-($cgst+$cgst)), 2) }}</td>
           </tr>
           
           <tr data-iterate="tax">

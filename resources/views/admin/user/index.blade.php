@@ -74,8 +74,8 @@
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->mobile }}</td>
-                                                <td>{{ $user->birth_date ? date('d-m-Y', strtotime($user->birth_date)) : 'N/A' }}</td>
-                                                <td>{{ $user->anniversary_date ? date('d-m-Y', strtotime($user->anniversary_date)) : 'N/A' }}</td>
+                                                <td>{{ $user->birth_date ? App\Helper\Helper::dateFormat($user->birth_date) : 'N/A' }}</td>
+                                                <td>{{ $user->anniversary_date ? App\Helper\Helper::dateFormat($user->anniversary_date) : 'N/A' }}</td>
                                                 <td>{!! $user->member_ship_code ? $user->member_ship_code : 'N/A' !!}</td>
                                                 <td>
                                                     @if($user->member_ship_code)
@@ -84,7 +84,7 @@
                                                         0
                                                     @endif
                                                 </td>
-                                                <td>{{ $user->created_at }}</td>
+                                                <td>{{ App\Helper\Helper::dateFormat($user->created_at) }}</td>
                                                 @if($user->status == 1)
                                                 <td>
                                                     <a href="javascript:void(0);" class="statuChange" data-status="1" data-id="{{ $user->id }}"><span class="label label-success">Active</span></a>

@@ -122,6 +122,15 @@ class UserController extends Controller
     public function logout()
     {
         Auth::logout();
+        Session::forget('cart');
+        Session::forget('discount');
+        Session::forget('CART_AMOUNT');
+        Session::forget('order');
+        Session::forget('voucher');
+        Session::forget('offer');
+        Session::forget('addressId');
+        Session::forget('orderId');
+
         return redirect(route('user.index'));
     }
 

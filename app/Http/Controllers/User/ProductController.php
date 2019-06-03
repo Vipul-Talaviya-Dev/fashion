@@ -55,7 +55,7 @@ class ProductController extends Controller
             'colors' => Color::active()->get(),
             'types' => ProductType::active()->get(),
             'cart' => true,
-            'footer' => false
+            'footer' => true
         ]);
     }
 
@@ -221,7 +221,7 @@ class ProductController extends Controller
             'addresses' => $user->addresses,
             'deliverCharge' => $deliverCharge->delivery_charge,
             'cart' => false,
-            'footer' => false
+            'footer' => true
         ]);
     }
 
@@ -254,7 +254,7 @@ class ProductController extends Controller
     		'address' => $address,
             'deliverCharge' => $deliverCharge->delivery_charge,
             'cart' => false,
-            'footer' => false
+            'footer' => true
     	]);
     }
     /**

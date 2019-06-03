@@ -261,13 +261,12 @@
 		<div class="modal-content" style="width: 50%;margin-left: 30%;">
 			<div class="modal-header">
 				<h4 class="modal-title">
-					MemberShip Code
 					<button type="button" class="close">&times;</button>
 				</h4>
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<h5 style="margin-top: 15px;">Are you sure you want to get membership ?</h5>
+					<h5 style="margin-top: 15px;">Be the member of shroud & add more discount on your shopping.! </h5>
 				</div>
 			</div>
 			<div class="modal-footer">

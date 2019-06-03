@@ -103,7 +103,7 @@
 					<td>
 						<div style="padding-left:250px;padding-right:10px;font-size:15px;margin-top:10px;"><b>Sub Total</b></div>
 					</td>
-					<td><div style="margin-top:10px;">Rs. {{ $order->total - ($cgst) }}</div></td>
+					<td><div style="margin-top:10px;">Rs. {{ $order->total - ($cgst+$cgst) }}</div></td>
 				</tr>
 				<tr>
 					<td>

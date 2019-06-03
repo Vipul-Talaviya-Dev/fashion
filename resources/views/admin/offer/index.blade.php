@@ -62,8 +62,8 @@
                                                 <td>{{ $offer->amount }}</td>
                                                 <td>{{ $offer->amount_limit }}</td>
                                             @endif
-                                            <td>{{ date('d-m-Y',strtotime($offer->start_date ))}}</td>
-                                            <td>{{ date('d-m-Y',strtotime($offer->end_date)) }}</td>
+                                            <td>{{ App\Helper\Helper::dateFormat($offer->start_date) }}</td>
+                                            <td>{{ App\Helper\Helper::dateFormat($offer->end_date) }}</td>
                                             @if($offer->use_time==1)
                                                 <td><span class="label label-success">Multi Time</span></td>
                                             @else

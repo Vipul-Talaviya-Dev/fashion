@@ -11,6 +11,11 @@
     }
     body {
         margin: 0px;
+        font-family: "Roboto", Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 13px;
+    }
+    a > img {
+        outline: none;
     }
 </style>
 @endsection
