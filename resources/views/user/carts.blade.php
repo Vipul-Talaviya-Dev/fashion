@@ -1,3 +1,8 @@
+<style type="text/css">
+.modal-body p {
+    margin-top: 0;
+}
+</style>
 <div id="cartLoad" class="modal fade in top-65" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">

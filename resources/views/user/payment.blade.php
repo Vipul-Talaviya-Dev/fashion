@@ -26,7 +26,7 @@
 		}
 		.modal button.close {
 			width: auto; 
-			margin-top: -12px;
+			margin-top: -25px;
 		}
 	</style>
 </head>
@@ -258,7 +258,7 @@
 @if(\Auth::user()->member_ship_code == null)
 <div id="myModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-		<div class="modal-content" style="width: 50%;margin-left: 30%;">
+		<div class="modal-content" style="width: 50%;margin-left: 30%;margin-top: 27%;">
 			<div class="modal-header">
 				<h4 class="modal-title">
 					<button type="button" class="close">&times;</button>

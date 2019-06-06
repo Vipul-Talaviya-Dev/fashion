@@ -33,7 +33,7 @@ class OrderController extends Controller
 		}
 
 		return view('admin.order.index', [
-			'orders' => $orders->paginate(10)
+			'orders' => $orders->paginate(8)
 		]);
 	}
 

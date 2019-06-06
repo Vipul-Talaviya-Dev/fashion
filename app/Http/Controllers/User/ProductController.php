@@ -247,12 +247,13 @@ class ProductController extends Controller
     	}
     	$user = Auth::user();
     	$address = $user->addresses()->find(Session::get('addressId'));
-        $deliverCharge = AppContent::find(1);
+        $content = AppContent::find(1);
 
     	return view('user.payment', [
     		'user' => $user,
     		'address' => $address,
-            'deliverCharge' => $deliverCharge->delivery_charge,
+            'deliverCharge' => $content->delivery_charge,
+            'content' => $content,
             'cart' => false,
             'footer' => true
     	]);
