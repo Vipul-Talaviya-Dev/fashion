@@ -9,7 +9,7 @@
 <table width="540" border="0" align="center" cellpadding="0" cellspacing="0" style="padding:38px 30px 30px 15px;background-color:#fafafa">
 	<tbody>
 	<tr>
-		<td width="100%">
+		<td width="100%" align="center">
 			<a href="javascript:void(0);">
 				<img src="{{ URL::asset('front/images/logo.png') }}" style="width: 20%;" alt="Online fashion store" align="center" title="Online fashion store" class="CToWUd">
 			</a>
