@@ -88,12 +88,16 @@ class LoginController extends Controller
             'name' => 'required',
             'mobile' => 'required|numeric|min:10',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required',
+            'password' => 'required|min:6|regex:/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{6,20}$/',
             'birthDate' => 'required|date_format:d-m-Y',
             'anniversaryDate' => 'nullable|date_format:d-m-Y',
         );
 
-        $validator = Validator::make($request->all(), $rules, []);
+        $message = [
+            'password.regex' => 'Please used, Password character, numeric, special character.'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $message);
 
         if ($validator->fails()) {
 

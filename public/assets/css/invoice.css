@@ -88,7 +88,7 @@ b, strong, .bold {
   font: normal 13px/1.4em 'Open Sans', Sans-serif;
   margin: 0 auto;
   min-height: 1158px;
-  background: #F7EDEB url("/assets/images/bg.png") 0 0 no-repeat;
+  background: #d0a65e3b url("/assets/images/bg.png") 0 0 no-repeat;
   background-size: 100% auto;
   color: #5B6165;
   position: relative;
@@ -142,7 +142,7 @@ b, strong, .bold {
   text-transform: uppercase;
   padding: 0px 2px 0px 60px;
   font-size: 50px;
-  background: #F4846F;
+  background: #d0a65e;
   color: white;
 }
 #invoice-title-number #number {
@@ -195,7 +195,7 @@ table th, table td {
   font-weight: bold;
   padding: 5px 8px;
   text-align: right;
-  background: #B32C39;
+  background: #d0a65e;
   color: white;
   text-transform: uppercase;
 }

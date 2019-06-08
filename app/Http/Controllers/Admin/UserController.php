@@ -45,10 +45,12 @@ class UserController extends Controller
 			'lastName' => 'required',
             'mobile' => 'required|numeric|min:10',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|same:confirmPassword',
+            'password' => 'required|regex:/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{6,20}$/|same:confirmPassword',
             'birthDate' => 'required',
             'anniversaryDate' => 'nullable',
-		]);
+		], [
+            'password.regex' => 'Please used, Password character, numeric, special character.'
+        ]);
 
 		$user = User::create([
             'name' => $request->get('firstName').' '.$request->get('lastName'),

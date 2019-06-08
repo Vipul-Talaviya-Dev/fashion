@@ -165,12 +165,13 @@ a {
     padding:10px 30px;
     color:#fff;
     font-size:1em;
-    background:#212121;
+    background: #d0a65e;
     text-decoration:none;
     margin: 20px 0 0 0;
 }
 .checkout-btn:hover{
-    background:#ff9b05;
+    background: #d0a65e;
+    color: #ffffff;
 }
 .cart-thumb-img {
     width: 60px;
@@ -264,10 +265,21 @@ a {
     padding: 4px 15px;
     font-size: 10px;
 }
+.simpleCart_shelfItem p a:hover {
+    background: #d0a65e;
+    color: #fff;
+    border: 1px solid #d0a65e;
+}
+.resp-tab-active {
+    border: 1px solid #d0a65e;
+    text-shadow: none;
+    color: #fff;
+    background: #d0a65e;
+}
 .login-btn {
     outline: none;
     border: none;
-    background: #212121;
+    background: #d0a65e;
     padding: 10px 0;
     color: #fff;
     width: 40%;
@@ -572,5 +584,5 @@ a {
     .out-stock-list-btn { 
         left: 92px;
     }
-    
+
 }

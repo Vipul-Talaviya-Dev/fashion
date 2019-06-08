@@ -28,6 +28,20 @@
 			width: auto; 
 			margin-top: -25px;
 		}
+		.modal-footer {
+		    text-align: center; 
+		    border-top: none; 
+		}
+		.close {
+	        float: inherit;
+		    font-size: 14px;
+		    font-weight: normal;
+		    line-height: 1;
+		    color: #fff;
+		    text-shadow: 0 1px 0 #fff;
+		    opacity: 1;
+		    line-height: 1.42857143;
+		}
 	</style>
 </head>
 
@@ -258,19 +272,21 @@
 @if(\Auth::user()->member_ship_code == null)
 <div id="myModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-		<div class="modal-content" style="width: 50%;margin-left: 30%;margin-top: 27%;">
+		<div class="modal-content" style="width: 50%;margin-left: 30%;margin-top: 20%;">
 			<div class="modal-header">
-				<h4 class="modal-title">
-					<button type="button" class="close">&times;</button>
+				<h4 class="modal-title text-center">
+					Membership Offer
+					<!-- <button type="button" class="close">&times;</button> -->
 				</h4>
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<h5 style="margin-top: 15px;">Be the member of shroud & add more discount on your shopping.! </h5>
+					<h5 class="text-center" style="margin-top: 15px;line-height: 1.2;">Be the member of shroud & add more discount on your shopping.! </h5>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<a href="{{ route('user.getMemberShip') }}" class="btn btn-default" id="getMemberCode">Confirm</a>
+				<a href="{{ route('user.getMemberShip') }}" class="btn btn-success" id="getMemberCode">Confirm</a>
+					<a href="javascript:void(0);" class="btn btn-danger close">Close</a>
 			</div>
 		</div>
 	</div>

@@ -80,8 +80,10 @@ class UserController extends Controller
     public function changePassword(Request $request)
     {
         $this->validate($request, [
-            'password' => 'required|min:6|same:confirmPassword',
+            'password' => 'required|regex:/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{6,20}$/|same:confirmPassword',
             'confirmPassword' => 'required',
+        ], [
+            'password.regex' => 'Please used, Password character, numeric, special character.'
         ]);
        
         $user = Auth::user();
