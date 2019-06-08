@@ -22,7 +22,7 @@
 			</div>
 			<div class="col-md-4 w3_footer_grid">
 				<h3>Profile</h3>
-				<h4>Follow Us</h4>
+				<h4 class="white-text">Follow Us</h4>
 				<div class="agileits_social_button">
 					<ul>
 						<li><a href="{{ $content->fb_link ? $content->fb_link : 'javascript:void(0);' }}" target="_blank" class="facebook"> </a></li>
@@ -33,8 +33,17 @@
 				</div>
 			</div>
 			<div class="clearfix"> </div>
+		</div><br>
+		<div class="footer-copy1" style="border-bottom: none;">
+			<div class="footer-copy-pos">
+				<a href="javascript:void(0);" class="scroll"><img src="/front/images/arrow.png" alt=" " class="img-responsive" /></a>
+			</div>
 		</div>
+		<div class=" text-center">
+			<p>&copy;{{ date('Y') }} Shroud Store. All rights reserved | Design by <a href="https://www.acquainteck.com" target="_blank" class="white-text">Acquainteck</a></p>
+		</div><br>
 	</div>
+	@if(false)
 	<div class="footer-copy">
 		<div class="footer-copy1">
 			<div class="footer-copy-pos">
@@ -45,13 +54,14 @@
 			<p>&copy;{{ date('Y') }} Fashion. All rights reserved | Design by <a href="javascript:void(0);">Fashion</a></p>
 		</div>
 	</div>
+	@endif
 </div>
 @endif
 
 <div class="modal fade" id="logingId" tabindex="-1" role="dialog" aria-labelledby="logingId"
 aria-hidden="true">
 <div class="modal-dialog modal-lg">
-	<div class="modal-content">
+	<div class="modal-content" style="margin-top: -5%;">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 			&times;</button>
@@ -88,8 +98,8 @@ aria-hidden="true">
 											<input placeholder="First Name" name="name" type="text" class="fName" required autocomplete="off">
 											<input placeholder="Last Name" name="name" style="margin: 1em 0 0;" type="text" class="lName" required autocomplete="off">
 											<input placeholder="Mobile" name="mobile" type="text" class="signupMobile" required style="margin: 1em 0 0;" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" autocomplete="off">
-											<input placeholder="Birth Date format DD-MM-YYYY" name="birthDate" class="birthDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Birth Date Format DD-MM-YYYY ">
-											<input placeholder="Anniversary Date format DD-MM-YYYY" name="anniversaryDate" class="anniversaryDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Anniversary Date Format DD-MM-YYYY">
+											<input placeholder="Birth Date format DD-MM-YYYY" name="birthDate" class="birthDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Birth Date Format DD-MM-YYYY " readonly>
+											<input placeholder="Anniversary Date format DD-MM-YYYY" name="anniversaryDate" class="anniversaryDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Anniversary Date Format DD-MM-YYYY" readonly>
 											<input placeholder="Email Address" name="email" class="signupEmail keyup-email" type="email" required autocomplete="off">	
 											<input placeholder="Password" name="password" class="signupPassword" type="password" required autocomplete="off">	
 											<input placeholder="Confirm Password" name="confirmPassword" class="confirmPassword" type="password" required autocomplete="off">

@@ -34,7 +34,7 @@ class OrderProduct extends Model
 	
 	public function orderProductId()
 	{
-		return 'SHRD'.date('Ymd', strtotime($this->created_at)).$this->id;
+		return 'SHRDSO'.date('Ymd', strtotime($this->created_at)).$this->id;
 	}
 
 	public function product()

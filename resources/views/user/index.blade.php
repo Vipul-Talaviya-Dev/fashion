@@ -174,7 +174,7 @@
         </div>
     </ul>
   </div>
-  <a href="{{ route('user.products') }}"><div class="more-product">Load More</div></a>
+  <a href="{{ route('user.products') }}"><div class="more-product">Load More</div></a><p><br></p>
 </section>
 
 <!-- //special-deals -->

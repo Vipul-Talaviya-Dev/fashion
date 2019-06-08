@@ -1,3 +1,20 @@
+.footer {
+    padding: 4em 0 0 0;
+    background: #f4be62;
+}
+.w3_footer_grid ul li a {
+    color: #ffffff;
+}
+.w3_footer_grid ul li {
+    color: #ffffff;
+}
+.w3l_login {
+    float: inherit; 
+    width: 22%;
+}
+.dresses {
+    margin-top: -50px;
+}
 a {
     color: #ff9b3d;
     font-weight: 500;
@@ -46,37 +63,38 @@ a {
     background: rgba(255,255,255,.84);
     z-index: 10005;
 }
-#loader {
-        display: block;
-    position: relative;
-    left: 43%;
-    top: 35%;
-  width: 60px;
-  height: 60px;
-  margin: 60px;
-  animation: rotate 1.4s infinite ease-in-out, background 1.4s infinite ease-in-out alternate;
+.lds-ring {
+  position: relative;
+    left: 50%;
+    top: 50%;
 }
-
-@keyframes rotate {
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 6px;
+  border: 6px solid #d0a65e;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #d0a65e transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
   0% {
-    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
-  }
-  50% {
-    transform: perspective(120px) rotateX(-180deg) rotateY(0deg);
+    transform: rotate(0deg);
   }
   100% {
-    transform: perspective(120px) rotateX(-180deg) rotateY(-180deg);
-  }
-}
-@keyframes background {
-  0% {
-    background-color: #27ae60;
-  }
-  50% {
-    background-color: #9b59b6;
-  }
-  100% {
-    background-color: #c0392b;
+    transform: rotate(360deg);
   }
 }
 /**
@@ -488,6 +506,9 @@ a {
     .out-stock-list-btn { 
         left: 92px;
     }
+    .lds-ring {
+        left: 40%;
+    }
 }
 .banner-bottom, .team, .checkout, .additional_info, .team-bottom, .single, .mail, .special-deals, .about, .faq, .typo, .new-products, .banner-bottom1, .top-brands, .dresses, .w3l_related_products {
     padding: 2em 0;
@@ -498,7 +519,14 @@ a {
         width: 30%;
     }
     .main-logo {
-        width: 30% !important;
+        width: 100% !important;
+    }
+    .w3l_login {
+        float: inherit; 
+        width: 30%;
+    }
+    .dresses {
+        margin-top: 0px;
     }
     .home-page {
         width: auto;
@@ -512,6 +540,9 @@ a {
     }
     .out-stock-list-btn { 
         left: 92px;
+    }
+    .lds-ring {
+        left: 35%;
     }
 }
 
@@ -541,4 +572,5 @@ a {
     .out-stock-list-btn { 
         left: 92px;
     }
+    
 }

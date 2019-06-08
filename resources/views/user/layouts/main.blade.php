@@ -32,7 +32,12 @@
 </head>
 
 <body>
-    <div id="preloader" class="loader" style="display: none;"><div id="loader"></div></div><span class="your-cart"></span>
+    <!-- <div id="preloader" class="loader" style="display: none;"><div id="loader"></div></div> -->
+    <div id="preloader" class="loader" style="display: none;">
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    </div>
+
+    <span class="your-cart"></span>
     @include('user.layouts.header')
     @yield('content')
     @include('user.layouts.footer')
@@ -58,13 +63,13 @@
             });
         });*/
         $(document).ready(function() {
-            $(".birthDate").datepicker({
+            var birthDate = $(".birthDate").datepicker({
                 format: "DD-MM-YYYY",
                 autoHide: true,
                 endDate: '-1'
             });
 
-            $(".anniversaryDate").datepicker({
+            var anniversaryDate = $(".anniversaryDate").datepicker({
                 format: "DD-MM-YYYY",
                 autoHide: true,
                 endDate: '-1'
@@ -80,10 +85,10 @@
             });
 
             $('#horizontalTab').easyResponsiveTabs({
-            type: 'default', //Types: default, vertical, accordion           
-            width: 'auto', //auto or any width like 600px
-            fit: true   // 100% fit in a container
-        });
+                type: 'default', //Types: default, vertical, accordion           
+                width: 'auto', //auto or any width like 600px
+                fit: true   // 100% fit in a container
+            });
 
             @if(\Session::get('error'))
             toastr.warning("{{ \Session::get('error') }}");
@@ -93,7 +98,21 @@
             toastr.success("{{ \Session::get('success') }}");
             @endif
 
+            $( window ).scroll(function() {
+                birthDate.datepicker('hide');
+                anniversaryDate.datepicker('hide');
+               $(".birthDate").blur(); 
+               $(".anniversaryDate").blur(); 
+            });
+
+            $(".modal").on("scroll", function() {
+               birthDate.datepicker('hide');
+               anniversaryDate.datepicker('hide');
+               $(".birthDate").blur(); 
+               $(".anniversaryDate").blur();
+            });
         });
+
     </script>
 </body>
 </html>

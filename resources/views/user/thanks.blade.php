@@ -43,7 +43,7 @@
 											</thead>
 											@foreach($order->orderProducts as $orderProduct)
 												<tr class="info">
-													<td>{{ 'FHN'.date('Ymd', strtotime($orderProduct->created_at)).$orderProduct->id }}</td>
+													<td>{{ $orderProduct->orderProductId() }}</td>
 													<td>{{ $orderProduct->product->name }}</td>
 													<td>Rs. {{ $orderProduct->price }}</td>
 													<td>{{ $orderProduct->qty }}</td>

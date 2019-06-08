@@ -68,6 +68,8 @@
                                 <thead>
                                     <tr>
                                         <th>Order Id</th>
+                                        <th>Invoice</th>
+                                        <th class="text-center">Actions</th>
                                         <th>Order Date</th>
                                         <th>User Name</th>
                                         <th>Address</th>
@@ -78,14 +80,16 @@
                                         <th>Payment Mode</th>
                                         <th>Payment Status</th>
                                         <th>Status</th>
-                                        <th>Invoice</th>
-                                        <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($orders as $key => $order)
                                     <tr>
                                         <td>{{ $order->orderId() }}</td>
+                                        <td class="text-center"><a href="{{ route('admin.invoice', ['id' => $order->id]) }}" title="Get Invoice" target="_blank"><i class="fa fa-print"></i></a>
+                                        </td>
+                                        <td class="text-center"><a href="{{ route('admin.orderDetail', ['id' => $order->id]) }}"><i class="icon-eye"></i></a>
+                                        </td>
                                         <td style="white-space: nowrap;">{{ App\Helper\Helper::dateFormat($order->created_at) }}</td>
                                         <td style="white-space: nowrap;">{{ $order->user->name }}</td>
                                         <td style="white-space: nowrap;">{{ $order->address->address }}, <br>{{ $order->address->address_1 }} <br>{{ $order->address->city }}, <br>{{ $order->address->state }} - {{ $order->address->pincode }}</td>
@@ -116,10 +120,6 @@
                                         @elseif($order->status == 8)
                                             <td><span class="label label-danger">{{ \App\Helper\Helper::orderStatus($order->status) }}</span></td>
                                         @endif
-                                        <td class="text-center"><a href="{{ route('admin.invoice', ['id' => $order->id]) }}" title="Get Invoice" target="_blank"><i class="fa fa-print"></i></a>
-                                        </td>
-                                        <td class="text-center"><a href="{{ route('admin.orderDetail', ['id' => $order->id]) }}"><i class="icon-eye"></i></a>
-                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
