@@ -16,6 +16,14 @@
 	width: auto; 
 	margin-top: -12px;
 }
+.btn-success, .btn-danger {
+    background-color: #f4be62;
+    border-color: #f4be62;
+}
+.btn-success:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active, .open > .dropdown-toggle.btn-success {
+	background-color: #f4be62;
+    border-color: #f4be62;	
+}
 </style>
 @endsection
 
@@ -162,7 +170,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default createAddress">Submit</button>
+				<button type="button" class="btn btn-success createAddress">Submit</button>
 			</div>
 		</div>
 

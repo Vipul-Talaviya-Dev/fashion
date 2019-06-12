@@ -19,6 +19,14 @@
 .row {
 	margin: 0;
 }
+.btn-success, .btn-danger {
+    background-color: #f4be62;
+    border-color: #f4be62;
+}
+.btn-success:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active, .open > .dropdown-toggle.btn-success {
+	background-color: #f4be62;
+    border-color: #f4be62;	
+}
 </style>
 @endsection
 @section('content')
@@ -114,7 +122,7 @@
 					</table>
 				</div>
 				<div class="form-group spacet-20">
-					<input type="submit" class="btn btn-block btn-danger" name="Payment" value="Go To Payment ">
+					<input type="submit" class="btn btn-block btn-success" name="Payment" value="Go To Payment ">
 				</div>
 			</div>
 		</div>
@@ -165,7 +173,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default createAddress">Submit</button>
+				<button type="button" class="btn btn-success createAddress">Submit</button>
 			</div>
 		</div>
 

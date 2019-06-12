@@ -15,8 +15,11 @@
 .dresses {
     margin-top: -50px;
 }
+.footer-copy-pos {
+    border: 3px solid rgb(208, 166, 94);
+}
 a {
-    color: #ff9b3d;
+    color: #f4be62;
     font-weight: 500;
 }
 .has-error, .error {
@@ -576,7 +579,7 @@ a {
         margin: 0;
     }
     .menu {
-        padding: 7px;
+        padding: 8px 10px 27px 0;
     }
     .varbtn {
         margin: 3px;

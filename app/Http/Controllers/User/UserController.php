@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use Mail;
 use Auth;
 use Session;
 use Validator;
@@ -65,6 +66,14 @@ class UserController extends Controller
         $user = Auth::user();
         $user->member_ship_code = $user->memberShipCode($user->name, (($user->birth_date) ? $user->birth_date : date('Y-m-d')));
         $user->save();  
+
+        Mail::send('user.email.member-ship-email', [
+            'user' => $user,
+        ], function ($message) use ($user) {
+            $message->from('support@shroud.in', 'Support')
+                ->subject('Order Placed')
+                ->to($user->email, $user->name);
+        });
 
         return redirect()->back()->with(['success' => 'Successfully to get your membership code..']);
     }

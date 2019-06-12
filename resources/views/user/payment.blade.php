@@ -42,6 +42,14 @@
 		    opacity: 1;
 		    line-height: 1.42857143;
 		}
+		.btn-danger {
+		    background-color: #f4be62;
+		    border-color: #f4be62;
+		}
+		.btn-danger:hover, .btn-danger:focus, .btn-danger.focus, .btn-danger:active, .btn-danger.active, .open > .dropdown-toggle.btn-danger {
+			background-color: #f4be62;
+		    border-color: #f4be62;
+		}
 	</style>
 </head>
 
@@ -249,9 +257,9 @@
 											<label><input type="radio" class="payment_option" name="payment_option" value="1"><span class="circle"></span><span class="check"></span> Cash On Delivery</label>
 											<button class="btn btn-danger btn-xs pull-right cod_place_btn" type="submit" name="PLACE_ORDER" >Place Order</button>
 										</div><hr>
-										<div class="radio radio-danger">
+										<!-- <div class="radio radio-danger">
 											<label><input type="radio" class="payment_option" name="payment_option" value="104"><span class="circle"></span><span class="check"></span> EMI Option</label>
-										</div><hr>
+										</div><hr> -->
 										<div class="radio radio-danger">
 											<label><input type="radio" class="payment_option" name="payment_option" value="107"><span class="circle"></span><span class="check"></span> UPI</label>
 										</div>

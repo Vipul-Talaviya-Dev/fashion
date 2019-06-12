@@ -133,7 +133,10 @@ section#content {
     color: #ffffff;
 }
 .panel-info>.panel-heading {
-    background-color: #03a9f4;
+    background-color: #f4be62;
+}
+.panel-info {
+    border-color: #f4be62;
 }
 .panel-warning>.panel-heading {
     background-color: #ff5722;
@@ -170,7 +173,7 @@ section#content {
     position: initial !important;
 }
 .btn-placeholder {
-    background: #f44336!important;
+    background: #f4be62!important;
     border: 1px solid transparent;
     color: #fff!important;
     padding: 0 45px;
@@ -228,4 +231,9 @@ section#content {
         padding: 0;
         margin: 0;
     }
+}
+
+.footer {
+    padding: 4em 0 0 0;
+    background: #f4be62;
 }

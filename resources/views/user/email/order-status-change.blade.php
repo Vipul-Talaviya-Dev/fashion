@@ -25,13 +25,18 @@
 				</tr>
 				<tr>
                     <td style="font-size:13px;font-family:Arial,Helvetica,sans-serif;color:#34495e;padding-top:10px">
-					 Thank you for your order!
+					 Thank you for your order.
 					</td>
 				</tr>
 				<tr>
                     <td style="font-size:13px;padding-top:10px;font-family:Arial,Helvetica,sans-serif;color:#34495e">
-						We will send you another email once the items in your order have been <b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b>.
-                        Meanwhile, you can check the status of your order on Online Shroud Store.
+                    	The status of your order is <b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b>.<br>
+						We will send you another email if there is any changes.
+						Meanwhile you can check the status of your order on online Shroud store.
+                    	@if(false)
+							We will send you another email once the items in your order have been <b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b>.
+                        	Meanwhile, you can check the status of your order on Online Shroud Store.
+                    	@endif
 					</td>
 				</tr>
 				</tbody>

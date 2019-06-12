@@ -26,13 +26,12 @@
 				</tr>
 				<tr>
                     <td style="font-size:13px;font-family:Arial,Helvetica,sans-serif;color:#34495e;padding-top:10px">
-					 Thank you for your order!
+					 Thank you for shopping at SHROUD.
 					</td>
 				</tr>
 				<tr>
                     <td style="font-size:13px;padding-top:10px;font-family:Arial,Helvetica,sans-serif;color:#34495e">
-						We will send you another email once the items in your order have been shipped.
-                        Meanwhile, you can check the status of your order on Online Shroud Store.
+						We will send you another email once the items in your order have been shipped. Meanwhile, you can check the status of your order on Online Shroud Store.
 					</td>
 				</tr>
 				</tbody>
@@ -46,7 +45,7 @@
 			<table>
 				<tbody>
 				<tr>
-				<td style="font-size:13px;padding-top:10px;font-family:Arial,Helvetica,sans-serif;color:#34495e">Please find below, the summary of your order <b>{{ $cs_order_id }}</b> </td>
+				<td style="font-size:13px;padding-top:10px;font-family:Arial,Helvetica,sans-serif;color:#34495e">Kindly find below, the summary of your order ID is <b>{{ $cs_order_id }}</b> </td>
 				</tr>
 				</tbody>
 			</table>
