@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Waiting...for Payment | Fashion</title>
+    <title>Waiting...for Payment | Shroud Store</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="/front/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
@@ -12,12 +12,12 @@
     <div class="container" style="padding:40px;" align="center">
         <div class="row">
             <div class="jumbotron">
-                <img src="/front/images/logo.png" alt="Fashion" class="img-responsive" style="width: 20%;"><p><br></p>
+                <img src="/front/images/logo.png" alt="Shroud Store" class="img-responsive" style="width: 20%;"><p><br></p>
                 <h2>We are going to our Payment Services...</h2>
                 <p>Wait for Few Seconds...</p>
                 <span style="font-size:30px;color:#d0a65e;"><i class="fa fa-spinner fa-spin fa-5x"></i></span>
             </div>
-            <div style="margin-top:40px;"> All Rights Reserved @ Fashion</div>
+            <div style="margin-top:40px;"> All Rights Reserved @ Shroud Store</div>
         </div>
     </div>
 
@@ -33,8 +33,6 @@
         <input type=hidden name="surl" value="{{ $parameters['surl'] }}">
         <input type=hidden name="furl" value="{{ $parameters['furl'] }}">
         <input type=hidden name="service_provider" value="{{ $parameters['service_provider'] }}">
-
-
         <input type=hidden name="lastname" value="{{ $parameters['lastname'] or '' }}">
         <input type=hidden name="curl" value="{{ $parameters['curl'] or '' }}">
         <input type=hidden name="address1" value="{{ $parameters['address1'] or '' }}">
@@ -50,7 +48,6 @@
         <input type=hidden name="udf5" value="{{ $parameters['udf5'] or '' }}">
         <input type=hidden name="pg" value="{{ $parameters['pg'] or '' }}">
     </form>
-<script language='javascript'>document.redirect.submit();</script>
 <script src="/front/js/jquery.min.js" type="text/javascript"></script>
     <script src="/front/js/bootstrap-3.1.1.min.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -58,12 +55,13 @@
             document.addEventListener('contextmenu', event => event.preventDefault());
         });
         $(document).keydown(function (event) {
-            if (event.keyCode == 123) { // Prevent F12
+            if (event.keyCode == 123) {
                 return false;
-            } else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) { // Prevent Ctrl+Shift+I        
+            } else if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {        
                 return false;
             }
         });
     </script>
+    <script language='javascript'>document.redirect.submit();</script>
 </body>
 </html>

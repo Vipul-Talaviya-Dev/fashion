@@ -1,3 +1,9 @@
+.agileits_social_button ul li {
+    margin: 2px !important;
+}
+.simpleCart_shelfItem p a {
+    margin: 2px;
+}
 .footer {
     padding: 4em 0 0 0;
     background: #f4be62;
@@ -130,10 +136,13 @@ a {
 }
 .box_1 {
     position: relative;
+    width: 2%;
+    margin-top: 30px;
 }
 .backetItem {
     position: absolute;
-    top: 9px;
+    top: -10px;
+    left: 10px;
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -474,20 +483,22 @@ a {
 
 @media (max-width: 568px) {
     .box_1 {
-        margin: 0;
-        top: 30px;
+        margin: 3px 12px 0 0px;
+        top: 0;
         z-index: 999;
         float: right;
         right: 32px;
     }
     .backetItem {
-        top: -12px;
-        margin-left: 10px;
+        top: 10px;
+        margin-left: 0;
     }
     .cart-list img {
         width: auto;
     }
-
+    .padding-top-10 {
+        margin-bottom: -20px;
+    }
     .padding-left-0{
         padding-left: 0px; 
     }

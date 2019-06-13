@@ -198,9 +198,9 @@
     		autoPlaySpeed: 5000,            
     		pauseOnHover: false,
     		enableResponsiveBreakpoints: true,
-			// controlNav: false,
-			// direction: "horizontal",
-			// controlNav: "thumbnails",
+			/*controlNav: false,
+			direction: "horizontal",
+			controlNav: "thumbnails",*/
 
 		});
 		$("#flexiselDemo2").flexisel({
@@ -229,9 +229,9 @@
 	});
 	$(document).ready(function() {
 		$('#horizontalTab1').easyResponsiveTabs({
-			type: 'default', //Types: default, vertical, accordion           
-			width: 'auto', //auto or any width like 600px
-			fit: true   // 100% fit in a container
+			type: 'default', /*Types: default, vertical, accordion*/
+			width: 'auto', /*auto or any width like 600px*/
+			fit: true   /* 100% fit in a container*/
 		});
 		$('body').on('click', '.value-plus1', function(){
 			var divUpd = $(this).parent().find('.value1'), newVal = parseInt(divUpd.text(), 10)+1;
@@ -246,7 +246,7 @@
 
 	$("body").on("click", ".variation", function() { 
 		$(".variation").removeClass("varselected");
-      	var a = $(this).attr("data-id"); // size
+      	var a = $(this).attr("data-id");
       	var c = $(this).attr("data-col");
       	$(".variation").removeClass("disabled");
       	var e = $(this).attr("data-product");
