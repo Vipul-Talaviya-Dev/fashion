@@ -52,7 +52,7 @@
                                         @foreach($windowImages as $key => $windowImage)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $windowImage->title }}</td>
+                                                <td>{{ $windowImage->title ?: 'N/A' }}</td>
                                                 <td><a href="{{$windowImage->link}}" target="_blank" class="btn btn-sm btn-info">View URL</a></td>
                                                 <td>{{ $windowImage->description }}</td>
                                                 @if($windowImage->status == 1)

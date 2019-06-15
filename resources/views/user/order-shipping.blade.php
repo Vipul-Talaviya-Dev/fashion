@@ -140,33 +140,33 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</h4>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body"><br>
 				<div class="row">
-					<div class="form-group">
+					<div class="form-group col-md-6 col-xs-12">
 						<label>Full Name :</label>
 						<input type="text" name="name" class="form-control name" autocomplete="off" value="{{ old('name') }}" required>
 					</div>
-					<div class="form-group">
+					<div class="form-group col-md-6 col-xs-12">
 						<label>Mobile :</label>
 						<input type="text" name="mobile" class="form-control mobile" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" value="{{ old('mobile') }}" autocomplete="off" required>
 					</div>
-					<div class="form-group">
+					<div class="form-group col-md-6 col-xs-12">
 						<label>Address 1:</label>
 						<input type="text" name="address" class="form-control address" autocomplete="off" required>
 					</div>
-					<div class="form-group">
+					<div class="form-group col-md-6 col-xs-12">
 						<label>Address 2:</label>
 						<input type="text" name="address1" class="form-control address1" autocomplete="off" required>
 					</div>
-					<div class="form-group">
+					<div class="form-group col-md-6 col-xs-12">
 						<label>pinCode :</label>
 						<input type="text" name="pincode" onkeydown="return max_length(this,event,6)" onkeypress="return isNumberKey(event)" class="form-control pincode" autocomplete="off" value="{{ old('pincode') }}" required>
 					</div>
-					<div class="form-group">
+					<div class="form-group col-md-6 col-xs-12">
 						<label>City :</label>
 						<input type="text" name="city" class="form-control city" autocomplete="off" value="{{ old('city') }}" required>
 					</div>
-					<div class="form-group">
+					<div class="form-group col-md-6 col-xs-12">
 						<label>State :</label>
 						<input type="text" name="state" class="form-control state" autocomplete="off" value="{{ old('state') }}" required>
 					</div>

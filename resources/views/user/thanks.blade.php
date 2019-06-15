@@ -8,6 +8,14 @@
     display: contents;
     vertical-align: middle;
 }
+.btn-success, .btn-danger {
+    background-color: #f4be62;
+    border-color: #f4be62;
+}
+.btn-success:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active, .open > .dropdown-toggle.btn-success {
+	background-color: #f4be62;
+    border-color: #f4be62;	
+}
 </style>
 @endsection
 @section('content')

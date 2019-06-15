@@ -33,6 +33,11 @@
 	    	-webkit-filter: blur(2px);
 	    }
     @endif
+    @media (max-width: 568px) {
+    .padding-top-10 {
+        margin-bottom: -20px;
+    }
+  }
 </style>
 @endsection
 @section('content')

@@ -115,7 +115,7 @@ class UserController extends Controller
             return redirect()->back()->with(['error' => 'something is wrong please try again']);
         }
 
-        $orderId = substr(trim($request->get('orderId')), 12);
+        $orderId = substr(trim($request->get('orderId')), 14);
 
         if(!$order = OrderProduct::where('status', 6)->where('id', $orderId)->first()) {
             return redirect()->back()->with(['error' => 'something is wrong please try again']);

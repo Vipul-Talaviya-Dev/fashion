@@ -35,7 +35,7 @@
                                                 <div class="col-lg-1"></div>
                                                 <label class="col-lg-2 control-label text-semibold">Name :</label>
                                                 <div class="col-lg-8">
-                                                    <input type="text" name="name" value="{{ $windowImage->title }}" class="form-control" placeholder="Enter Name" autocomplete="off" required="">
+                                                    <input type="text" name="name" value="{{ $windowImage->title }}" class="form-control" placeholder="Enter Name" autocomplete="off">
                                                     @if($errors->get('name'))
                                                         @foreach($errors->get('name') as $error)
                                                             <span style="color: red;"><i class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>

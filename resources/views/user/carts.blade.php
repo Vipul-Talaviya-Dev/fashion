@@ -124,6 +124,7 @@
 				<a href="/" class="checkout-btn pull-right"> GO FOR SHOPPING</a>
 			</div>
 			@endif
+			<p><br></p><p><br></p>
 		</div>
 	</div>
 </div>

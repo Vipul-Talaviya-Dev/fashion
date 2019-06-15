@@ -35,7 +35,7 @@
                                                 <div class="col-lg-1"></div>
                                                 <label class="col-lg-2 control-label text-semibold">Title :</label>
                                                 <div class="col-lg-8">
-                                                    <input type="text" name="title" value="{{ old('title') }}" class="form-control"  placeholder="Enter Title" autocomplete="off" required="">
+                                                    <input type="text" name="title" value="{{ old('title') }}" class="form-control"  placeholder="Enter Title" autocomplete="off">
                                                     @if($errors->get('title'))
                                                         @foreach($errors->get('title') as $error)
                                                             <span style="color: red;"><i class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>

@@ -24,11 +24,14 @@
 	background-color: #f4be62;
     border-color: #f4be62;	
 }
+.row {
+	margin: 0;
+}
 </style>
 @endsection
 
 @section('content')
-<div class="col-md-12 col-sm-12 col-xs-12" style="background-color: #f3f3f3;">
+<div class="row" style="background-color: #f3f3f3;">
 	@include('user.profile-menu')
 	<div class="col-md-9 col-sm-9 col-xs-12 margin-top-10">
 		<div class="panel panel-default">
@@ -129,7 +132,7 @@
 <!-- Address -->
 <div id="myModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-		<div class="modal-content" style="width: 50%;margin-left: 30%;">
+		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title">
 					<span id="addressHeader"></span>
@@ -137,32 +140,32 @@
 				</h4>
 			</div>
 			<div class="modal-body">
-				<div class="row">
-					<div class="form-group">
+				<div class="row"><br>
+					<div class="form-group col-md-6 col-xs-12">
 						<label>Full Name :</label>
 						<input type="text" name="name" class="form-control name" autocomplete="off" value="{{ old('name') }}" required>
 					</div>
-					<div class="form-group">
+					<div class="form-group col-md-6 col-xs-12">
 						<label>Mobile :</label>
 						<input type="text" name="mobile" class="form-control mobile" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" value="{{ old('mobile') }}" autocomplete="off" required>
 					</div>
-					<div class="form-group">
+					<div class="form-group col-md-6 col-xs-12">
 						<label>Address 1:</label>
 						<input type="text" name="address" class="form-control address" autocomplete="off" required>
 					</div>
-					<div class="form-group">
+					<div class="form-group col-md-6 col-xs-12">
 						<label>Address 2:</label>
 						<input type="text" name="address1" class="form-control address1" autocomplete="off" required>
 					</div>
-					<div class="form-group">
+					<div class="form-group col-md-6 col-xs-12">
 						<label>pinCode :</label>
 						<input type="text" name="pincode" onkeydown="return max_length(this,event,6)" onkeypress="return isNumberKey(event)" class="form-control pincode" autocomplete="off" value="{{ old('pincode') }}" required>
 					</div>
-					<div class="form-group">
+					<div class="form-group col-md-6 col-xs-12">
 						<label>City :</label>
 						<input type="text" name="city" class="form-control city" autocomplete="off" value="{{ old('city') }}" required>
 					</div>
-					<div class="form-group">
+					<div class="form-group col-md-6 col-xs-12">
 						<label>State :</label>
 						<input type="text" name="state" class="form-control state" autocomplete="off" value="{{ old('state') }}" required>
 						<input type="hidden" name="id" value="0">

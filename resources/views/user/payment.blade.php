@@ -274,7 +274,7 @@
 						</div>
 					</div>
 				</div>
-			</section>
+			</section><p><br></p>
 		</form>
 	</div>
 @if(\Auth::user()->member_ship_code == null)
@@ -293,7 +293,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<a href="{{ route('user.getMemberShip') }}" class="btn btn-success" id="getMemberCode">Confirm</a>
+				<a href="{{ route('user.getMemberShip') }}" class="btn btn-danger" id="getMemberCode">Confirm</a>
 					<a href="javascript:void(0);" class="btn btn-danger close">Close</a>
 			</div>
 		</div>

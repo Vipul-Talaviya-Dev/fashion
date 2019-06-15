@@ -26,7 +26,7 @@ class WindowImageController extends Controller
     {
         $file = $request->file('image');
         $this->validate($request, [
-            'title' => 'required',
+            'title' => 'nullable',
             'url' => 'required|url',
             // 'order' => 'required|numeric|min:0',
             'status' => 'required|numeric',
@@ -35,7 +35,7 @@ class WindowImageController extends Controller
 
 
         WindowImage::create([
-            'title' => $request->get('title'),
+            'title' => $request->get('title') ? $request->get('title') : NULL,
             'link' => $request->get('url'),
             'image' => Cloudder::upload($file, [])->getPublicId(),
             // 'order' => $request->get('order'),
@@ -64,7 +64,7 @@ class WindowImageController extends Controller
         }
 
         $this->validate($request, [
-            'name' => 'required',
+            'name' => 'nullable',
             'url' => 'required|url',
             'status' => 'required|numeric',
             // 'order' => 'required|numeric|min:0',
@@ -75,8 +75,8 @@ class WindowImageController extends Controller
             \Cloudder::destroy($windowImage->image);
             $windowImage->image = Cloudder::upload($request->file('image'), [])->getPublicId();
         }
-
-        $windowImage->title = $request->get('name');
+        
+        $windowImage->title = $request->get('name') ? $request->get('name') : NULL;
         $windowImage->link = $request->get('url');
         $windowImage->description = $request->get('description');
         $windowImage->status = $request->get('status');

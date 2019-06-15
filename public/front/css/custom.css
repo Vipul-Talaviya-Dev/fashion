@@ -196,9 +196,11 @@ a {
 .order-boxos-header {
     padding: 1em 1em 0;
     font-size: 15px;
-    font-family: Lato;
     margin-bottom: -10px;
     padding-bottom: 0;
+}
+.footer-copy-pos {
+    bottom: 0;
 }
 .order-boxos-items {
     display: inline-block;
@@ -438,15 +440,11 @@ a {
 /*Address Page*/
 .addresses-box {
     background: rgba(255,255,255,.98);
-    box-shadow: 0 3px 3px 0 rgba(0,0,0,.2);
-    margin: 0px 0px 15px -10px;
+    /*box-shadow: 0 3px 3px 0 rgba(0,0,0,.2);*/
+    margin: 0px 0px 15px 0;
 }
 #cartLoad, #myModal {
     top: -65px;
-}
-.order-shipping-modal-content {
-    width: 50%;
-    margin-left: 30%;
 }
 .main-logo {
     width: 45% !important;height: 0px !important;border: 0 !important;
@@ -496,9 +494,6 @@ a {
     .cart-list img {
         width: auto;
     }
-    .padding-top-10 {
-        margin-bottom: -20px;
-    }
     .padding-left-0{
         padding-left: 0px; 
     }
@@ -546,10 +541,6 @@ a {
     }
     .main-logo {
         width: 100% !important;
-    }
-    .w3l_login {
-        float: inherit; 
-        width: 30%;
     }
     .dresses {
         margin-top: 0px;

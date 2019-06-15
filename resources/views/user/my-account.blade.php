@@ -16,11 +16,31 @@
 	width: auto; 
 	margin-top: -12px;
 }
+.modalContent { 
+	width: 50%;margin-left: 30%;
+ }
+@media (max-width: 767px) {
+	.modalContent { 
+	    width: auto;
+    	margin-left: auto;
+	 }	
+}
+.row {
+	margin: 0;
+}
+.btn-success, .btn-danger {
+    background-color: #f4be62;
+    border-color: #f4be62;
+}
+.btn-success:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active, .open > .dropdown-toggle.btn-success {
+	background-color: #f4be62;
+    border-color: #f4be62;	
+}
 </style>
 @endsection
 
 @section('content')
-<div class="col-md-12 col-sm-12 col-xs-12" style="background-color: #f3f3f3;">
+<div class="row" style="background-color: #f3f3f3;">
 	@include('user.profile-menu')
 	<div class="col-md-9 col-xs-12 margin-top-10">
 		@if(count($orders) == 0)
@@ -89,7 +109,7 @@
 	<div class="modal-dialog">
 		<form action="{{ route('user.orderReturn') }}" method="post" id="form">
 			{{ csrf_field() }}
-			<div class="modal-content" style="width: 50%;margin-left: 30%;">
+			<div class="modal-content modalContent">
 			<div class="modal-header">
 				<h4 class="modal-title">
 					Order Return
@@ -114,7 +134,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="Submit" class="btn btn-default">Submit</button>
+				<button type="Submit" class="btn btn-success">Submit</button>
 			</div>
 			</div>
 		</form>
