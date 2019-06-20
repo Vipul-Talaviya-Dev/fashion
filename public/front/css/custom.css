@@ -6,7 +6,7 @@
 }
 .footer {
     padding: 4em 0 0 0;
-    background: #f4be62;
+    background: #d0a65e;
 }
 .w3_footer_grid ul li a {
     color: #ffffff;
@@ -25,7 +25,7 @@
     border: 3px solid rgb(208, 166, 94);
 }
 a {
-    color: #f4be62;
+    color: #d0a65e;
     font-weight: 500;
 }
 .has-error, .error {
@@ -376,7 +376,7 @@ a {
     text-transform: uppercase;
 }
 .shop-by-occasion-banner .shop-now {
-    background: rgba(243, 183, 81, 0.88) none repeat scroll 0 0;
+    background: rgb(208, 166, 94) none repeat scroll 0 0;
     border: 1px solid;
     bottom: 38px;
     color: #ffffff;
@@ -391,8 +391,8 @@ a {
     font-weight: 500;
 }
 .more-product {
-    background: rgba(243, 183, 81, 0.88) none repeat scroll 0 0;
-    border: 1px solid #f4c066;
+    background: rgb(208, 166, 94) none repeat scroll 0 0;
+    border: 1px solid #d0a65e;
     color: #ffffff;
     margin: 0 auto;
     padding: 10px 0;

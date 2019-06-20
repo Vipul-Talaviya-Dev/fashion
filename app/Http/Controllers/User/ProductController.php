@@ -50,7 +50,7 @@ class ProductController extends Controller
             // $variations = $variations->where('product_type_id', explode(',', $request->get('types')));
         }
         return view('user.product-list', [
-        	'variations' => $variations->paginate(21),
+        	'variations' => $variations->paginate(12),
             'sizes' => Size::active()->get(),
             'colors' => Color::active()->get(),
             'types' => ProductType::active()->get(),

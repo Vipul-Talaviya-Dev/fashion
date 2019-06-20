@@ -17,12 +17,12 @@
 	margin-top: -12px;
 }
 .btn-success, .btn-danger {
-    background-color: #f4be62;
-    border-color: #f4be62;
+    background-color: #d0a65e;
+    border-color: #d0a65e;
 }
 .btn-success:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active, .open > .dropdown-toggle.btn-success {
-	background-color: #f4be62;
-    border-color: #f4be62;	
+	background-color: #d0a65e;
+    border-color: #d0a65e;	
 }
 .row {
 	margin: 0;

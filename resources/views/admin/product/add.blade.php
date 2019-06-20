@@ -143,7 +143,6 @@
             $('.addmore').append(html1);
             $('#product' + html_inc).find('#size_0').attr('id', 'size_'+html_inc);
             $('#size_' + html_inc).select2().trigger('change');
-            // $('.sizes').select2();
             $(document).on('click', '.btnrmv', function () {
                 var _id = $(this).attr('id');
                 $('#product' + _id).remove();

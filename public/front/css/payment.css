@@ -130,13 +130,13 @@ section#content {
     color: #929296;
 }
 .white-text {
-    color: #ffffff;
+    color: #ffffff !important;
 }
 .panel-info>.panel-heading {
-    background-color: #f4be62;
+    background-color: #d0a65e;
 }
 .panel-info {
-    border-color: #f4be62;
+    border-color: #d0a65e;
 }
 .panel-warning>.panel-heading {
     background-color: #ff5722;
@@ -173,7 +173,7 @@ section#content {
     position: initial !important;
 }
 .btn-placeholder {
-    background: #f4be62!important;
+    background: #d0a65e!important;
     border: 1px solid transparent;
     color: #fff!important;
     padding: 0 45px;
@@ -235,7 +235,7 @@ section#content {
 
 .footer {
     padding: 4em 0 0 0;
-    background: #f4be62;
+    background: #d0a65e;
 }
 .agileits_social_button ul li {
     margin: 2px !important;

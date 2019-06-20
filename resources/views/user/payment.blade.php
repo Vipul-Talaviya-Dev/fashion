@@ -43,12 +43,12 @@
 		    line-height: 1.42857143;
 		}
 		.btn-danger {
-		    background-color: #f4be62;
-		    border-color: #f4be62;
+		    background-color: #d0a65e;
+		    border-color: #d0a65e;
 		}
 		.btn-danger:hover, .btn-danger:focus, .btn-danger.focus, .btn-danger:active, .btn-danger.active, .open > .dropdown-toggle.btn-danger {
-			background-color: #f4be62;
-		    border-color: #f4be62;
+			background-color: #d0a65e;
+		    border-color: #d0a65e;
 		}
 	</style>
 </head>
