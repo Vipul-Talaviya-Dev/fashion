@@ -206,8 +206,8 @@ class LoginController extends Controller
         $authKey = "281230AgqvMwvw5d05f39c";
         $senderId = "SHROUD";
         $route = 4;
-
-        (new Client)->post('https://control.msg91.com/api/sendotp.php', [
+        // https://control.msg91.com/api/sendotp.php
+        (new Client)->post('http://control.msg91.com/api/sendotp.php', [
             'form_params' => [
                 'authkey' => $authKey,
                 'mobiles' => $to,
