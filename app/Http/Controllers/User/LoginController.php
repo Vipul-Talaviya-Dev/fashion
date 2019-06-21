@@ -6,9 +6,11 @@ use Mail;
 use Auth;
 use Session;
 use Validator;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Socialite;
+use App\Models\User;
+use App\Library\Sms;
+use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
 
@@ -109,6 +111,11 @@ class LoginController extends Controller
 
         } else {
             $otp = mt_rand(1111, 9999);
+            $msg = "Don't Share OTP. Your Otp is = {{otp}}. This OTP expires in 05:00 minutes.";
+            $message = str_replace('{{otp}}', $otp, $msg);
+            // SMS Send
+            self::send($request->get('mobile'), $message, $otp);
+            
             $user = [
                 'name' => $request->get('name'),
                 'email' => $request->get('email'),
@@ -122,7 +129,8 @@ class LoginController extends Controller
             Session::put('otp', $otp);
             return response()->json([
                 'status' => true,
-                'otp' => $otp
+                'otp' => ''
+                // 'otp' => $otp
             ]);
         }      
     }
@@ -177,13 +185,40 @@ class LoginController extends Controller
     public function resendOtp(Request $request)
     {
         Session::forget('otp');
+        
         $otp = mt_rand(1111, 9999);
+        $msg = "Don't Share OTP. Your Otp is = {{otp}}. This OTP expires in 05:00 minutes.";
+        $message = str_replace('{{otp}}', $otp, $msg);
+        // SMS Send
+        self::send(Session::get('user')['mobile'], $message, $otp);
+
         Session::put('otp', $otp);
 
         return response()->json([
             'status' => true,
-            'otp' => $otp,
+            'otp' => ''
+            // 'otp' => $otp,
         ]);
+    }
+
+    public static function send($to, $message, $otp)
+    {
+        $authKey = "281230AgqvMwvw5d05f39c";
+        $senderId = "SHROUD";
+        $route = 4;
+
+        (new Client)->post('https://control.msg91.com/api/sendotp.php', [
+            'form_params' => [
+                'authkey' => $authKey,
+                'mobiles' => $to,
+                'message' => $message,
+                'sender' => $senderId,
+                'route' => $route,
+                'otp' => $otp
+            ]
+        ]);
+
+        return true;
     }
 
     public function otpExpire()
@@ -202,9 +237,15 @@ class LoginController extends Controller
                 ]);
                 Session::put('otp', $otp);
 
+                $msg = "Don't Share OTP. Your Otp is = {{otp}}. This OTP expires in 05:00 minutes.";
+                $message = str_replace('{{otp}}', $otp, $msg);
+                // SMS Send
+                self::send($user->mobile, $message, $otp);
+
                 return response()->json([
                     'status' => true,
-                    'otp' => $otp,
+                    // 'otp' => $otp,
+                    'otp' => '',
                     'email' => false,
                     'success' => ""
                 ]);

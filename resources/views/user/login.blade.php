@@ -55,7 +55,9 @@
 									<p><br></p><p><br></p>
 								</div>
 								<div id="otpDiv" style="display: none;">
-									<p>Don't Share OTP. Your Otp is = <span id="otp"></span>. This OTP expires in <span class="timeCounter">05:00</span> minutes.</p>
+									@if(false)
+										<p>Don't Share OTP. Your Otp is = <span id="otp"></span>. This OTP expires in <span class="timeCounter">05:00</span> minutes.</p>
+									@endif
 									<input placeholder="Otp" name="otp" type="text" class="otp" required autocomplete="off">
 									<a class="pull-right" id="resendOtp" data-id="1" style="cursor: pointer;">Resend</a>
 									<div class="sign-up">
@@ -76,7 +78,9 @@
 									</div>
 								</div>
 								<div id="forgotPasswordOtpDiv" style="display: none;">
-									<p>Don't Share OTP. Your Otp is = <span id="forgotPasswordOtp"></span>. This OTP expires in <span class="timeCounter">05:00</span> minutes.</p>
+									@if(false)
+										<p>Don't Share OTP. Your Otp is = <span id="forgotPasswordOtp"></span>. This OTP expires in <span class="timeCounter">05:00</span> minutes.</p>
+									@endif
 									<input placeholder="Otp" name="otp" type="text" class="forgotPasswordOtp" required autocomplete="off">
 									<a class="pull-right" id="resendOtp" data-id="2" style="cursor: pointer;">Resend</a>
 									<div class="sign-up">
