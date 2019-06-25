@@ -424,7 +424,8 @@ class ProductController extends Controller
 	        $orderProduct->user_id = $user->id;
 	        $orderProduct->product_id = $product->id;
 	        $orderProduct->variation_id = $variation->id;
-	        $orderProduct->price = $variation->price;
+	        $orderProduct->purchase_price = $variation->purchase_price;
+            $orderProduct->price = $variation->price;
 	        $orderProduct->max_price = $variation->price;
 	        $orderProduct->qty = $data['qty'];
             $orderProduct->status = ($request->get('payment_option') == 1) ? 3 : 1;
