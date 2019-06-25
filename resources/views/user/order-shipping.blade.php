@@ -143,8 +143,12 @@
 			<div class="modal-body"><br>
 				<div class="row">
 					<div class="form-group col-md-6 col-xs-12">
-						<label>Full Name :</label>
-						<input type="text" name="name" class="form-control name" autocomplete="off" value="{{ old('name') }}" required>
+						<label>First Name :</label>
+						<input type="text" name="firstName" class="form-control firstName" autocomplete="off" value="{{ old('firstName') }}" required>
+					</div>
+					<div class="form-group col-md-6 col-xs-12">
+						<label>Last Name :</label>
+						<input type="text" name="lastName" class="form-control lastName" autocomplete="off" value="{{ old('lastName') }}" required>
 					</div>
 					<div class="form-group col-md-6 col-xs-12">
 						<label>Mobile :</label>
@@ -192,6 +196,15 @@
       });
 
 		$('body').on('click', '.addAdddress', function() {
+			$("input[name='firstName']").val('');
+	        $("input[name='lastName']").val('');
+	        $("input[name='mobile']").val('');
+	        $("input[name='pincode']").val('');
+	        $("input[name='city']").val('');
+	        $("input[name='state']").val('');
+	        $("input[name='address']").val('');
+	        $("input[name='address1']").val('');
+	        $("input[name='id']").val('');
 			$('#myModal').modal();
 		});
 	});

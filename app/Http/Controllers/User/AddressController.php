@@ -94,7 +94,7 @@ class AddressController extends Controller
             'name' => $address->name,
             'mobile' => $address->mobile,
             'address' => $address->address,
-            'address_1' => $address->address1,
+            'address_1' => $address->address_1,
             'pincode' => $address->pincode,
             'city' => $address->city,
             'state' => $address->state,

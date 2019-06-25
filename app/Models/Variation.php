@@ -16,6 +16,7 @@ class Variation extends Model
         'size_id',
         'images',
         'price',
+        'purchase_price',
         'qty',
     ];
 
@@ -25,6 +26,31 @@ class Variation extends Model
         'deleted_at'
     ];
 
+    /**
+     * Mutators
+     */
+
+
+    public function setPriceAttribute($value)
+    {
+        $this->attributes['price'] = $value * 100;
+    }
+    
+    public function getPriceAttribute($value)
+    {
+        return $value / 100;
+    }
+
+    public function setPurchasePriceAttribute($value)
+    {
+        $this->attributes['purchase_price'] = $value * 100;
+    }
+    
+    public function getPurchasePriceAttribute($value)
+    {
+        return $value / 100;
+    }
+    
     public function color()
     {
         return $this->belongsTo(Color::class);

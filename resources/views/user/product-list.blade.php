@@ -8,6 +8,10 @@
 	.body {
 		background: #f3f3f3;
 	}
+	.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+		background-color: #d0a65e;
+    	border-color: #d0a65e;
+	}
 </style>
 @endsection
 

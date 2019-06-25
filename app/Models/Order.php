@@ -41,6 +41,52 @@ class Order extends Model
 		return 'SHRD'.date('Ymd', strtotime($this->created_at)).$this->id;
 	}
 
+	/**
+     * Mutators
+     */
+
+
+    public function setCartAmountAttribute($value)
+    {
+        $this->attributes['cart_amount'] = $value * 100;
+    }
+    
+    public function getCartAmountAttribute($value)
+    {
+        return $value / 100;
+    }
+
+
+    public function setDiscountAmountAttribute($value)
+    {
+        $this->attributes['discount_amount'] = $value * 100;
+    }
+    
+    public function getDiscountAmountAttribute($value)
+    {
+        return $value / 100;
+    }
+
+    public function setDeliveryChargeAttribute($value)
+    {
+        $this->attributes['delivery_charge'] = $value * 100;
+    }
+    
+    public function getDeliveryChargeAttribute($value)
+    {
+        return $value / 100;
+    }
+
+    public function setTotalAttribute($value)
+    {
+        $this->attributes['total'] = $value * 100;
+    }
+    
+    public function getTotalAttribute($value)
+    {
+        return $value / 100;
+    }
+
 	public function orderProducts()
 	{
 		return $this->hasMany(OrderProduct::class);

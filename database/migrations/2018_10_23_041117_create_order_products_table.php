@@ -19,6 +19,7 @@ class CreateOrderProductsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('product_id')->unsigned();
             $table->integer('variation_id')->unsigned();
+            $table->integer('purchase_price')->unsigned()->default(0)->comment("In Paisa");
             $table->integer('price')->unsigned()->default(0)->comment("In Paisa");
             $table->integer('max_price')->unsigned()->default(0)->comment("In Paisa");
             $table->integer('qty')->unsigned()->default(0);

@@ -53,6 +53,7 @@ class ProductVariationController extends Controller
             'colorId' => 'required|exists:colors,id',
             'sizes' => 'required|array|min:1',
             'typeIds' => 'required|array|min:1',
+            'purchase_price' => 'required|numeric|min:1',
             'price' => 'required|numeric|min:1',
             'qty' => 'required|numeric|min:1',
             'images' => 'required|array|min:1',
@@ -71,6 +72,7 @@ class ProductVariationController extends Controller
                 'size_id' => $request->get('sizes')[$i],
                 'product_type_id' => isset($request->get('typeIds')[$i]) ? implode(',', $request->get('typeIds')) : NULL,
                 'images' => implode(',', $images),
+                'purchase_price' => $request->get('purchase_price'),
                 'price' => $request->get('price'),
                 'qty' => $request->get('qty'),
             ]);
@@ -107,6 +109,7 @@ class ProductVariationController extends Controller
             'colorId' => 'required|exists:colors,id',
             'sizeId' => 'required|exists:sizes,id',
             'typeIds' => 'required|array|min:1',
+            'purchase_price' => 'required|numeric|min:1',
             'price' => 'required|numeric|min:1',
             'qty' => 'required|numeric|min:0',
             'images' => 'nullable|array|min:1',
@@ -127,6 +130,7 @@ class ProductVariationController extends Controller
 
         $variation->color_id = $request->get('colorId');
         $variation->size_id = $request->get('sizeId');
+        $variation->purchase_price = $request->get('purchase_price');
         $variation->price = $request->get('price');
         $variation->qty = $request->get('qty');
         $variation->save();

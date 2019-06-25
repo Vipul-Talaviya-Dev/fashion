@@ -44,7 +44,8 @@
                                         <th>Product</th>
                                         <th>Color</th>
                                         <th>Size</th>
-                                        <th>Price</th>
+                                        <th>Purchase Price</th>
+                                        <th>Selling Price</th>
                                         <th>Qty</th>
                                         <th class="text-center">Actions</th>
                                     </tr>
@@ -57,6 +58,7 @@
                                                 <td>{{ $product->name }}</td>
                                                 <td>{{ $variation->color->name }}</td>
                                                 <td>{{ $variation->size->name }}</td>
+                                                <td>{{ $variation->purchase_price }}</td>
                                                 <td>{{ $variation->price }}</td>
                                                 <td>{{ $variation->qty }}</td>
                                                 <td class="text-center">

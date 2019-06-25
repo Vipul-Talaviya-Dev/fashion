@@ -37,6 +37,41 @@ class OrderProduct extends Model
 		return 'SHRDSO'.date('Ymd', strtotime($this->created_at)).$this->id;
 	}
 
+	/**
+     * Mutators
+     */
+
+
+    public function setPriceAttribute($value)
+    {
+        $this->attributes['price'] = $value * 100;
+    }
+    
+    public function getPriceAttribute($value)
+    {
+        return $value / 100;
+    }
+
+    public function setPurchasePriceAttribute($value)
+    {
+        $this->attributes['purchase_price'] = $value * 100;
+    }
+    
+    public function getPurchasePriceAttribute($value)
+    {
+        return $value / 100;
+    }
+
+    public function setMaxPriceAttribute($value)
+    {
+        $this->attributes['max_price'] = $value * 100;
+    }
+    
+    public function getMaxPriceAttribute($value)
+    {
+        return $value / 100;
+    }
+
 	public function product()
 	{
 		return $this->belongsTo(Product::class);

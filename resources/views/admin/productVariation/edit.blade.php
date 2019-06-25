@@ -66,21 +66,31 @@
                 
             </div>
             <div class="row">
-                <div class="form-group col-md-4">
-                    <label>Price: <span class="text-danger">*</span></label>
-                    <input type="number" name="price" placeholder="Enter Product Price" class="form-control" required pattern="[0-9]" min="0" required value="{{ $variation->price ?: old('price') }}" autocomplete="off">
+                <div class="form-group col-md-3">
+                    <label>Purchase Price: <span class="text-danger">*</span></label>
+                    <input type="number" name="purchase_price" placeholder="Enter Product Purchase Price" class="form-control" required pattern="[0-9]" min="0" required value="{{ $variation->purchase_price ?: old('purchase_price') }}" autocomplete="off">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
+                    <label>Selling Price: <span class="text-danger">*</span></label>
+                    <input type="number" name="price" placeholder="Enter Product Selling Price" class="form-control" required pattern="[0-9]" min="0" required value="{{ $variation->price ?: old('price') }}" autocomplete="off">
+                </div>
+                <div class="form-group col-md-3">
                     <label>Quantity: <span class="text-danger">*</span></label>
                     <input type="number" name="qty" placeholder="Enter Quantity" class="form-control" required pattern="[0-9]" min="0" value="{{ $variation->qty ?: ('qty') }}" autocomplete="off">
                 </div>
-                <div class="col-md-4 form-group">
+                <div class="col-md-3 form-group">
                     <label>Image :</label>
                     <input type="file" name="images[]" class="form-control" accept=".jpeg, .jpg, .png" multiple>
                     <span><b>Note:</b> 306 X 400 Image Upload.</span>
                     <span class="help-block">Accepted formats: jpeg, jpg, png. Max file size 2Mb</span>
                 </div>
             </div>
+            <div class="row">
+                <label><b>Barcode</b></label>
+                <div class="form-group">
+                    <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($variation->id, 'C39+') }}" alt="barcode" />
+                </div>
+            </div><br>
             <div class="row">
                 <?php
                     $product_type_ids = [];

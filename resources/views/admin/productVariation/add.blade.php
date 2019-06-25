@@ -68,15 +68,19 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-4">
-                    <label>Price: <span class="text-danger">*</span></label>
-                    <input type="number" name="price" placeholder="Enter Product Price" class="form-control" required pattern="[0-9]" min="0" required>
+                <div class="form-group col-md-3">
+                    <label>Purchase Price: <span class="text-danger">*</span></label>
+                    <input type="number" name="purchase_price" placeholder="Enter Product Purchase Price" class="form-control" required pattern="[0-9]" min="0" required value="{{ old('purchase_price') }}" autocomplete="off">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
+                    <label>Selling Price: <span class="text-danger">*</span></label>
+                    <input type="number" name="price" placeholder="Enter Product Selling Price" class="form-control" required pattern="[0-9]" min="0" required>
+                </div>
+                <div class="form-group col-md-3">
                     <label>Quantity: <span class="text-danger">*</span></label>
                     <input type="number" name="qty" placeholder="Enter Quantity" class="form-control" required pattern="[0-9]" min="0">
                 </div>
-                <div class="col-md-4 form-group">
+                <div class="col-md-3 form-group">
                     <label>Image :<span class="text-danger">*</span></label>
                     <input type="file" name="images[]" class="form-control required" required accept=".jpeg, .jpg, .png" multiple>
                     <span><b>Note:</b> 306 X 400 Image Upload.</span>

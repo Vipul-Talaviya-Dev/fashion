@@ -34,7 +34,7 @@ function max_length(c, b, a) {
     return true
 }
 
-// TIme Count For Otp
+/*TIme Count For Otp*/
 function startCounter(duration, display) {
     var timer = duration, minutes, seconds;
     setInterval(function () {
@@ -90,7 +90,7 @@ $(document).ready(function() {
             });
         }
     });
-    // Remove Cart Item
+    /*Remove Cart Item*/
     $("body").on("click", ".removeItem", function() {
         $(".your-cart").html('');
     	var id = $(this).attr("data-id");
@@ -115,7 +115,6 @@ $(document).ready(function() {
                         hide_loader();
                     }, 4000);
               }
-              // hide_loader();
           }
       });
     });
@@ -149,7 +148,9 @@ $(document).ready(function() {
         }
     });
 
-    // Forgot password
+    /**
+    * Forgot password
+    */
     $("body").on("click", "#forgotPassword", function() {
         $(".has-error").remove();
         var a = $(".emailorMobile").val();
@@ -185,7 +186,7 @@ $(document).ready(function() {
                         } else {
                             toastr.success(res.success);
                         }
-                        // window.location.reload();
+                        /* window.location.reload();*/
                     }
                 }
             });
@@ -353,7 +354,7 @@ $(document).ready(function() {
                 },
                 dataType: "json",
                 type: "POST",
-                // data: {"emailorMobile": a},
+                /*data: {"emailorMobile": a},*/
                 success: function(res) {
                     hide_loader();
                     if(res.status == false) {
@@ -419,7 +420,8 @@ $(document).ready(function() {
     // Address Add
     $("body").on("click", ".createAddress", function() {
         $(".has-error").remove();
-        var n = $("input[name='name']").val();
+        var firstName = $("input[name='firstName']").val();
+        var lastName = $("input[name='lastName']").val();
         var m = $("input[name='mobile']").val();
         var p = $("input[name='pincode']").val();
         var c = $("input[name='city']").val();
@@ -430,8 +432,9 @@ $(document).ready(function() {
         var r = $(".redirect").val();
         var t = $('meta[name="csrf-token"]').attr('content');
         var b = false;
+        var n = firstName.trim() +' '+lastName.trim();
         if (n == "" || m == "" || p == "" || c == "" || s == "" || a == "" || r == "") {
-            alert('Kindly All Field Required!');
+            toastr.error("Kindly All Field Required!");
             b = true;
         }
         if(b == false) {
@@ -451,14 +454,25 @@ $(document).ready(function() {
                     }
                     if(res.status == true) {
                         toastr.success(res.success);
-                        location.reload();
+                        // location.reload();
                     }
                 }
             });
         }
     });
 
-    $("body").on("click", ".update_address", function() {
+    $("body").on("click", ".update_address", function(event) {
+        $("input[name='firstName']").val('');
+        $("input[name='lastName']").val('');
+        $("input[name='mobile']").val('');
+        $("input[name='pincode']").val('');
+        $("input[name='city']").val('');
+        $("input[name='state']").val('');
+        $("input[name='address']").val('');
+        $("input[name='address1']").val('');
+        $("input[name='id']").val('');
+        $(".redirect").val('');
+        event.preventDefault();
         show_loader();
         $('#addressHeader').html("Update Your Address");
         var id = $(this).attr('data-id');
@@ -468,9 +482,11 @@ $(document).ready(function() {
           url: url,
           success: function (data) {
                 if(data.status) {
-                    var ad = data.address; 
+                    var ad = data.address;
+                    var name = ad.name.split(" ");
                     $("input[name='id']").val(ad.id);
-                    $("input[name='name']").val(ad.name);
+                    $("input[name='firstName']").val(name[0]);
+                    $("input[name='lastName']").val(name[1]);
                     $("input[name='mobile']").val(ad.mobile);
                     $("input[name='pincode']").val(ad.pincode);
                     $("input[name='city']").val(ad.city);
@@ -521,13 +537,11 @@ $(document).ready(function () {
         } else {
             input.val(0);
         }
-        //total of selling price
         var sum = 0;
         $('.sellingprice').each(function(){
             sum += parseInt($(this).text());  
         });
         document.getElementById('total').innerHTML = sum;
-        //final amount
         document.getElementById('finalPrice').innerHTML = parseInt(sum);
     });
 
@@ -547,7 +561,9 @@ $(document).ready(function () {
         } 
     });
 
-    // Apply Discount
+    /**
+    * Apply Discount
+    */
     $("body").on("click", ".apply_code", function() {
         var p = $(".member_ship_code").val();
         if (typeof p === "undefined") {
@@ -578,8 +594,10 @@ $(document).ready(function () {
         }
     }); 
 
-    // Apply Offer Code
-    // Apply Discount
+    /**
+    * Apply Offer Code
+    * Apply Discount
+    */
     $("body").on("click", ".apply_offer", function() {
         var p = $(".offer_code").val();
         if (typeof p === "undefined") {

@@ -20,7 +20,8 @@ class CreateVariationsTable extends Migration
             $table->integer('color_id')->unsigned();
             $table->integer('size_id')->unsigned()->nullable();
             $table->text('images')->nullable();
-            $table->integer('price');
+            $table->integer('purchase_price')->unsigned()->default(0)->comment("In Paisa, Purchase price");
+            $table->integer('price')->unsigned()->default(0)->comment("In Paisa, Selling Price");
             $table->integer('qty');
             $table->timestamps();
             $table->softDeletes();

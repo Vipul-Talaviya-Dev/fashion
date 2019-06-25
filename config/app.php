@@ -172,6 +172,7 @@ return [
         JD\Cloudder\CloudderServiceProvider::class,
         Sofa\Eloquence\BaseServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Milon\Barcode\BarcodeServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -234,6 +235,8 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Cloudder' => JD\Cloudder\Facades\Cloudder::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
     ],
 
 ];
