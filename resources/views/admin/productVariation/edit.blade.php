@@ -88,7 +88,8 @@
             <div class="row">
                 <label><b>Barcode</b></label>
                 <div class="form-group">
-                    <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($variation->id, 'C39+') }}" alt="barcode" />
+                    <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($variation->id, 'C39+') }}" alt="barcode" /><br>
+                    <span style="margin-left: 1%">{{$variation->id}}</span>
                 </div>
             </div><br>
             <div class="row">

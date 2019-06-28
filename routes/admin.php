@@ -9,6 +9,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
 
     Route::group(['middleware' => 'adminAuth'], function () {
         // Dashboard Controller
+        Route::get('barcode/layout1', 'DashboardController@barcodeLayout1')->name('barcodeLayout1');
+        Route::get('barcode/layout2', 'DashboardController@barcodeLayout2')->name('barcodeLayout2');
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
         Route::get('contacts', 'DashboardController@contacts')->name('contacts');
         Route::get('app-content', 'DashboardController@appContent')->name('appContent');

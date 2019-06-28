@@ -213,6 +213,62 @@ $admin  = \Session::get('admin');
                 </div>
             </a>
         </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
+            <a href="{{ route('admin.barcodeLayout1') }}" target="_blank">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stats-widget">
+                            <div class="stats-widget-body">
+                                <!-- Row start -->
+                                <ul class="row no-gutters mb-3">
+                                    <li class="">
+                                        <div class="stats-widget-header">
+                                            <i class="icon-basket"></i>
+                                        </div>
+                                    </li>
+                                    <li class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12">
+                                        <h6 class="title">Barcode Layout 1</h6>
+                                        <h4 class="total" title="Count">1</h4>
+                                    </li>
+                                </ul>
+                                <!-- Row end -->
+                                <div class="progress sm">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
+            <a href="{{ route('admin.barcodeLayout2') }}" target="_blank">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="stats-widget">
+                            <div class="stats-widget-body">
+                                <!-- Row start -->
+                                <ul class="row no-gutters mb-3">
+                                    <li class="">
+                                        <div class="stats-widget-header">
+                                            <i class="icon-basket"></i>
+                                        </div>
+                                    </li>
+                                    <li class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12">
+                                        <h6 class="title">Barcode Layout 2</h6>
+                                        <h4 class="total" title="Count">2</h4>
+                                    </li>
+                                </ul>
+                                <!-- Row end -->
+                                <div class="progress sm">
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 @endif
 </div>

@@ -16,6 +16,19 @@ use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
+    public function barcodeLayout1()
+    {
+        return view('admin.dashbord.barcode', [
+            'products' => Variation::with(['product', 'size', 'color'])->limit(15)->get(),
+        ]);
+    }
+
+    public function barcodeLayout2()
+    {
+        return view('admin.dashbord.barcode-2', [
+            'products' => Variation::with(['product', 'size', 'color'])->get(),
+        ]);
+    }
 
     public function index()
     {
