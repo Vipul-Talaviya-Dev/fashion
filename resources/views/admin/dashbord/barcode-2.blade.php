@@ -33,8 +33,8 @@
                     <div >
                         <div style="font-size: 24px;text-transform: uppercase;"><b>Shourd</b></div>
                         <!-- <span style="font-weight: 600;">{{ substr($variation->product->name, 0, 15).'...' }}</span> -->
-                        <div style="font-weight: 600;">QTY: 1</div>
-                        <!-- <div style="font-weight: 600;">Color: {{ $variation->color->name }}</div> -->
+                        <!-- <div style="font-weight: 600;">QTY: 1</div> -->
+                        <div style="font-weight: 600;">Color: {{ substr($variation->color->name, 0, 10) }}</div>
                         <div style="font-weight: 600;">SIZE: {{ $variation->size->name }}
                             <!-- <span style="font-size: 10px;">(Maximum Retail Price)</span> -->
                         </div>
