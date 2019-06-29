@@ -213,6 +213,7 @@ $admin  = \Session::get('admin');
                 </div>
             </a>
         </div>
+        @if(false)
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
             <a href="{{ route('admin.barcodeLayout1') }}" target="_blank">
                 <div class="card">
@@ -241,6 +242,7 @@ $admin  = \Session::get('admin');
                 </div>
             </a>
         </div>
+        @endif
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
             <a href="{{ route('admin.barcodeLayout2') }}" target="_blank">
                 <div class="card">

@@ -26,7 +26,7 @@ class DashboardController extends Controller
     public function barcodeLayout2()
     {
         return view('admin.dashbord.barcode-2', [
-            'products' => Variation::with(['product', 'size', 'color'])->get(),
+            'products' => Variation::with(['product', 'size', 'color'])->limit(30)->get(),
         ]);
     }
 
