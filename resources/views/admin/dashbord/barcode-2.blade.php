@@ -14,14 +14,16 @@
           .col-md-3 {
             float: left !important;
             width: 20% !important;
-            height: 170px !important;
-            margin-bottom: 15px !important;
+            height: 151px !important;
+            margin-bottom: 13px !important;
+            margin-top: 7px !important;
           }
         }
         .col-md-3 {
             width: 20% !important;
             height: 157px;
             margin-bottom: 5px;
+            margin-top: 7px !important;
         }
     </style>
 </head>
