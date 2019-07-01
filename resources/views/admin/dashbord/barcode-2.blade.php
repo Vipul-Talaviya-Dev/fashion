@@ -21,7 +21,7 @@
         .col-md-3 {
             width: 20% !important;
             height: 157px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
     </style>
 </head>
