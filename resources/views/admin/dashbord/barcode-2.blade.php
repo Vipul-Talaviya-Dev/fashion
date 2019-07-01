@@ -14,8 +14,8 @@
           .col-md-3 {
             float: left;
             width: 20%;
-            height: 163px;
-            margin-bottom: 13px;
+            height: 170px;
+            margin-bottom: 15px;
           }
         }
         .col-md-3 {
