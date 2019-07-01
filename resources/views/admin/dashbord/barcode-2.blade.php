@@ -28,7 +28,8 @@
 
 <body>
 <div class="col-md-12">
-    @foreach($products as $variation)
+    <?php $v = 4;?>
+    @foreach($products as $key => $variation)
         <div class="col-md-3">
             <div >
                 <div style="font-size: 22px;text-transform: uppercase;"><b>Shourd</b></div>
@@ -42,6 +43,10 @@
                 </div>
             </div>
         </div>
+        @if($key == $v && $v < 28)
+            <div class="col-md-12"><p>&nbsp;</p></div>
+            <?php $v = $v + 5;?>
+        @endif
     @endforeach
 </div>
 <script type="text/javascript" src="/assets/js/core/libraries/jquery.min.js"></script>
