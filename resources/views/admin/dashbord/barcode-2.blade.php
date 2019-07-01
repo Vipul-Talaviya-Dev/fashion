@@ -13,9 +13,9 @@
         @media print {
           .col-md-3 {
             float: left;
-            width: 33.33%;
-            height: 157px;
-            margin-bottom: 11px;
+            width: 20%;
+            height: 163px;
+            margin-bottom: 13px;
           }
         }
         .col-md-3 {
@@ -44,7 +44,7 @@
             </div>
         </div>
         @if($key == $v && $v < 28)
-            <div class="col-md-12"><p>&nbsp;</p></div>
+            <div class="col-md-12"></div>
             <?php $v = $v + 5;?>
         @endif
     @endforeach
