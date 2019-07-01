@@ -14,7 +14,7 @@
           .col-md-3 {
             float: left !important;
             width: 20% !important;
-            height: 131px !important;
+            height: 121px !important;
             margin-bottom: 9.2px !important;
             /*margin-top: 7px !important;*/
           }
