@@ -31,16 +31,16 @@
             <tr class="col-md-3">
                 <th>
                     <div >
-                        <div style="font-size: 24px;text-transform: uppercase;"><b>Shourd</b></div>
+                        <div style="font-size: 22px;text-transform: uppercase;"><b>Shourd</b></div>
                         <!-- <span style="font-weight: 600;">{{ substr($variation->product->name, 0, 15).'...' }}</span> -->
                         <!-- <div style="font-weight: 600;">QTY: 1</div> -->
                         <div style="font-weight: 600;">Color: {{ substr($variation->color->name, 0, 10) }}</div>
                         <div style="font-weight: 600;">SIZE: {{ $variation->size->name }}
                             <!-- <span style="font-size: 10px;">(Maximum Retail Price)</span> -->
                         </div>
-                        <div style="font-weight: 600;">Price. {{ $variation->price }}/- <span style="font-size: 10px;">(inclusive of all texes)</span></div>
+                        <div style="font-weight: 600;">Price. {{ $variation->price }}/- <div style="font-size: 10px;">(inclusive of all texes)</div></div>
                         <div >
-                            <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($variation->id, 'C39+') }}" style="height: 34px;" /><br>
+                            <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($variation->id, 'C39+') }}" style="height: 34px;width: 100%;" /><br>
                             <span style="font-size: 12px;margin-left: 3%">{{$variation->id}}</span>
                         </div>
                     </div>
