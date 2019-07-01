@@ -15,43 +15,34 @@
             float: left;
             width: 33.33%;
             height: 157px;
-            margin-bottom: 5px;
+            margin-bottom: 11px;
           }
         }
         .col-md-3 {
             width: 20% !important;
             height: 157px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 
 <body>
 <div class="col-md-12">
-    <table>
-        <tbody>
-           @foreach($products as $variation)
-            <tr class="col-md-3">
-                <th>
-                    <div >
-                        <div style="font-size: 22px;text-transform: uppercase;"><b>Shourd</b></div>
-                        <!-- <span style="font-weight: 600;">{{ substr($variation->product->name, 0, 15).'...' }}</span> -->
-                        <!-- <div style="font-weight: 600;">QTY: 1</div> -->
-                        <div style="font-weight: 600;">Color: {{ substr($variation->color->name, 0, 10) }}</div>
-                        <div style="font-weight: 600;">SIZE: {{ $variation->size->name }}
-                            <!-- <span style="font-size: 10px;">(Maximum Retail Price)</span> -->
-                        </div>
-                        <div style="font-weight: 600;">Price. {{ $variation->price }}/- <div style="font-size: 10px;">(inclusive of all texes)</div></div>
-                        <div >
-                            <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($variation->id, 'C39+') }}" style="height: 34px;width: 100%;" /><br>
-                            <span style="font-size: 12px;margin-left: 3%">{{$variation->id}}</span>
-                        </div>
-                    </div>
-                </th>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    @foreach($products as $variation)
+        <div class="col-md-3">
+            <div >
+                <div style="font-size: 22px;text-transform: uppercase;"><b>Shourd</b></div>
+                <div style="font-weight: 600;">Color: {{ substr($variation->color->name, 0, 10) }}</div>
+                <div style="font-weight: 600;">SIZE: {{ $variation->size->name }}
+                </div>
+                <div style="font-weight: 600;">Price. {{ $variation->price }}/- <div style="font-size: 10px;">(inclusive of all texes)</div></div>
+                <div >
+                    <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($variation->id, 'C39+') }}" style="height: 34px;" /><br>
+                    <span style="font-size: 12px;margin-left: 3%">{{$variation->id}}</span>
+                </div>
+            </div>
+        </div>
+    @endforeach
 </div>
 <script type="text/javascript" src="/assets/js/core/libraries/jquery.min.js"></script>
 <script type="text/javascript" src="/assets/js/core/libraries/bootstrap.min.js"></script>
