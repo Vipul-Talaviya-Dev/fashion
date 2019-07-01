@@ -12,10 +12,10 @@
     <style type="text/css">
         @media print {
           .col-md-3 {
-            float: left;
-            width: 20%;
-            height: 170px;
-            margin-bottom: 15px;
+            float: left !important;
+            width: 20% !important;
+            height: 170px !important;
+            margin-bottom: 15px !important;
           }
         }
         .col-md-3 {
