@@ -14,14 +14,14 @@
           .col-md-3 {
             float: left !important;
             width: 20% !important;
-            height: 151px !important;
-            margin-bottom: 13px !important;
-            margin-top: 7px !important;
+            height: 131px !important;
+            margin-bottom: 9.2px !important;
+            /*margin-top: 7px !important;*/
           }
         }
         .col-md-3 {
             width: 20% !important;
-            height: 157px;
+            height: 160px;
             margin-bottom: 5px;
             margin-top: 7px !important;
         }
@@ -30,8 +30,12 @@
 
 <body>
 <div class="col-md-12">
-    <?php $v = 4;?>
+    <?php $v = 0;?>
     @foreach($products as $key => $variation)
+        @if($key == $v && $v < 29)
+            <div class="col-md-12">&nbsp;</div>
+            <?php $v = $v + 5;?>
+        @endif
         <div class="col-md-3">
             <div >
                 <div style="font-size: 22px;text-transform: uppercase;"><b>Shourd</b></div>
@@ -45,10 +49,6 @@
                 </div>
             </div>
         </div>
-        @if($key == $v && $v < 28)
-            <div class="col-md-12"></div>
-            <?php $v = $v + 5;?>
-        @endif
     @endforeach
 </div>
 <script type="text/javascript" src="/assets/js/core/libraries/jquery.min.js"></script>
