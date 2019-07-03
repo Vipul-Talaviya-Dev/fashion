@@ -488,7 +488,7 @@ a {
         right: 32px;
     }
     .backetItem {
-        top: 10px;
+        /*top: 10px;*/
         margin-left: 0;
     }
     .cart-list img {
@@ -530,6 +530,10 @@ a {
     .lds-ring {
         left: 40%;
     }
+    .banner-home-bottom li {
+        margin-bottom: 0;
+        height: auto;
+    }
 }
 .banner-bottom, .team, .checkout, .additional_info, .team-bottom, .single, .mail, .special-deals, .about, .faq, .typo, .new-products, .banner-bottom1, .top-brands, .dresses, .w3l_related_products {
     padding: 2em 0;
@@ -561,6 +565,10 @@ a {
     .lds-ring {
         left: 35%;
     }
+    .banner-home-bottom li {
+        margin-bottom: 0;
+        height: auto;
+    }
 }
 
 @media (max-width:640px) {
@@ -589,5 +597,8 @@ a {
     .out-stock-list-btn { 
         left: 92px;
     }
-
+    .banner-home-bottom li {
+        margin-bottom: 0;
+        height: auto;
+    }
 }

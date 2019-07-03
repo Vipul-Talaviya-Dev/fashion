@@ -19,6 +19,20 @@
   font-size: -webkit-xxx-large;
   font-weight: 800;
 }*/
+.btn-danger {
+        background-color: #d0a65e;
+        border-color: #d0a65e;
+    }
+    .btn-danger:hover, .btn-danger:focus, .btn-danger.focus, .btn-danger:active, .btn-danger.active, .open > .dropdown-toggle.btn-danger {
+      background-color: #d0a65e;
+        border-color: #d0a65e;
+    }
+    .close {
+     color: #fff;
+     font-weight: inherit;  
+     opacity: 1; 
+     font-size: 16px;
+}
 </style>
 @endsection
 
@@ -177,6 +191,24 @@
   <a href="{{ route('user.products') }}"><div class="more-product">Load More</div></a><p><br></p>
 </section>
 
+
+<div id="indexModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width: 50%;margin-left: 30%;margin-top: 20%;">
+      <div class="modal-header">
+        <h4 class="modal-title text-center"></h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <h5 class="text-center" style="margin-top: 15px;line-height: 1.2;">Website is under testing. Only company’s employee can generate the order. Other order will be strictly neglected.! Thanks.</h5>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0);" class="btn btn-danger close">Close</a>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- //special-deals -->
 @endsection
 
@@ -192,8 +224,12 @@
         prevArrow: false,
         nextArrow: false
       });
-
       $(".slide__caption").css('position', 'absolute');
+      
+      $('#indexModal').modal();
+      $("body").on("click", ".close", function() {
+        $('#indexModal').modal("hide");
+      });
     });
 </script>
 @endsection
