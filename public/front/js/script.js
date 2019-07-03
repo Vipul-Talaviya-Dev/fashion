@@ -420,19 +420,20 @@ $(document).ready(function() {
     // Address Add
     $("body").on("click", ".createAddress", function() {
         $(".has-error").remove();
-        var firstName = $("input[name='firstName']").val();
-        var lastName = $("input[name='lastName']").val();
-        var m = $("input[name='mobile']").val();
-        var p = $("input[name='pincode']").val();
-        var c = $("input[name='city']").val();
-        var s = $("input[name='state']").val();
-        var a = $("input[name='address']").val();
-        var a1 = $("input[name='address1']").val();
+        var firstName = $(".firstName").val();
+        var lastName = $(".lastName").val();
+        var m = $("#mobile").val();
+        var p = $(".pincode").val();
+        var c = $(".city").val();
+        var s = $(".state").val();
+        var a = $(".address").val();
+        var a1 = $(".address1").val();
         var id = $("input[name='id']").val();
         var r = $(".redirect").val();
         var t = $('meta[name="csrf-token"]').attr('content');
         var b = false;
         var n = firstName.trim() +' '+lastName.trim();
+
         if (n == "" || m == "" || p == "" || c == "" || s == "" || a == "") {
             toastr.error("Kindly All Field Required!");
             b = true;
@@ -454,7 +455,7 @@ $(document).ready(function() {
                     }
                     if(res.status == true) {
                         toastr.success(res.success);
-                        // location.reload();
+                        location.reload();
                     }
                 }
             });

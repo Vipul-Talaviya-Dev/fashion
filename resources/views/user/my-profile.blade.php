@@ -151,7 +151,7 @@
 					</div>
 					<div class="form-group col-md-6 col-xs-12">
 						<label>Mobile :</label>
-						<input type="text" name="mobile" class="form-control mobile" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" value="{{ old('mobile') }}" autocomplete="off" required>
+						<input type="text" name="mobile" class="form-control mobile" id="mobile" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" value="{{ old('mobile') }}" autocomplete="off" required>
 					</div>
 					<div class="form-group col-md-6 col-xs-12">
 						<label>Address 1:</label>
