@@ -433,7 +433,7 @@ $(document).ready(function() {
         var t = $('meta[name="csrf-token"]').attr('content');
         var b = false;
         var n = firstName.trim() +' '+lastName.trim();
-        if (n == "" || m == "" || p == "" || c == "" || s == "" || a == "" || r == "") {
+        if (n == "" || m == "" || p == "" || c == "" || s == "" || a == "") {
             toastr.error("Kindly All Field Required!");
             b = true;
         }
