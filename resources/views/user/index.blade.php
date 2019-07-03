@@ -33,6 +33,15 @@
      opacity: 1; 
      font-size: 16px;
 }
+
+.modal-content {
+  width: 50%;margin-left: 30%;margin-top: 20%;
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .modal-content {
+    width: auto;margin-left: 0;margin-top: 0;
+  }
+}
 </style>
 @endsection
 
@@ -70,7 +79,7 @@
               <h4>
                 <span class="jockey-one">{{ $windowImages[1]['title'] }}</span>
               </h4>
-              <div class="shop-now">Shop Now</div>
+              <!-- <div class="shop-now">Shop Now</div> -->
             </a>
           </li>
           @endif
@@ -81,7 +90,7 @@
               <h4>
                 <span class="jockey-one"> {{ $windowImages[2]['title'] }}</span>
               </h4>
-              <div class="shop-now">Shop Now</div>
+              <!-- <div class="shop-now">Shop Now</div> -->
             </a>
           </li>
           @endif
@@ -95,7 +104,7 @@
               <h4>
                 <span class="jockey-one"> {{ $windowImages[3]['title'] }}</span>
               </h4>
-              <div class="shop-now">Shop Now</div>
+              <!-- <div class="shop-now">Shop Now</div> -->
             </a>
           </li>
           @endif
@@ -106,7 +115,7 @@
               <h4>
                 <span class="jockey-one">{{ $windowImages[4]['title'] }}</span>
               </h4> 
-              <div class="shop-now">Shop Now</div>
+              <!-- <div class="shop-now">Shop Now</div> -->
             </a>
           </li>
           @endif
@@ -120,7 +129,7 @@
               <h4>
                 <span class="jockey-one">{{ $windowImages[5]['title'] }}</span>
               </h4>
-              <div class="shop-now">Shop Now</div>
+              <!-- <div class="shop-now">Shop Now</div> -->
             </a>
           </li>
           @endif
@@ -131,7 +140,7 @@
               <h4>
                 <span class="jockey-one">{{ $windowImages[6]['title'] }}</span>
               </h4>
-              <div class="shop-now">Shop Now</div>
+              <!-- <div class="shop-now">Shop Now</div> -->
             </a>
           </li>
           @endif
@@ -145,7 +154,7 @@
               <h4>
                 <span class="jockey-one">{{ $windowImages[7]['title'] }}</span>
               </h4>
-              <div class="shop-now">Shop Now</div>
+              <!-- <div class="shop-now">Shop Now</div> -->
             </a>
           </li>
           @endif
@@ -156,7 +165,7 @@
               <h4>
                 <span class="jockey-one"> {{ $windowImages[8]['title'] }}</span>
               </h4>
-              <div class="shop-now">Shop Now</div>
+              <!-- <div class="shop-now">Shop Now</div> -->
             </a>
           </li>
           @endif
@@ -170,7 +179,7 @@
               <h4>
                 <span class="jockey-one">{{ $windowImages[9]['title'] }}</span>
               </h4> 
-              <div class="shop-now">Shop Now</div>
+              <!-- <div class="shop-now">Shop Now</div> -->
             </a>
           </li>
           @endif
@@ -181,7 +190,7 @@
               <h4>
                 <span class="jockey-one">{{ $windowImages[10]['title'] }}</span>
               </h4>
-              <div class="shop-now">Shop Now</div>
+              <!-- <div class="shop-now">Shop Now</div> -->
             </a>
           </li>
           @endif
@@ -194,7 +203,7 @@
 
 <div id="indexModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-    <div class="modal-content" style="width: 50%;margin-left: 30%;margin-top: 20%;">
+    <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title text-center"></h4>
       </div>
