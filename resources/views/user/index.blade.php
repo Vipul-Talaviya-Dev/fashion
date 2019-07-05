@@ -34,11 +34,11 @@
      font-size: 16px;
 }
 
-.modal-content {
+#indexModal .modal-content {
   width: 50%;margin-left: 30%;margin-top: 20%;
 }
 @media (min-width: 320px) and (max-width: 480px) {
-  .modal-content {
+  #indexModal .modal-content {
     width: auto;margin-left: 0;margin-top: 0;
   }
 }
