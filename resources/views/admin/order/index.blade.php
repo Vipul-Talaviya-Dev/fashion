@@ -92,7 +92,9 @@
                                         </td>
                                         <td style="white-space: nowrap;">{{ App\Helper\Helper::dateFormat($order->created_at) }}</td>
                                         <td style="white-space: nowrap;">{{ $order->user->name }}</td>
-                                        <td style="white-space: nowrap;">{{ $order->address->address }}, <br>{{ $order->address->address_1 }} <br>{{ $order->address->city }}, <br>{{ $order->address->state }} - {{ $order->address->pincode }}</td>
+                                        <td style="white-space: nowrap;">
+                                            {{ $order->address->address or '-' }}, <br>{{ $order->address->address_1 or '-' }} <br>{{ $order->address->city or '-' }}, <br>{{ $order->address->state or '-' }} - {{ $order->address->pincode or '-' }}
+                                        </td>
                                         <td>{{ $order->total }}</td>
                                         <td>{{ $order->discount }}</td>
                                         <td>{{ $order->discount_amount }}</td>
