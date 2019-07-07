@@ -79,13 +79,17 @@
 										</table>
 									</div>				
 								</div>
+								<p><br></p>
+								<div align="center">
+									<a href="/products" class="more-product">&nbsp; Go For Home &nbsp;</a>
+								</div>
 							@else
 								<h4>OrderId: {{ $order->orderId() }}</h4>
 								<div class="jumbotron" style="text-align: center;">
 					                <h2>Thank You. Your Order has been Pending.</h2>
 					                <span style="font-size:30px;color:#d0a65e;"><i class="fa fa-exclamation-circle fa-5x"></i></span>
 					                <p>Please contact our support team.</p><br>
-					                <a href="/" class="more-product">&nbsp; Go For Home &nbsp;</a>
+					                <a href="/products" class="more-product">&nbsp; Go For Home &nbsp;</a>
 					            </div>
 							@endif
 						</div>

@@ -70,6 +70,12 @@ class CategoryController extends Controller
             'name' => 'required|unique:categories,name,'.$id,
         ]);
 
+        $subCategories = Category::where('parent_id', $category->id)->get();
+        foreach ($subCategories as $subCategory) {
+            Category::where('parent_id', $subCategory->id)->update(['status' => $request->get('status')]);
+        }
+        Category::where('parent_id', $category->id)->update(['status' => $request->get('status')]);
+
         $category->name = trim($request->get('name'));
         $category->slug = trim(str_slug($request->get('name')));
         $category->status = $request->get('status');

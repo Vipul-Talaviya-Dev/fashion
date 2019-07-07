@@ -23,8 +23,21 @@ class OrderController extends Controller
 			$orders = $orders->where('status', $request->get('status'));
 		}
 
+		if($request->get('payment_mode')) {
+			$orders = $orders->where('payment_mode', $request->get('payment_mode'));
+		}
+
+		if($request->get('payment_status')) {
+			$orders = $orders->where('payment_status', $request->get('payment_status'));
+		}
+
 		if(($request->get('startDate') != "") && ($request->get('endDate') != "")) {
-			$orders = $orders->where(DB::raw("DATE(created_at)"), '>=', $request->get('startDate'))->where(DB::raw("DATE(created_at)"), '<=', $request->get('endDate'));
+			$orders = $orders->where(DB::raw("DATE(created_at)"), '>=', date('Y-m-d', strtotime($request->get('startDate'))))->where(DB::raw("DATE(created_at)"), '<=', date('Y-m-d', strtotime($request->get('endDate'))));
+		}
+
+		if($request->get('search')) {
+			$id = substr($request->get('search'), 12);
+			$orders = $orders->where('id', $id);
 		}
 
 		if($request->get('excel')) {
@@ -55,7 +68,7 @@ class OrderController extends Controller
 		}
 
 		$order->status = $request->get('status');
-		if($order->payment_mode == 1) {
+		if($order->payment_mode == 1 && $request->get('status') == 6) {
 			$order->payment_status = 2;	
 		}
 		
@@ -104,7 +117,7 @@ class OrderController extends Controller
 
 	public function returnOrders()
 	{
-		$orders = OrderProduct::latest()->where('status', 7);
+		$orders = OrderProduct::with(['order', 'product.variations', 'user'])->latest()->where('status', 7);
 
 		return view('admin.order.order-return', [
 			'orders' => $orders->paginate(15)

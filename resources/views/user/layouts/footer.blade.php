@@ -1,6 +1,11 @@
 <!-- footer -->
 @if($footer)
 <div class="footer">
+	<div class="footer-copy1" style="border-bottom: none;">
+		<div class="footer-copy-pos">
+			<a href="javascript:void(0);" class="scroll"><img src="/front/images/arrow.png" alt=" " class="img-responsive" /></a>
+		</div>
+	</div>
 	<div class="container">
 		<div class="w3_footer_grids">
 			<div class="col-md-4 w3_footer_grid">
@@ -27,20 +32,17 @@
 					<ul>
 						<li><a href="{{ $content->fb_link ? $content->fb_link : 'javascript:void(0);' }}" target="_blank" class="facebook"> </a></li>
 						<li><a href="{{ $content->twitter_link ? $content->twitter_link : 'javascript:void(0);' }}" target="_blank" class="twitter"> </a></li>
-						<li><a href="{{ $content->google_link ? $content->google_link : 'javascript:void(0);' }}" target="_blank" class="google"> </a></li>
+						@if(false)
+							<li><a href="{{ $content->google_link ? $content->google_link : 'javascript:void(0);' }}" target="_blank" class="google"> </a></li>
+						@endif
 						<li><a href="{{ $content->instagram_link ? $content->instagram_link : 'javascript:void(0);' }}" class="instagram" target="_blank"></a></li>
 					</ul>
 				</div>
 			</div>
 			<div class="clearfix"> </div>
-		</div><br>
-		<div class="footer-copy1" style="border-bottom: none;">
-			<div class="footer-copy-pos">
-				<a href="javascript:void(0);" class="scroll"><img src="/front/images/arrow.png" alt=" " class="img-responsive" /></a>
-			</div>
 		</div>
 		<div class=" text-center">
-			<p>&copy;{{ date('Y') }} Shroud Store. All rights reserved | Design by <a href="https://www.acquainteck.com" target="_blank" class="white-text">Acquainteck</a></p>
+			<p>&copy;{{ date('Y') }} Shroud Enterprise. All rights reserved | Design by <a href="https://www.acquainteck.com" target="_blank" class="white-text">Acquainteck Consultancy</a></p>
 		</div><br>
 	</div>
 	@if(false)
@@ -66,7 +68,7 @@ aria-hidden="true">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 			&times;</button>
 			<h4 class="modal-title" id="myModalLabel">
-			Don't Wait, Login now!</h4>
+			Create an account with shroud!</h4>
 		</div>
 		<div class="modal-body modal-body-sub">
 			<div class="row">
@@ -82,8 +84,8 @@ aria-hidden="true">
 							<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
 								<div class="facts">
 									<div class="register">
-										<input type="email" name="email" class="keyup-email email" placeholder="Email Address"  required="" autocomplete="off">
-										<input type="password" class="password" name="password" placeholder="Password" required="" autocomplete="off">
+										<input type="email" name="email" class="keyup-email email" placeholder="Enter Email Address"  required="" autocomplete="off">
+										<input type="password" class="password" name="password" placeholder="Enter Password" required="" autocomplete="off">
 										<div class="sign-up">
 											<button type="button" class="login-btn" id="userLogin">Sign in</button>
 										</div>
@@ -95,23 +97,24 @@ aria-hidden="true">
 								<div class="facts">
 									<div class="register">
 										<div id="registrationCheck">
-											<input placeholder="First Name" name="name" type="text" class="fName" required autocomplete="off">
-											<input placeholder="Last Name" name="name" style="margin: 1em 0 0;" type="text" class="lName" required autocomplete="off">
-											<input placeholder="Mobile" name="mobile" type="text" class="signupMobile" required style="margin: 1em 0 0;" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" autocomplete="off">
-											<input placeholder="Birth Date format DD-MM-YYYY" name="birthDate" class="birthDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Birth Date Format DD-MM-YYYY " readonly>
-											<input placeholder="Anniversary Date format DD-MM-YYYY" name="anniversaryDate" class="anniversaryDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Anniversary Date Format DD-MM-YYYY" readonly>
-											<input placeholder="Email Address" name="email" class="signupEmail keyup-email" type="email" required autocomplete="off">	
-											<input placeholder="Password" name="password" class="signupPassword" type="password" required autocomplete="off">	
-											<input placeholder="Confirm Password" name="confirmPassword" class="confirmPassword" type="password" required autocomplete="off">
+											<input placeholder="Enter First Name" name="name" type="text" class="fName" required autocomplete="off">
+											<input placeholder="Enter Last Name" name="name" style="margin: 1em 0 0;" type="text" class="lName" required autocomplete="off">
+											<input placeholder="Enter Mobile" name="mobile" type="text" class="signupMobile" required style="margin: 1em 0 0;" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" autocomplete="off">
+											<input placeholder="Enter Birth Date format DD-MM-YYYY" name="birthDate" class="birthDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Birth Date Format DD-MM-YYYY " readonly>
+											<input placeholder="Enter Anniversary Date format DD-MM-YYYY" name="anniversaryDate" class="anniversaryDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Anniversary Date Format DD-MM-YYYY" readonly>
+											<input placeholder="Enter Email Address" name="email" class="signupEmail keyup-email" type="email" required autocomplete="off">	
+											<input placeholder="Enter Password" name="password" class="signupPassword" type="password" required autocomplete="off">	
+											<input placeholder="Enter Confirm Password" name="confirmPassword" class="confirmPassword" type="password" required autocomplete="off">
 											<div class="sign-up">
 												<input type="button" class="login-btn" id="signUp" value="Create Account"/>
 											</div>
 										</div>
 										<div id="otpDiv" style="display: none;">
+											<p class="pull-right">This OTP expires in <span class="timeCounter">05:00</span> minutes.</p>
 											@if(false)
 												<p>Don't Share OTP. Your Otp is = <span id="otp"></span>.  This OTP expires in <span class="timeCounter">05:00</span> minutes.</p>
 											@endif
-											<input placeholder="Otp" name="otp" type="text" class="otp" required autocomplete="off">
+											<input placeholder="Enter Otp" name="otp" type="text" class="otp" required autocomplete="off" onkeydown="return max_length(this,event,4)" onkeypress="return isNumberKey(event)" maxlength="4">
 											<a class="pull-right" id="resendOtp" data-id="1" style="cursor: pointer;">Resend</a>
 											<div class="sign-up">
 												<input type="button" class="login-btn" id="otpBtn" value="Submit"/>
@@ -125,16 +128,17 @@ aria-hidden="true">
 								<div class="facts">
 									<div class="register">
 										<div id="forgotPasswordDiv">
-											<input type="text" name="emailorMobile" class="emailorMobile" placeholder="Email Or Mobile No Enter"  required="" autocomplete="off">
+											<input type="text" name="emailorMobile" class="emailorMobile" placeholder="Enter Email Or Mobile No Enter"  required="" autocomplete="off">
 											<div class="sign-up">
 												<button type="button" class="login-btn" id="forgotPassword">Submit</button>
 											</div>
 										</div>
 										<div id="forgotPasswordOtpDiv" style="display: none;">
+											<p class="pull-right">This OTP expires in <span class="timeCounter">05:00</span> minutes.</p>
 											@if(false)
 												<p>Don't Share OTP. Your Otp is = <span id="forgotPasswordOtp"></span>. This OTP expires in <span class="timeCounter">05:00</span> minutes.</p>
 											@endif
-											<input placeholder="Otp" name="otp" type="text" class="forgotPasswordOtp" required autocomplete="off">
+											<input placeholder="Enter Otp" name="otp" type="text" class="forgotPasswordOtp" required autocomplete="off" onkeydown="return max_length(this,event,4)" onkeypress="return isNumberKey(event)" maxlength="4">
 											<a class="pull-right" id="resendOtp" data-id="2" style="cursor: pointer;">Resend</a>
 											<div class="sign-up">
 												<input type="button" class="login-btn" id="forgotPasswordOtpBtn" value="Submit"/>

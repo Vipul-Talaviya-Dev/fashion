@@ -168,3 +168,11 @@
     backface-visibility: hidden;
     display: none;
 }
+.color-code {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 100px;
+    vertical-align: bottom;
+    border: 1px solid rgba(0,0,0,.1);
+}

@@ -63,7 +63,7 @@
 									<input type="hidden" class="variation_id" value="{{ $variation->id }}">
 									<span id="product_subtotal1{{ $variation->id }}" >{{ $variation->price }}</span>
 								</td>
-								<td class="invert">Rs. <span class="cart-subtotal sellingprice" id="product_subtotal{{ $variation->id }}">{{ $variation->price }}</span></td>
+								<td class="invert"><i class="fa fa-rupee"></i> &nbsp;  <span class="cart-subtotal sellingprice" id="product_subtotal{{ $variation->id }}">{{ $variation->price }}</span></td>
 								<td class="invert">
 									<span><button type="button" class="fa fa-times removeItem" data-id="{{ $cart['cart_id'] }}"></button></span>
 								</td>
@@ -90,17 +90,17 @@
 									<tbody>
 										<tr>
 											<td colspan="4">Subtotal</td>
-											<td> Rs.<span class="price" id="total">{{ $total }}</span></td>
+											<td> <i class="fa fa-rupee"></i> &nbsp; <span class="price" id="total">{{ $total }}</span></td>
 										</tr>
 										<tr>
 											<td colspan="4">Delivery Charge</td>
-											<td> Rs.<span >0</span></td>
+											<td> <i class="fa fa-rupee"></i> &nbsp; <span >0</span></td>
 										</tr>
 									</tbody>
 									<tfoot>
 										<tr>
 											<td colspan="4"><strong>Grand Total</strong></td>
-											<td><strong> Rs. <span id="finalPrice">{{ $finalAmount }}</span></strong></td>
+											<td><strong> <i class="fa fa-rupee"></i> &nbsp;  <span id="finalPrice">{{ $finalAmount }}</span></strong></td>
 										</tr>
 									</tfoot>
 								</table>

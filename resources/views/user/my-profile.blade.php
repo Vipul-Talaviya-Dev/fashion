@@ -124,7 +124,7 @@
 				@endforeach
 			</div>
 			<p><br></p>
-			<button style="margin-left: 47px;" type="button" class="btn btn-success addAdddress"><i class="fa fa-plus"></i> Add New Address<div class="ripple-wrapper"></div></button>
+			<button style="margin-left: 47px;" type="button" class="btn btn-success addAdddress"><i class="fa fa-plus"></i> Add New Delivery Address<div class="ripple-wrapper"></div></button>
 			<p><br></p>
 		</div>
 	</div>
@@ -162,7 +162,7 @@
 						<input type="text" name="address1" class="form-control address1" autocomplete="off" required>
 					</div>
 					<div class="form-group col-md-6 col-xs-12">
-						<label>pinCode :</label>
+						<label>PinCode :</label>
 						<input type="text" name="pincode" onkeydown="return max_length(this,event,6)" onkeypress="return isNumberKey(event)" class="form-control pincode" autocomplete="off" value="{{ old('pincode') }}" required>
 					</div>
 					<div class="form-group col-md-6 col-xs-12">
@@ -213,7 +213,7 @@
 	        $("input[name='address1']").val('');
 	        $("input[name='id']").val('');
 	        $(".redirect").val('');
-			$('#addressHeader').html("Add New Address");
+			$('#addressHeader').html("Add New Delivery Address");
 			$('#myModal').modal();
 		});
 

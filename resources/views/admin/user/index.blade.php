@@ -33,17 +33,21 @@
                                 <label>Search</label>
                                 <input type="text" name="search" class="form-control" placeholder ="Search for Name, Email, Mobile, Member Ship Code" autocomplete="off" value="{{ request('search') }}">
                             </div>
-                            <div class="form-group col-md-3">
-                                    <label>Birth Date</label>
-                                    <input type="date" name="birthDate" class="form-control" placeholder="Start Date" autocomplete="off" value="{{ request('birthDate') }}">
-                                </div>
-                                <div class="form-group col-md-3">
-                                    <label>Anniversary Date</label>
-                                    <input type="date" name="anniversaryDate" class="form-control" placeholder="End Date" autocomplete="off" value="{{ request('anniversaryDate') }}">
-                                </div>
+                            <div class="form-group col-md-2">
+                                <label>Birth Date</label>
+                                <input type="text" name="birthDate" id="birthDate" class="form-control" required="required" value="{{ request('birthDate') }}" autocomplete="off" readonly placeholder="dd-mm-yyyy">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label>Anniversary Date</label>
+                                <input type="text" name="anniversaryDate" id="anniversaryDate" class="form-control" required="required" value="{{ request('anniversaryDate') }}" autocomplete="off" readonly placeholder="dd-mm-yyyy">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label>Only Members</label>
+                                <input type="checkbox" name="onlyMember" class="form-control" value="1" {{ request('onlyMember') == 1 ? 'checked' : '' }} style="height: 22px;">
+                            </div>
                             <div class="form-group col-md-2">
                                 <p>&nbsp;</p>
-                                <button class="btn btn-info" type="submit" style="margin-top: -5px;">Search</button>
+                                <button class="btn btn-info" type="submit" style="margin-top: -5px;">Search</button> &nbsp;
                                 <a href="{{ route('admin.users') }}" class="btn btn-sm btn-warning" style="margin-top: -5px;"><i class="fa fa-refresh"></i></a>
                             </div>
                         </form>
@@ -76,7 +80,13 @@
                                                 <td>{{ $user->mobile }}</td>
                                                 <td>{{ $user->birth_date ? App\Helper\Helper::dateFormat($user->birth_date) : 'N/A' }}</td>
                                                 <td>{{ $user->anniversary_date ? App\Helper\Helper::dateFormat($user->anniversary_date) : 'N/A' }}</td>
-                                                <td>{!! $user->member_ship_code ? $user->member_ship_code : 'N/A' !!}</td>
+                                                <td>
+                                                    @if($user->member_ship_code)
+                                                        {{ $user->member_ship_code }}
+                                                    @else
+                                                        <a href="{{ route('admin.user.generateMemberShipCode', ['id' => $user->id]) }}" class="btn btn-sm btn-info">Generate Member Ship Code</a>
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if($user->member_ship_code)
                                                         {{ $user->login_count }}
@@ -124,10 +134,20 @@
     @section('js')
         <script type="text/javascript">
             $(document).ready(function() {
+                $("#birthDate").datepicker({
+                    todayBtn: 1,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true,
+                });
+                $("#anniversaryDate").datepicker({
+                    todayBtn: 1,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true,
+                });
                 $("body").on("click", ".statuChange", function() {
                     var id = $(this).attr('data-id');
                     var status = $(this).attr('data-status');
-                    var msg = ''
+                    var msg = '';
                     if(status == 1) {
                         msg = 'This User has De-Activated.';
                     } else {
@@ -145,7 +165,6 @@
                         closeOnCancel: false
                      },
                      function(isConfirm) {
-                         // swal("Shortlisted!", "Candidates are successfully shortlisted!", "success");
                        if (isConfirm) {
                             $.ajax({
                                 type: 'POST',

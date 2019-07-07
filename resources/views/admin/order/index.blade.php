@@ -14,7 +14,7 @@
 @section('css')
 <style>
 .form-control::-webkit-input-placeholder {
-    color: #fff;
+    color: #000;
 }
 </style>
 @endsection
@@ -36,12 +36,16 @@
                         <div class="row">
                             <form method="get">
                                 <div class="form-group col-md-2">
+                                    <label>Search (Order Id)</label>
+                                    <input type="text" name="search" class="form-control" placeholder="Order Number" autocomplete="off" value="{{ request('search') }}">
+                                </div>
+                                <div class="form-group col-md-2">
                                     <label>Start Date</label>
-                                    <input type="date" name="startDate" class="form-control" placeholder="Start Date" autocomplete="off" value="{{ request('startDate') }}">
+                                    <input type="text" name="startDate" id="startDate" class="form-control" required="required" value="{{ request('startDate') }}" autocomplete="off" readonly placeholder="dd-mm-yyyy">
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label>End Date</label>
-                                    <input type="date" name="endDate" class="form-control" placeholder="End Date" autocomplete="off" value="{{ request('endDate') }}">
+                                    <input type="text" name="endDate" id="endDate" class="form-control" required="required" value="{{ request('endDate') }}" autocomplete="off" readonly placeholder="dd-mm-yyyy">
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label>Order Status</label>
@@ -53,12 +57,30 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-md-2">
-                                    <p>&nbsp;</p>
-                                    <button class="btn btn-info" type="submit" style="margin-top: -5px;">Search</button>
+                                    <label>Payment Mode</label>
+                                    <select name="payment_mode" class="form-control">
+                                        <option value="">-- Select Mode --</option>
+                                        @foreach(\App\Helper\Helper::paymentMode() as $key => $mode)
+                                            <option value="{{ $key }}" {{ (request('payment_mode') == $key) ? 'selected' : '' }}>{{ $mode }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label>Payment Status</label>
+                                    <select name="payment_status" class="form-control">
+                                        <option value="">-- Select Status --</option>
+                                            <option value="1" {{ (request('payment_status') == 1) ? 'selected' : '' }}>Yes</option>
+                                            <option value="2" {{ (request('payment_status') == 2) ? 'selected' : '' }}>No</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <!-- <p>&nbsp;</p> -->
+                                    <button class="btn btn-info" type="submit" style="margin-top: -5px;">Search</button> &nbsp;
+                                    <a href="{{ route('admin.orders') }}" class="btn btn-sm btn-warning" style="margin-top: -5px;"><i class="fa fa-refresh"></i></a>
                                 </div>
 
                                 <div class="form-group col-md-2">
-                                    <p>&nbsp;</p>
+                                    <!-- <p>&nbsp;</p> -->
                                     <button class="btn btn-info" type="submit" name="excel" value="1" style="margin-top: -5px;">Export</button>
                                 </div>
                             </form>
@@ -99,13 +121,7 @@
                                         <td>{{ $order->discount }}</td>
                                         <td>{{ $order->discount_amount }}</td>
                                         <td>{{ $order->cart_amount }}</td>
-                                        <td>
-                                            @if($order->payment_mode == 1)
-                                                COD
-                                            @else
-                                                OnLine
-                                            @endif    
-                                        </td>
+                                        <td>{{ \App\Helper\Helper::paymentMode($order->payment_mode) }}</td>
                                         <td>
                                             @if($order->payment_status == 1)
                                                 <span class="label label-danger">No</span>
@@ -139,4 +155,20 @@
             </div>
         </div>
     </div>
+    @endsection
+    @section('js')
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#startDate").datepicker({
+                    todayBtn: 1,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true,
+                });
+                $("#endDate").datepicker({
+                    todayBtn: 1,
+                    format: 'dd-mm-yyyy',
+                    autoclose: true,
+                });
+            });
+        </script>    
     @endsection

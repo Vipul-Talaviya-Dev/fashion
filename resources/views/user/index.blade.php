@@ -209,7 +209,7 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <h5 class="text-center" style="margin-top: 15px;line-height: 1.2;">Website is under testing. Only company’s employee can generate the order. Other order will be strictly neglected.! Thanks.</h5>
+          <h5 class="text-center" style="margin-top: 5px;line-height: 1.3;">Website is under testing. Only company’s employee can generate the order. Other order will be strictly neglected.! Thanks.</h5>
         </div>
       </div>
       <div class="modal-footer">

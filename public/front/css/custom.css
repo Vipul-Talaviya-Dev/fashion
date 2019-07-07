@@ -1,3 +1,12 @@
+body {
+    font-family: 'Open Sans', sans-serif !important;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif !important;
+}
+.error {
+    border: 1px solid #ff0707 !important;
+}
 .agileits_social_button ul li {
     margin: 2px !important;
 }
@@ -22,7 +31,7 @@
     margin-top: -50px;
 }
 .footer-copy-pos {
-    border: 3px solid rgb(208, 166, 94);
+    border: 2px solid #ffffff;
 }
 a {
     color: #d0a65e;

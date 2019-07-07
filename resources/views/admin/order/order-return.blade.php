@@ -37,12 +37,14 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Sub Order Id</th>
+                                        <th>Order Id</th>
                                         <th>User Name</th>
                                         <th>Item Detail</th>
                                         <th>Quality</th>
                                         <th>Price</th>
                                         <th>Order Date</th>
+                                        <th>Reason</th>
+                                        <th>Message</th>
                                         <th>Change Status</th>
                                     </tr>
                                 </thead>
@@ -53,12 +55,17 @@
                                         $images = explode(',', $variation->images);
                                     ?>
                                     <tr>
-                                        <td>{{ $orderProduct->orderProductId() }}</td>
+                                        <td>
+                                            Main : <br>{{ $orderProduct->order->orderId() }} <br>
+                                            Sub : <br>{{ $orderProduct->orderProductId() }}
+                                        </td>
                                         <td>{{ $orderProduct->user->name }}<br>({{ $orderProduct->user->mobile }})</td>
                                         <td><img src="{{ \Cloudder::secureShow($images[0]) }}" data-imagezoom="true" style="width: 50px;" class="img-responsive" alt="{{ $orderProduct->product->name }}"></td>
                                         <td>{{ $orderProduct->qty }}</td>
                                         <td>{{ $orderProduct->price }}</td>
-                                        <td>{{ $orderProduct->created_at }}</td>
+                                        <td>{{ App\Helper\Helper::dateFormat($orderProduct->created_at) }}</td>
+                                        <td>{{ App\Helper\Helper::orderReason($orderProduct->return_reason) }}</td>
+                                        <td>{{ $orderProduct->message ?: 'N/A' }}</td>
                                         <td>
                                             <form method="get" action="{{ route('admin.returnOrderStatusChange', ['id' => $orderProduct->id]) }}">
                                                 <div class="form-group">

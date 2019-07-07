@@ -50,7 +50,7 @@ class ProductController extends Controller
             // $variations = $variations->where('product_type_id', explode(',', $request->get('types')));
         }
         return view('user.product-list', [
-        	'variations' => $variations->paginate(12),
+        	'variations' => $variations->paginate(9),
             'sizes' => Size::active()->get(),
             'colors' => Color::active()->get(),
             'types' => ProductType::active()->get(),
@@ -139,7 +139,7 @@ class ProductController extends Controller
 				if($cartItems['cart_product_id'] == $productId && $cartItems['variation_id'] == $variationId) {
 					return response()->json([
 			            'status' => false,
-			            'error' => 'Already Added For This Product..'
+			            'error' => 'This product is already added.'
 			        ]);
 					exit(); // If Product Id Already Exist then Exit	
 				}	
@@ -276,6 +276,7 @@ class ProductController extends Controller
             $discount = round(Session::get('CART_AMOUNT')*20/100);
             Session::put('discount', $discount);
             Session::put('offer', 0);
+            Session::put('discountPercentage', 20);
             
             return response()->json([
                 'status' => true,
@@ -354,7 +355,7 @@ class ProductController extends Controller
                 }*/
             }   
             
-            Session::put('discount', number_format($discount, 2)); // discount amount
+            Session::put('discount', round($discount)); // discount amount
             Session::put('offer', $offer->id);
             Session::put('discountPercentage', $offer->discount); //discount percentage
 
@@ -405,11 +406,11 @@ class ProductController extends Controller
 
         $order->payment_mode = $request->get('payment_option') ? $request->get('payment_option') : 2;
         $order->payment_status = 1;
-        $order->cart_amount = (Session::get('order')['final_amount'] - Session::get('discount')) + $deliverCharge->delivery_charge;
+        $order->cart_amount = round((Session::get('order')['final_amount'] - Session::get('discount')) + $deliverCharge->delivery_charge);
         $order->discount = Session::get('discountPercentage') ?: 0;
-        $order->discount_amount = Session::get('discount') ?: 0;
+        $order->discount_amount = round(Session::get('discount')) ?: 0;
         // $order->extra_discount = $request->get('data');
-        $order->total = (Session::get('order')['final_amount']) + $deliverCharge->delivery_charge;
+        $order->total = round((Session::get('order')['final_amount']) + $deliverCharge->delivery_charge);
         $order->delivery_charge = $deliverCharge->delivery_charge;
         $order->status = ($request->get('payment_option') == 1) ? 3 : 1;
         $order->save();

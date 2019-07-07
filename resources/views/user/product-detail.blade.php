@@ -101,7 +101,7 @@
 				<p><br></p>
 			</div>
 			<div class="simpleCart_shelfItem">
-				<p>Rs. <i class="item_price">{{ $variation->price }}</i></p>
+				<p><i class="fa fa-rupee"></i> &nbsp;  <i class="item_price">{{ $variation->price }}</i></p>
 			</div>
 			<div class="simpleCart_shelfItem">
 					@if($variation->qty == 0)
@@ -159,7 +159,7 @@
 									<h5>{{ $relatedProduct->name }}</h5>
 									<div class="simpleCart_shelfItem">
 										<p class="flexisel_ecommerce_cart">
-											Rs. <i class="item_price">{{ $variationProduct->price }}</i>
+											<i class="fa fa-rupee"></i> &nbsp;  <i class="item_price">{{ $variationProduct->price }}</i>
 										</p>
 									</div>
 								</div>

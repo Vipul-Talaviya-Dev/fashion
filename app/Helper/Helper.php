@@ -28,4 +28,36 @@ class Helper
     {
         return date("d/m/Y", strtotime($date));
     }
+
+    public static function paymentMode($id = null)
+    {
+        $status = [
+            101 => 'Credit Card',
+            2 => 'Debit Card',
+            3 => 'Net Banking',
+            107 => 'UPI',
+            1 => 'COD',
+        ];
+
+        if($id) {
+            return $status[$id];
+        }
+        
+        return $status;
+    }
+
+    public static function orderReason($id = null)
+    {
+        $reason = [
+            1 => 'Damage',
+            2 => 'Size Issue',
+            3 => 'Other Resion',
+        ];
+
+        if($id) {
+            return $reason[$id];
+        }
+        
+        return $reason;
+    }
 }

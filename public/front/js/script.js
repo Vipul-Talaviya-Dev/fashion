@@ -52,6 +52,22 @@ function startCounter(duration, display) {
     }, 1000);
 }
 
+$("input[type='text']").bind("keyup", function(e) {
+    if($(this).val() != "") {
+        $(this).removeClass('error');
+    } else {
+        $(this).addClass('error');
+    }
+});
+
+$("input[type='password']").bind("keyup", function(e) {
+    if($(this).val() != "") {
+        $(this).removeClass('error');
+    } else {
+        $(this).addClass('error');
+    }
+})
+
 $(document).ready(function() {
     $("body").on("click", ".item_add", function() {
         var p = $(".varselected").attr("data-product");
@@ -141,10 +157,12 @@ $(document).ready(function() {
      */
      $("body").on("keyup", ".keyup-email", function() {
         $(".has-error").remove();
+        $(this).removeClass('error');
         var a = $(this).val();
         var b = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
         if (!b.test(a)) {
-            $(this).after('<span class="has-error">Please Enter Valid Email Address.</span>')
+            $(this).addClass('error');
+            /*$(this).after('<span class="has-error">Please Enter Valid Email Address.</span>')*/
         }
     });
 
@@ -157,7 +175,7 @@ $(document).ready(function() {
         var t = $('meta[name="csrf-token"]').attr('content');
         var c = false;
         if (a == "") {
-            $(".emailorMobile").after('<span class="has-error">Enter Email Or Mobilre no.</span>');
+            $(".emailorMobile").addClass('error');
             c = true
         }
         if (c == false) {
@@ -199,7 +217,7 @@ $(document).ready(function() {
         var t = $('meta[name="csrf-token"]').attr('content');
         var b = false;
         if (n == "") {
-            $(".forgotPasswordOtp").after('<span class="has-error">Enter Otp</span>');
+            $(".forgotPasswordOtp").addClass('error');
             b = true
         }
         if(b == false) {
@@ -234,11 +252,11 @@ $(document).ready(function() {
         var t = $('meta[name="csrf-token"]').attr('content');
         var c = false;
         if (b == "") {
-            $(".email").after('<span class="has-error">Enter Email Address</span>');
+            $(".email").addClass('error');
             c = true
         }
         if (a == "") {
-            $(".password").after('<span class="has-error">Enter Password</span>');
+            $(".password").addClass('error');
             c = true
         }
         if (c == false) {
@@ -284,31 +302,31 @@ $(document).ready(function() {
         var mobile_no_reg = /^[789][0-9]{9}$/;
         var b = false;
         if (!mobile_no_reg.test(c) || c == "" || c.length < 10) {
-            $(".signupMobile").after('<span class="has-error">Please Enter Valid Mobile No</span>');
+            $(".signupMobile").addClass('error');
             b = true
         }
         if (a != cP) {
-            $(".confirmPassword").after('<span class="has-error">Password and confirm password do not match</span>');
+            $(".confirmPassword").addClass('error');
             b = true
         }
         if (!reg.test(d) || d == "") {
-            $(".signupEmail").after('<span class="has-error">Enter Email Address</span>');
+            $(".signupEmail").addClass('error');
             b = true
         }
         if (a == "") {
-            $(".signupPassword").after('<span class="has-error">Enter Password</span>');
+            $(".signupPassword").addClass('error');
             b = true
         }
         if (fn == "") {
-            $(".fName").after('<span class="has-error">Enter First Name</span>');
+            $(".fName").addClass('error');
             b = true
         }
         if (ln == "") {
-            $(".lName").after('<span class="has-error">Enter Last Name</span>');
+            $(".lName").addClass('error');
             b = true
         }
         if (bdate == "") {
-            $(".birthDate").after('<span class="has-error">Enter Birth Date</span>');
+            $(".birthDate").addClass('error');
             b = true
         }
         if (b == false) {
@@ -435,7 +453,13 @@ $(document).ready(function() {
         var n = firstName.trim() +' '+lastName.trim();
 
         if (n == "" || m == "" || p == "" || c == "" || s == "" || a == "") {
-            toastr.error("Kindly All Field Required!");
+            $(".firstName").addClass('error');
+            $(".lastName").addClass('error');
+            $("#mobile").addClass('error');
+            $(".pincode").addClass('error');
+            $(".city").addClass('error');
+            $(".state").addClass('error');
+            $(".address").addClass('error');
             b = true;
         }
         if(b == false) {
@@ -475,7 +499,7 @@ $(document).ready(function() {
         $(".redirect").val('');
         event.preventDefault();
         show_loader();
-        $('#addressHeader').html("Update Your Address");
+        $('#addressHeader').html("Update Your Delivery Address");
         var id = $(this).attr('data-id');
         var url = '/address/'+id+'/edit';
         $.ajax({

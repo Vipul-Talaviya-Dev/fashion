@@ -105,6 +105,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'control-panel','as' => 'admin
         // User
         Route::get('users', 'UserController@index')->name('users');
         Route::get('user/add', 'UserController@add')->name('user.add');
+        Route::get('user/{id}/generateMemberShipCode', 'UserController@generateMemberShipCode')->name('user.generateMemberShipCode');
         Route::post('user/create', 'UserController@create')->name('user.create');
         Route::post('user/change-status', 'UserController@changeStatus')->name('user.changeStatus');
 

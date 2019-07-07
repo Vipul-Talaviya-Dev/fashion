@@ -98,7 +98,7 @@
 								<span class="cart-variation"><span>Color : {{ $variation->color->name }}</span></span>
 							</h5>
 							<div class="pull-left">Quantity : {{ $data['qty'] }}</div>
-							<div class="pull-right">Rs. {{ ($variation->price * $data['qty']) }}</div>
+							<div class="pull-right"><i class="fa fa-rupee"></i> &nbsp;  {{ ($variation->price * $data['qty']) }}</div>
 						</div>
 					</div>
 					@endforeach
@@ -108,15 +108,15 @@
 						<tbody>
 							<tr>
 								<td class="text-left">Subtotal Amount</td>
-								<td class="text-right">Rs. {{ $total }}</td>
+								<td class="text-right"><i class="fa fa-rupee"></i> &nbsp;  {{ $total }}</td>
 							</tr>
 							<tr>
 								<td class="text-left">Delivery Charge [+]</td>
-								<td class="text-right green">Rs. {{ $deliverCharge }}</td>
+								<td class="text-right green"><i class="fa fa-rupee"></i> &nbsp;  {{ $deliverCharge }}</td>
 							</tr>
 							<tr style="border-top: 1px solid;">
 								<td class="text-left">Total Amount</td>
-								<td class="text-right"><strong>Rs. {{ $finalAmount+$deliverCharge }}</strong></td>
+								<td class="text-right"><strong><i class="fa fa-rupee"></i> &nbsp;  {{ $finalAmount+$deliverCharge }}</strong></td>
 							</tr>
 						</tbody>
 					</table>
@@ -136,7 +136,7 @@
 		<div class="modal-content order-shipping-modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title">
-					Add Address
+					Add Delivery Address
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</h4>
 			</div>
@@ -163,7 +163,7 @@
 						<input type="text" name="address1" class="form-control address1" autocomplete="off" required>
 					</div>
 					<div class="form-group col-md-6 col-xs-12">
-						<label>pinCode :</label>
+						<label>PinCode :</label>
 						<input type="text" name="pincode" onkeydown="return max_length(this,event,6)" onkeypress="return isNumberKey(event)" class="form-control pincode" autocomplete="off" value="{{ old('pincode') }}" required>
 					</div>
 					<div class="form-group col-md-6 col-xs-12">

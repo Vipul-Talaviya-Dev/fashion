@@ -69,7 +69,14 @@
 						                                    	@if(in_array($color->id, $serchColors))
 							                                    	checked
 							                                    @endif
-					                                    	><div class="_1p7h2j"></div><div class="_1GEhLw">{{ $color->name }}</div></label></div>
+					                                    	><div class="_1p7h2j"></div>
+					                                    		<div class="_1GEhLw">
+					                                    			<div>
+																		<div class="color-code" style="background: {{ $color->code }};"></div> 
+																		<div style="display: inline-block;"> &nbsp; {{ $color->name }}</div>
+																	</div>	
+					                                    		</div>
+					                                    	</label></div>
 						                                </div>
 						                            </div>
 						                        </div>
@@ -147,7 +154,7 @@
 											</div>
 											<h5>{{ (strlen($variation->product->name) > 15) ? substr($variation->product->name, 0, 15).'...' : $variation->product->name }}</h5>
 											<div class="simpleCart_shelfItem">
-												<p>Rs. <i class="item_price">{{ $variation->price }}</i></p>
+												<p><i class="fa fa-rupee"></i> &nbsp; <i class="item_price">{{ $variation->price }}</i></p>
 												<!-- <p><a class="item_add" href="javascript:void(0);">Add to cart</a></p> -->
 											</div>
 										</div>

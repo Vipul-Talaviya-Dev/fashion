@@ -28,8 +28,8 @@
 					<div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
 						<div class="facts">
 							<div class="register">
-								<input type="email" name="email" class="keyup-email email" placeholder="Email Address"  required="" autocomplete="off">
-								<input type="password" class="password" name="password" placeholder="Password" required="" autocomplete="off">
+								<input type="email" name="email" class="keyup-email email" placeholder="Enter Email Address"  required="" autocomplete="off">
+								<input type="password" class="password" name="password" placeholder="Enter Password" required="" autocomplete="off">
 								<div class="sign-up">
 									<button type="button" class="login-btn" id="userLogin">Sign in</button>
 								</div>
@@ -41,24 +41,25 @@
 						<div class="facts">
 							<div class="register">
 								<div id="registrationCheck">
-									<input placeholder="First Name" name="name" type="text" class="fName" required autocomplete="off">
-									<input placeholder="Last Name" name="name" style="margin: 1em 0 0;" type="text" class="lName" required autocomplete="off">
-									<input placeholder="Mobile" name="mobile" type="text" class="signupMobile" required style="margin: 1em 0 0;" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" autocomplete="off">
-									<input placeholder="Birth Date format DD-MM-YYYY" name="birthDate" class="birthDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Birth Date Format DD-MM-YYYY" readonly>
-									<input placeholder="Anniversary Date format DD-MM-YYYY" name="anniversaryDate" class="anniversaryDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Anniversary Date Format DD-MM-YYYY" readonly>
-									<input placeholder="Email Address" name="email" class="signupEmail keyup-email" type="email" required autocomplete="off">	
-									<input placeholder="Password" name="password" class="signupPassword" type="password" required autocomplete="off">	
-									<input placeholder="Confirm Password" name="confirmPassword" class="confirmPassword" type="password" required autocomplete="off">
+									<input placeholder="Enter First Name" name="name" type="text" class="fName" required autocomplete="off">
+									<input placeholder="Enter Last Name" name="name" style="margin: 1em 0 0;" type="text" class="lName" required autocomplete="off">
+									<input placeholder="Enter Mobile" name="mobile" type="text" class="signupMobile" required style="margin: 1em 0 0;" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" autocomplete="off">
+									<input placeholder="Enter Birth Date format DD-MM-YYYY" name="birthDate" class="birthDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Birth Date Format DD-MM-YYYY" readonly>
+									<input placeholder="Enter Anniversary Date format DD-MM-YYYY" name="anniversaryDate" class="anniversaryDate" type="text" required autocomplete="off" style="margin: 1em 0 0;" max="{{ date('Y-m-d') }}" title="Anniversary Date Format DD-MM-YYYY" readonly>
+									<input placeholder="Enter Email Address" name="email" class="signupEmail keyup-email" type="email" required autocomplete="off">	
+									<input placeholder="Enter Password" name="password" class="signupPassword" type="password" required autocomplete="off">	
+									<input placeholder="Enter Confirm Password" name="confirmPassword" class="confirmPassword" type="password" required autocomplete="off">
 									<div class="sign-up">
 										<input type="button" class="login-btn" id="signUp" value="Create Account"/>
 									</div>
 									<p><br></p><p><br></p>
 								</div>
 								<div id="otpDiv" style="display: none;">
+									<p class="pull-right">This OTP expires in <span class="timeCounter">05:00</span> minutes.</p>
 									@if(false)
 										<p>Don't Share OTP. Your Otp is = <span id="otp"></span>. This OTP expires in <span class="timeCounter">05:00</span> minutes.</p>
 									@endif
-									<input placeholder="Otp" name="otp" type="text" class="otp" required autocomplete="off">
+									<input placeholder="Enter Otp" name="otp" type="text" class="otp" required autocomplete="off" onkeydown="return max_length(this,event,4)" onkeypress="return isNumberKey(event)" maxlength="4">
 									<a class="pull-right" id="resendOtp" data-id="1" style="cursor: pointer;">Resend</a>
 									<div class="sign-up">
 										<input type="button" class="login-btn" id="otpBtn" value="Submit"/>
@@ -72,16 +73,17 @@
 						<div class="facts">
 							<div class="register">
 								<div id="forgotPasswordDiv">
-									<input type="text" name="emailorMobile" class="emailorMobile" placeholder="Email Or Mobile No Enter"  required="" autocomplete="off">
+									<input type="text" name="emailorMobile" class="emailorMobile" placeholder="Enter Email Or Mobile No Enter"  required="" autocomplete="off">
 									<div class="sign-up">
 										<button type="button" class="login-btn" id="forgotPassword">Submit</button>
 									</div>
 								</div>
 								<div id="forgotPasswordOtpDiv" style="display: none;">
+									<p class="pull-right">This OTP expires in <span class="timeCounter">05:00</span> minutes.</p>
 									@if(false)
 										<p>Don't Share OTP. Your Otp is = <span id="forgotPasswordOtp"></span>. This OTP expires in <span class="timeCounter">05:00</span> minutes.</p>
 									@endif
-									<input placeholder="Otp" name="otp" type="text" class="forgotPasswordOtp" required autocomplete="off">
+									<input placeholder="Enter Otp" name="otp" type="text" class="forgotPasswordOtp" required autocomplete="off" onkeydown="return max_length(this,event,4)" onkeypress="return isNumberKey(event)" maxlength="4">
 									<a class="pull-right" id="resendOtp" data-id="2" style="cursor: pointer;">Resend</a>
 									<div class="sign-up">
 										<input type="button" class="login-btn" id="forgotPasswordOtpBtn" value="Submit"/>

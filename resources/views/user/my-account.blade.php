@@ -36,6 +36,9 @@
 	background-color: #f4be62;
     border-color: #f4be62;	
 }
+#message-error {
+    display: none !important;
+}
 </style>
 @endsection
 
@@ -79,7 +82,7 @@
 					<span class="font-size-10 green">Placed On {{ date('d M, Y', strtotime($order->created_at)) }}</span>
 				</div>
 				<div class="col-md-3 text-center">
-					<span class="timetitle atimes">Rs. {{ $order->price }}</span><br>
+					<span class="timetitle atimes"><i class="fa fa-rupee"></i> &nbsp;  {{ $order->price }}</span><br>
 					<span class="bus-order-location">Qty : {{ $order->qty }} </span>
 				</div>
 			</div>
@@ -120,16 +123,17 @@
 				<div class="row">
 					<div class="form-group">
 						<label>Reason :</label>
-						<select class="form-control" name="reason" required>
+						<select class="form-control reason" name="reason" required>
 							<option value="">-- Select Reason --</option>
 							<option value="1">Damage</option>
-							<option value="2">Other Resion</option>
+							<option value="2">Size Issue</option>
+							<option value="3">Other Resion</option>
 						</select>
 						<input type="hidden" name="orderId" class="orderId">
 					</div>
 					<div class="form-group">
 						<label>Message :</label>
-						<textarea class="form-control" name="message" rows="10" cols="8" required></textarea>
+						<textarea class="form-control" name="message" rows="10" cols="8"></textarea>
 					</div>
 				</div>
 			</div>
@@ -149,14 +153,25 @@
 	 	$('body').on('click', '.orderReturn', function() {
 	 		$(".orderId").val($(this).attr('data-id'));
 			$('#myModal').modal();
+		});
 
-			$("#form").validate({
-		      	rules: {
-		 			orderId: 'required',
-		         	reason: 'required',
-		         	message: 'required',
-		      	}
-		  	});
+	 	$('body').on('change', '.reason', function() {
+	 		if($(this).val() == 3) {
+		 		$("#form").validate({
+			      	rules: {
+			 			orderId: 'required',
+			         	reason: 'required',
+			         	message: 'required',
+			      	}
+			  	});
+	 		} else {
+	 			$("#form").validate({
+			      	rules: {
+			 			orderId: 'required',
+			         	reason: 'required',
+			      	}
+			  	});
+	 		}
 		});
    });
 </script>

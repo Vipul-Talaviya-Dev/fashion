@@ -14,7 +14,7 @@
 	<link href="/front/css/payment.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="/front/css/popuo-box.css" rel="stylesheet" type="text/css" property="" media="all" />
 	<link href='https://fonts.googleapis.com/css?family=Glegoo:400,700' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'> -->
 	<style type="text/css">
 		.modal-title {
 			padding-left: 0; 
@@ -136,21 +136,21 @@
 												</h5>
 											</div>
 											<div class="col-xs-3 col-md-2 font-size-13">{{ $data['qty'] }} x Qty</div>
-											<div class="col-xs-2 col-md-3 font-size-13">Rs. {{ ($variation->price * $data['qty']) }}</div>
+											<div class="col-xs-2 col-md-3 font-size-13"><i class="fa fa-rupee"></i> &nbsp;  {{ ($variation->price * $data['qty']) }}</div>
 										</div>
 										<hr>
 									@endforeach
 										<div class="row order-cart-summary" style="line-height: 2">
 											<div class="col-md-6">Sub Total</div>
-											<div class="col-md-6 order-cart-amount">Rs. {{ $total }}</div>
+											<div class="col-md-6 order-cart-amount"><i class="fa fa-rupee"></i> &nbsp;  {{ $total }}</div>
 											@if(Session::get('discount') > 0)
 											<div class="col-md-6">{{ (!Session::get('offer')) ? 'Member Ship Discount' : 'Discount' }}</div>
-											<div class="col-md-6 order-cart-amount"> [-] Rs. {{ Session::get('discount') }}</div>
+											<div class="col-md-6 order-cart-amount"> [-] <i class="fa fa-rupee"></i> &nbsp;  {{ Session::get('discount') }}</div>
 											@endif
 											<div class="col-md-6">Delivery Charges</div>
-											<div class="col-md-6 order-cart-amount"> [+] Rs. {{ $deliverCharge }}</div>
+											<div class="col-md-6 order-cart-amount"> [+] <i class="fa fa-rupee"></i> &nbsp;  {{ $deliverCharge }}</div>
 											<div class="col-md-6 total">Total Amount</div>
-											<div class="col-md-6 order-cart-amount total">Rs. {{ ($finalAmount - Session::get('discount')) + $deliverCharge }}</div>
+											<div class="col-md-6 order-cart-amount total"><i class="fa fa-rupee"></i> &nbsp;  {{ ($finalAmount - Session::get('discount')) + $deliverCharge }}</div>
 										</div>
 								</div>
 							</div>

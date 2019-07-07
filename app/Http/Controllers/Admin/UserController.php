@@ -21,11 +21,15 @@ class UserController extends Controller
 		}
 
 		if ($request->get('birthDate')) {
-			$users = $users->where('birth_date', $request->get('birthDate'));
+			$users = $users->where('birth_date', date('Y-m-d', strtotime($request->get('birthDate'))));
 		}
 
 		if ($request->get('anniversaryDate')) {
-			$users = $users->where('anniversary_date', $request->get('anniversaryDate'));
+			$users = $users->where('anniversary_date', date('Y-m-d', strtotime($request->get('anniversaryDate'))));
+		}
+
+		if ($request->get('onlyMember')) {
+			$users = $users->where('member_ship_code', '!=', NULL);
 		}
 		
 		return view('admin.user.index', [
@@ -80,6 +84,17 @@ class UserController extends Controller
         return redirect(route('admin.users'))->with('success','User has been inserted successfully.'); 
 	}
 
+	public function generateMemberShipCode($id)
+	{
+		if(!$user = User::find($id)) {
+			return redirect()->back()->with('error', 'Invalid Selected Id');
+		}
+
+		$user->member_ship_code = User::memberShipCode($user->name, $user->birth_date);
+		$user->save();
+
+		return redirect()->back()->with('success', 'Successfully Generate Member Ship Code');
+	}
 	public function changeStatus(Request $request)
 	{
 		if(!$user = User::find($request->get('id'))) {
