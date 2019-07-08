@@ -156,24 +156,11 @@
 							</div>
 							@if(!Session::get('discount'))
 							<!-- Coupons & Gift Vouchers-->
-							<div class="panel panel-default pck-box-shadow">
-								<div class="panel-collapse collapse in" id="promotional">
-									<div class="panel-body">
-										@if($user->member_ship_code)
-											<div class="col-md-12 col-xs-12">
-												<label style="margin-top: 7px;">Enter MemberShip Code (?)</label>
-												<div class="input-group width-50">
-													<input class="pck-input adv member_ship_code" type="text" autocomplete="off" value="{{ Auth::user()->member_ship_code }}">
-													<span class="input-group-btn"><button type="button" class="btn btn-danger apply_code">Apply</button></span>
-												</div>
-												<span style="display: block;">
-													<b>Note:</b> You Will Purchase (Rs. 2000/-) Up Shopping to get discount.
-													@if(\Auth::user()->member_ship_code == null)
-													<a class="pull-right getCode" style="cursor: pointer;">Get Code</a>
-													@endif
-												</span>
-											</div>
-										@else
+							@if($user->member_ship_code)
+							@else
+								<div class="panel panel-default pck-box-shadow">
+									<div class="panel-collapse collapse in" id="promotional">
+										<div class="panel-body">
 											<div class="col-md-12 col-xs-12">
 												<label style="margin-top: 7px;">MemberShip Terms & Conditions.</label>
 												<hr>
@@ -187,11 +174,10 @@
 													<a class="pull-right getCode" style="cursor: pointer;">Get Code</a>
 												@endif
 											</div>
-										@endif
-
+										</div>
 									</div>
 								</div>
-							</div>
+							@endif
 
 							<div class="panel panel-default pck-box-shadow">
 								<div class="panel-collapse collapse in" id="promotional">
@@ -300,6 +286,34 @@
 	</div>
 </div>
 @endif
+
+@if((\Auth::user()->member_ship_code != null))
+<div id="myMemberDiscountModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content" style="width: 50%;margin-left: 30%;margin-top: 20%;">
+			<div class="modal-header">
+				<h4 class="modal-title text-center">Membership Offer</h4>
+			</div>
+			<div class="modal-body" align="center"><br>
+				<label style="margin-top: 7px;">Enter Membership Code (?)</label>
+				<div class="input-group">
+					<input class="pck-input adv member_ship_code" type="text" autocomplete="off" value="{{ Auth::user()->member_ship_code }}">
+				</div>
+				<span style="display: block;">
+					<b>Note:</b> You Will Purchase (Rs. 2000/-) Up Shopping to get discount.
+					@if(\Auth::user()->member_ship_code == null)
+					<a class="pull-right getCode" style="cursor: pointer;">Get Code</a>
+					@endif
+				</span>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger apply_code">Apply</button>
+				<a href="javascript:void(0);" class="btn btn-danger close">Close</a>
+			</div>
+		</div>
+	</div>
+</div>
+@endif
 	@include('user.layouts.footer')
 	<!-- Core JS files -->
 	<script src="/front/js/jquery.min.js" type="text/javascript"></script>
@@ -326,10 +340,16 @@
 
 			$("body").on("click", ".close", function() {
 				$('#myModal').modal("hide");
+				$('#myMemberDiscountModal').modal("hide");
 				<?php
 					Cookie::queue("userCloseModel", 1, 30);
 				?>
 			});
+			@if((\Auth::user()->member_ship_code != null))
+				@if(!Session::get('discount'))
+					$('#myMemberDiscountModal').modal();
+				@endif
+			@endif
 		});
 	</script>
 </body>

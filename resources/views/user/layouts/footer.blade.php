@@ -21,8 +21,14 @@
 				<ul class="info"> 
 					<li><a href="{{ route('user.about') }}">About Us</a></li>
 					<li><a href="{{ route('user.contact') }}">Contact Us</a></li>
-					<li><a href="{{ route('user.faq') }}">FAQ's</a></li>
+					<!-- <li><a href="{{ route('user.faq') }}">FAQ's</a></li> -->
 					<li><a href="{{ route('user.term') }}">Term & Condition</a></li>
+					@if(\Auth::user())
+						<li><a href="{{ route('user.myAccount') }}">Order Return</a></li>
+					@else
+						<?php \Session::put('redirect', route('user.myAccount')); ?>
+						<li><a href="{{ route('user.loginForm') }}">Order Return</a></li>
+					@endif
 				</ul>
 			</div>
 			<div class="col-md-4 w3_footer_grid">
@@ -43,7 +49,9 @@
 		</div>
 		<div class=" text-center">
 			<p>&copy;{{ date('Y') }} Shroud Enterprise. All rights reserved | Design by <a href="https://www.acquainteck.com" target="_blank" class="white-text">Acquainteck Consultancy</a></p>
-		</div><br>
+		</div>
+		<button type="button" class="btn btn-sm btn-infi pull-right" style="margin-top: -50px;font-size: 18px;" title="Visitors">{{ ($counter = \App\Models\Counter::find(1)) ? $counter->visitor : 0 }}</button>
+		<br>
 	</div>
 	@if(false)
 	<div class="footer-copy">

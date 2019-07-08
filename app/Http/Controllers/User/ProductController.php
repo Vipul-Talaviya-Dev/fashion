@@ -420,21 +420,25 @@ class ProductController extends Controller
         	$product = Product::find($data['product_id']);
 			$variation = $product->variations()->find($data['variation_id']);
 
-			$orderProduct = new OrderProduct;
-	        $orderProduct->order_id = $order->id;
-	        $orderProduct->user_id = $user->id;
-	        $orderProduct->product_id = $product->id;
-	        $orderProduct->variation_id = $variation->id;
-	        $orderProduct->purchase_price = $variation->purchase_price;
-            $orderProduct->price = $variation->price;
-	        $orderProduct->max_price = $variation->price;
-	        $orderProduct->qty = $data['qty'];
-            $orderProduct->status = ($request->get('payment_option') == 1) ? 3 : 1;
-	        // $orderProduct->payment_status = ($request->get('payment_option') == 1) ? 2 : 1;
-	        $orderProduct->save();
+            for($i=0;$i<$data['qty'];$i++) {
+    			$orderProduct = new OrderProduct;
+    	        $orderProduct->order_id = $order->id;
+    	        $orderProduct->user_id = $user->id;
+    	        $orderProduct->product_id = $product->id;
+    	        $orderProduct->variation_id = $variation->id;
+    	        $orderProduct->purchase_price = $variation->purchase_price;
+                $orderProduct->price = $variation->price;
+    	        $orderProduct->max_price = $variation->price;
+    	        $orderProduct->qty = 1;
+                // $orderProduct->qty = $data['qty'];
+                $orderProduct->status = ($request->get('payment_option') == 1) ? 3 : 1;
+    	        // $orderProduct->payment_status = ($request->get('payment_option') == 1) ? 2 : 1;
+    	        $orderProduct->save();
 
-            $variation->qty = $variation->qty - $data['qty'];
-            $variation->save();
+                $variation->qty = $variation->qty - 1;
+                // $variation->qty = $variation->qty - $data['qty'];
+                $variation->save();
+            }
         }
 
         Session::forget('cart');

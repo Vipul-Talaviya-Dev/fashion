@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Models\Banner;
 use App\Models\Content;
 use App\Models\Contact;
+use App\Models\Counter;
 use App\Models\WindowImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,7 +24,14 @@ class HomeController extends Controller
     		];
     		$images[$key+1] = $data;
     	}
-    	
+	       
+        if ($counter = Counter::find(1)) {
+            $counter->visitor = $counter->visitor+1;
+            $counter->save();
+        } else {
+            Counter::create(['visitor' => 1]);
+        }
+        
         return view('user.index', [
         	'windowImages' => $images,
             'banners' => Banner::latest()->active()->get(),
