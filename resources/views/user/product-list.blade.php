@@ -4,6 +4,7 @@
 
 @section('css')
 <link rel="stylesheet" href="/front/css/product-filter.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
 <style type="text/css">
 	.body {
 		background: #f3f3f3;
@@ -28,6 +29,14 @@
 					                    <div class="filter-title">
 					                        <div class="filter-text"><span>Filters</span></div>
 					                        <a href="{{ route('user.products') }}" class="filter-clear-all"><span>Clear all</span></a>
+					                    </div>
+					                </section>
+					                <section class="size-list" style="height: 150px;">
+					                    <div class="">
+					                        <div class="_2yccxO D0YrLF">Price</div><br>
+					                        <div>
+					                        	<input type="text" class="js-range-slider" name="my_range" value="" />
+					                        </div>
 					                    </div>
 					                </section>
 					                <section class="size-list">
@@ -189,28 +198,47 @@
 @endsection
 
 @section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+
 <script type="text/javascript">
 	$(document).ready(function() {
+		var commonPice = "{{ (request('prices') ? request('prices') : '0;1000') }}";
+		var price = commonPice.split(";");
+
+
 		var sizes = "{{ (request('sizes') ? request('sizes') : '') }}",
 		colors = "{{ (request('colors') ? request('colors') : '') }}",
 		types = "{{ (request('types') ? request('types') : '') }}";
 		$("body").on("click", ".sizes", function() {
 			sizes = $('.sizes:checked').map(function() { return this.value; }).get().join(',');
-			searchRedirect(sizes, colors, types);
+			searchRedirect(sizes, colors, types, commonPice);
 		});
 
 		$("body").on("click", ".colors", function() {
 			colors = $('.colors:checked').map(function() { return this.value; }).get().join(',');
-			searchRedirect(sizes, colors, types);
+			searchRedirect(sizes, colors, types, commonPice);
 		});
 
 		$("body").on("click", ".types", function() {
 			types = $('.types:checked').map(function() { return this.value; }).get().join(',');
-			searchRedirect(sizes, colors, types);
+			searchRedirect(sizes, colors, types, commonPice);
 		});
 
-		function searchRedirect(sizes, colors, types) {
-			window.location.href= "{{ route('user.products') }}?sizes="+sizes+"&colors="+colors+'&types='+types;
+		$(".js-range-slider").ionRangeSlider({
+	        type: "double",
+	        min: 0,
+	        max: 1000,
+	        from: price[0],
+	        to: price[1],
+        	grid: true,
+        	onFinish: function (data) {
+        		var p = data.from+';'+data.to;
+        		searchRedirect(sizes, colors, types, p);
+	        }
+    	});
+
+		function searchRedirect(sizes, colors, types, commonPice) {
+			window.location.href= "{{ route('user.products') }}?sizes="+sizes+"&colors="+colors+'&types='+types+'&prices='+commonPice;
 		}
 	})
 </script>

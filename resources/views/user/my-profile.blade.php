@@ -27,6 +27,9 @@
 .row {
 	margin: 0;
 }
+#firstName-error, #lastName-error, #mobile-error, #birth_date-error {
+    display: none !important;
+}
 </style>
 @endsection
 
@@ -124,7 +127,7 @@
 				@endforeach
 			</div>
 			<p><br></p>
-			<button style="margin-left: 47px;" type="button" class="btn btn-success addAdddress"><i class="fa fa-plus"></i> Add New Delivery Address<div class="ripple-wrapper"></div></button>
+			<button style="margin-left: 47px;" type="button" class="btn btn-success addAdddress"><i class="fa fa-plus"></i> Delivery Address<div class="ripple-wrapper"></div></button>
 			<p><br></p>
 		</div>
 	</div>
@@ -213,7 +216,7 @@
 	        $("input[name='address1']").val('');
 	        $("input[name='id']").val('');
 	        $(".redirect").val('');
-			$('#addressHeader').html("Add New Delivery Address");
+			$('#addressHeader').html("Delivery Address");
 			$('#myModal').modal();
 		});
 

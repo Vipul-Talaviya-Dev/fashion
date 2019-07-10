@@ -33,8 +33,12 @@
     border-color: #f4be62;
 }
 .btn-success:hover, .btn-success:focus, .btn-success.focus, .btn-success:active, .btn-success.active, .open > .dropdown-toggle.btn-success {
-	background-color: #f4be62;
-    border-color: #f4be62;	
+	background-color: #f4be62 !important;
+    border-color: #f4be62 !important;	
+}
+.btn-danger:hover, .btn-danger:focus, .btn-danger.focus, .btn-danger:active, .btn-danger.active, .open > .dropdown-toggle.btn-danger {
+	background-color: #f4be62 !important;
+    border-color: #f4be62 !important;
 }
 #message-error {
     display: none !important;
@@ -53,58 +57,67 @@
 			</h3> 
 		</div>
 		@endif
-		@foreach($orders as $order)
-		<?php
-			$variation = $order->variation;
-			$images = explode(',', $variation->images);
-			$startTime = \Carbon\Carbon::parse($order->updated_at);
-			$finishTime = \Carbon\Carbon::now();
-			$returnTime = $finishTime->diffInHours($startTime);
+		@foreach($orders as $mainOrder)
+			<div class="col-md-12 col-xs-12 margin-top-10">
+			<a class="btn btn-danger" data-toggle="collapse" href="#{{ $mainOrder->orderId() }}" role="button" aria-expanded="false" aria-controls="{{ $mainOrder->orderId() }}" style="width: 100%;border: 0px;padding: 5px;font-size: 18px;">
+			    {{ $mainOrder->orderId() }}
+		  	</a>
+		  	<div class="collapse in" id="{{ $mainOrder->orderId() }}">
+			  @foreach($mainOrder->orderProducts as $order)
+			  	<?php
+					$variation = $order->variation;
+					$images = explode(',', $variation->images);
+					$startTime = \Carbon\Carbon::parse($order->updated_at);
+					$finishTime = \Carbon\Carbon::now();
+					$returnTime = $finishTime->diffInHours($startTime);
 
-		?>
-		<div class="shopping-order-box">
-			<div class="row">
-				<div class="col-md-3">
-					<span class="timetitle btimes"><a href="javascript:void(0);"><img class="track-img-thumb" src="{{ \Cloudder::secureShow($images[0]) }}" alt="{{ $order->product->name }}" width="72" height="72"></a></span>
-				</div>
-				<div class="col-md-3">
-					<!-- <span class="timetitle atimes"><a href="/product/"></a></span><p><br></p> -->
-					<span class="bus-order-location">Size : {{ $variation->size->name }}</span> &nbsp;
-					<span class="btn colorSelected" style="background: {{ $variation->color->code }};padding: 9px 9px;" title="Color"></span>
+				?>
+				<div class="shopping-order-box">
+					<div class="row">
+						<div class="col-md-3">
+							<span class="timetitle btimes"><a href="javascript:void(0);"><img class="track-img-thumb" src="{{ \Cloudder::secureShow($images[0]) }}" alt="{{ $order->product->name }}" width="72" height="72"></a></span>
+						</div>
+						<div class="col-md-3">
+							<!-- <span class="timetitle atimes"><a href="/product/"></a></span><p><br></p> -->
+							<span class="bus-order-location">Size : {{ $variation->size->name }}</span> &nbsp;
+							<span class="btn colorSelected" style="background: {{ $variation->color->code }};padding: 9px 9px;" title="Color"></span>
+							<p><br></p>
+
+							@if(($returnTime < 24) && ($order->status == 6))
+								<a href="javascript:void(0);" class="btn btn-cart btn-xs black-text orderReturn" data-id="{{ $order->orderProductId() }}">Order Return<div class="ripple-wrapper"></div></a>
+							@endif
+						</div>
+						<div class="col-md-3 text-center">
+							<span class="timetitle atimes">{{ $order->orderProductId() }}</span><br>
+							<span class="font-size-10 green">Placed On {{ date('d M, Y', strtotime($order->created_at)) }}</span>
+						</div>
+						<div class="col-md-3 text-center">
+							<span class="timetitle atimes"><i class="fa fa-rupee"></i> &nbsp;  {{ $order->price }}</span><br>
+							<span class="bus-order-location">Qty : {{ $order->qty }} </span>
+						</div>
+					</div>
+					<div class="pull-right">
+						@if($order->status == 1 || $order->status == 2)
+		                    <span class="label label-default"><b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b></span>
+		                @elseif($order->status == 3 || $order->status == 6)
+		                    <span class="label label-success"><b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b></span>
+		                @elseif($order->status == 4 || $order->status == 5 || $order->status == 7)
+		                    <span class="label label-info"><b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b></span>
+		                @elseif($order->status == 8)
+		                    <span class="label label-danger"><b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b></span>
+		                @endif
+					</div>
 					<p><br></p>
-
-					@if(($returnTime < 24) && ($order->status == 6))
-						<a href="javascript:void(0);" class="btn btn-cart btn-xs black-text orderReturn" data-id="{{ $order->orderProductId() }}">Order Return<div class="ripple-wrapper"></div></a>
+					@if(false)
+					<span class="line-divider-dashed1"></span>
+					<span>7-Day Easy Returns Policy period has ended. You cannot return / replace your product now.</span>
 					@endif
 				</div>
-				<div class="col-md-3 text-center">
-					<span class="timetitle atimes">{{ $order->orderProductId() }}</span><br>
-					<span class="font-size-10 green">Placed On {{ date('d M, Y', strtotime($order->created_at)) }}</span>
-				</div>
-				<div class="col-md-3 text-center">
-					<span class="timetitle atimes"><i class="fa fa-rupee"></i> &nbsp;  {{ $order->price }}</span><br>
-					<span class="bus-order-location">Qty : {{ $order->qty }} </span>
-				</div>
+			  @endforeach
 			</div>
-			<div class="pull-right">
-				@if($order->status == 1 || $order->status == 2)
-                    <span class="label label-default"><b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b></span>
-                @elseif($order->status == 3 || $order->status == 6)
-                    <span class="label label-success"><b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b></span>
-                @elseif($order->status == 4 || $order->status == 5 || $order->status == 7)
-                    <span class="label label-info"><b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b></span>
-                @elseif($order->status == 8)
-                    <span class="label label-danger"><b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b></span>
-                @endif
-			</div>
-			<p><br></p>
-			@if(false)
-			<span class="line-divider-dashed1"></span>
-			<span>7-Day Easy Returns Policy period has ended. You cannot return / replace your product now.</span>
-			@endif
-		</div>
+		  </div>
 		@endforeach
-		<p><br></p>
+		<div class="col-md-12 col-xs-12 margin-top-10"><p></p></div>
 	</div>
 </div>
 

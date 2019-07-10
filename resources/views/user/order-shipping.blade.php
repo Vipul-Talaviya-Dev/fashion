@@ -136,7 +136,7 @@
 		<div class="modal-content order-shipping-modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title">
-					Add Delivery Address
+					Delivery Address
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</h4>
 			</div>

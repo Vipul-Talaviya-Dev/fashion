@@ -499,7 +499,7 @@ $(document).ready(function() {
         $(".redirect").val('');
         event.preventDefault();
         show_loader();
-        $('#addressHeader').html("Update Your Delivery Address");
+        $('#addressHeader').html("Delivery Address");
         var id = $(this).attr('data-id');
         var url = '/address/'+id+'/edit';
         $.ajax({

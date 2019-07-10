@@ -8,6 +8,7 @@ use Session;
 use Validator;
 use App\Models\User;
 use App\Models\Address;
+use App\Models\Order;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -18,7 +19,7 @@ class UserController extends Controller
     public function index()
     {
     	$user = Auth::user();
-    	$orders = OrderProduct::latest()->with(['variation'])->where('user_id', $user->id)->get();
+    	$orders = Order::latest()->with(['orderProducts.variation'])->where('user_id', $user->id)->get();
     	return view('user.my-account', [
     		'orders' => $orders,
             'cart' => true,

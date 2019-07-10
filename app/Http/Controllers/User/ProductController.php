@@ -38,6 +38,14 @@ class ProductController extends Controller
             $variations = $variations->whereIn('color_id', explode(',', $request->get('colors')));
         }
 
+        if($request->get('prices')) {
+            $price = explode(';', $request->get('prices'));
+            $from = isset($price[0]) ? ($price[0]*100) : 0; 
+            $to = isset($price[1]) ? ($price[1]*100) : 100000; 
+
+            $variations = $variations->where('price', '>=', $from)->where('price', '<=', $to);
+        }
+
         if($request->get('types')) {
             $types = explode(',', $request->get('types'));
             $variations = $variations->whereRaw("find_in_set('".$types[0]."', product_type_id)");

@@ -50,7 +50,7 @@
 		<div class=" text-center">
 			<p>&copy;{{ date('Y') }} Shroud Enterprise. All rights reserved | Design by <a href="https://www.acquainteck.com" target="_blank" class="white-text">Acquainteck Consultancy</a></p>
 		</div>
-		<button type="button" class="btn btn-sm btn-infi pull-right" style="margin-top: -50px;font-size: 18px;" title="Visitors">{{ ($counter = \App\Models\Counter::find(1)) ? $counter->visitor : 0 }}</button>
+		<button type="button" class="btn btn-sm btn-infi pull-right" style="margin-top: -50px;font-size: 18px;" title="Visitors">Visitor : {{ ($counter = \App\Models\Counter::find(1)) ? $counter->visitor : 0 }}</button>
 		<br>
 	</div>
 	@if(false)
