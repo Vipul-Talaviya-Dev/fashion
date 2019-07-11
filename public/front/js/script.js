@@ -452,16 +452,41 @@ $(document).ready(function() {
         var b = false;
         var n = firstName.trim() +' '+lastName.trim();
 
-        if (n == "" || m == "" || p == "" || c == "" || s == "" || a == "") {
+        if (firstName == "") {
             $(".firstName").addClass('error');
+            b = true;
+        }
+
+        if(lastName == "") {
             $(".lastName").addClass('error');
+            b = true;
+        }
+
+        if(m == "") {
             $("#mobile").addClass('error');
+            b = true;
+        }
+
+        if(p == "") {
             $(".pincode").addClass('error');
+            b = true;
+        }
+
+        if(c == "") {
             $(".city").addClass('error');
+            b = true;
+        }
+
+        if(s == "") {
             $(".state").addClass('error');
+            b = true;
+        }
+         
+        if(a == "") {
             $(".address").addClass('error');
             b = true;
         }
+        
         if(b == false) {
             show_loader();
             $.ajax({

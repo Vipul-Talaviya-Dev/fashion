@@ -50,6 +50,14 @@
 			background-color: #d0a65e;
 		    border-color: #d0a65e;
 		}
+		#myMemberDiscountModal .membershipDis {
+		  width: 50%;margin-left: 30%;margin-top: 20%;
+		}
+		@media (min-width: 320px) and (max-width: 480px) {
+		  #myMemberDiscountModal .membershipDis {
+		    width: auto;margin-left: 0;margin-top: 0;
+		  }
+		}
 	</style>
 </head>
 
@@ -290,7 +298,7 @@
 @if((\Auth::user()->member_ship_code != null))
 <div id="myMemberDiscountModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
-		<div class="modal-content" style="width: 50%;margin-left: 30%;margin-top: 20%;">
+		<div class="modal-content membershipDis">
 			<div class="modal-header">
 				<h4 class="modal-title text-center">Membership Offer</h4>
 			</div>

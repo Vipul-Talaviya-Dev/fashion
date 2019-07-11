@@ -135,6 +135,7 @@
       <!-- <div class="thank-you">Vopul</div> -->
 
       <div class="clearfix"></div>
+      <div style="margin-top: 42%;text-align: center;font-size: 20px;"><b>Thanks for Shooping at SHROUD.IN</b></div>
     </div>
 
   </body>

@@ -8,7 +8,9 @@
      margin-right: 0; 
      margin-left: 0; 
 }
-
+#oldPassword-error, #password-error, #confirmPassword-error {
+	display: none !important;
+}
 </style>
 @endsection
 
@@ -58,4 +60,18 @@
 		</div>
 	</div>
 </div>
+@endsection
+@section('js')
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+      $("#form").validate({
+      	rules: {
+         oldPassword: 'required',
+         password: 'required',
+         confirmPassword: 'required',
+        }
+      });
+   });
+</script>
 @endsection

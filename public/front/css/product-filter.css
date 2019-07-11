@@ -176,3 +176,16 @@
     vertical-align: bottom;
     border: 1px solid rgba(0,0,0,.1);
 }
+
+.irs--flat .irs-bar {
+    background-color: #d0a65e !important;
+}
+.irs--flat .irs-from, .irs--flat .irs-to, .irs--flat .irs-single {
+    background-color: #d0a65e !important;
+}
+.irs--flat .irs-from:before, .irs--flat .irs-to:before, .irs--flat .irs-single:before {
+    border-top-color: #d0a65e !important;
+}
+.irs--flat .irs-handle>i:first-child {
+        background-color: #d0a65e !important;
+}
