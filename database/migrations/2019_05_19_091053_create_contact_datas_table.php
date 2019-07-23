@@ -15,6 +15,7 @@ class CreateContactDatasTable extends Migration
     {
         Schema::create('contact_datas', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->string('mobile');
             $table->tinyInteger('status')->comment('1: Active, 2: In-active')->default(1);
             $table->timestamps();

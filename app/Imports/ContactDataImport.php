@@ -14,11 +14,12 @@ class ContactDataImport implements ToCollection
     */
     public function collection(Collection $rows)
     {
-    	foreach ($rows as $row) {
-    		if(is_numeric($row[0]) && (strlen($row[0]) == 10)) {
+    	foreach ($rows as $key => $row) {
+    		if(is_numeric($row[0]) && (strlen($row[0]) == 10) && ($key > 0) && isset($row[1])) {
 	    		if(!ContactData::where('mobile', (int)$row[0])->exists()) {
 	    			ContactData::create([
-	    				'mobile' => (int)$row[0]
+	    				'mobile' => (int)$row[0],
+                        'name' => $row[1],
 	    			]);
 	    		}
     		}

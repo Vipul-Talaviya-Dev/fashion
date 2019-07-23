@@ -43,6 +43,7 @@
                                     <thead>
                                     <tr>
                                         <th>Sr. No.</th>
+                                        <th>Name</th>
                                         <th>Mobile</th>
                                     </tr>
                                     </thead>
@@ -51,6 +52,7 @@
                                         @foreach($contactDataImports as $key => $contactDataImport)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
+                                                <td>{{ $contactDataImport->name }}</td>
                                                 <td>{{ $contactDataImport->mobile }}</td>
                                             </tr>
                                         @endforeach

@@ -14,6 +14,6 @@ class ContactData extends Model
      * @var array
      */
     protected $fillable = [
-        'mobile', 'status'
+        'mobile', 'status', 'name'
     ];
 }

@@ -25,7 +25,7 @@
                         <h1 class="panel-title">Contact Import
                             <a style="margin-left: 10px;" href="{{ route('admin.contantImports') }}" class="btn btn-primary pull-right">contant Import List</a> 
 
-                            <a href="{{ route('admin.contactImportDownloadExcel') }}" class="btn btn-primary pull-right">Download Excel</a>
+                            <a href="/contactImport.xlsx" class="btn btn-primary pull-right" download> Download Excel</a>
                         </h1>
                     </div>
                     <hr/>
