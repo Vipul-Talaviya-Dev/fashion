@@ -1,5 +1,5 @@
 <?php
-putenv('TMPDIR=/home/admin/tmp');
+putenv('TMPDIR=/home/vipult/tmp');
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
