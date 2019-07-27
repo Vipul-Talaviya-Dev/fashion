@@ -25,6 +25,17 @@ use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
+    public function mail()
+    {
+        Mail::send('user.email.member-ship-email', [
+            'user' => User::find(1),
+        ], function ($message) {
+            $message->from('support@shroud.in', 'Support')
+                ->subject('Order Placed')
+                ->to("vipulpatel1152@gmail.com", "vipul patel");
+        });
+        dd('df');
+    }
     public function index(Request $request)
     {
 
@@ -180,7 +191,8 @@ class ProductController extends Controller
 
     public function carts()
     {
-        return view('user.carts');
+        $deliverCharge = AppContent::find(1);
+        return view('user.carts', ['deliverCharge' => $deliverCharge->delivery_charge,]);
     }
 
     public function cartOrderDetail(Request $request)
@@ -223,6 +235,10 @@ class ProductController extends Controller
         if (!\Auth::check()) {
             return redirect(route('user.loginForm'));
         }
+        Cookie::queue(
+            Cookie::forget('userCloseModel')
+        );
+
         $user = Auth::user();
         $deliverCharge = AppContent::find(1);
     	return view('user.order-shipping', [

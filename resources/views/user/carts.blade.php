@@ -94,13 +94,13 @@
 										</tr>
 										<tr>
 											<td colspan="4">Delivery Charge</td>
-											<td> <i class="fa fa-rupee"></i> &nbsp; <span >0</span></td>
+											<td> <i class="fa fa-rupee"></i> &nbsp; <span >{{ $deliverCharge }}</span></td>
 										</tr>
 									</tbody>
 									<tfoot>
 										<tr>
 											<td colspan="4"><strong>Grand Total</strong></td>
-											<td><strong> <i class="fa fa-rupee"></i> &nbsp;  <span id="finalPrice">{{ $finalAmount }}</span></strong></td>
+											<td><strong> <i class="fa fa-rupee"></i> &nbsp;  <span id="finalPrice">{{ $finalAmount+$deliverCharge }}</span></strong></td>
 										</tr>
 									</tfoot>
 								</table>

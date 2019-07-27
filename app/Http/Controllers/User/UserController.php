@@ -112,8 +112,12 @@ class UserController extends Controller
 
     public function orderReturn(Request $request)
     {
-        if(trim($request->get('orderId')) == "" || trim($request->get('reason')) == "" || trim($request->get('message')) == "") {
-            return redirect()->back()->with(['error' => 'something is wrong please try again']);
+        if(trim($request->get('reason')) == 3 && trim($request->get('message')) == "") {
+            return redirect()->back()->with(['error' => 'Message Field Is Required..']);
+        }
+
+        if(trim($request->get('orderId')) == "" || trim($request->get('reason')) == "") {
+            return redirect()->back()->with(['error' => 'Select reason field.']);
         }
 
         $orderId = substr(trim($request->get('orderId')), 14);

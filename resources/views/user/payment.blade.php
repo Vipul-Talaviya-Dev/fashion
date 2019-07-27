@@ -283,7 +283,8 @@
 			</div>
 			<div class="modal-body">
 				<div class="row">
-					<h5 class="text-center" style="margin-top: 15px;line-height: 1.2;">Be the member of shroud & add more discount on your shopping.! </h5>
+					<h5 class="text-center" style="margin-top: 15px;line-height: 1.2;">Congratulations you are eligible for become MEMBER </h5>
+					<!-- <h5 class="text-center" style="margin-top: 15px;line-height: 1.2;">Be the member of shroud & add more discount on your shopping.! </h5> -->
 				</div>
 			</div>
 			<div class="modal-footer">

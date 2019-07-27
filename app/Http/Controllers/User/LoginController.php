@@ -73,8 +73,10 @@ class LoginController extends Controller
             ]);
         }
 
-        $user->login_count = ($user->login_count+1);
-        $user->save();
+        if($user->member_ship_code) {
+            $user->login_count = ($user->login_count+1);
+            $user->save();
+        }
         
         Auth::login($user);
 

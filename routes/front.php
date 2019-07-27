@@ -10,10 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/vipul', function() {
-	return view('user.email.order-place');
-});
 Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
+	Route::get('mail', 'ProductController@mail');
+
 	Route::get('/', 'HomeController@index')->name('index');
 	Route::get('contact-us', 'HomeController@contact')->name('contact');
 	Route::post('contact', 'HomeController@addContact')->name('addContact');
