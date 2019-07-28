@@ -8,13 +8,33 @@ class Helper
     {
         $status = [
             1 => 'Order Checkout',
-            2 => 'Order Placed',
+            // 2 => 'Order Placed',
             3 => 'Order Success',
             4 => 'Delivery Boy Pickup Order',
             5 => 'Delivery Boy To Customer',
             6 => 'Delivered',
             7 => 'Return',
             8 => 'Cancelled',
+        ];
+
+        if($id) {
+            return $status[$id];
+        }
+        
+        return $status;
+    }
+
+    public static function orderSummary($id = null)
+    {
+        $status = [
+            1 => 'Your order is in Check out.',
+            // 2 => 'Your Order has been Placed',
+            3 => 'Order Success',
+            4 => 'Your order will be pick up by our courier company from our facility',
+            5 => 'Your order is on the way to your Delivery address.',
+            6 => 'Delivered',
+            7 => 'We got your return request. Our team is processing your request.',
+            8 => 'Your order has been cancelled. Kindly contact us for more detail.',
         ];
 
         if($id) {

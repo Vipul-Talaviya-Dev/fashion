@@ -30,9 +30,14 @@
 				</tr>
 				<tr>
                     <td style="font-size:13px;padding-top:10px;font-family:Arial,Helvetica,sans-serif;color:#34495e">
-                    	The status of your order is <b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b>.<br>
-						We will send you another email if there is any changes.
-						Meanwhile you can check the status of your order on online Shroud store.
+                    	
+                    	{{ \App\Helper\Helper::orderSummary($order->status) }}
+
+                    	@if($order->status != 8)
+							We will send you another email if there is any changes.
+							Meanwhile you can check the status of your order on online Shroud store.
+                		@endif
+
                     	@if(false)
 							We will send you another email once the items in your order have been <b>{{ \App\Helper\Helper::orderStatus($order->status) }}</b>.
                         	Meanwhile, you can check the status of your order on Online Shroud Store.
