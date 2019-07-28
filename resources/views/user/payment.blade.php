@@ -304,12 +304,11 @@
 				<h4 class="modal-title text-center">Membership Offer</h4>
 			</div>
 			<div class="modal-body" align="center"><br>
-				<label style="margin-top: 7px;">Enter Membership Code (?)</label>
+				<label style="margin-top: 7px;">Enter Membership Code</label>
 				<div class="input-group">
 					<input class="pck-input adv member_ship_code" type="text" autocomplete="off" value="{{ Auth::user()->member_ship_code }}">
 				</div>
 				<span style="display: block;">
-					<b>Note:</b> You Will Purchase (Rs. 2000/-) Up Shopping to get discount.
 					@if(\Auth::user()->member_ship_code == null)
 					<a class="pull-right getCode" style="cursor: pointer;">Get Code</a>
 					@endif

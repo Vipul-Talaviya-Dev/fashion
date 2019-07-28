@@ -77,7 +77,7 @@
 						<a style="text-decoration:none" width="200px" href="{{ \Cloudder::secureShow($image[0]) }}" target="_blank">
 						<img border="0" src="{{ \Cloudder::secureShow($image[0]) }}" style="width:80px;min-height:auto" class="CToWUd">
 						</a><br>
-						<span>{{ $orderProduct->product->name }} <br> (Order Id: {{ $cs_order_id }})</span>
+						<span>{{ $orderProduct->product->name }} <br> (Order Id: {{ $orderProduct->orderProductId() }})</span>
 					</div>
 					</td>
 					<td style="font-family:Arial,Helvetica,sans-serif;color:#34495e;font-size:13px"><div align="center">Rs. {{ $orderProduct->price }}</div></td>

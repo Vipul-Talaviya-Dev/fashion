@@ -44,6 +44,8 @@
 												<tr class="primary">
 													<th>Sub Order ID</th>
 													<th>Product Name</th>
+													<th>Size </th>
+													<th>Color</th>
 													<th>Price</th>
 													<th>Qty</th>
 													<th>SubTotal</th>
@@ -52,28 +54,36 @@
 											@foreach($order->orderProducts as $orderProduct)
 												<tr class="info">
 													<td>{{ $orderProduct->orderProductId() }}</td>
-													<td>{{ $orderProduct->product->name }}</td>
+													<td>
+														{{ $orderProduct->product->name }} <br>
+													</td>
+													<td>
+														{{ $orderProduct->variation->size->name }}
+													</td>
+													<td>
+														<span class="btn colorSelected" style="background: {{ $orderProduct->variation->color->code }};padding: 9px 9px;" title="Color"></span>
+													</td>
 													<td><i class="fa fa-rupee"></i> &nbsp;{{ $orderProduct->price }}</td>
 													<td>{{ $orderProduct->qty }}</td>
 													<td><i class="fa fa-rupee"></i> &nbsp;{{ $orderProduct->price * $orderProduct->qty }}</td>
 												</tr>
 											@endforeach
 											<tr class="thanks_summary_text">
-												<td colspan="4" align="right">Total</td>
+												<td colspan="6" align="right">Total</td>
 												<td align="left"><i class="fa fa-rupee"></i> &nbsp;{{ $order->total }}</td>
 											</tr>
 											<tr class="thanks_summary_text">
-												<td colspan="4" align="right">Delivery Charge(+)</td>
+												<td colspan="6" align="right">Delivery Charge(+)</td>
 												<td align="left"><i class="fa fa-rupee"></i> &nbsp;{{ $order->delivery_charge }}</td>
 											</tr>
 											@if($order->voucher_id > 0)	
 												<tr class="thanks_summary_text">
-													<td colspan="4" align="right">Applied Discount (-)</td>
+													<td colspan="6" align="right">Applied Discount (-)</td>
 													<td align="left"><i class="fa fa-rupee"></i> &nbsp;{{ $order->discount }}</td>
 												</tr>
 											@endif
 											<tr class="thanks_summary_text total">
-												<td colspan="4">Final Amount</td>
+												<td colspan="6">Final Amount</td>
 												<td align="left"><i class="fa fa-rupee"></i> &nbsp;{{ $order->cart_amount }}</td>
 											</tr>
 										</table>

@@ -93,7 +93,7 @@ class UserController extends Controller
             'password' => 'required|regex:/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{6,20}$/|same:confirmPassword',
             'confirmPassword' => 'required',
         ], [
-            'password.regex' => 'Please used, Password character, numeric, special character.'
+            'password.regex' => 'Please set password length between 6 to 20. Also use Alphabets, numeric & Special characters.'
         ]);
        
         $user = Auth::user();
@@ -107,7 +107,36 @@ class UserController extends Controller
 
 
         Auth::logout();
+        Session::put('redirect', route('user.products'));
         return redirect(route('user.loginForm'))->with(['success' => 'Password has been reset successfully! ']);
+    }
+
+    public function newPassword()
+    {
+        return view('user.new-password', [
+            'cart' => true,
+            'footer' => true
+        ]);
+    }
+
+    public function changeNewPassword(Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required|regex:/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{6,20}$/|same:confirmPassword',
+            'confirmPassword' => 'required',
+        ], [
+            'password.regex' => 'Please set password length between 6 to 20. Also use Alphabets, numeric & Special characters.'
+        ]);
+       
+        $user = Auth::user();
+
+        $user->password = bcrypt($request->get('password'));
+        $user->save();
+
+
+        Auth::logout();
+        Session::put('redirect', route('user.products'));
+        return redirect(route('user.loginForm'))->with(['success' => 'Password has been added successfully! ']);
     }
 
     public function orderReturn(Request $request)

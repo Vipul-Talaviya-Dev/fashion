@@ -102,7 +102,7 @@
 
             <script type="text/javascript" src="/assets/js/core/app.js"></script>
             <script type="text/javascript" src="/assets/js/pages/picker_color.js"></script>
-            <script type="text/javascript" src="http://chir.ag/projects/ntc/ntc.js"></script>
+            <script type="text/javascript" src="/assets/js/ntc.js"></script>
             <script>
                 $('#product').submit(function(){
                     $(this).find(':button[type=submit]').prop('disabled', true);

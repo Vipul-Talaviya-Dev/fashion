@@ -233,7 +233,7 @@ $(document).ready(function() {
                 success: function(res) {
                     hide_loader();
                     if(res.status) {
-                        page_redirect('reset-password');
+                        page_redirect('new-password');
                     } else {
                         toastr.warning(res.error);
                     }

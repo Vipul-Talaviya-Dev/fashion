@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('status')->comment('1: Active, 2: In-active')->default(1);
             $table->tinyInteger('social_login')->comment('0: default, 1: Google, 2: Facebook, 3: Twitter')->default(0);
             $table->tinyInteger('login_type')->comment('1: Web, 2: Android, 3: IOS')->default(1);
-            $table->unsignedBigInteger('login_count')->comment('User login Count')->default(1);
+            $table->unsignedBigInteger('login_count')->comment('User login Count')->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

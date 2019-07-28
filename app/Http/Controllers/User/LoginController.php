@@ -98,7 +98,7 @@ class LoginController extends Controller
         );
 
         $message = [
-            'password.regex' => 'Please used, Password character, numeric, special character.'
+            'password.regex' => 'Please set password length between 6 to 20. Also use Alphabets, numeric & Special characters.'
         ];
 
         $validator = Validator::make($request->all(), $rules, $message);

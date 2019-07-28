@@ -217,6 +217,7 @@ class ProductController extends Controller
 		$orders['final_amount'] = $final_amount;
         Session::put('CART_AMOUNT', $final_amount);
 		Session::put('discount', 0);
+        Session::put('discountPercentage', 0);
 		Session::put('order', $orders);
 
 		// For Basket Counting // 

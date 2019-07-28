@@ -81,6 +81,8 @@
                                         <th>Order Product Id</th>
                                         <th>User Name</th>
                                         <th>Item Detail</th>
+                                        <th>Size</th>
+                                        <th>Color</th>
                                         <th>Quality</th>
                                         <th>Price</th>
                                         <th>Order Date</th>
@@ -96,6 +98,12 @@
                                         <td>{{ $orderProduct->orderProductId() }}</td>
                                         <td>{{ $order->user->name }}<br>({{ $order->user->mobile }})</td>
                                         <td><img src="{{ \Cloudder::secureShow($images[0]) }}" data-imagezoom="true" style="width: 50px;" class="img-responsive" alt="{{ $orderProduct->product->name }}"></td>
+                                        <td>
+                                            {{ $orderProduct->variation->size->name }}
+                                        </td>
+                                        <td>
+                                            <span class="btn colorSelected" style="background: {{ $orderProduct->variation->color->code }};padding: 9px 9px;" title="Color"></span>
+                                        </td>
                                         <td>{{ $orderProduct->qty }}</td>
                                         <td>{{ $orderProduct->price }}</td>
                                         <td>{{ $order->created_at }}</td>
@@ -109,13 +117,13 @@
                                 <table id="order-totals-table">
                                     <tbody>
                                         <tr>
-                                            <td colspan="4">Subtotal</td>
+                                            <td colspan="6">Subtotal</td>
                                             <td> Rs.<span >{{ $order->total }}</span></td>
                                         </tr>
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="4"><strong>Grand Total</strong></td>
+                                            <td colspan="6"><strong>Grand Total</strong></td>
                                             <td><strong> Rs. <span>{{ $order->cart_amount }}</span></strong></td>
                                         </tr>
                                     </tfoot>

@@ -36,7 +36,7 @@
 		{{ csrf_field() }}
 		<div class="col-md-8 col-sm-6 col-xs-12 order-boxos">
 			<div class="">
-				<div class="panel-heading">Your Address Details</div>
+				<div class="panel-heading">Delivery Address</div>
 				<div class="panel-body">
 					@foreach($addresses as $address)
 						<div class="col-md-6 col-xs-12 padding-left-0">
