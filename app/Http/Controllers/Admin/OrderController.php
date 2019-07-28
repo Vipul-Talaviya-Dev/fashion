@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Address;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
+use App\Exports\OrderExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 
@@ -42,7 +43,7 @@ class OrderController extends Controller
 
 		if($request->get('excel')) {
 			// $getOrders = $orders->get();
-			return Excel::download($orders->get(), date('Y-m-d-H-i').'-orders.xlsx');
+			return Excel::download(new OrderExport, date('Y-m-d-H-i').'-orders.xlsx');
 		}
 
 		return view('admin.order.index', [
