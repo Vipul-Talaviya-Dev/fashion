@@ -41,7 +41,7 @@
                                 <label>Anniversary Date</label>
                                 <input type="text" name="anniversaryDate" id="anniversaryDate" class="form-control" required="required" value="{{ request('anniversaryDate') }}" autocomplete="off" readonly placeholder="dd-mm-yyyy">
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-1">
                                 <label>Only Members</label>
                                 <input type="checkbox" name="onlyMember" class="form-control" value="1" {{ request('onlyMember') == 1 ? 'checked' : '' }} style="height: 22px;">
                             </div>
@@ -49,6 +49,10 @@
                                 <p>&nbsp;</p>
                                 <button class="btn btn-info" type="submit" style="margin-top: -5px;">Search</button> &nbsp;
                                 <a href="{{ route('admin.users') }}" class="btn btn-sm btn-warning" style="margin-top: -5px;"><i class="fa fa-refresh"></i></a>
+                            </div>
+                            <div class="form-group col-md-1">
+                                <p>&nbsp;</p>
+                                <button class="btn btn-info" type="submit" name="excel" value="1" style="margin-top: -5px;">Export</button>
                             </div>
                         </form>
                     </div>

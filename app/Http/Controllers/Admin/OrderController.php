@@ -42,7 +42,7 @@ class OrderController extends Controller
 
 		if($request->get('excel')) {
 			// $getOrders = $orders->get();
-			return Excel::download($orders->get(), 'orders.xlsx');
+			return Excel::download($orders->get(), date('Y-m-d-H-i').'-orders.xlsx');
 		}
 
 		return view('admin.order.index', [

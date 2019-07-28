@@ -7,6 +7,7 @@ use Mail;
 use Cloudder;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Exports\UserExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 
@@ -32,6 +33,11 @@ class UserController extends Controller
 			$users = $users->where('member_ship_code', '!=', NULL);
 		}
 		
+		if($request->get('excel')) {
+			// $getOrders = $orders->get();
+			return Excel::download(new UserExport, date('Y-m-d-H-i').'-users.xlsx');
+		}
+
 		return view('admin.user.index', [
 			'users' => $users->paginate(10)
 		]);
