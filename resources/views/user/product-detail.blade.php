@@ -90,7 +90,7 @@
 						@if($sizeVariations)
 							@foreach($sizeVariations as $sizeVariation)
 								<li>
-									<a href="javascript:void(0);" class="btn varbtn variation" name="size" id="varbtn-{{ $sizeVariation->size_id }}" data-id="{{ $sizeVariation->size_id }}" data-variation="{{ $sizeVariation->id }}" data-product="{{ $product->id }}" data-col="{{ $sizeVariation->color_id }}"> {{ $sizeVariation->size->name }}</a><input type="radio" name="variation" class="radio-cust radio-variation" id="{{ $sizeVariation->size_id }}" data-col="{{ $sizeVariation->color_id }}" style="display:none;" value="{{ $sizeVariation->size_id }}">
+									<a href="{{ $url.'/'.base64_encode($sizeVariation->id).'/'.str_random(25) }}" class="btn varbtn variation {{ ($variation->size_id == $sizeVariation->size->id) ? 'varselected disabled' : '' }}" name="size" id="varbtn-{{ $sizeVariation->size_id }}" data-id="{{ $sizeVariation->size_id }}" data-variation="{{ $sizeVariation->id }}" data-product="{{ $product->id }}" data-col="{{ $sizeVariation->color_id }}"> {{ $sizeVariation->size->name }}</a><input type="radio" name="variation" class="radio-cust radio-variation" id="{{ $sizeVariation->size_id }}" data-col="{{ $sizeVariation->color_id }}" style="display:none;" value="{{ $sizeVariation->size_id }}">
 								</li>
 							@endforeach
 						@endif

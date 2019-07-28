@@ -52,6 +52,24 @@ class UserController extends Controller
         ]);
 
         $user = Auth::user();
+        if($request->get('mobile') != $user->mobile) {
+            $otp = mt_rand(1111, 9999);
+            Session::put('updateUser', [
+                'name' => $request->get('firstName').' '.$request->get('lastName'),
+                'mobile' => $request->get('mobile'),
+                'birthDate' => date('Y-m-d', strtotime($request->get('birthDate'))),
+                'anniversaryDate' => ($request->get('anniversaryDate')) ? date('Y-m-d', strtotime($request->get('anniversaryDate'))) : NULL,
+            ]);
+
+            Session::put('otp', $otp);
+            $msg = "Don't Share OTP. Your Otp is = {{otp}}. This OTP expires in 05:00 minutes.";
+            $message = str_replace('{{otp}}', $otp, $msg);
+            // SMS Send
+            \App\Http\Controllers\User\LoginController::send($request->get('mobile'), $message, $otp);
+
+            $name = explode(' ', $user->name);
+            return redirect()->back();
+        }
 
         $user->name = $request->get('firstName').' '.$request->get('lastName');
         $user->mobile = $request->get('mobile');
@@ -61,6 +79,30 @@ class UserController extends Controller
 
         return redirect()->back()->with(['success' => 'Profile Updated Successfully..']);
     }
+
+    
+    public function mobileUpdate(Request $request)
+    {
+        $this->validate($request, [
+            'otp' => 'required|numeric',
+        ]);
+
+        $user = Auth::user();
+        if(Session::get('otp') != $request->get('otp')) {
+            return redirect()->back()->with(['error' => 'Invalid Otp.']);
+        }
+        // dd(Session::get('updateUser'));
+        $user->name = Session::get('updateUser')['name'];
+        $user->mobile = Session::get('updateUser')['mobile'];
+        $user->birth_date = date('Y-m-d', strtotime(Session::get('updateUser')['birthDate']));
+        $user->anniversary_date = !is_null(Session::get('updateUser')['anniversaryDate']) ? date('Y-m-d', strtotime(Session::get('updateUser')['anniversary_date'])) : NULL;
+        $user->save();
+
+        Session::forget('otp');
+        Session::forget('updateUser');
+        return redirect()->back()->with(['success' => 'Profile Updated Successfully..']);
+    }
+
 
     public function getMemberShip()
     {
@@ -72,7 +114,7 @@ class UserController extends Controller
             'user' => $user,
         ], function ($message) use ($user) {
             $message->from('support@shroud.in', 'Support')
-                ->subject('Order Placed')
+                ->subject('Shroud Membership')
                 ->to($user->email, $user->name);
         });
 

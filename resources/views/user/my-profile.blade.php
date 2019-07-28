@@ -27,7 +27,7 @@
 .row {
 	margin: 0;
 }
-#firstName-error, #lastName-error, #mobile-error, #birth_date-error {
+#firstName-error, #lastName-error, #mobile-error, #birth_date-error, #otp-error {
     display: none !important;
 }
 </style>
@@ -37,99 +37,130 @@
 <div class="row" style="background-color: #f3f3f3;">
 	@include('user.profile-menu')
 	<div class="col-md-9 col-sm-9 col-xs-12 margin-top-10">
-		<div class="panel panel-default">
-		  <div class="panel-body">
-		  	@if ($errors->any())
-			    <div class="alert alert-danger">
-			        <ul>
-			            @foreach ($errors->all() as $error)
-			                <li>{{ $error }}</li>
-			            @endforeach
-			        </ul>
-			    </div>
-			@endif
-		    <form action="{{ route('user.profileUpdate') }}" method="post" id="form">
-				{{ csrf_field() }}
-				<div class="col-md-12 col-xs-12">
-					<div class="form-group col-md-6">
-						<div class="input-group">
-						  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						  <input type="text" name="firstName" class="form-control" placeholder="First Name" value="{{ $fname ?: old('firstName') }}" autocomplete="off" required>
-						</div>
-					</div>
-					<div class="form-group col-md-6">
-						<div class="input-group">
-						  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						  <input type="text" name="lastName" class="form-control" placeholder="Last Name" value="{{ $lname ?: old('lastName') }}" autocomplete="off" required>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-12 col-xs-12">
-					<div class="form-group col-md-6">
-						<div class="input-group">
-						  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-						  <input type="email" name="email" class="form-control" placeholder="Email" value="{{ $user->email ?: old('email') }}" autocomplete="off" readonly>
-						</div>
-					</div>
-					<div class="form-group col-md-6">
-						<div class="input-group">
-						  <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-						  <input type="text" name="mobile" class="form-control mobile" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" value="{{ $user->mobile ?: old('mobile') }}" autocomplete="off" required>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-12 col-xs-12">
-					<div class="form-group col-md-6">
-						<div class="input-group">
-						  <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-						  <input type="text" name="birth_date" class="form-control birthDate" placeholder="Birth Date" value="{{ $user->birth_date ? date('d-m-Y', strtotime($user->birth_date)) : old('birth_date') }}" autocomplete="off" required max="{{ date('Y-m-d') }}" title="Birth Date">
-						</div>
-					</div>
-					<div class="form-group col-md-6">
-						<div class="input-group">
-						  <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-						  <input type="text" name="anniversary_date" class="form-control anniversaryDate" placeholder="Anniversary Date" value="{{ $user->anniversary_date ? date('d-m-Y', strtotime($user->anniversary_date)) : old('anniversary_date') }}" autocomplete="off"  max="{{ date('Y-m-d') }}" title="Anniversary Date">
-						</div>
-					</div>
-				</div>
-				<div class="form-group col-md-7 pull-right">
-					<input type="submit" class="more-product" value="Save">
-				</div>
-			</form>
-		  </div>
-		</div>
-		<!-- Address -->
-		<div class="addresses-box">
-			<div class="panel-body">
-				@foreach($addresses as $address)
-					<div class="col-md-6">
-						<div class="notification-area">
-							<div class="info-box">
-								<p>
-									<b class="black-text">{{ $address->name }}</b><br><br>
-									{{ $address->address }}<br>
-									{{ $address->address_1 }}<br>
-									{{ $address->city }} - {{ $address->pincode }},<br>{{ $address->state }}, {{ $address->country }}<br>
-									Phone: <span class="black-text">{{ $address->mobile }}</span><br>
-								</p>
+		@if(!empty(Session::get('updateUser')))
+			<div class="panel panel-default">
+			  <div class="panel-body">
+			  	@if ($errors->any())
+				    <div class="alert alert-danger">
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				                <li>{{ $error }}</li>
+				            @endforeach
+				        </ul>
+				    </div>
+				@endif
+	  			<form action="{{ route('user.mobileUpdate') }}" method="post" id="mobileUpdate">
+					{{ csrf_field() }}
+					<div class="col-md-12 col-xs-12">
+						<div class="form-group col-md-6">
+							<div class="input-group">
+							  <span class="input-group-addon"><i class="glyphicon glyphicon-no"></i></span>
+							  <input placeholder="Enter Otp" name="otp" type="text" class="form-control otp" required autocomplete="off" onkeydown="return max_length(this,event,4)" onkeypress="return isNumberKey(event)" maxlength="4">
 							</div>
-							<div class="add-box-footer" style="padding: 14px 18px 26px 2px;">
-								<span class="pull-left">
-									<a href="javascript:void(0)" class="dlt-thrush update_address" data-id="{{ $address->id }}"><i class="fa fa-edit"></i> Update </a>
-								</span>
-
-								<span class="pull-right">
-									<a href="{{ route('user.addressDelete', ['id' => $address->id]) }}" class="dlt-thrush delete_address" data-add="{{ $address->id }}"><i class="fa fa-trash-o"></i> Delete </a>
-								</span>
-							</div>
+		  					<p class="">This OTP expires in <span class="timeCounter">05:00</span> minutes.</p>
+						</div>
+						<div class="form-group col-md-7 pull-right">
+							<input type="submit" class="more-product" value="Submit">
 						</div>
 					</div>
-				@endforeach
+				</form>
+			  </div>
 			</div>
-			<p><br></p>
-			<button style="margin-left: 47px;" type="button" class="btn btn-success addAdddress"><i class="fa fa-plus"></i> Delivery Address<div class="ripple-wrapper"></div></button>
-			<p><br></p>
-		</div>
+		@else
+			<div class="panel panel-default">
+			  <div class="panel-body">
+			  	@if ($errors->any())
+				    <div class="alert alert-danger">
+				        <ul>
+				            @foreach ($errors->all() as $error)
+				                <li>{{ $error }}</li>
+				            @endforeach
+				        </ul>
+				    </div>
+				@endif
+			    <form action="{{ route('user.profileUpdate') }}" method="post" id="form">
+					{{ csrf_field() }}
+					<div class="col-md-12 col-xs-12">
+						<div class="form-group col-md-6">
+							<div class="input-group">
+							  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							  <input type="text" name="firstName" class="form-control" placeholder="First Name" value="{{ $fname ?: old('firstName') }}" autocomplete="off" required>
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<div class="input-group">
+							  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							  <input type="text" name="lastName" class="form-control" placeholder="Last Name" value="{{ $lname ?: old('lastName') }}" autocomplete="off" required>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-xs-12">
+						<div class="form-group col-md-6">
+							<div class="input-group">
+							  <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+							  <input type="email" name="email" class="form-control" placeholder="Email" value="{{ $user->email ?: old('email') }}" autocomplete="off" readonly>
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<div class="input-group">
+							  <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+							  <input type="text" name="mobile" class="form-control mobile" onkeydown="return max_length(this,event,10)" onkeypress="return isNumberKey(event)" value="{{ $user->mobile ?: old('mobile') }}" autocomplete="off" required>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 col-xs-12">
+						<div class="form-group col-md-6">
+							<div class="input-group">
+							  <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+							  <input type="text" name="birth_date" class="form-control birthDate" placeholder="Birth Date" value="{{ $user->birth_date ? date('d-m-Y', strtotime($user->birth_date)) : old('birth_date') }}" autocomplete="off" required max="{{ date('Y-m-d') }}" title="Birth Date">
+							</div>
+						</div>
+						<div class="form-group col-md-6">
+							<div class="input-group">
+							  <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+							  <input type="text" name="anniversary_date" class="form-control anniversaryDate" placeholder="Anniversary Date" value="{{ $user->anniversary_date ? date('d-m-Y', strtotime($user->anniversary_date)) : old('anniversary_date') }}" autocomplete="off"  max="{{ date('Y-m-d') }}" title="Anniversary Date">
+							</div>
+						</div>
+					</div>
+					<div class="form-group col-md-7 pull-right">
+						<input type="submit" class="more-product" value="Save">
+					</div>
+				</form>
+			  </div>
+			</div>
+			<!-- Address -->
+			<div class="addresses-box">
+				<div class="panel-body">
+					@foreach($addresses as $address)
+						<div class="col-md-6">
+							<div class="notification-area">
+								<div class="info-box">
+									<p>
+										<b class="black-text">{{ $address->name }}</b><br><br>
+										{{ $address->address }}<br>
+										{{ $address->address_1 }}<br>
+										{{ $address->city }} - {{ $address->pincode }},<br>{{ $address->state }}, {{ $address->country }}<br>
+										Phone: <span class="black-text">{{ $address->mobile }}</span><br>
+									</p>
+								</div>
+								<div class="add-box-footer" style="padding: 14px 18px 26px 2px;">
+									<span class="pull-left">
+										<a href="javascript:void(0)" class="dlt-thrush update_address" data-id="{{ $address->id }}"><i class="fa fa-edit"></i> Update </a>
+									</span>
+
+									<span class="pull-right">
+										<a href="{{ route('user.addressDelete', ['id' => $address->id]) }}" class="dlt-thrush delete_address" data-add="{{ $address->id }}"><i class="fa fa-trash-o"></i> Delete </a>
+									</span>
+								</div>
+							</div>
+						</div>
+					@endforeach
+				</div>
+				<p><br></p>
+				<button style="margin-left: 47px;" type="button" class="btn btn-success addAdddress"><i class="fa fa-plus"></i> Delivery Address<div class="ripple-wrapper"></div></button>
+				<p><br></p>
+			</div>
+		@endif
 	</div>
 </div>
 <!-- Address -->
@@ -190,6 +221,37 @@
 @section('js')
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script type="text/javascript">
+@if(!empty(Session::get('updateUser')))
+	/*TIme Count For Otp*/
+function startCounters(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.text(minutes + ":" + seconds);
+
+        if (--timer < 0) {
+            page_redirect('/');
+        }
+    }, 1000);
+}
+var fiveMinutes = 60 * 5,
+    display = $('.timeCounter');
+startCounters(fiveMinutes, display);
+
+$("#mobileUpdate").validate({
+  	rules: {
+     otp: {
+        required: true,
+     },
+	}
+});
+@endif
+
 	$(document).ready(function() {
       $("#form").validate({
       	rules: {

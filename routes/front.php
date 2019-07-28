@@ -53,6 +53,7 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 		Route::post('orderReturn', 'UserController@orderReturn')->name('orderReturn');
 		Route::get('my-profile', 'UserController@profile')->name('myProfile');
 		Route::post('my-update', 'UserController@profileUpdate')->name('profileUpdate');
+		Route::post('my-mobile-update', 'UserController@mobileUpdate')->name('mobileUpdate');
 
 		Route::get('get-membership', 'UserController@getMemberShip')->name('getMemberShip');
 		Route::get('check-membership-code', 'ProductController@memberShipCodeCheck')->name('memberShipCodeCheck');

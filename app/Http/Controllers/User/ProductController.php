@@ -38,7 +38,7 @@ class ProductController extends Controller
     }
     public function index(Request $request)
     {
-
+        Session::forget('updateUser');
         $variations = Variation::with(['product.category.parent'])->latest()->groupBy('color_id')->groupBy('product_id');
 
         if($request->get('sizes')) {
@@ -210,13 +210,22 @@ class ProductController extends Controller
 		$product_id		= $request->get('product_id');
 		$variation_id	= $request->get('variation_id');
 		$orders = array();
+        $finalPrice = 0;
 		for($i = 0; $i<count($product_id); $i++) {
+            if(!$variation = Variation::find($variation_id[$i])) {
+                return response()->json([
+                    'status' => true,
+                    'order' => 0
+                ]); 
+            }
+            $finalPrice += $variation->price * $qty[$i];
 			$orders['product'][] = array("product_id" => $product_id[$i],"qty" => $qty[$i],"variation_id" =>$variation_id[$i]);
 		}
+
 		$orders['total'] = $total;
         $deliverCharge = AppContent::find(1);
-		$orders['final_amount'] = ($final_amount - $deliverCharge->delivery_charge);
-        Session::put('CART_AMOUNT', ($final_amount - $deliverCharge->delivery_charge));
+		$orders['final_amount'] = ($finalPrice - $deliverCharge->delivery_charge);
+        Session::put('CART_AMOUNT', ($finalPrice - $deliverCharge->delivery_charge));
 		Session::put('discount', 0);
         Session::put('discountPercentage', 0);
 		Session::put('order', $orders);
