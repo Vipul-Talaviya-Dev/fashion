@@ -1,4 +1,5 @@
 <?php
+putenv('TMPDIR=/home/vipult/tmp');
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
@@ -57,7 +58,3 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
-
-if(env('APP_ENV') == 'production') {
-	putenv('TMPDIR=/home/vipult/tmp');
-}
