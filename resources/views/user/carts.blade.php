@@ -94,7 +94,7 @@
 										</tr>
 										<tr>
 											<td colspan="4">Delivery Charge</td>
-											<td> <i class="fa fa-rupee"></i> &nbsp; <span >{{ $deliverCharge }}</span></td>
+											<td> <i class="fa fa-rupee"></i> &nbsp; <span id="deliverCharge">{{ $deliverCharge }}</span></td>
 										</tr>
 									</tbody>
 									<tfoot>

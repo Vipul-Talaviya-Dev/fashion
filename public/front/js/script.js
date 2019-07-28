@@ -591,7 +591,9 @@ $(document).ready(function () {
         $('.sellingprice').each(function(){
             sum += parseInt($(this).text());  
         });
+        var deliverCharge  = document.getElementById('deliverCharge').innerHTML;
         document.getElementById('total').innerHTML = sum;
+        sum += parseInt(deliverCharge);
         document.getElementById('finalPrice').innerHTML = parseInt(sum);
     });
 

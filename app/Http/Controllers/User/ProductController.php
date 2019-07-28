@@ -206,7 +206,7 @@ class ProductController extends Controller
 
     	$qty 			= $request->get('product_qty');
 		$total		 	= $request->get('total');
-		$final_amount  	= $request->get('finalamount');
+		$final_amount  	= (int) $request->get('finalamount');
 		$product_id		= $request->get('product_id');
 		$variation_id	= $request->get('variation_id');
 		$orders = array();
@@ -215,7 +215,6 @@ class ProductController extends Controller
 		}
 		$orders['total'] = $total;
         $deliverCharge = AppContent::find(1);
-
 		$orders['final_amount'] = ($final_amount - $deliverCharge->delivery_charge);
         Session::put('CART_AMOUNT', ($final_amount - $deliverCharge->delivery_charge));
 		Session::put('discount', 0);
@@ -298,7 +297,6 @@ class ProductController extends Controller
                 'error' => 'Invalid MemberShip Code...'
             ]);
         }
-
         // if(Session::get('CART_AMOUNT') >= 2000) {
             $discount = round(Session::get('CART_AMOUNT')*20/100, 2);
             Session::put('discount', $discount);
