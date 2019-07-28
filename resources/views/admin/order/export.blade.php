@@ -9,6 +9,7 @@
         <th>Discount</th>
         <th>Discount Amount</th>
         <th>Delivery Charge</th>
+        <th>Cart Amount</th>
         <th>Payment Mode</th>
         <th>Payment Status</th>
         <th>Order Status</th>
