@@ -214,8 +214,10 @@ class ProductController extends Controller
 			$orders['product'][] = array("product_id" => $product_id[$i],"qty" => $qty[$i],"variation_id" =>$variation_id[$i]);
 		}
 		$orders['total'] = $total;
-		$orders['final_amount'] = $final_amount;
-        Session::put('CART_AMOUNT', $final_amount);
+        $deliverCharge = AppContent::find(1);
+
+		$orders['final_amount'] = ($final_amount - $deliverCharge->delivery_charge);
+        Session::put('CART_AMOUNT', ($final_amount - $deliverCharge->delivery_charge));
 		Session::put('discount', 0);
         Session::put('discountPercentage', 0);
 		Session::put('order', $orders);
@@ -298,7 +300,7 @@ class ProductController extends Controller
         }
 
         // if(Session::get('CART_AMOUNT') >= 2000) {
-            $discount = round(Session::get('CART_AMOUNT')*20/100);
+            $discount = round(Session::get('CART_AMOUNT')*20/100, 2);
             Session::put('discount', $discount);
             Session::put('offer', 0);
             Session::put('discountPercentage', 20);
@@ -380,7 +382,7 @@ class ProductController extends Controller
                 }*/
             }   
             
-            Session::put('discount', round($discount)); // discount amount
+            Session::put('discount', round($discount, 2)); // discount amount
             Session::put('offer', $offer->id);
             Session::put('discountPercentage', $offer->discount); //discount percentage
 

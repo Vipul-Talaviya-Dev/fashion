@@ -64,7 +64,7 @@
 					<th width="100px" style="font-family:Arial,Helvetica,sans-serif;color:#34495e;font-size:14px">Subtotal</th>
 				</tr></thead>
 				<tbody>
-					<?php $cgst = 0;?>
+					<?php $productTotal = $cgst = 0;?>
 				@foreach($order->orderProducts as $key => $orderProduct)
 				<tr>
 					<td>{{ $key+1 }}</td>
@@ -77,13 +77,14 @@
 						<a style="text-decoration:none" width="200px" href="{{ \Cloudder::secureShow($image[0]) }}" target="_blank">
 						<img border="0" src="{{ \Cloudder::secureShow($image[0]) }}" style="width:80px;min-height:auto" class="CToWUd">
 						</a><br>
-						<span>{{ $orderProduct->product->name }} <br> (Order Id: {{ $orderProduct->orderProductId() }})</span>
+						<span>{{ $orderProduct->product->name }} <br> (Sub Order Id: {{ $orderProduct->orderProductId() }})</span>
 					</div>
 					</td>
 					<td style="font-family:Arial,Helvetica,sans-serif;color:#34495e;font-size:13px"><div align="center">Rs. {{ $orderProduct->price }}</div></td>
 					<td style="font-family:Arial,Helvetica,sans-serif;color:#34495e;font-size:13px"><div align="center">{{ $orderProduct->qty }}</div> </td>
 					<td style="font-family:Arial,Helvetica,sans-serif;color:#34495e;font-size:13px"><div align="center">Rs. {{ $orderProduct->price * $orderProduct->qty }}</div> </td>
 					<?php 
+					  $productTotal += ($orderProduct->price * $orderProduct->qty);
 		              $cgstAmount = round(($orderProduct->price*2.5)/100, 2);
 		              $cgst += $cgstAmount*$orderProduct->qty;
 		            ?>
@@ -102,7 +103,7 @@
 					<td>
 						<div style="padding-left:250px;padding-right:10px;font-size:15px;margin-top:10px;"><b>Sub Total</b></div>
 					</td>
-					<td><div style="margin-top:10px;">Rs. {{ $order->total - ($cgst+$cgst) }}</div></td>
+					<td><div style="margin-top:10px;">Rs. {{ number_format(($productTotal-($cgst*2)), 2) }}</div></td>
 				</tr>
 				<tr>
 					<td>
@@ -120,7 +121,13 @@
 					<td>
 						<div style="padding-left:250px;padding-right:10px;font-size:15px;margin-top:10px;color:red;"><b>Discount (-)</b></div>
 					</td>
-					<td><div style="margin-top:10px;">Rs. {{ $order->discount_amount }}</div></td>
+					<td><div style="margin-top:10px;">Rs. {{ number_format($order->discount_amount, 2) }}</div></td>
+				</tr>
+				<tr>
+					<td>
+						<div style="padding-left:250px;padding-right:10px;font-size:15px;margin-top:10px;"><b>Gross Amount</b></div>
+					</td>
+					<td><div style="margin-top:10px;">Rs. {{ number_format($productTotal-$order->discount_amount, 0) }}</div></td>
 				</tr>
 				<tr>
 					<td>
@@ -132,7 +139,7 @@
 					<td>
 						<div style="padding-left:250px;padding-right:10px;font-size:18px;margin-top:10px;font-family:Arial,Helvetica,sans-serif;color:#34495e"><b>Total</b> </div>
 					</td>
-					<td> <div style="margin-top:10px;">Rs. {{ $order->cart_amount }}</div></td>
+					<td> <div style="margin-top:10px;">Rs. {{ number_format($order->cart_amount) }}</div></td>
 				</tr>
 			</tbody>
 			</table>
@@ -156,6 +163,29 @@
 			</table>            
     </td>
   </tr>
+
+  <tr><td colspan="2" height="10" style="border-bottom:1px solid black"></td></tr>
+	<tr>
+		<td>
+			<table>
+				<tbody>
+					<tr>
+						<td>
+							<div style="padding-right:10px;font-size:15px;margin-top:10px;"><b>Payment Mode</b></div>
+						</td>
+						<td><div style="margin-top:10px;">{{ \App\Helper\Helper::paymentMode($order->payment_mode) }}</div></td>
+					</tr>
+					<tr>
+						<td>
+							<div style="padding-right:10px;font-size:15px;margin-top:10px;"><b>Payment Status</b></div>
+						</td>
+						<td><div style="margin-top:10px;">{{ ($order->payment_status == 2) ? 'Success' : 'Pending' }}</div></td>
+					</tr>
+				</tbody>
+			</table>
+		</td>
+	</tr>
+
 	<tr><td colspan="2" style="font-size:11px;text-align:center;font-family:Arial,Helvetica,sans-serif;color:#919bac;padding-top:10px">
         Feedback, suggestions or compliments - do write to <a href="mailto:support@shroud.in" style="font-size:12px;font-family:Arial,Helvetica,sans-serif;color:#22a7f0;text-decoration:none" target="_blank">Support Mail</a>
 		</td>

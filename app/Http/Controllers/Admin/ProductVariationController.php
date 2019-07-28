@@ -70,7 +70,7 @@ class ProductVariationController extends Controller
                 'product_id' => $product->id,
                 'color_id' => $request->get('colorId'),
                 'size_id' => $request->get('sizes')[$i],
-                'product_type_id' => isset($request->get('typeIds')[$i]) ? implode(',', $request->get('typeIds')) : NULL,
+                'product_type_id' => !empty($request->get('typeIds')) ? implode(',', $request->get('typeIds')) : NULL,
                 'images' => implode(',', $images),
                 'purchase_price' => $request->get('purchase_price'),
                 'price' => $request->get('price'),
