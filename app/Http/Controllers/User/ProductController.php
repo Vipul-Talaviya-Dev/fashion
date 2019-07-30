@@ -7,6 +7,8 @@ use Auth;
 use Session, Cookie;
 use Carbon\Carbon;
 use Validator;
+use App\Helper\Sms;
+use App\Helper\Helper;
 use App\Models\Size;
 use App\Models\User;
 use App\Models\Color;
@@ -69,7 +71,7 @@ class ProductController extends Controller
             // $variations = $variations->where('product_type_id', explode(',', $request->get('types')));
         }
         return view('user.product-list', [
-        	'variations' => $variations->paginate(9),
+        	'variations' => $variations->where('qty', '>', 0)->paginate(9),
             'sizes' => Size::active()->get(),
             'colors' => Color::active()->get(),
             'types' => ProductType::active()->get(),
@@ -469,9 +471,9 @@ class ProductController extends Controller
     	        // $orderProduct->payment_status = ($request->get('payment_option') == 1) ? 2 : 1;
     	        $orderProduct->save();
 
-                $variation->qty = $variation->qty - 1;
+                // $variation->qty = $variation->qty - 1;
                 // $variation->qty = $variation->qty - $data['qty'];
-                $variation->save();
+                // $variation->save();
             }
         }
 
@@ -501,6 +503,15 @@ class ProductController extends Controller
         $user = Auth::user();
         $address = $user->addresses()->find($order->address_id);
 
+
+        #sms
+        $message = Helper::orderMessages($order->status, $order->orderId());
+        if($order->status == 8) {
+            $message = "Your payment id decline somehow. Kindly retry the payment or contact us.";
+        }
+        Sms::send($user->mobile, $message);
+
+        # Mail
         Mail::send('user.email.order-place', [
             'order' => $order,
             'user' => $user,

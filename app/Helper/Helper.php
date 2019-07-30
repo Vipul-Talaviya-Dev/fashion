@@ -44,6 +44,24 @@ class Helper
         return $status;
     }
 
+    public static function orderMessages($id, $orderId)
+    {
+        $messages = [
+            3 => "Thanks for shopping at SHROUD. Your ORDER ID $orderId. Kindly visit SHROUD.IN for more detail.",
+            4 => "Your oreder picked up from our facility. Your ORDER ID $orderId . Kindly visit SHROUD.IN for more detail.",
+            5 => "Your order is on the way for Delievry. Your ORDER ID $orderId. Kindly visit SHROUD.IN for more detail.",
+            6 => "Yout order has been delievred. Your ORDER ID $orderId. Kindly visit SHROUD.IN for more detail.",
+            7 => "We got your return request. Sub order ID $orderId. Our team is processing your request. Kindly visit SHROUD.IN for more detail",
+            8 => "Your order has been cancelled Kindly visit SHROUD.IN for more detail.",
+        ];
+
+        if($id) {
+            return $messages[$id];
+        }
+        
+        return $messages;
+    }
+
     public static function dateFormat($date)
     {
         return date("d/m/Y", strtotime($date));

@@ -31,7 +31,11 @@
 				</tr>
 				<tr>
                     <td style="font-size:13px;padding-top:10px;font-family:Arial,Helvetica,sans-serif;color:#34495e">
-						We will send you another email once the items in your order have been shipped. Meanwhile, you can check the status of your order on Online Shroud Store.
+                    	@if($order->status == 8)
+                    		Your payment is Decline. Kindly retry the payment process or contact us. (send a immigiate one mail to customer regarding this).
+                    	@else
+							We will send you another email once the items in your order have been shipped. 	Meanwhile, you can check the status of your order on Online Shroud Store.
+                    	@endif
 					</td>
 				</tr>
 				</tbody>

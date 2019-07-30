@@ -8,6 +8,8 @@ use Cloudder;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\Address;
+use App\Helper\Helper;
+use App\Helper\Sms;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use App\Exports\OrderExport;
@@ -64,10 +66,10 @@ class OrderController extends Controller
 
 	public function statusChange(Request $request, $id)
 	{
-		if(!$order = Order::with(['user'])->find($id)) {
+		if(!$order = Order::with(['orderProducts.variation', 'user'])->find($id)) {
 			return redirect()->back()->with('error', 'Invalid Selected Id');
 		}
-
+		
 		$order->status = $request->get('status');
 		if($order->payment_mode == 1 && $request->get('status') == 6) {
 			$order->payment_status = 2;	
@@ -77,10 +79,21 @@ class OrderController extends Controller
 		
 		foreach ($order->orderProducts as $key => $orderProduct) {
 			$orderProduct->status = $request->get('status');
-			$orderProduct->save();	
+			$orderProduct->save();
+
+			if($orderProduct->variation->qty > 0) {
+				# variavtion
+				$orderProduct->variation->qty = $orderProduct->variation->qty - $orderProduct->qty;
+	            $orderProduct->variation->save();
+			}
 		}
 		$user = $order->user;
 		
+		#sms 
+		$message = Helper::orderMessages($request->get('status'), $order->orderId());
+		Sms::send($user->mobile, $message);
+
+		# send mail
 		Mail::send('user.email.order-status-change', [
             'order' => $order,
             'user' => $user,

@@ -64,7 +64,9 @@
                                     <select name="status" class="form-control">
                                         <option value="">-- Select Status --</option>
                                         @foreach(\App\Helper\Helper::orderStatus() as $key => $status)
-                                            <option value="{{ $key }}" {{ ($order->status == $key) ? 'selected' : '' }}>{{ $status }}</option>
+                                            @if(!in_array($key, [1,2,3]))
+                                                <option value="{{ $key }}" {{ ($order->status == $key) ? 'selected' : '' }}>{{ $status }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -73,6 +75,10 @@
                                     <button class="btn btn-info" type="submit" style="margin-top: -5px;">Save</button>
                                 </div>
                             </form>
+                            <div class="form-group pull-right">
+                                    <label class=""><b>Cuurent Order Status</b></label><br>
+                                    <button class="btn btn-sm btn-info" type="button" disabled>{{ \App\Helper\Helper::orderStatus($order->status) }}</button>
+                                </div>
                         </div>
                         <div class="panel panel-flat">
                             <table class="table">

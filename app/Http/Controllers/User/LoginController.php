@@ -8,7 +8,7 @@ use Session;
 use Validator;
 use Socialite;
 use App\Models\User;
-use App\Library\Sms;
+use App\Helper\Sms;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
