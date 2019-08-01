@@ -49,8 +49,8 @@ class Helper
         $messages = [
             3 => "Thanks for shopping at SHROUD. Your ORDER ID $orderId. Kindly visit SHROUD.IN for more detail.",
             4 => "Your oreder picked up from our facility. Your ORDER ID $orderId . Kindly visit SHROUD.IN for more detail.",
-            5 => "Your order is on the way for Delievry. Your ORDER ID $orderId. Kindly visit SHROUD.IN for more detail.",
-            6 => "Yout order has been delievred. Your ORDER ID $orderId. Kindly visit SHROUD.IN for more detail.",
+            5 => "Your order is on the way for delivery. Your ORDER ID $orderId. Kindly visit SHROUD.IN for more detail.",
+            6 => "Your order has been delivered. Your ORDER ID $orderId. Kindly visit SHROUD.IN for more detail.",
             7 => "We got your return request. Sub order ID $orderId. Our team is processing your request. Kindly visit SHROUD.IN for more detail",
             8 => "Your order has been cancelled Kindly visit SHROUD.IN for more detail.",
         ];

@@ -34,7 +34,7 @@ class ProductController extends Controller
         ], function ($message) {
             $message->from('support@shroud.in', 'Support')
                 ->subject('Order Placed')
-                ->to("vipulpatel1152@gmail.com", "vipul patel");
+                ->to("apkalaundrytest@gmail.com", "vipul patel");
         });
         dd('df');
     }
@@ -507,7 +507,7 @@ class ProductController extends Controller
         #sms
         $message = Helper::orderMessages($order->status, $order->orderId());
         if($order->status == 8) {
-            $message = "Your payment id decline somehow. Kindly retry the payment or contact us.";
+            $message = "Your payment ".$order->orderId()." decline somehow. Kindly retry the payment or contact us.";
         }
         Sms::send($user->mobile, $message);
 

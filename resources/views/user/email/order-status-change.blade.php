@@ -23,11 +23,11 @@
 					Dear <b>{{ $user->name }}</b>,
 					</td>
 				</tr>
-				<tr>
+				<!-- <tr>
                     <td style="font-size:13px;font-family:Arial,Helvetica,sans-serif;color:#34495e;padding-top:10px">
 					 Thank you for your order.
 					</td>
-				</tr>
+				</tr> -->
 				<tr>
                     <td style="font-size:13px;padding-top:10px;font-family:Arial,Helvetica,sans-serif;color:#34495e">
                     	
