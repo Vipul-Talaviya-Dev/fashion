@@ -32,18 +32,21 @@ class LoginController extends Controller
     public function socialCallBackHandle($service)
     {
         try {
-            if($socialUser = Socialite::with($service)->user()) {
-                if(!$user = User::where('email', $socialUser->email)->first()) {
-                    $user = User::create([
-                        'name' => $socialUser->name,
-                        'email' => $socialUser->email,
-                        'referral_code' => User::referralCode(),
-                    ]);
+            if($socialUser = Socialite::with($service)->stateless()->user()) {
+                if(isset($socialUser->email)) {
+                    if(!$user = User::where('email', $socialUser->email)->first()) {
+                        $user = User::create([
+                            'name' => $socialUser->name,
+                            'email' => $socialUser->email,
+                            'referral_code' => User::referralCode(),
+                        ]);
+                    }
+                    Auth::login($user);
+                    return redirect('/')->with(['success' => 'Successfully Login..']);
                 }
-                Auth::login($user);
-                return redirect('/')->with(['success' => 'Successfully Login..']);
+                return redirect('/')->with(['error' => 'Please Use different account..']);
             }
-        } catch(Exception $e) {
+        } catch(\Exception $e) {
             return redirect('/')->with(['error' => $e->getMessage()]);
         }
 
