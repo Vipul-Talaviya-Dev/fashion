@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use DB;
+use PDF;
 use Mail;
 use Cloudder;
 use App\Models\Order;
@@ -113,11 +114,18 @@ class OrderController extends Controller
 		}
 
 		$address = Address::where('user_id', $order->user->id)->first();
-		return view('admin.order.invoice', [
+
+		$pdf = PDF::loadView('admin.order.invoice2', [
 			'order' => $order,
 			'address' => $address,
 			'user' => $order->user
 		]);
+        return $pdf->stream();
+		/*return view('admin.order.invoice2', [
+			'order' => $order,
+			'address' => $address,
+			'user' => $order->user
+		]);*/
 	}
 
 	public function users(Request $request)

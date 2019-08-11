@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use Mail;
+use PDF;
 use Auth;
 use Session, Cookie;
 use Carbon\Carbon;
@@ -27,6 +28,17 @@ use Illuminate\Validation\Rule;
 
 class ProductController extends Controller
 {
+    public function invoice()
+    {
+        /*$pdf = PDF::loadView('admin.order.invoice2');
+        return $pdf->setPaper('a4')->setOption('encoding', 'UTF-8')->inline('vipl.pdf');*/
+        $order = Order::with(['orderProducts.product', 'user'])->find(1);
+        $address = Address::where('user_id', $order->user->id)->first();
+        $user = $order->user;
+        $pdf = PDF::loadView('admin.order.invoice2', compact('user', 'order', 'address'));
+        return $pdf->stream();
+    }
+
     public function mail()
     {
         Mail::send('user.email.member-ship-email', [

@@ -12,6 +12,7 @@
 */
 Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 	Route::get('mail', 'ProductController@mail');
+	Route::get('invoice', 'ProductController@invoice');
 
 	Route::get('/', 'HomeController@index')->name('index');
 	Route::get('contact-us', 'HomeController@contact')->name('contact');
