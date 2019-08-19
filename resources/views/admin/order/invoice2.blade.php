@@ -91,22 +91,24 @@
                 </td>
             </tr>
             <tr> 
-                <td width="40%" style="border-right: 1px solid #000000;" class="padding-10"> 
-                    <strong>To:</strong>
-                    <br> GF Sahajanand Arcade <br>
-                        Near helmet char rasta <br>
-                        Ahmedabad - 380007 <br>
-                        Gujarat <br>
-                </td>
+            	@if(false)
+	                <td width="40%" style="border-right: 1px solid #000000;" class="padding-10"> 
+	                    <strong>To:</strong>
+	                    <br> GF Sahajanand Arcade <br>
+	                        Near helmet char rasta <br>
+	                        Ahmedabad - 380007 <br>
+	                        Gujarat <br>
+	                </td>
+                @endif
                 <td class="padding-10"> 
-                    <strong>Delivery at:</strong><br> {{ $order->user->name }} ({{ $address->mobile }})<br> {{ $address->address }},<br> {{ $address->city }} - {{ $address->pincode }}, {{ $address->state }}, {{ $address->country }}
+                    <strong>To:</strong><br> {{ $order->user->name }} ({{ $address->mobile }})<br> {{ $address->address }},<br> {{ $address->city }} - {{ $address->pincode }}, {{ $address->state }}, {{ $address->country }}
                 </td> 
             </tr>
             <tr> 
                 <th class="top-right-border">Description</th>
                 <th class="top-right-border">Pattern Code</th>
                 <th class="top-right-border">HSN Code</th>
-                <th class="top-right-border">Qty</th>
+                <th class="top-right-border" style="width: 5%;">Qty</th>
                 <th class="top-right-border">Unit Rate (Rs)</th>
                 <th class="top-right-border border-right-0">Amount (Rs)</th>
             </tr>
@@ -192,11 +194,13 @@
                 </td>
                 <td colspan="5" class="top-right-border border-right-0"><br>
                     <div style="width: 100%;">
-                        <b style="font-size: 14px">For Shroud Enterpeise</b> <p><br></p>
+                        <b style="font-size: 14px">For Shroud Enterpeise,</b> <p><br></p>
 
                         <div>
                             <!-- <span>AUTHORIZED SIGNATORY </span> -->
-                            <img style="margin-top: -70px; left:0px; width:150px; height:90px;" src="{{ public_path('front/images/sign.png') }}">
+                            @if(false)
+                            	<img style="margin-top: -70px; left:0px; width:150px; height:90px;" src="{{ public_path('front/images/sign.png') }}">
+                        	@endif
                         </div>
 
                     </div>
