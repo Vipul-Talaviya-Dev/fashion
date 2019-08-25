@@ -46,9 +46,9 @@ class ProductController extends Controller
         ], function ($message) {
             $message->from('support@shroud.in', 'Support')
                 ->subject('Order Placed')
-                ->to("apkalaundrytest@gmail.com", "vipul patel");
+                ->to("vipulpatel1152@gmail.com", "vipul patel");
         });
-        dd('df');
+        dd('Done');
     }
     public function index(Request $request)
     {
@@ -529,7 +529,7 @@ class ProductController extends Controller
             'user' => $user,
             'address' => $address
         ], function ($message) use ($user) {
-            $message->from('support@shroud.in', 'Support')
+            $message->from('support@shroud.in', 'Shroud Enterprise')
                 ->subject('Order Placed')
                 ->to($user->email, $user->name);
         });

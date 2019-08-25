@@ -274,7 +274,7 @@ class LoginController extends Controller
                     'email' => $user->email,
                     'password' => $password
                 ], function ($message) use ($user) {
-                    $message->from('support@shroud.in', 'Support')
+                    $message->from('support@shroud.in', 'Shroud Enterprise')
                         ->subject('Reset account')
                         ->to($user->email, $user->name);
                 });
