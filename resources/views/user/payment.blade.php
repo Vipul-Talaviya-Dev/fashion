@@ -221,7 +221,7 @@
 							<!--online Payment-->
 							<div class="panel panel-info">
 								<div class="panel-heading">
-									<h4 class="panel-title white-text"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-2">Other Online Payment Options</a></h4>
+									<h4 class="panel-title white-text"><a data-toggle="collapse" data-parent="#accordion" href="#collapse-2">Payment Modes</a></h4>
 								</div>
 								<div class="panel-collapse collapse in" id="collapse-2">
 									<div class="panel-body">

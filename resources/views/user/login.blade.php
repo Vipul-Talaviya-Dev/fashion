@@ -105,8 +105,8 @@
 					<ul class="social">
 						<li class="social_facebook"><a href="{{ route('user.socialLogin', ['service' => 'facebook']) }}" class="entypo-facebook"></a></li>
 						<li class="social_dribbble"><a href="{{ route('user.socialLogin', ['service' => 'google']) }}" class="entypo-dribbble"></a></li>
-						<li class="social_instagram"><a href="javascript:void(0);" class="entypo-instagram"></a></li>
 						@if(false)
+							<li class="social_instagram"><a href="javascript:void(0);" class="entypo-instagram"></a></li>
 							<li class="social_twitter"><a href="javascript:void(0);" class="entypo-twitter"></a></li>
 							<li class="social_behance"><a href="javascript:void(0);" class="entypo-behance"></a></li>
 						@endif

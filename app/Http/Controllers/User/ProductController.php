@@ -321,7 +321,7 @@ class ProductController extends Controller
             ]);
         }
         // if(Session::get('CART_AMOUNT') >= 2000) {
-            $discount = round(Session::get('CART_AMOUNT')*20/100, 2);
+            $discount = round(Session::get('CART_AMOUNT')*20/100);
             Session::put('discount', $discount);
             Session::put('offer', 0);
             Session::put('discountPercentage', 20);
@@ -403,7 +403,7 @@ class ProductController extends Controller
                 }*/
             }   
             
-            Session::put('discount', round($discount, 2)); // discount amount
+            Session::put('discount', round($discount)); // discount amount
             Session::put('offer', $offer->id);
             Session::put('discountPercentage', $offer->discount); //discount percentage
 

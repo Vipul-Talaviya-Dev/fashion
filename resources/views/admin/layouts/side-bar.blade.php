@@ -85,8 +85,13 @@
                     <li><a href="{{ route('admin.content.edit', ['id' => 2]) }}"><i class="fa fa-cog"></i> <span>FAQ</span></a></li>
                     @endif
                     @if(in_array(16, $moduleIds))
-                        <li><a href="{{ route('admin.content.edit', ['id' => 3]) }}"><i class="fa fa-cog"></i> <span>Term & Condition</span></a></li>
-                        <li><a href="{{ route('admin.content.edit', ['id' => 4]) }}"><i class="fa fa-cog"></i> <span>Privacy Policy</span></a></li>
+                        <li>
+                            <a href="javascript:void(0);"><i class="fa fa-cog"></i> <span>Condition Modules</span></a>
+                            <ul>
+                                <li><a href="{{ route('admin.content.edit', ['id' => 3]) }}"><i class="fa fa-cog"></i> <span>Term & Condition</span></a></li>
+                                <li><a href="{{ route('admin.content.edit', ['id' => 4]) }}"><i class="fa fa-cog"></i> <span>Privacy Policy</span></a></li>
+                            </ul>
+                        </li>
                     @endif
                     @if(in_array(18, $moduleIds))
                         <li><a href="{{ route('admin.contantImportForm') }}"><i class="fa fa-cog"></i> <span>Contact Import</span></a></li>
