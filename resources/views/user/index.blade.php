@@ -48,18 +48,18 @@
 @section('content')
 <!-- banner -->
 <div class="">
-	<div class="bannerImg sliderfig" style="margin: 1em 0 0;">
-		<ul id="banner">			
-			@foreach($banners as $banner)
-				<li title="{{ $banner->name }}" style="padding: 0px;">
+  <div class="bannerImg sliderfig" style="margin: 1em 0 0;">
+    <ul id="banner">      
+      @foreach($banners as $banner)
+        <li title="{{ $banner->name }}" style="padding: 0px;">
           <a href="{{ $banner->url }}" class="vip">
             <!-- <div class="slide__caption text-center">{{ $banner->description }}</div> -->
-  					<img src="{{ \Cloudder::secureShow($banner->image) }}" alt="{{ $banner->name }}" class="img-responsive" />
+            <img src="{{ \Cloudder::secureShow($banner->image) }}" alt="{{ $banner->name }}" class="img-responsive" />
           </a>
-				</li>
-			@endforeach
-		</ul>
-	</div>
+        </li>
+      @endforeach
+    </ul>
+  </div>
 </div>
 
 <!-- special-deals -->
@@ -230,11 +230,9 @@
         infinite: false,
         autoplay: true,
         autoplaySpeed: 5000,
-        prevArrow: false,
-        nextArrow: false
       });
       $(".slide__caption").css('position', 'absolute');
-      
+      $(".slick-arrow").html('');
       $('#indexModal').modal();
       $("body").on("click", ".close", function() {
         $('#indexModal').modal("hide");

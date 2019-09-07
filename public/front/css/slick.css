@@ -117,3 +117,35 @@
 .slick-arrow.slick-hidden {
     display: none;
 }
+
+button.slick-next, button.slick-next:hover {
+  position: absolute;
+    top: 45%;
+    right: 19px;
+    width: 30px;
+    height: 35px;
+    background-image: url(/front/images/right-arrow.png);
+    background-size: 28px 36px;
+    border: 0;
+}
+button.slick-prev, button.slick-prev:hover {
+    position: absolute;
+    top: 45%;
+    left: 15px;
+    z-index: 1;
+    width: 30px;
+    height: 35px;
+    background-image: url(/front/images/left-arrow.png);
+    background-size: 28px 36px;
+    border: 0;
+    background-position-x: right;
+}
+.slick-prev:before, .slick-next:before {
+  font-size: 70px;
+  color: #EA8496;
+  line-height: inherit;
+  font-weight: bold;
+}
+.slider img {
+  height: 324px;
+}
