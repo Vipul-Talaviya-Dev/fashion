@@ -104,4 +104,13 @@ class HomeController extends Controller
             'footer' => true
         ]);
     }
+
+    public function returnPolicy()
+    {
+        return view('user.content', [
+            'content' => Content::find(5),
+            'cart' => false,
+            'footer' => true
+        ]);
+    }
 }

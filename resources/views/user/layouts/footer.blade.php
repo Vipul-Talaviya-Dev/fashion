@@ -24,6 +24,7 @@
 					<!-- <li><a href="{{ route('user.faq') }}">FAQ's</a></li> -->
 					<li><a href="{{ route('user.term') }}">Term & Condition</a></li>
 					<li><a href="{{ route('user.privacyPolicy') }}">Privacy Policy</a></li>
+					<li><a href="{{ route('user.returnPolicy') }}">Return Policy</a></li>
 					@if(\Auth::user())
 						<li><a href="{{ route('user.myAccount') }}">Order Return</a></li>
 					@else

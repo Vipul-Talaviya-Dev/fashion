@@ -511,10 +511,18 @@ class ProductController extends Controller
             return redirect(route('user.index'));
         }
 
-        $order = Order::with(['orderProducts.product.variations'])->find(Session::get('orderId'));
+        $order = Order::with(['orderProducts.product.variations', 'orderProducts.variation'])->find(Session::get('orderId'));
         $user = Auth::user();
         $address = $user->addresses()->find($order->address_id);
 
+        # Dedact Qty
+        if(($order->payment_mode == 1 && $order->status == 3) || ($order->status == 3 && $order->payment_status == 2)) {
+            foreach ($order->orderProducts as $key => $orderProduct) {
+                # variavtion Qty Minus
+                $orderProduct->variation->qty = $orderProduct->variation->qty - $orderProduct->qty;
+                $orderProduct->variation->save();
+            }
+        }
 
         #sms
         $message = Helper::orderMessages($order->status, $order->orderId());
@@ -523,7 +531,7 @@ class ProductController extends Controller
         }
         Sms::send($user->mobile, $message);
 
-        # Mail
+        # User Mail
         Mail::send('user.email.order-place', [
             'order' => $order,
             'user' => $user,
@@ -532,6 +540,17 @@ class ProductController extends Controller
             $message->from('support@shroud.in', 'Shroud Enterprise')
                 ->subject('Order Placed')
                 ->to($user->email, $user->name);
+        });
+
+        # Admin Mail
+        Mail::send('user.email.order-place', [
+            'order' => $order,
+            'user' => $user,
+            'address' => $address
+        ], function ($message) use ($user) {
+            $message->from('support@shroud.in', 'Shroud Enterprise')
+                ->subject('Order Placed from '.$user->name)
+                ->to('support@shroud.in', 'Shroud Enterprise');
         });
 
         Session::forget('orderId');

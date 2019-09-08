@@ -82,11 +82,11 @@ class OrderController extends Controller
 			$orderProduct->status = $request->get('status');
 			$orderProduct->save();
 
-			if($orderProduct->variation->qty > 0) {
+			/*if($orderProduct->variation->qty > 0) {
 				# variavtion
 				$orderProduct->variation->qty = $orderProduct->variation->qty - $orderProduct->qty;
 	            $orderProduct->variation->save();
-			}
+			}*/
 		}
 		$user = $order->user;
 		

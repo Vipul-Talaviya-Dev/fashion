@@ -12,7 +12,7 @@ class ContentSeeder extends Seeder
      */
     public function run()
     {
-        foreach (['About', 'FAQ', 'Term & Condition', 'Privacy Policy '] as $content) {
+        foreach (['About', 'FAQ', 'Term & Condition', 'Privacy Policy', 'Return Policy'] as $content) {
 	        Content::create([
 	        	'name' => $content,
 	        	'content' => $content,
