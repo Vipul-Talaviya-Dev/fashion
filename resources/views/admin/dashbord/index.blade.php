@@ -94,6 +94,32 @@ $admin  = \Session::get('admin');
                                     </div>
                                 </li>
                                 <li class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12">
+                                    <h6 class="title">Visitors</h6>
+                                    <h4 class="total" title="Count">{{ ($counter = \App\Models\Counter::find(1)) ? $counter->visitor : 0 }}</h4>
+                                </li>
+                            </ul>
+                            <!-- Row end -->
+                            <div class="progress sm">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stats-widget">
+                        <div class="stats-widget-body">
+                            <!-- Row start -->
+                            <ul class="row no-gutters mb-3">
+                                <li class="">
+                                    <div class="stats-widget-header">
+                                        <i class="fa fa-home"></i>
+                                    </div>
+                                </li>
+                                <li class="col-xl-7 col-lg-7 col-md-12 col-sm-12 col-12">
                                     <h6 class="title">New Order</h6>
                                     <h4 class="total" title="Count">{{ $newOrder }}</h4>
                                 </li>

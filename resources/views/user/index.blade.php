@@ -67,7 +67,8 @@
   <div class="home-page">
     <div class="col-sm-12">
       <br><br>
-      <h2 class="title"><span>NEW SEASON</span> bestsellers</h2>
+      <!-- <h2 class="title"><span>NEW SEASON</span> bestsellers</h2> -->
+      <h2 class="title">The joy of dressing is an art</h2>
       <div class="sub-title">&nbsp;</div>
     </div>
     <ul class="clearfix shop-by-occasion-banner">
