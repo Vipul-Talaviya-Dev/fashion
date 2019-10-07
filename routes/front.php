@@ -22,6 +22,8 @@ Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
 	Route::get('term-condition', 'HomeController@termCondition')->name('term');
 	Route::get('privacy-policy', 'HomeController@privacyPolicy')->name('privacyPolicy');
 	Route::get('return-policy', 'HomeController@returnPolicy')->name('returnPolicy');
+	Route::get('member-ship-policy', 'HomeController@memberShipPolicy')->name('memberShipPolicy');
+	Route::get('shipping-policy', 'HomeController@shippingPolicy')->name('shippingPolicy');
 
 	Route::get('products', 'ProductController@index')->name('products');
 	Route::get('/shop/{mainCategory?}/{subCategory?}/{thirdCategory?}/{productUrl?}', 'ProductController@productDetail')->name('productDetail');

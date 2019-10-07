@@ -91,6 +91,8 @@
                                 <li><a href="{{ route('admin.content.edit', ['id' => 3]) }}"><i class="fa fa-cog"></i> <span>Term & Condition</span></a></li>
                                 <li><a href="{{ route('admin.content.edit', ['id' => 4]) }}"><i class="fa fa-cog"></i> <span>Privacy Policy</span></a></li>
                                 <li><a href="{{ route('admin.content.edit', ['id' => 5]) }}"><i class="fa fa-cog"></i> <span>Return Policy</span></a></li>
+                                <li><a href="{{ route('admin.content.edit', ['id' => 6]) }}"><i class="fa fa-cog"></i> <span>MemberShip Policy</span></a></li>
+                                <li><a href="{{ route('admin.content.edit', ['id' => 7]) }}"><i class="fa fa-cog"></i> <span>Shipping Policy</span></a></li>
                             </ul>
                         </li>
                     @endif

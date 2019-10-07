@@ -16,24 +16,32 @@
 					<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i> {{ substr($content->support_mobile, 0, 3) .'-'. substr($content->support_mobile, 3, 3) .'-'. substr($content->support_mobile, 6) }}</li>
 				</ul>
 			</div>
-			<div class="col-md-4 w3_footer_grid">
-				<h3>Information</h3>
-				<ul class="info"> 
-					<li><a href="{{ route('user.about') }}">About Us</a></li>
-					<li><a href="{{ route('user.contact') }}">Contact Us</a></li>
-					<!-- <li><a href="{{ route('user.faq') }}">FAQ's</a></li> -->
-					<li><a href="{{ route('user.term') }}">Term & Condition</a></li>
-					<li><a href="{{ route('user.privacyPolicy') }}">Privacy Policy</a></li>
-					<li><a href="{{ route('user.returnPolicy') }}">Return Policy</a></li>
-					@if(\Auth::user())
-						<li><a href="{{ route('user.myAccount') }}">Order Return</a></li>
-					@else
-						<?php \Session::put('redirect', route('user.myAccount')); ?>
-						<li><a href="{{ route('user.loginForm') }}">Order Return</a></li>
-					@endif
-				</ul>
+			<div class="col-md-6 w3_footer_grid">
+				<h3>Information & Policy</h3>
+				<div class="col-md-6">
+					<ul class="info"> 
+						<li><a href="{{ route('user.about') }}">About Us</a></li>
+						<li><a href="{{ route('user.contact') }}">Contact Us</a></li>
+						<!-- <li><a href="{{ route('user.faq') }}">FAQ's</a></li> -->
+						<li><a href="{{ route('user.returnPolicy') }}">Return & Exchange Policy</a></li>
+						@if(\Auth::user())
+							<li><a href="{{ route('user.myAccount') }}">Order Return</a></li>
+						@else
+							<?php \Session::put('redirect', route('user.myAccount')); ?>
+							<li><a href="{{ route('user.loginForm') }}">Order Return</a></li>
+						@endif
+					</ul>
+				</div>
+				<div class="col-md-6">
+					<ul class="info"> 
+						<li><a href="{{ route('user.term') }}">Term & Condition</a></li>
+						<li><a href="{{ route('user.privacyPolicy') }}">Privacy Policy</a></li>
+						<li><a href="{{ route('user.memberShipPolicy') }}">Membership Policy</a></li>
+						<li><a href="{{ route('user.shippingPolicy') }}">Shipping Policy</a></li>
+					</ul>
+				</div>
 			</div>
-			<div class="col-md-4 w3_footer_grid">
+			<div class="col-md-2 w3_footer_grid">
 				<h3>Profile</h3>
 				<h4 class="white-text">Follow Us</h4>
 				<div class="agileits_social_button">

@@ -113,4 +113,22 @@ class HomeController extends Controller
             'footer' => true
         ]);
     }
+
+    public function memberShipPolicy()
+    {
+        return view('user.content', [
+            'content' => Content::find(6),
+            'cart' => false,
+            'footer' => true
+        ]);
+    }
+
+    public function shippingPolicy()
+    {
+        return view('user.content', [
+            'content' => Content::find(7),
+            'cart' => false,
+            'footer' => true
+        ]);
+    }
 }
