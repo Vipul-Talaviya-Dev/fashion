@@ -97,10 +97,15 @@
             <p><br></p>
             <div class="row">
                 <label>Chart :</label>
-                <textarea name="chart" id="editor1" rows="4" cols="4" class="form-control required"  required>{{ old('chart') }}</textarea> 
+                <input type="file" name="chart" class="form-control required" required accept=".jpeg, .jpg, .png">
+                <span><b>Note:</b> 1098 X 500 Image Upload.</span>
+                <span class="help-block">Accepted formats: jpeg, jpg, png. Max file size 2Mb</span>
                 @foreach($errors->get('chart') as $error)
                 <span style="color: red;">{{$error}}</span>
                 @endforeach
+                @if(false)
+                    <textarea name="chart" id="editor1" rows="4" cols="4" class="form-control required"  required>{{ old('chart') }}</textarea> 
+                @endif
             </div>  
             <p><br></p>
             <div class="row pull-right">

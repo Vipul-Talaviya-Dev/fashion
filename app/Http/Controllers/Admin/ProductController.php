@@ -46,7 +46,7 @@ class ProductController extends Controller
             // 'prices' => 'required|array|min:1',
             // 'quantities' => 'required|array|min:1',
             // 'images' => 'required|array|min:1',
-            'chart' => 'required',
+            'chart' => 'required|image',
             'description' => 'required',
             'meta_keyword' => 'required',
             'meta_description' => 'required',
@@ -55,6 +55,7 @@ class ProductController extends Controller
         // dd($request->all());
 
         $lastId = (Product::latest()->first() ? Product::latest()->first()->id : 1);
+        $file = $request->file('chart');
 
         $product = Product::create([
             'name' => trim($request->get('name')),
@@ -65,7 +66,7 @@ class ProductController extends Controller
             'description' => $request->get('description'),
             'meta_keyword' => $request->get('meta_keyword'),
             'meta_description' => $request->get('meta_description'),
-            'chart' => $request->get('chart'),
+            'chart' => Cloudder::upload($file, [])->getPublicId(),
         ]);
 
         /*for ($i = 0; $i < count($request->get('colors')); $i++) {
@@ -116,7 +117,7 @@ class ProductController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'categoryId' => 'nullable|exists:categories,id',
-            'chart' => 'required',
+            'chart' => 'nullable|image',
             'description' => 'required',
             'meta_keyword' => 'required',
             'meta_description' => 'required',
@@ -127,12 +128,16 @@ class ProductController extends Controller
             $product->category_id = $request->get('categoryId');
         }
 
+        if ($request->file('chart')) {
+            // \Cloudder::destroy($product->chart);
+            $product->chart = Cloudder::upload($request->file('chart'), [])->getPublicId();
+        }
+
         $product->name = $request->get('name');
         $product->admin_side_name_show = $request->get('adminProductName');
         $product->meta_keyword = $request->get('meta_keyword');
         $product->meta_description = $request->get('meta_description');
         $product->description = $request->get('description');
-        $product->chart = $request->get('chart');
         $product->save();
 
         return redirect(route('admin.products'))->with(['success' => 'successfully update your product.']);

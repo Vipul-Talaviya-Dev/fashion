@@ -106,10 +106,23 @@
             <p><br></p>
             <div class="row">
                 <label>Chart :</label>
-                <textarea name="chart" id="editor1" rows="4" cols="4" class="form-control required"  required>{!! $product->chart ?: old('chart') !!}</textarea> 
-                @foreach($errors->get('chart') as $error)
-                <span style="color: red;">{{$error}}</span>
-                @endforeach
+                 <input type="file" name="chart" class="file-styled" accept=".jpeg, .jpg, .png, .gif">
+                 <span><b>Note:</b> 1098 X 500 Image Upload.</span>
+                 <span class="help-block">Accepted formats: jpeg, jpg, png. Max file size 2Mb</span>
+                @if($errors->get('chart'))
+                    @foreach($errors->get('chart') as $error)
+                        <span style="color: red;"><i class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>
+                    @endforeach
+                @endif
+                @if(false)
+                    <textarea name="chart" id="editor1" rows="4" cols="4" class="form-control required"  required>{!! $product->chart ?: old('chart') !!}</textarea> 
+                @endif
+                @if($product->chart)
+                    <hr>
+                    <div>
+                        <img src="{{ \Cloudder::secureShow($product->chart) }}" class="img-responsive" style="width: 100px;">
+                    </div>
+                @endif
             </div> 
             <p><br></p>
             <div class="row pull-right">

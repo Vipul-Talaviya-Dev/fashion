@@ -178,7 +178,13 @@
       <div class="modal-header">
         <h4 class="modal-title">Chart <a type="button" class="close" data-dismiss="modal">&times;</a></h4>
       </div><hr>
-      <div class="modal-body">{!! $product->chart !!}</div>
+      <div class="modal-body">
+      	@if($product->chart)
+      		<img src="{{ \Cloudder::secureShow($product->chart) }}" class="img-responsive" alt="{{ $product->name }}">
+  		@else
+      		<img src="{{ URL::asset('front/images/chart.png') }}" class="img-responsive" alt="{{ $product->name }}">
+  		@endif
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
