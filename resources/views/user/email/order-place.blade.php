@@ -68,7 +68,7 @@
 					<th width="100px" style="font-family:Arial,Helvetica,sans-serif;color:#34495e;font-size:14px">Subtotal</th>
 				</tr></thead>
 				<tbody>
-					<?php $productTotal = $cgst = 0;?>
+					<?php $productTotal = $cgst = $cgst6 = 0;?>
 				@foreach($order->orderProducts as $key => $orderProduct)
 				<tr>
 					<td>{{ $key+1 }}</td>
@@ -89,8 +89,12 @@
 					<td style="font-family:Arial,Helvetica,sans-serif;color:#34495e;font-size:13px"><div align="center">Rs. {{ $orderProduct->price * $orderProduct->qty }}</div> </td>
 					<?php 
 					  $productTotal += ($orderProduct->price * $orderProduct->qty);
-		              $cgstAmount = round(($orderProduct->price*2.5)/100, 2);
+		              $cgstAmount = ($orderProduct->price >= 1000) ? 0 : round(($orderProduct->price*2.5)/100, 2);
 		              $cgst += $cgstAmount*$orderProduct->qty;
+
+		              /* 6% Hoy to*/
+	                  $cgstAmount6 = ($orderProduct->price >= 1000) ? round($orderProduct->price*6, 2) : 0;
+	                  $cgst6 += $cgstAmount6*$orderProduct->qty;
 		            ?>
 				</tr>
 				@endforeach
@@ -107,7 +111,7 @@
 					<td>
 						<div style="padding-left:250px;padding-right:10px;font-size:15px;margin-top:10px;"><b>Sub Total</b></div>
 					</td>
-					<td><div style="margin-top:10px;">Rs. {{ number_format(($productTotal-($cgst*2)), 2) }}</div></td>
+					<td><div style="margin-top:10px;">Rs. {{ number_format(($productTotal-(($cgst*2) + ($cgst6*2))), 2) }}</div></td>
 				</tr>
 				<tr>
 					<td>
@@ -121,6 +125,20 @@
 					</td>
 					<td><div style="margin-top:10px;">Rs. {{ $cgst }}</div></td>
 				</tr>
+				@if($cgst6 > 0)
+					<tr>
+						<td>
+							<div style="padding-left:250px;padding-right:10px;font-size:15px;margin-top:10px;font-family:Arial,Helvetica,sans-serif;color:green"> <b>SGST(6%) (+)</b></div>
+						</td>
+						<td><div style="margin-top:10px;">Rs. {{ $cgst6 }}</div></td>
+					</tr>
+					<tr>
+						<td>
+							<div style="padding-left:250px;padding-right:10px;font-size:15px;margin-top:10px;font-family:Arial,Helvetica,sans-serif;color:green"> <b>CGST(6%) (+)</b></div>
+						</td>
+						<td><div style="margin-top:10px;">Rs. {{ $cgst6 }}</div></td>
+					</tr>
+				@endif
 				<tr>
 					<td>
 						<div style="padding-left:250px;padding-right:10px;font-size:15px;margin-top:10px;color:red;"><b>Discount (-)</b></div>
