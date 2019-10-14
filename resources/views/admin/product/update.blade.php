@@ -105,24 +105,33 @@
             </div>
             <p><br></p>
             <div class="row">
-                <label>Chart :</label>
-                 <input type="file" name="chart" class="file-styled" accept=".jpeg, .jpg, .png, .gif">
-                 <span><b>Note:</b> 1098 X 500 Image Upload.</span>
-                 <span class="help-block">Accepted formats: jpeg, jpg, png. Max file size 2Mb</span>
-                @if($errors->get('chart'))
-                    @foreach($errors->get('chart') as $error)
-                        <span style="color: red;"><i class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>
+                <div class="form-group col-md-6">
+                    <label>Chart :</label>
+                     <input type="file" name="chart" class="file-styled" accept=".jpeg, .jpg, .png, .gif">
+                     <span><b>Note:</b> 1098 X 500 Image Upload.</span>
+                     <span class="help-block">Accepted formats: jpeg, jpg, png. Max file size 2Mb</span>
+                    @if($errors->get('chart'))
+                        @foreach($errors->get('chart') as $error)
+                            <span style="color: red;"><i class="fa fa-times-circle"></i> &nbsp;{{$error}}</span>
+                        @endforeach
+                    @endif
+                    @if(false)
+                        <textarea name="chart" id="editor1" rows="4" cols="4" class="form-control required"  required>{!! $product->chart ?: old('chart') !!}</textarea> 
+                    @endif
+                    @if($product->chart)
+                        <hr>
+                        <div>
+                            <img src="{{ \Cloudder::secureShow($product->chart) }}" class="img-responsive" style="width: 100px;">
+                        </div>
+                    @endif
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Product HSN Code: <span class="text-danger">*</span></label>
+                    <input type="text" name="hsn_code" placeholder="Enter HSN Code" class="form-control required" required value="{{ $product->hsn_code ?: old('hsn_code') }}" autocomplete="off">
+                    @foreach($errors->get('hsn_code') as $error)
+                    <span style="color: red;">{{$error}}</span>
                     @endforeach
-                @endif
-                @if(false)
-                    <textarea name="chart" id="editor1" rows="4" cols="4" class="form-control required"  required>{!! $product->chart ?: old('chart') !!}</textarea> 
-                @endif
-                @if($product->chart)
-                    <hr>
-                    <div>
-                        <img src="{{ \Cloudder::secureShow($product->chart) }}" class="img-responsive" style="width: 100px;">
-                    </div>
-                @endif
+                </div>
             </div> 
             <p><br></p>
             <div class="row pull-right">

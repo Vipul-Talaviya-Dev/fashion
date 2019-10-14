@@ -117,7 +117,7 @@
               <tr data-iterate="item">
                 <td class="top-right-border">{{ $orderProduct->product->name }}</td>
                 <td class="top-right-border">-</td>
-                <td class="top-right-border">{{ $orderProduct->orderProductId() }}</td>
+                <td class="top-right-border">{{ ($orderProduct->product->hsn_code) ? $orderProduct->product->hsn_code : $orderProduct->orderProductId() }}</td>
                 <td class="top-right-border">{{ $orderProduct->qty }}</td>
                 <td class="top-right-border">{{ $orderProduct->price }}</td>
                 <td class="top-right-border border-right-0">{{ $orderProduct->price * $orderProduct->qty }}</td>

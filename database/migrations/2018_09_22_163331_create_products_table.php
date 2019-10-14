@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->integer('category_id')->unsigned();
             $table->string('name')->comment('User side shown');
             $table->string('admin_side_name_show')->comment('Admin Show Name');
+            $table->string('hsn_code')->comment('HSN Code');
             $table->string('slug');
             $table->double('weight', 15, 8)->default(0);
             $table->longText('description')->nullable();

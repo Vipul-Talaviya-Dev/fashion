@@ -96,16 +96,25 @@
             </div>
             <p><br></p>
             <div class="row">
-                <label>Chart :</label>
-                <input type="file" name="chart" class="form-control required" required accept=".jpeg, .jpg, .png">
-                <span><b>Note:</b> 1098 X 500 Image Upload.</span>
-                <span class="help-block">Accepted formats: jpeg, jpg, png. Max file size 2Mb</span>
-                @foreach($errors->get('chart') as $error)
-                <span style="color: red;">{{$error}}</span>
-                @endforeach
-                @if(false)
-                    <textarea name="chart" id="editor1" rows="4" cols="4" class="form-control required"  required>{{ old('chart') }}</textarea> 
-                @endif
+                <div class="form-group col-md-6">
+                    <label>Chart :</label>
+                    <input type="file" name="chart" class="form-control required" required accept=".jpeg, .jpg, .png">
+                    <span><b>Note:</b> 1098 X 500 Image Upload.</span>
+                    <span class="help-block">Accepted formats: jpeg, jpg, png. Max file size 2Mb</span>
+                    @foreach($errors->get('chart') as $error)
+                    <span style="color: red;">{{$error}}</span>
+                    @endforeach
+                    @if(false)
+                        <textarea name="chart" id="editor1" rows="4" cols="4" class="form-control required"  required>{{ old('chart') }}</textarea> 
+                    @endif
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Product HSN Code: <span class="text-danger">*</span></label>
+                    <input type="text" name="hsn_code" placeholder="Enter HSN Code" class="form-control required" required value="{{ old('hsn_code') }}" autocomplete="off">
+                    @foreach($errors->get('hsn_code') as $error)
+                    <span style="color: red;">{{$error}}</span>
+                    @endforeach
+                </div>
             </div>  
             <p><br></p>
             <div class="row pull-right">

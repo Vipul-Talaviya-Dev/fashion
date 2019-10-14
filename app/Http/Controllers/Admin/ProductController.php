@@ -39,6 +39,7 @@ class ProductController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'adminProductName' => 'required',
+            'hsn_code' => 'required',
             // 'brand' => 'nullable|exists:brands,id',
             'categoryId' => 'required|exists:categories,id',
             // 'colors' => 'required|array|min:1',
@@ -59,6 +60,7 @@ class ProductController extends Controller
 
         $product = Product::create([
             'name' => trim($request->get('name')),
+            'hsn_code' => trim($request->get('hsn_code')),
             'admin_side_name_show' => trim($request->get('adminProductName')),
             'slug' => trim(str_slug($request->get('name')).date('YmdHis').$lastId),
             'category_id' => $request->get('categoryId'),
@@ -116,6 +118,7 @@ class ProductController extends Controller
 
         $this->validate($request, [
             'name' => 'required',
+            'hsn_code' => 'required',
             'categoryId' => 'nullable|exists:categories,id',
             'chart' => 'nullable|image',
             'description' => 'required',
@@ -133,7 +136,8 @@ class ProductController extends Controller
             $product->chart = Cloudder::upload($request->file('chart'), [])->getPublicId();
         }
 
-        $product->name = $request->get('name');
+        $product->name = trim($request->get('name'));
+        $product->hsn_code = $request->get('hsn_code');
         $product->admin_side_name_show = $request->get('adminProductName');
         $product->meta_keyword = $request->get('meta_keyword');
         $product->meta_description = $request->get('meta_description');
