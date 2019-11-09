@@ -15,7 +15,7 @@ class AppContent extends Model
      * @var array
      */
     protected $fillable = [
-        'support_email', 'support_mobile', 'address', 'fb_link', 'instagram_link', 'twitter_link', 'google_link', 'delivery_charge', 'offer_text',
+        'support_email', 'support_mobile', 'address', 'fb_link', 'instagram_link', 'twitter_link', 'google_link', 'delivery_charge', 'offer_text', 'member_ship'
     ];
 
     protected $dates = [

@@ -164,27 +164,29 @@
 							</div>
 							@if(!Session::get('discount'))
 							<!-- Coupons & Gift Vouchers-->
-							@if($user->member_ship_code)
-							@else
-								<div class="panel panel-default pck-box-shadow">
-									<div class="panel-collapse collapse in" id="promotional">
-										<div class="panel-body">
-											<div class="col-md-12 col-xs-12">
-												<label style="margin-top: 7px;">MemberShip Terms & Conditions.</label>
-												<hr>
-												<ul>
-													<li>1. Purchase worth Rs. 2000/- & get SHROUD membership.</li>
-													<li>2. Members will get flat 20% discount on every purchase.</li>
-													<li>3. Only members will eligible for discount & other offer at SHROUD.</li>
-													<li>4. This membership must not be clubbed with any other offer from SHROUD.</li>
-												</ul>
-												@if((\Auth::user()->member_ship_code == null) && ($finalAmount >= 2000))
-													<a class="pull-right getCode" style="cursor: pointer;">Get Code</a>
-												@endif
+							@if($content->member_ship)
+								@if($user->member_ship_code)
+								@else
+									<div class="panel panel-default pck-box-shadow">
+										<div class="panel-collapse collapse in" id="promotional">
+											<div class="panel-body">
+												<div class="col-md-12 col-xs-12">
+													<label style="margin-top: 7px;">MemberShip Terms & Conditions.</label>
+													<hr>
+													<ul>
+														<li>1. Purchase worth Rs. 2000/- & get SHROUD membership.</li>
+														<li>2. Members will get flat 20% discount on every purchase.</li>
+														<li>3. Only members will eligible for discount & other offer at SHROUD.</li>
+														<li>4. This membership must not be clubbed with any other offer from SHROUD.</li>
+													</ul>
+													@if((\Auth::user()->member_ship_code == null) && ($finalAmount >= 2000))
+														<a class="pull-right getCode" style="cursor: pointer;">Get Code</a>
+													@endif
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
+								@endif
 							@endif
 
 							<div class="panel panel-default pck-box-shadow">
@@ -271,57 +273,59 @@
 			</section><p><br></p>
 		</form>
 	</div>
-@if(\Auth::user()->member_ship_code == null)
-<div id="myModal" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content" style="width: 50%;margin-left: 30%;margin-top: 20%;">
-			<div class="modal-header">
-				<h4 class="modal-title text-center">
-					Membership Offer
-					<!-- <button type="button" class="close">&times;</button> -->
-				</h4>
-			</div>
-			<div class="modal-body">
-				<div class="row">
-					<h5 class="text-center" style="margin-top: 15px;line-height: 1.2;">Congratulations you are eligible for become MEMBER </h5>
-					<!-- <h5 class="text-center" style="margin-top: 15px;line-height: 1.2;">Be the member of shroud & add more discount on your shopping.! </h5> -->
+@if($content->member_ship)
+	@if(\Auth::user()->member_ship_code == null)
+		<div id="myModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content" style="width: 50%;margin-left: 30%;margin-top: 20%;">
+					<div class="modal-header">
+						<h4 class="modal-title text-center">
+							Membership Offer
+							<!-- <button type="button" class="close">&times;</button> -->
+						</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<h5 class="text-center" style="margin-top: 15px;line-height: 1.2;">Congratulations you are eligible for become MEMBER </h5>
+							<!-- <h5 class="text-center" style="margin-top: 15px;line-height: 1.2;">Be the member of shroud & add more discount on your shopping.! </h5> -->
+						</div>
+					</div>
+					<div class="modal-footer">
+						<a href="{{ route('user.getMemberShip') }}" class="btn btn-danger" id="getMemberCode">Confirm</a>
+							<a href="javascript:void(0);" class="btn btn-danger close">Close</a>
+					</div>
 				</div>
 			</div>
-			<div class="modal-footer">
-				<a href="{{ route('user.getMemberShip') }}" class="btn btn-danger" id="getMemberCode">Confirm</a>
-					<a href="javascript:void(0);" class="btn btn-danger close">Close</a>
+		</div>
+	@endif
+	@if((\Auth::user()->member_ship_code != null))
+		<div id="myMemberDiscountModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content membershipDis">
+					<div class="modal-header">
+						<h4 class="modal-title text-center">Membership Offer</h4>
+					</div>
+					<div class="modal-body" align="center"><br>
+						<label style="margin-top: 7px;">Enter Membership Code</label>
+						<div class="input-group">
+							<input class="pck-input adv member_ship_code" type="text" autocomplete="off" value="{{ Auth::user()->member_ship_code }}">
+						</div>
+						<span style="display: block;">
+							@if(\Auth::user()->member_ship_code == null)
+							<a class="pull-right getCode" style="cursor: pointer;">Get Code</a>
+							@endif
+						</span>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger apply_code">Apply</button>
+						<a href="javascript:void(0);" class="btn btn-danger close">Close</a>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-</div>
+	@endif
 @endif
 
-@if((\Auth::user()->member_ship_code != null))
-<div id="myMemberDiscountModal" class="modal fade" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content membershipDis">
-			<div class="modal-header">
-				<h4 class="modal-title text-center">Membership Offer</h4>
-			</div>
-			<div class="modal-body" align="center"><br>
-				<label style="margin-top: 7px;">Enter Membership Code</label>
-				<div class="input-group">
-					<input class="pck-input adv member_ship_code" type="text" autocomplete="off" value="{{ Auth::user()->member_ship_code }}">
-				</div>
-				<span style="display: block;">
-					@if(\Auth::user()->member_ship_code == null)
-					<a class="pull-right getCode" style="cursor: pointer;">Get Code</a>
-					@endif
-				</span>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-danger apply_code">Apply</button>
-				<a href="javascript:void(0);" class="btn btn-danger close">Close</a>
-			</div>
-		</div>
-	</div>
-</div>
-@endif
 	@include('user.layouts.footer')
 	<!-- Core JS files -->
 	<script src="/front/js/jquery.min.js" type="text/javascript"></script>
@@ -336,28 +340,31 @@
 				event.preventDefault();
 				$('html,body').animate({scrollTop: "0px"},1000);
 			});
-			@if(Cookie::get('userCloseModel'))
+			@if($content->member_ship)
+				@if(Cookie::get('userCloseModel'))
 
-			@elseif((\Auth::user()->member_ship_code == null) && ($finalAmount >= 2000))
-				$('#myModal').modal();
+				@elseif((\Auth::user()->member_ship_code == null) && ($finalAmount >= 2000))
+					$('#myModal').modal();
 
-			@endif
-			$('body').on('click', '.getCode', function() {
-				$('#myModal').modal();
-			});
+				@endif
+				$('body').on('click', '.getCode', function() {
+					$('#myModal').modal();
+				});
 
-			$("body").on("click", ".close", function() {
-				$('#myModal').modal("hide");
-				$('#myMemberDiscountModal').modal("hide");
-				<?php
-					Cookie::queue("userCloseModel", 1, 30);
-				?>
-			});
-			@if((\Auth::user()->member_ship_code != null))
-				@if(!Session::get('discount'))
-					$('#myMemberDiscountModal').modal();
+				$("body").on("click", ".close", function() {
+					$('#myModal').modal("hide");
+					$('#myMemberDiscountModal').modal("hide");
+					<?php
+						Cookie::queue("userCloseModel", 1, 30);
+					?>
+				});
+				@if((\Auth::user()->member_ship_code != null))
+					@if(!Session::get('discount'))
+						$('#myMemberDiscountModal').modal();
+					@endif
 				@endif
 			@endif
+
 		});
 	</script>
 </body>

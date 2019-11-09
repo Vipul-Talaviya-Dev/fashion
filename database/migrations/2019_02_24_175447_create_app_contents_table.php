@@ -24,6 +24,7 @@ class CreateAppContentsTable extends Migration
             $table->string('google_link')->nullable();
             $table->string('offer_text')->nullable();
             $table->integer('delivery_charge')->unsigned()->default(0);
+            $table->tinyInteger('member_ship')->comment('Member ship code 1: open, 2: close')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

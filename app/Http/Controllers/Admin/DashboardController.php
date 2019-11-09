@@ -78,6 +78,7 @@ class DashboardController extends Controller
         $content->google_link = $request->get('google_link');
         $content->delivery_charge = $request->get('delivery_charge');
         $content->offer_text = $request->get('offer_text');
+        $content->member_ship = $request->get('member_ship');
         $content->save();
 
         return redirect()->back()->with(['success' => 'Updated Successfully..']);

@@ -85,6 +85,13 @@
                                 <input type="text" name="offer_text" value="{{ $content->offer_text ?: old('offer_text') }}" class="form-control">
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Meber ship code use: </label> &nbsp;&nbsp;
+                                <input type="checkbox" name="member_ship" value="1" {{ ($content->member_ship) ? 'checked' : '' }}><br>
+                                <span>Member ship code use yes or no for all user.</span>
+                            </div>
+                        </div>
                         <div class="row text-center">
                             <button type="submit" class="btn btn-success ">Submit</button>
                         </div>
